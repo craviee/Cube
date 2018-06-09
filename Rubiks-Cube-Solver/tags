@@ -1,0 +1,84 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BACK	cube.h	83;"	d
+BLOCK	stack.h	/^typedef struct BLOCK {$/;"	s
+BLOCKLEN	stack.h	37;"	d
+CC	Makefile	/^CC=gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS=-Wall -Werror -O3$/;"	m
+COMMON_H	common.h	18;"	d
+CORNERTABLE_H	cornertable.h	18;"	d
+CORNER_TABLE_CLEAR	cornertable.h	28;"	d
+CORNER_TABLE_NEW	cornertable.h	27;"	d
+CUBELEN	cube.h	66;"	d
+CUBE_H	cube.h	18;"	d
+CUBIE	cube.h	75;"	d
+DOWN	cube.h	84;"	d
+EDGETABLE_H	edgetable.h	18;"	d
+EDGE_TABLE_CLEAR	edgetable.h	29;"	d
+EDGE_TABLE_NEW	edgetable.h	28;"	d
+FRONT	cube.h	80;"	d
+GOAL_H	goal.h	18;"	d
+GOAL_MAXDEPTH	goal.h	28;"	d
+HEADS	Makefile	/^HEADS=cube.h stack.h common.h cornertable.h goal.h edgetable.h$/;"	m
+LEFT	cube.h	82;"	d
+OBJS	Makefile	/^OBJS=cube.o stack.o common.o cornertable.o goal.o edgetable.o$/;"	m
+RIGHT	cube.h	85;"	d
+SHOULDIAVOID	cube.h	107;"	d
+SRCS	Makefile	/^SRCS=cube.c stack.c common.c cornertable.c main.c goal.c edgetable.c$/;"	m
+STACK_H	stack.h	18;"	d
+STACK_NEW	stack.h	56;"	d
+TABLE_LOOKUP	common.h	29;"	d
+TOP	cube.h	81;"	d
+block	stack.h	/^} block;$/;"	t	typeref:struct:BLOCK
+cc	cube_convert.py	/^cc = "@" + cc.strip().lower()$/;"	v
+cc	cube_convert.py	/^cc = sys.argv[1]$/;"	v
+corner_cubies	cube.c	/^static char corner_cubies[] = {1,0,1,0,0,1,0,1,0,0,0,0,1,0,1,0,0,1,0,1};$/;"	v	file:
+corner_generate	cornertable.c	/^int corner_generate(unsigned char *cornertable, const char *solution)$/;"	f
+corner_map	cornertable.c	/^int corner_map(const char *cubestr)$/;"	f
+corner_read	cornertable.c	/^int corner_read(unsigned char *cornertable, FILE *input)$/;"	f
+corner_rotation	cube.c	/^static char corner_rotation[6][3] = {$/;"	v	file:
+corner_write	cornertable.c	/^int corner_write(unsigned char *cornertable, FILE *output)$/;"	f
+cube_120convert	cube.c	/^int cube_120convert(const char *input, char *output)$/;"	f
+cube_data	stack.h	/^    cube_type cube_data;$/;"	m	struct:__anon1
+cube_print	cube.c	/^int cube_print(FILE *output, const char *cube)$/;"	f
+cube_print_solution	goal.c	/^void cube_print_solution(const int *path)$/;"	f
+cube_solved	cube.c	/^const cube_type cube_solved =  "\\x00\\x00" "\\x01\\x00" "\\x02\\x00" "\\x03\\x00" \\$/;"	v
+cube_turn	cube.c	/^char *cube_turn(char *to_twist, int turn)$/;"	f
+cube_turn_avoid	cube.c	/^const long cube_turn_avoid[] = {$/;"	v
+cube_type	cube.h	/^typedef char cube_type[CUBELEN];$/;"	t
+cubies	cube_convert.py	/^cubies = []$/;"	v
+data	stack.h	/^    qdata data[BLOCKLEN];$/;"	m	struct:BLOCK
+distance	stack.h	/^    int distance;$/;"	m	struct:__anon1
+edge_generate	edgetable.c	/^int edge_generate(unsigned char *table, const char *solution, int tablenum)$/;"	f
+edge_hash1	edgetable.c	/^int edge_hash1(const char *cubestr)$/;"	f
+edge_hash2	edgetable.c	/^int edge_hash2(const char *cubestr)$/;"	f
+edge_read	edgetable.c	/^int edge_read(unsigned char *edgetable, FILE *input)$/;"	f
+edge_write	edgetable.c	/^int edge_write(unsigned char *edgetable, FILE *output)$/;"	f
+fc	cube_convert.py	/^fc = ""$/;"	v
+goal_solve	goal.c	/^int goal_solve(const char *scrambled, const char *solved,$/;"	f
+leftlink	stack.h	/^    struct BLOCK *leftlink;$/;"	m	struct:BLOCK	typeref:struct:BLOCK::BLOCK
+length	stack.h	/^    long length;$/;"	m	struct:__anon2
+main	main.c	/^int main(int argc, char **argv)$/;"	f
+make_corner	main.c	/^int make_corner()$/;"	f
+make_edge	main.c	/^int make_edge(int t)$/;"	f
+qdata	stack.h	/^} qdata;$/;"	t	typeref:struct:__anon1
+rightblock	stack.h	/^    block *rightblock;$/;"	m	struct:__anon2
+rightindex	stack.h	/^    int rightindex; \/* index into last block, points to last element *\/$/;"	m	struct:__anon2
+solve	main.c	/^int solve(char *tosolve)$/;"	f
+sort_turns	goal.c	/^static void sort_turns(qdata **turns_sorted, int *heuristics, int numturns)$/;"	f	file:
+stack_peek_cube	stack.c	/^int stack_peek_cube(stacktype *stack, cube_type *targetcube)$/;"	f
+stack_peek_distance	stack.c	/^int stack_peek_distance(stacktype *stack)$/;"	f
+stack_peek_turn	stack.c	/^int stack_peek_turn(stacktype *stack)$/;"	f
+stack_pop	stack.c	/^int stack_pop(stacktype *stack)$/;"	f
+stack_push	stack.c	/^int stack_push(stacktype *stack, const char *cube_to_append, int turn, int distance)$/;"	f
+stacktype	stack.h	/^} stacktype;$/;"	t	typeref:struct:__anon2
+sys	cube_convert.py	/^import sys$/;"	i
+turn	stack.h	/^    int turn;$/;"	m	struct:__anon1
+turn_position_lookup	cube.c	/^static char turn_position_lookup[20][18] = {$/;"	v	file:
+turn_this_cubie	cube.c	/^static char turn_this_cubie[20][6] = {$/;"	v	file:
+whichpos	common.c	/^int whichpos(const char *cubie)$/;"	f
+whichrot	common.c	/^int whichrot(const char *cubie)$/;"	f

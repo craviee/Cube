@@ -1,0 +1,4 @@
+227823.24user 15.06system 63:19:13elapsed 99%CPU (0avgtext+0avgdata 86036maxresident)k
+0inputs+8outputs (0major+1803minor)pagefaults 0swaps
+
+1336043ms rotacoes
