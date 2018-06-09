@@ -1,0 +1,7 @@
+Etapa1	Maior = 40			Menor = 9			Média = 23
+Etapa2	Maior = 63	MaiorT = 31	Menor = 26	MenorT = 10	Média = 46	MédiaT = 22
+Etapa3	Maior = 90	MaiorT = 46	Menor = 56	MenorT = 10	Média = 76	MédiaT = 30
+Etapa4	Maior = 109	MaiorT = 19	Menor = 63	MenorT = 0	Média = 87	MédiaT = 10
+Etapa5	Maior = 146	MaiorT = 43	Menor = 72	MenorT = 9	Média = 110	MédiaT = 22
+Etapa6	Maior = 153	MaiorT = 24	Menor = 83	MenorT = 0	Média = 123	MédiaT = 13
+Etapa7	Maior = 201	MaiorT = 64	Menor = 123	MenorT = 16	Média = 166	MédiaT = 43
