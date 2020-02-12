@@ -1,2 +1,5 @@
 # Vs code
 .vscode/
+
+# User Project files
+cube.pro.user*
