@@ -1022,250 +1022,6 @@
      <string/>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="ultimo">
-    <property name="geometry">
-     <rect>
-      <x>780</x>
-      <y>70</y>
-      <width>71</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>70</y>
-      <width>59</width>
-      <height>18</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Último:</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="CrossSul">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>520</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>CrossSul</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="CrossNorte">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>480</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>CrossNorte</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="CruzLeste">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>560</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>CrossLeste</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="CruzOeste">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>600</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>CrossOeste</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="QuinaSudeste">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>0</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>QuinaSudeste</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="QuinaSudoeste">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>40</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>QuinaSudoeste</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="QuinaNordeste">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>80</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>QuinaNordeste</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="QuinaNoroeste">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>120</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>QuinaNoroeste</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="SudesteBaixo">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>330</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>SudesteBaixo</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="SudoesteBaixo">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>370</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>SudoesteBaixo</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="NordesteBaixo">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>410</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>NordesteBaixo</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="NoroesteBaixo">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>450</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>NoroesteBaixo</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="frontSecond">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>20</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>frontSecond</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="leftSecond">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>60</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>leftSecond</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="rightSecond">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>100</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>rightSecond</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="backSecond">
-    <property name="geometry">
-     <rect>
-      <x>760</x>
-      <y>580</y>
-      <width>88</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>backSecond</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="consertaSegunda">
-    <property name="geometry">
-     <rect>
-      <x>760</x>
-      <y>540</y>
-      <width>101</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>ConsertaSecond</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
@@ -1279,49 +1035,49 @@
      <item>
       <widget class="QPushButton" name="Cross">
        <property name="text">
-        <string>Cruz</string>
+        <string>Cross</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="Quinas">
        <property name="text">
-        <string>Quinas</string>
+        <string>First Layer Corners</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="segundaCamada">
        <property name="text">
-        <string>Segunda Camada</string>
+        <string>Second Layer</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="CrossDown">
        <property name="text">
-        <string>Cruz de Baixo</string>
+        <string>Down Cross</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="CantosDown">
        <property name="text">
-        <string>Cantos de Baixo</string>
+        <string>Back Edges</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="Place">
        <property name="text">
-        <string>Alocar Quinas de Baixo</string>
+        <string>Place Down Edges</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="Turn">
        <property name="text">
-        <string>Girar Quinas de Baixo</string>
+        <string>Turn Down Edges</string>
        </property>
       </widget>
      </item>
@@ -1444,14 +1200,14 @@
      <item>
       <widget class="QPushButton" name="Randomize">
        <property name="text">
-        <string>Aleatório</string>
+        <string>Random</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="zerar">
        <property name="text">
-        <string>Reiniciar</string>
+        <string>Restart</string>
        </property>
       </widget>
      </item>
@@ -1461,16 +1217,16 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>40</y>
+      <y>50</y>
       <width>181</width>
-      <height>31</height>
+      <height>16</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Movimentos:</string>
+        <string>#Rotations:</string>
        </property>
       </widget>
      </item>
@@ -1479,39 +1235,13 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="camadasReal">
-    <property name="geometry">
-     <rect>
-      <x>751</x>
-      <y>428</y>
-      <width>52</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Camadas - R</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="otimoReal">
-    <property name="geometry">
-     <rect>
-      <x>809</x>
-      <y>428</y>
-      <width>51</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Ótimo - R</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>200</x>
       <y>0</y>
       <width>191</width>
-      <height>71</height>
+      <height>61</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1520,7 +1250,7 @@
        <item>
         <widget class="QLabel" name="modo">
          <property name="text">
-          <string>Modo:</string>
+          <string>Mode:</string>
          </property>
         </widget>
        </item>
@@ -1530,8 +1260,8 @@
           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Simulação&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Noto Sans'; font-size:10pt;&quot;&gt;Simulation&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
@@ -1540,7 +1270,7 @@ p, li { white-space: pre-wrap; }
      <item>
       <widget class="QPushButton" name="pushButton_3">
        <property name="text">
-        <string>Alterar modo</string>
+        <string>Change mode</string>
        </property>
       </widget>
      </item>
@@ -1556,7 +1286,8 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <property name="text">
-     <string>Leitura</string>
+     <string>Read
+Colors</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton">
@@ -1569,7 +1300,8 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <property name="text">
-     <string>Calibração</string>
+     <string>Color
+Calibration</string>
     </property>
    </widget>
    <widget class="QPushButton" name="otimoButton">
@@ -1582,7 +1314,8 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <property name="text">
-     <string>Ótimo</string>
+     <string>Solve by
+Optimal</string>
     </property>
    </widget>
    <widget class="QPushButton" name="Tudo">
@@ -1595,7 +1328,8 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <property name="text">
-     <string>Camadas</string>
+     <string>Solve by
+Lanes</string>
     </property>
    </widget>
   </widget>
@@ -1605,7 +1339,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>865</width>
-     <height>30</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuCube">

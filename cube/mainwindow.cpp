@@ -70,27 +70,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     
     ui->setupUi(this);
-    ui->label_2->setVisible(false);
-    ui->ultimo->setVisible(false);
-    ui->camadasReal->setVisible(false);
-    ui->otimoReal->setVisible(false);
-    ui->QuinaNordeste->setVisible(false);
-    ui->QuinaNoroeste->setVisible(false);
-    ui->QuinaSudeste->setVisible(false);
-    ui->QuinaSudoeste->setVisible(false);
-    ui->NoroesteBaixo->setVisible(false);
-    ui->NordesteBaixo->setVisible(false);
-    ui->SudoesteBaixo->setVisible(false);
-    ui->SudesteBaixo->setVisible(false);
-    ui->CrossNorte->setVisible(false);
-    ui->CrossSul->setVisible(false);
-    ui->CruzLeste->setVisible(false);
-    ui->CruzOeste->setVisible(false);
-    ui->consertaSegunda->setVisible(false);
-    ui->leftSecond->setVisible(false);
-    ui->rightSecond->setVisible(false);
-    ui->frontSecond->setVisible(false);
-    ui->backSecond->setVisible(false);
     completeCube();
     conf.readCalibrateColors(&conf);
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
@@ -1064,7 +1043,7 @@ void MainWindow::CruzLeste()
             rotateB();
             rotateU();
             ult = "1L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right6->styleSheet() == ui->up5->styleSheet() && ui->back6->styleSheet() == ui->right5->styleSheet())
         {
@@ -1072,13 +1051,13 @@ void MainWindow::CruzLeste()
             rotateB();
             rotateU();
             ult = "2L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right6->styleSheet() == ui->right5->styleSheet() && ui->back6->styleSheet() == ui->up5->styleSheet())
         {
             rotateRA();
             ult = "3L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right4->styleSheet() == ui->up5->styleSheet() && ui->front6->styleSheet() == ui->right5->styleSheet())
         {
@@ -1086,20 +1065,20 @@ void MainWindow::CruzLeste()
             rotateFA();
             rotateUA();
             ult = "4L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right4->styleSheet() == ui->right5->styleSheet() && ui->front6->styleSheet() == ui->up5->styleSheet())
         {
             rotateR();
             ult = "5L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right8->styleSheet() == ui->right5->styleSheet() && ui->down6->styleSheet() == ui->up5->styleSheet())
         {
             rotateR();
             rotateR();
             ult = "6L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right8->styleSheet() == ui->up5->styleSheet() && ui->down6->styleSheet() == ui->right5->styleSheet())
         {
@@ -1108,7 +1087,7 @@ void MainWindow::CruzLeste()
             rotateB();
             rotateU();
             ult = "7L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back8->styleSheet() == ui->right5->styleSheet() && ui->up2->styleSheet() == ui->up5->styleSheet())
         {
@@ -1117,7 +1096,7 @@ void MainWindow::CruzLeste()
             rotateB();
             rotateU();
             ult = "8L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back8->styleSheet() == ui->up5->styleSheet() && ui->up2->styleSheet() == ui->right5->styleSheet())
         {
@@ -1127,7 +1106,7 @@ void MainWindow::CruzLeste()
             rotateB();
             rotateU();
             ult = "9L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front2->styleSheet() == ui->right5->styleSheet() && ui->up8->styleSheet() == ui->up5->styleSheet())
         {
@@ -1136,14 +1115,14 @@ void MainWindow::CruzLeste()
             rotateF();
             rotateUA();
             ult = "10L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front2->styleSheet() == ui->up5->styleSheet() && ui->up8->styleSheet() == ui->right5->styleSheet())
         {
             rotateF();
             rotateR();
             ult = "11L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back2->styleSheet() == ui->right5->styleSheet() && ui->down8->styleSheet() == ui->up5->styleSheet())
         {
@@ -1151,7 +1130,7 @@ void MainWindow::CruzLeste()
             rotateR();
             rotateR();
             ult = "12L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back2->styleSheet() == ui->up5->styleSheet() && ui->down8->styleSheet() == ui->right5->styleSheet())
         {
@@ -1161,7 +1140,7 @@ void MainWindow::CruzLeste()
             rotateB();
             rotateU();
             ult = "13L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front8->styleSheet() == ui->right5->styleSheet() && ui->down2->styleSheet() == ui->up5->styleSheet())
         {
@@ -1169,7 +1148,7 @@ void MainWindow::CruzLeste()
             rotateR();
             rotateR();
             ult = "14L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front8->styleSheet() == ui->up5->styleSheet() && ui->down2->styleSheet() == ui->right5->styleSheet())
         {
@@ -1179,7 +1158,7 @@ void MainWindow::CruzLeste()
             rotateB();
             rotateU();
             ult = "15L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left2->styleSheet() == ui->right5->styleSheet() && ui->up4->styleSheet() == ui->up5->styleSheet())
         {
@@ -1190,7 +1169,7 @@ void MainWindow::CruzLeste()
             rotateR();
             rotateR();
             ult = "16L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left2->styleSheet() == ui->up5->styleSheet() && ui->up4->styleSheet() == ui->right5->styleSheet())
         {
@@ -1201,7 +1180,7 @@ void MainWindow::CruzLeste()
             rotateB();
             rotateU();
             ult = "17L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left4->styleSheet() == ui->right5->styleSheet() && ui->back4->styleSheet() == ui->up5->styleSheet())
         {
@@ -1209,7 +1188,7 @@ void MainWindow::CruzLeste()
             rotateU();
             rotateU();
             ult = "18L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left4->styleSheet() == ui->up5->styleSheet() && ui->back4->styleSheet() == ui->right5->styleSheet())
         {
@@ -1221,7 +1200,7 @@ void MainWindow::CruzLeste()
             rotateB();
             rotateU();
             ult = "19L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left6->styleSheet() == ui->right5->styleSheet() && ui->front4->styleSheet() == ui->up5->styleSheet())
         {
@@ -1232,7 +1211,7 @@ void MainWindow::CruzLeste()
             rotateUA();
             rotateUA();
             ult = "20L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left6->styleSheet() == ui->up5->styleSheet() && ui->front4->styleSheet() == ui->right5->styleSheet())
         {
@@ -1244,7 +1223,7 @@ void MainWindow::CruzLeste()
             rotateB();
             rotateU();
             ult = "21L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left8->styleSheet() == ui->right5->styleSheet() && ui->down4->styleSheet() == ui->up5->styleSheet())
         {
@@ -1253,7 +1232,7 @@ void MainWindow::CruzLeste()
             rotateR();
             rotateR();
             ult = "22L";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left8->styleSheet() == ui->up5->styleSheet() && ui->down4->styleSheet() == ui->right5->styleSheet())
         {
@@ -1264,7 +1243,7 @@ void MainWindow::CruzLeste()
             rotateB();
             rotateU();
             ult = "23L";
-            ui->ultimo->setPlainText(ult);
+            
         }
     }
 }
@@ -1279,7 +1258,7 @@ void MainWindow::CruzOeste()
             rotateF();
             rotateU();
             ult = "1O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left6->styleSheet() == ui->up5->styleSheet() && ui->front4->styleSheet() == ui->left5->styleSheet())
         {
@@ -1287,13 +1266,13 @@ void MainWindow::CruzOeste()
             rotateF();
             rotateU();
             ult = "2O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left6->styleSheet() == ui->left5->styleSheet() && ui->front4->styleSheet() == ui->up5->styleSheet())
         {
             rotateLA();
             ult = "3O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left4->styleSheet() == ui->up5->styleSheet() && ui->back4->styleSheet() == ui->left5->styleSheet())
         {
@@ -1301,20 +1280,20 @@ void MainWindow::CruzOeste()
             rotateBA();
             rotateUA();
             ult = "4O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left4->styleSheet() == ui->left5->styleSheet() && ui->back4->styleSheet() == ui->up5->styleSheet())
         {
             rotateL();
             ult = "5O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left8->styleSheet() == ui->left5->styleSheet() && ui->down4->styleSheet() == ui->up5->styleSheet())
         {
             rotateL();
             rotateL();
             ult = "6O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left8->styleSheet() == ui->up5->styleSheet() && ui->down4->styleSheet() == ui->left5->styleSheet())
         {
@@ -1323,13 +1302,13 @@ void MainWindow::CruzOeste()
             rotateF();
             rotateU();
             ult = "7O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front2->styleSheet() == ui->left5->styleSheet() && ui->up8->styleSheet() == ui->up5->styleSheet())
         {
             rotateU();
             ult = "8O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front2->styleSheet() == ui->up5->styleSheet() && ui->up8->styleSheet() == ui->left5->styleSheet())
         {
@@ -1339,13 +1318,13 @@ void MainWindow::CruzOeste()
             rotateF();
             rotateU();
             ult = "9O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back8->styleSheet() == ui->left5->styleSheet() && ui->up2->styleSheet() == ui->up5->styleSheet())
         {
             rotateUA();
             ult = "10O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back8->styleSheet() == ui->up5->styleSheet() && ui->up2->styleSheet() == ui->left5->styleSheet())
         {
@@ -1355,7 +1334,7 @@ void MainWindow::CruzOeste()
             rotateF();
             rotateU();
             ult = "11O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front8->styleSheet() == ui->left5->styleSheet() && ui->down2->styleSheet() == ui->up5->styleSheet())
         {
@@ -1363,7 +1342,7 @@ void MainWindow::CruzOeste()
             rotateL();
             rotateL();
             ult = "12O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front8->styleSheet() == ui->up5->styleSheet() && ui->down2->styleSheet() == ui->left5->styleSheet())
         {
@@ -1373,7 +1352,7 @@ void MainWindow::CruzOeste()
             rotateF();
             rotateU();
             ult = "13O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back2->styleSheet() == ui->left5->styleSheet() && ui->down8->styleSheet() == ui->up5->styleSheet())
         {
@@ -1381,7 +1360,7 @@ void MainWindow::CruzOeste()
             rotateL();
             rotateL();
             ult = "14O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back2->styleSheet() == ui->up5->styleSheet() && ui->down8->styleSheet() == ui->left5->styleSheet())
         {
@@ -1391,14 +1370,14 @@ void MainWindow::CruzOeste()
             rotateF();
             rotateU();
             ult = "15O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right2->styleSheet() == ui->left5->styleSheet() && ui->up6->styleSheet() == ui->up5->styleSheet())
         {
             rotateU();
             rotateU();
             ult = "16O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right2->styleSheet() == ui->up5->styleSheet() && ui->up6->styleSheet() == ui->left5->styleSheet())
         {
@@ -1409,7 +1388,7 @@ void MainWindow::CruzOeste()
             rotateF();
             rotateU();
             ult = "17O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right4->styleSheet() == ui->left5->styleSheet() && ui->front6->styleSheet() == ui->up5->styleSheet())
         {
@@ -1419,7 +1398,7 @@ void MainWindow::CruzOeste()
             rotateUA();
             rotateUA();
             ult = "18O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right4->styleSheet() == ui->up5->styleSheet() && ui->front6->styleSheet() == ui->left5->styleSheet())
         {
@@ -1431,7 +1410,7 @@ void MainWindow::CruzOeste()
             rotateF();
             rotateU();
             ult = "19O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right6->styleSheet() == ui->left5->styleSheet() && ui->back6->styleSheet() == ui->up5->styleSheet())
         {
@@ -1441,7 +1420,7 @@ void MainWindow::CruzOeste()
             rotateL();
             rotateL();
             ult = "20O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right6->styleSheet() == ui->up5->styleSheet() && ui->back6->styleSheet() == ui->left5->styleSheet())
         {
@@ -1453,7 +1432,7 @@ void MainWindow::CruzOeste()
             rotateF();
             rotateU();
             ult = "21O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right8->styleSheet() == ui->left5->styleSheet() && ui->down6->styleSheet() == ui->up5->styleSheet())
         {
@@ -1462,7 +1441,7 @@ void MainWindow::CruzOeste()
             rotateL();
             rotateL();
             ult = "22O";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right8->styleSheet() == ui->up5->styleSheet() && ui->down6->styleSheet() == ui->left5->styleSheet())
         {
@@ -1473,7 +1452,7 @@ void MainWindow::CruzOeste()
             rotateF();
             rotateU();
             ult = "23O";
-            ui->ultimo->setPlainText(ult);
+            
         }
     }
 }
@@ -1488,7 +1467,7 @@ void MainWindow::CruzNorte()
             rotateL();
             rotateU();
             ult = "1N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back4->styleSheet() == ui->up5->styleSheet() && ui->left4->styleSheet() == ui->back5->styleSheet())
         {
@@ -1496,13 +1475,13 @@ void MainWindow::CruzNorte()
             rotateL();
             rotateU();
             ult = "2N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back4->styleSheet() == ui->back5->styleSheet() && ui->left4->styleSheet() == ui->up5->styleSheet())
         {
             rotateBA();
             ult = "3N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back6->styleSheet() == ui->up5->styleSheet() && ui->right6->styleSheet() == ui->back5->styleSheet())
         {
@@ -1510,20 +1489,20 @@ void MainWindow::CruzNorte()
             rotateRA();
             rotateUA();
             ult = "4N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back6->styleSheet() == ui->back5->styleSheet() && ui->right6->styleSheet() == ui->up5->styleSheet())
         {
             rotateB();
             ult = "5N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back2->styleSheet() == ui->back5->styleSheet() && ui->down8->styleSheet() == ui->up5->styleSheet())
         {
             rotateB();
             rotateB();
             ult = "6N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back2->styleSheet() == ui->up5->styleSheet() && ui->down8->styleSheet() == ui->back5->styleSheet())
         {
@@ -1532,7 +1511,7 @@ void MainWindow::CruzNorte()
             rotateL();
             rotateU();
             ult = "7N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left2->styleSheet() == ui->back5->styleSheet() && ui->up4->styleSheet() == ui->up5->styleSheet())
         {
@@ -1541,7 +1520,7 @@ void MainWindow::CruzNorte()
             rotateL();
             rotateU();
             ult = "8N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left2->styleSheet() == ui->up5->styleSheet() && ui->up4->styleSheet() == ui->back5->styleSheet())
         {
@@ -1551,7 +1530,7 @@ void MainWindow::CruzNorte()
             rotateL();
             rotateU();
             ult = "9N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right2->styleSheet() == ui->back5->styleSheet() && ui->up6->styleSheet() == ui->up5->styleSheet())
         {
@@ -1560,7 +1539,7 @@ void MainWindow::CruzNorte()
             rotateRA();
             rotateUA();
             ult = "10N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right2->styleSheet() == ui->up5->styleSheet() && ui->up6->styleSheet() == ui->back5->styleSheet())
         {
@@ -1570,7 +1549,7 @@ void MainWindow::CruzNorte()
             rotateL();
             rotateU();
             ult = "11N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left8->styleSheet() == ui->back5->styleSheet() && ui->down4->styleSheet() == ui->up5->styleSheet())
         {
@@ -1578,7 +1557,7 @@ void MainWindow::CruzNorte()
             rotateB();
             rotateB();
             ult = "12N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left8->styleSheet() == ui->up5->styleSheet() && ui->down4->styleSheet() == ui->back5->styleSheet())
         {
@@ -1588,7 +1567,7 @@ void MainWindow::CruzNorte()
             rotateL();
             rotateU();
             ult = "13N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right8->styleSheet() == ui->back5->styleSheet() && ui->down6->styleSheet() == ui->up5->styleSheet())
         {
@@ -1596,7 +1575,7 @@ void MainWindow::CruzNorte()
             rotateB();
             rotateB();
             ult = "14N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right8->styleSheet() == ui->up5->styleSheet() && ui->down6->styleSheet() == ui->back5->styleSheet())
         {
@@ -1606,14 +1585,14 @@ void MainWindow::CruzNorte()
             rotateL();
             rotateU();
             ult = "15N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front2->styleSheet() == ui->back5->styleSheet() && ui->up8->styleSheet() == ui->up5->styleSheet())
         {
             rotateU();
             rotateU();
             ult = "16N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front2->styleSheet() == ui->up5->styleSheet() && ui->up8->styleSheet() == ui->back5->styleSheet())
         {
@@ -1624,7 +1603,7 @@ void MainWindow::CruzNorte()
             rotateL();
             rotateU();
             ult = "17N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front4->styleSheet() == ui->back5->styleSheet() && ui->left6->styleSheet() == ui->up5->styleSheet())
         {
@@ -1632,7 +1611,7 @@ void MainWindow::CruzNorte()
             rotateU();
             rotateU();
             ult = "18N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front4->styleSheet() == ui->up5->styleSheet() && ui->left6->styleSheet() == ui->back5->styleSheet())
         {
@@ -1644,7 +1623,7 @@ void MainWindow::CruzNorte()
             rotateL();
             rotateU();
             ult = "19N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front6->styleSheet() == ui->back5->styleSheet() && ui->right4->styleSheet() == ui->up5->styleSheet())
         {
@@ -1652,7 +1631,7 @@ void MainWindow::CruzNorte()
             rotateU();
             rotateU();
             ult = "20N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front6->styleSheet() == ui->up5->styleSheet() && ui->right4->styleSheet() == ui->back5->styleSheet())
         {
@@ -1664,7 +1643,7 @@ void MainWindow::CruzNorte()
             rotateL();
             rotateU();
             ult = "21N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front8->styleSheet() == ui->back5->styleSheet() && ui->down2->styleSheet() == ui->up5->styleSheet())
         {
@@ -1675,7 +1654,7 @@ void MainWindow::CruzNorte()
             rotateBA();
             rotateBA();
             ult = "22N";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front8->styleSheet() == ui->up5->styleSheet() && ui->down2->styleSheet() == ui->back5->styleSheet())
         {
@@ -1686,7 +1665,7 @@ void MainWindow::CruzNorte()
             rotateL();
             rotateU();
             ult = "23N";
-            ui->ultimo->setPlainText(ult);
+            
         }
     }
 }
@@ -1716,7 +1695,6 @@ void MainWindow::on_zerar_clicked()
     completeCube();
     movimentos = 0;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
-    ui->ultimo->setPlainText(QString::number(movimentos));
 }
 void MainWindow::on_CrossSul_clicked()
 {
@@ -3082,7 +3060,7 @@ void MainWindow::on_leftSecond_clicked()
             rotateD();
             rotateL();
             ult = "1LL";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->left8->styleSheet() == ui->left5->styleSheet() && ui->down4->styleSheet() == ui->front5->styleSheet())
         {
@@ -3095,7 +3073,7 @@ void MainWindow::on_leftSecond_clicked()
             rotateDA();
             rotateLA();
             ult = "2LL";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back2->styleSheet() == ui->left5->styleSheet() && ui->down8->styleSheet() == ui->back5->styleSheet())
         {
@@ -3109,7 +3087,7 @@ void MainWindow::on_leftSecond_clicked()
             rotateD();
             rotateL();
             ult = "3LL";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back2->styleSheet() == ui->left5->styleSheet() && ui->down8->styleSheet() == ui->front5->styleSheet())
         {
@@ -3123,7 +3101,7 @@ void MainWindow::on_leftSecond_clicked()
             rotateDA();
             rotateLA();
             ult = "4LL";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front8->styleSheet() == ui->left5->styleSheet() && ui->down2->styleSheet() == ui->back5->styleSheet())
         {
@@ -3137,7 +3115,7 @@ void MainWindow::on_leftSecond_clicked()
             rotateD();
             rotateL();
             ult = "5LL";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front8->styleSheet() == ui->left5->styleSheet() && ui->down2->styleSheet() == ui->front5->styleSheet())
         {
@@ -3151,7 +3129,7 @@ void MainWindow::on_leftSecond_clicked()
             rotateDA();
             rotateLA();
             ult = "6LL";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right8->styleSheet() == ui->left5->styleSheet() && ui->down6->styleSheet() == ui->back5->styleSheet())
         {
@@ -3166,7 +3144,7 @@ void MainWindow::on_leftSecond_clicked()
             rotateD();
             rotateL();
             ult = "7LL";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->right8->styleSheet() == ui->left5->styleSheet() && ui->down6->styleSheet() == ui->front5->styleSheet())
         {
@@ -3181,7 +3159,7 @@ void MainWindow::on_leftSecond_clicked()
             rotateDA();
             rotateLA();
             ult = "8LL";
-            ui->ultimo->setPlainText(ult);
+            
         }
     }
 }
@@ -4386,7 +4364,7 @@ void MainWindow::on_Place_clicked()
             rotateLA();
             rotateDA();
             ult = "1SS";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(sudestecorreto())
         {
@@ -4399,7 +4377,7 @@ void MainWindow::on_Place_clicked()
             rotateFA();
             rotateDA();
             ult = "2SS";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(noroestecorreto())
         {
@@ -4412,7 +4390,7 @@ void MainWindow::on_Place_clicked()
             rotateBA();
             rotateDA();
             ult = "3SS";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(nordestecorreto())
         {
@@ -4425,7 +4403,7 @@ void MainWindow::on_Place_clicked()
             rotateLA();
             rotateDA();
             ult = "4SS";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else
         {
@@ -4438,7 +4416,7 @@ void MainWindow::on_Place_clicked()
             rotateLA();
             rotateDA();
             ult = "5SS";
-            ui->ultimo->setPlainText(ult);
+            
         }
     }
 }
@@ -4483,7 +4461,7 @@ void MainWindow::on_Turn_clicked()
             rotateD();
             rotateR();
             ult = "1FF";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if((ui->back1->styleSheet() != ui->back5->styleSheet() || ui->left7->styleSheet() != ui->left5->styleSheet() || ui->down7->styleSheet() != ui->down7->styleSheet()) &&
                 (ui->back3->styleSheet() != ui->back5->styleSheet() || ui->right9->styleSheet() != ui->right5->styleSheet() || ui->down9->styleSheet() != ui->down7->styleSheet()))
@@ -4505,7 +4483,7 @@ void MainWindow::on_Turn_clicked()
             rotateD();
             rotateF();
             ult = "2FF";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if((ui->back3->styleSheet() != ui->back5->styleSheet() || ui->right9->styleSheet() != ui->right5->styleSheet() || ui->down9->styleSheet() != ui->down7->styleSheet()) &&
                 (ui->front9->styleSheet() != ui->front5->styleSheet() || ui->right7->styleSheet() != ui->right5->styleSheet() || ui->down3->styleSheet() != ui->down7->styleSheet()))
@@ -4527,7 +4505,7 @@ void MainWindow::on_Turn_clicked()
             rotateD();
             rotateL();
             ult = "3FF";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if((ui->front9->styleSheet() != ui->front5->styleSheet() || ui->right7->styleSheet() != ui->right5->styleSheet() || ui->down3->styleSheet() != ui->down7->styleSheet()) &&
                 (ui->front7->styleSheet() != ui->front5->styleSheet() || ui->left9->styleSheet() != ui->left5->styleSheet() || ui->down1->styleSheet() != ui->down5->styleSheet()))
@@ -4549,7 +4527,7 @@ void MainWindow::on_Turn_clicked()
             rotateD();
             rotateB();
             ult = "4FF";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front7->styleSheet() != ui->front5->styleSheet() || ui->left9->styleSheet() != ui->left5->styleSheet() || ui->down1->styleSheet() != ui->down5->styleSheet())
         {
@@ -4570,7 +4548,7 @@ void MainWindow::on_Turn_clicked()
             rotateD();
             rotateR();
             ult = "5FF";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back1->styleSheet() != ui->back5->styleSheet() || ui->left7->styleSheet() != ui->left5->styleSheet() || ui->down7->styleSheet() != ui->down7->styleSheet())
         {
@@ -4591,7 +4569,7 @@ void MainWindow::on_Turn_clicked()
             rotateD();
             rotateF();
             ult = "6FF";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->back3->styleSheet() != ui->back5->styleSheet() || ui->right9->styleSheet() != ui->right5->styleSheet() || ui->down9->styleSheet() != ui->down7->styleSheet())
         {
@@ -4612,7 +4590,7 @@ void MainWindow::on_Turn_clicked()
             rotateD();
             rotateL();
             ult = "7FF";
-            ui->ultimo->setPlainText(ult);
+            
         }
         else if(ui->front9->styleSheet() != ui->front5->styleSheet() || ui->right7->styleSheet() != ui->right5->styleSheet() || ui->down3->styleSheet() != ui->down7->styleSheet())
         {
@@ -4633,7 +4611,7 @@ void MainWindow::on_Turn_clicked()
             rotateD();
             rotateB();
             ult = "8FF";
-            ui->ultimo->setPlainText(ult);
+            
         }
     }
 }
@@ -5814,7 +5792,7 @@ void MainWindow::on_pushButton_3_clicked()
     }
     else if(simulacao == 0)
     {
-        ui->simulation->setPlainText(QString("Simulação"));
+        ui->simulation->setPlainText(QString("Simulation"));
         simulacao = 1;
     }
 }
