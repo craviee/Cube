@@ -29,7 +29,6 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/opencv.hpp"
-#include "opencv2/imgcodecs.hpp"
 #include <QElapsedTimer>
 std::ofstream cross;
 std::ofstream quinas;
@@ -5128,75 +5127,75 @@ void MainWindow::calibrar()
         std::vector<char> c;
         if(i == 0)
         {
-            c.push_back(teste::StyleSheet2Char((ui->up1->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->up2->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->up3->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->up4->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->up5->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->up6->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->up7->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->up8->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->up9->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->up1->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->up2->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->up3->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->up4->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->up5->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->up6->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->up7->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->up8->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->up9->styleSheet()).toStdString()));
         }
         else if(i == 1)
         {
-            c.push_back(teste::StyleSheet2Char((ui->front1->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->front2->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->front3->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->front4->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->front5->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->front6->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->front7->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->front8->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->front9->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->front1->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->front2->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->front3->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->front4->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->front5->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->front6->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->front7->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->front8->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->front9->styleSheet()).toStdString()));
         }
         else if(i == 4)
         {
-            c.push_back(teste::StyleSheet2Char((ui->right1->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->right2->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->right3->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->right4->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->right5->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->right6->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->right7->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->right8->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->right9->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->right1->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->right2->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->right3->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->right4->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->right5->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->right6->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->right7->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->right8->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->right9->styleSheet()).toStdString()));
         }
         else if(i == 5)
         {
-            c.push_back(teste::StyleSheet2Char((ui->left1->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->left2->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->left3->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->left4->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->left5->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->left6->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->left7->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->left8->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->left9->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->left1->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->left2->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->left3->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->left4->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->left5->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->left6->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->left7->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->left8->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->left9->styleSheet()).toStdString()));
         }
         else if(i == 2)
         {
-            c.push_back(teste::StyleSheet2Char((ui->down1->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->down2->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->down3->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->down4->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->down5->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->down6->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->down7->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->down8->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->down9->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->down1->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->down2->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->down3->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->down4->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->down5->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->down6->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->down7->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->down8->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->down9->styleSheet()).toStdString()));
         }
         else if(i == 3)
         {
-            c.push_back(teste::StyleSheet2Char((ui->back1->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->back2->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->back3->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->back4->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->back5->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->back6->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->back7->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->back8->styleSheet()).toStdString()));
-            c.push_back(teste::StyleSheet2Char((ui->back9->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->back1->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->back2->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->back3->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->back4->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->back5->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->back6->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->back7->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->back8->styleSheet()).toStdString()));
+            c.push_back(StyleSheet2Char((ui->back9->styleSheet()).toStdString()));
         }
         takePictureAndProcess(c);
         

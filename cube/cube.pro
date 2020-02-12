@@ -13,8 +13,7 @@ QT += serialport
 TARGET = cube
 TEMPLATE = app
 
-INCLUDEPATH += /usr/include/opencv2
-INCLUDEPATH += /usr/include/opencv
+INCLUDEPATH += /usr/include/opencv4
 
 LIBS += -L/usr/local/lib -lopencv_core -lopencv_imgcodecs -lopencv_highgui -lopencv_imgproc -lopencv_videoio
 
