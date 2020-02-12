@@ -31,7 +31,6 @@
 #include "opencv2/opencv.hpp"
 #include "opencv2/imgcodecs.hpp"
 #include <QElapsedTimer>
-
 std::ofstream cross;
 std::ofstream quinas;
 std::ofstream segundacamada;
@@ -40,7 +39,6 @@ std::ofstream cantosdown;
 std::ofstream place;
 std::ofstream turn;
 std::ofstream otimotempo;
-
 void delay( int millisecondsToWait )
 {
     QTime dieTime = QTime::currentTime().addMSecs( millisecondsToWait );
@@ -49,11 +47,9 @@ void delay( int millisecondsToWait )
         QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
     }
 }
-
 int simulacao = 1;
 int del = 2;
 QSerialPort *arduino = new QSerialPort;
-//arduino = new QSerialPort;
 static const quint16 arduino_uno_vendor_id = 9025;
 static const quint16 arduino_uno_product_id = 67;
 QString arduino_port_name = "";
@@ -69,17 +65,14 @@ QCameraViewfinder *mCameraViewFinder;
 QCameraImageCapture *mCameraImageCapture;
 QVBoxLayout *mLayout;
 int lado = 0;
-
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    //QString inicial = ;
+    
     ui->setupUi(this);
     ui->label_2->setVisible(false);
     ui->ultimo->setVisible(false);
-//    ui->simulation->setVisible(false);
     ui->camadasReal->setVisible(false);
     ui->otimoReal->setVisible(false);
     ui->QuinaNordeste->setVisible(false);
@@ -100,9 +93,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->frontSecond->setVisible(false);
     ui->backSecond->setVisible(false);
     completeCube();
-
     conf.readCalibrateColors(&conf);
-
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
     cross.open("1cross_r2.txt");
     quinas.open("2quinas_r2.txt");
@@ -112,12 +103,11 @@ MainWindow::MainWindow(QWidget *parent) :
     place.open("6place_r2.txt");
     turn.open("7turn_r2.txt");
     otimotempo.open("otimotempo.txt");
-
     foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
             if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier()){
                 if(serialPortInfo.vendorIdentifier() == arduino_uno_vendor_id){
                     if(serialPortInfo.productIdentifier() == arduino_uno_product_id){
-                        arduino_port_name = "ttyACM1";//serialPortInfo.portName();
+                        arduino_port_name = "ttyACM1";
                         std::cout << arduino_port_name.toStdString() << std::endl;
                         arduino_is_available = true;
                         std::cout << "arduino_is_available = true" << std::endl;
@@ -125,10 +115,8 @@ MainWindow::MainWindow(QWidget *parent) :
                 }
             }
         }
-
         if(arduino_is_available){
-
-            // open and configure the serialport
+            
             arduino->setPortName(arduino_port_name);
             arduino->setBaudRate(QSerialPort::Baud9600);
             arduino->setDataBits(QSerialPort::Data8);
@@ -140,20 +128,17 @@ MainWindow::MainWindow(QWidget *parent) :
             else
                 std::cout << "arduino não aberto" << std:: endl;
         }else{
-            // give error message if not available
+            
             std::cout << "Arduido não está ativo" << std::endl;
         }
 }
-
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 void MainWindow::on_Randomize_clicked()
 {
-    //movimentos = 0;
-//    simulacao = 1;
+    
     int i;
     int random2;
     int random = 20;
@@ -163,7 +148,6 @@ void MainWindow::on_Randomize_clicked()
     for(i = 0; i < random; i++)
     {
         random2 = qrand()%12;
-
         if(random2 == 0)
             rotateU();
         else if(random2 == 1)
@@ -193,21 +177,11 @@ void MainWindow::on_Randomize_clicked()
     movimentos = 0;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::rotateU()
 {
     if(!simulacao)
     {
-//            if(arduino->isWritable())
-//            {
-//                arduino->write("07");
                 delay(35000*del);
-//                std::cout << "07" << std::endl;
-//            }
-//            else
-//            {
-//                 std::cout << "Couldn't write to serial!" << std::endl;
-//            }
     }
     QString auxF1 = ui->front1->styleSheet();
     QString auxF2 = ui->front2->styleSheet();
@@ -221,7 +195,6 @@ void MainWindow::rotateU()
     QString auxB7 = ui->back7->styleSheet();
     QString auxB8 = ui->back8->styleSheet();
     QString auxB9 = ui->back9->styleSheet();
-
     QString auxU1 = ui->up1->styleSheet();
     QString auxU2 = ui->up2->styleSheet();
     QString auxU3 = ui->up3->styleSheet();
@@ -230,7 +203,6 @@ void MainWindow::rotateU()
     QString auxU7 = ui->up7->styleSheet();
     QString auxU8 = ui->up8->styleSheet();
     QString auxU9 = ui->up9->styleSheet();
-
     ui->front1->setStyleSheet(auxR1);
     ui->front2->setStyleSheet(auxR2);
     ui->front3->setStyleSheet(auxR3);
@@ -243,7 +215,6 @@ void MainWindow::rotateU()
     ui->back9->setStyleSheet(auxL1);
     ui->back8->setStyleSheet(auxL2);
     ui->back7->setStyleSheet(auxL3);
-
     ui->up1->setStyleSheet(auxU7);
     ui->up2->setStyleSheet(auxU4);
     ui->up3->setStyleSheet(auxU1);
@@ -252,26 +223,15 @@ void MainWindow::rotateU()
     ui->up7->setStyleSheet(auxU9);
     ui->up8->setStyleSheet(auxU6);
     ui->up9->setStyleSheet(auxU3);
-
     ui->up5->repaint();
     movimentos++;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::rotateUA()
 {
     if(!simulacao)
     {
-//            if(arduino->isWritable())
-//            {
-//                arduino->write("08");
                 delay(20000*del);
-//                std::cout << "08" << std::endl;
-//            }
-//            else
-//            {
-//                 std::cout << "Couldn't write to serial!" << std::endl;
-//            }
     }
     QString auxF1 = ui->front1->styleSheet();
     QString auxF2 = ui->front2->styleSheet();
@@ -285,7 +245,6 @@ void MainWindow::rotateUA()
     QString auxB7 = ui->back7->styleSheet();
     QString auxB8 = ui->back8->styleSheet();
     QString auxB9 = ui->back9->styleSheet();
-
     QString auxU1 = ui->up1->styleSheet();
     QString auxU2 = ui->up2->styleSheet();
     QString auxU3 = ui->up3->styleSheet();
@@ -294,7 +253,6 @@ void MainWindow::rotateUA()
     QString auxU7 = ui->up7->styleSheet();
     QString auxU8 = ui->up8->styleSheet();
     QString auxU9 = ui->up9->styleSheet();
-
     ui->front1->setStyleSheet(auxL1);
     ui->front2->setStyleSheet(auxL2);
     ui->front3->setStyleSheet(auxL3);
@@ -307,7 +265,6 @@ void MainWindow::rotateUA()
     ui->back9->setStyleSheet(auxR1);
     ui->back8->setStyleSheet(auxR2);
     ui->back7->setStyleSheet(auxR3);
-
     ui->up1->setStyleSheet(auxU3);
     ui->up2->setStyleSheet(auxU6);
     ui->up3->setStyleSheet(auxU9);
@@ -316,26 +273,15 @@ void MainWindow::rotateUA()
     ui->up7->setStyleSheet(auxU1);
     ui->up8->setStyleSheet(auxU4);
     ui->up9->setStyleSheet(auxU7);
-
     ui->up5->repaint();
     movimentos++;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::rotateD()
 {
     if(!simulacao)
     {
-//            if(arduino->isWritable())
-//            {
-//                arduino->write("011");
                 delay(31000*del);
-//                std::cout << "011" << std::endl;
-//            }
-//            else
-//            {
-//                 std::cout << "Couldn't write to serial!" << std::endl;
-//            }
     }
     QString auxF7 = ui->front7->styleSheet();
     QString auxF8 = ui->front8->styleSheet();
@@ -349,7 +295,6 @@ void MainWindow::rotateD()
     QString auxB1 = ui->back1->styleSheet();
     QString auxB2 = ui->back2->styleSheet();
     QString auxB3 = ui->back3->styleSheet();
-
     QString auxD1 = ui->down1->styleSheet();
     QString auxD2 = ui->down2->styleSheet();
     QString auxD3 = ui->down3->styleSheet();
@@ -358,7 +303,6 @@ void MainWindow::rotateD()
     QString auxD7 = ui->down7->styleSheet();
     QString auxD8 = ui->down8->styleSheet();
     QString auxD9 = ui->down9->styleSheet();
-
     ui->front7->setStyleSheet(auxL7);
     ui->front8->setStyleSheet(auxL8);
     ui->front9->setStyleSheet(auxL9);
@@ -371,7 +315,6 @@ void MainWindow::rotateD()
     ui->back3->setStyleSheet(auxR7);
     ui->back2->setStyleSheet(auxR8);
     ui->back1->setStyleSheet(auxR9);
-
     ui->down1->setStyleSheet(auxD7);
     ui->down2->setStyleSheet(auxD4);
     ui->down3->setStyleSheet(auxD1);
@@ -380,26 +323,15 @@ void MainWindow::rotateD()
     ui->down7->setStyleSheet(auxD9);
     ui->down8->setStyleSheet(auxD6);
     ui->down9->setStyleSheet(auxD3);
-
     ui->down5->repaint();
     movimentos++;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::rotateDA()
 {
     if(!simulacao)
     {
-//            if(arduino->isWritable())
-//            {
-//                arduino->write("012");
                 delay(20000*del);
-//                std::cout << "012" << std::endl;
-//            }
-//            else
-//            {
-//                 std::cout << "Couldn't write to serial!" << std::endl;
-//            }
     }
     QString auxF7 = ui->front7->styleSheet();
     QString auxF8 = ui->front8->styleSheet();
@@ -413,7 +345,6 @@ void MainWindow::rotateDA()
     QString auxB1 = ui->back1->styleSheet();
     QString auxB2 = ui->back2->styleSheet();
     QString auxB3 = ui->back3->styleSheet();
-
     QString auxD1 = ui->down1->styleSheet();
     QString auxD2 = ui->down2->styleSheet();
     QString auxD3 = ui->down3->styleSheet();
@@ -422,7 +353,6 @@ void MainWindow::rotateDA()
     QString auxD7 = ui->down7->styleSheet();
     QString auxD8 = ui->down8->styleSheet();
     QString auxD9 = ui->down9->styleSheet();
-
     ui->front7->setStyleSheet(auxR7);
     ui->front8->setStyleSheet(auxR8);
     ui->front9->setStyleSheet(auxR9);
@@ -435,7 +365,6 @@ void MainWindow::rotateDA()
     ui->back3->setStyleSheet(auxL7);
     ui->back2->setStyleSheet(auxL8);
     ui->back1->setStyleSheet(auxL9);
-
     ui->down1->setStyleSheet(auxD3);
     ui->down2->setStyleSheet(auxD6);
     ui->down3->setStyleSheet(auxD9);
@@ -444,26 +373,15 @@ void MainWindow::rotateDA()
     ui->down7->setStyleSheet(auxD1);
     ui->down8->setStyleSheet(auxD4);
     ui->down9->setStyleSheet(auxD7);
-
     ui->down5->repaint();
     movimentos++;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::rotateR()
 {
     if(!simulacao)
     {
-//            if(arduino->isWritable())
-//            {
-//                arduino->write("015");
                 delay(39000*del);
-//                std::cout << "015" << std::endl;
-//            }
-//            else
-//            {
-//                 std::cout << "Couldn't write to serial!" << std::endl;
-//            }
     }
     QString auxF3 = ui->front3->styleSheet();
     QString auxF6 = ui->front6->styleSheet();
@@ -477,7 +395,6 @@ void MainWindow::rotateR()
     QString auxD3 = ui->down3->styleSheet();
     QString auxD6 = ui->down6->styleSheet();
     QString auxD9 = ui->down9->styleSheet();
-
     QString auxR1 = ui->right1->styleSheet();
     QString auxR2 = ui->right2->styleSheet();
     QString auxR3 = ui->right3->styleSheet();
@@ -486,7 +403,6 @@ void MainWindow::rotateR()
     QString auxR7 = ui->right7->styleSheet();
     QString auxR8 = ui->right8->styleSheet();
     QString auxR9 = ui->right9->styleSheet();
-
     ui->front3->setStyleSheet(auxD3);
     ui->front6->setStyleSheet(auxD6);
     ui->front9->setStyleSheet(auxD9);
@@ -499,7 +415,6 @@ void MainWindow::rotateR()
     ui->down3->setStyleSheet(auxB3);
     ui->down6->setStyleSheet(auxB6);
     ui->down9->setStyleSheet(auxB9);
-
     ui->right1->setStyleSheet(auxR7);
     ui->right2->setStyleSheet(auxR4);
     ui->right3->setStyleSheet(auxR1);
@@ -508,26 +423,15 @@ void MainWindow::rotateR()
     ui->right7->setStyleSheet(auxR9);
     ui->right8->setStyleSheet(auxR6);
     ui->right9->setStyleSheet(auxR3);
-
     ui->right5->repaint();
     movimentos++;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::rotateRA()
 {
     if(!simulacao)
     {
-//            if(arduino->isWritable())
-//            {
-//                arduino->write("016");
                 delay(29000*del);
-//                std::cout << "016" << std::endl;
-//            }
-//            else
-//            {
-//                 std::cout << "Couldn't write to serial!" << std::endl;
-//            }
     }
     QString auxF3 = ui->front3->styleSheet();
     QString auxF6 = ui->front6->styleSheet();
@@ -541,7 +445,6 @@ void MainWindow::rotateRA()
     QString auxD3 = ui->down3->styleSheet();
     QString auxD6 = ui->down6->styleSheet();
     QString auxD9 = ui->down9->styleSheet();
-
     QString auxR1 = ui->right1->styleSheet();
     QString auxR2 = ui->right2->styleSheet();
     QString auxR3 = ui->right3->styleSheet();
@@ -550,7 +453,6 @@ void MainWindow::rotateRA()
     QString auxR7 = ui->right7->styleSheet();
     QString auxR8 = ui->right8->styleSheet();
     QString auxR9 = ui->right9->styleSheet();
-
     ui->front3->setStyleSheet(auxU3);
     ui->front6->setStyleSheet(auxU6);
     ui->front9->setStyleSheet(auxU9);
@@ -563,7 +465,6 @@ void MainWindow::rotateRA()
     ui->down3->setStyleSheet(auxF3);
     ui->down6->setStyleSheet(auxF6);
     ui->down9->setStyleSheet(auxF9);
-
     ui->right1->setStyleSheet(auxR3);
     ui->right2->setStyleSheet(auxR6);
     ui->right3->setStyleSheet(auxR9);
@@ -572,26 +473,15 @@ void MainWindow::rotateRA()
     ui->right7->setStyleSheet(auxR1);
     ui->right8->setStyleSheet(auxR4);
     ui->right9->setStyleSheet(auxR7);
-
     ui->right5->repaint();
     movimentos++;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::rotateL()
 {
     if(!simulacao)
     {
-//            if(arduino->isWritable())
-//            {
-//                arduino->write("017");
                 delay(39000*del);
-//                std::cout << "017" << std::endl;
-//            }
-//            else
-//            {
-//                 std::cout << "Couldn't write to serial!" << std::endl;
-//            }
     }
     QString auxF1 = ui->front1->styleSheet();
     QString auxF4 = ui->front4->styleSheet();
@@ -605,7 +495,6 @@ void MainWindow::rotateL()
     QString auxD1 = ui->down1->styleSheet();
     QString auxD4 = ui->down4->styleSheet();
     QString auxD7 = ui->down7->styleSheet();
-
     QString auxL1 = ui->left1->styleSheet();
     QString auxL2 = ui->left2->styleSheet();
     QString auxL3 = ui->left3->styleSheet();
@@ -614,7 +503,6 @@ void MainWindow::rotateL()
     QString auxL7 = ui->left7->styleSheet();
     QString auxL8 = ui->left8->styleSheet();
     QString auxL9 = ui->left9->styleSheet();
-
     ui->front1->setStyleSheet(auxU1);
     ui->front4->setStyleSheet(auxU4);
     ui->front7->setStyleSheet(auxU7);
@@ -627,7 +515,6 @@ void MainWindow::rotateL()
     ui->down1->setStyleSheet(auxF1);
     ui->down4->setStyleSheet(auxF4);
     ui->down7->setStyleSheet(auxF7);
-
     ui->left1->setStyleSheet(auxL7);
     ui->left2->setStyleSheet(auxL4);
     ui->left3->setStyleSheet(auxL1);
@@ -636,26 +523,15 @@ void MainWindow::rotateL()
     ui->left7->setStyleSheet(auxL9);
     ui->left8->setStyleSheet(auxL6);
     ui->left9->setStyleSheet(auxL3);
-
     ui->left5->repaint();
     movimentos++;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::rotateLA()
 {
     if(!simulacao)
     {
-//            if(arduino->isWritable())
-//            {
-//                arduino->write("018");
                 delay(21000*del);
-//                std::cout << "018" << std::endl;
-//            }
-//            else
-//            {
-//                 std::cout << "Couldn't write to serial!" << std::endl;
-//            }
     }
     QString auxF1 = ui->front1->styleSheet();
     QString auxF4 = ui->front4->styleSheet();
@@ -669,7 +545,6 @@ void MainWindow::rotateLA()
     QString auxD1 = ui->down1->styleSheet();
     QString auxD4 = ui->down4->styleSheet();
     QString auxD7 = ui->down7->styleSheet();
-
     QString auxL1 = ui->left1->styleSheet();
     QString auxL2 = ui->left2->styleSheet();
     QString auxL3 = ui->left3->styleSheet();
@@ -678,7 +553,6 @@ void MainWindow::rotateLA()
     QString auxL7 = ui->left7->styleSheet();
     QString auxL8 = ui->left8->styleSheet();
     QString auxL9 = ui->left9->styleSheet();
-
     ui->front1->setStyleSheet(auxD1);
     ui->front4->setStyleSheet(auxD4);
     ui->front7->setStyleSheet(auxD7);
@@ -691,7 +565,6 @@ void MainWindow::rotateLA()
     ui->down1->setStyleSheet(auxB1);
     ui->down4->setStyleSheet(auxB4);
     ui->down7->setStyleSheet(auxB7);
-
     ui->left1->setStyleSheet(auxL3);
     ui->left2->setStyleSheet(auxL6);
     ui->left3->setStyleSheet(auxL9);
@@ -700,28 +573,16 @@ void MainWindow::rotateLA()
     ui->left7->setStyleSheet(auxL1);
     ui->left8->setStyleSheet(auxL4);
     ui->left9->setStyleSheet(auxL7);
-
     ui->left5->repaint();
     movimentos++;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::rotateF()
 {
     if(!simulacao)
     {
-//            if(arduino->isWritable())
-//            {
-//                arduino->write("09");
                 delay(35000*del);
-//                std::cout << "09" << std::endl;
-//            }
-//            else
-//            {
-//                 std::cout << "Couldn't write to serial!" << std::endl;
-//            }
     }
-
     QString auxU7 = ui->up7->styleSheet();
     QString auxU8 = ui->up8->styleSheet();
     QString auxU9 = ui->up9->styleSheet();
@@ -734,7 +595,6 @@ void MainWindow::rotateF()
     QString auxL3 = ui->left3->styleSheet();
     QString auxL6 = ui->left6->styleSheet();
     QString auxL9 = ui->left9->styleSheet();
-
     QString auxF1 = ui->front1->styleSheet();
     QString auxF2 = ui->front2->styleSheet();
     QString auxF3 = ui->front3->styleSheet();
@@ -743,7 +603,6 @@ void MainWindow::rotateF()
     QString auxF7 = ui->front7->styleSheet();
     QString auxF8 = ui->front8->styleSheet();
     QString auxF9 = ui->front9->styleSheet();
-
     ui->up7->setStyleSheet(auxL9);
     ui->up8->setStyleSheet(auxL6);
     ui->up9->setStyleSheet(auxL3);
@@ -756,7 +615,6 @@ void MainWindow::rotateF()
     ui->left3->setStyleSheet(auxD1);
     ui->left6->setStyleSheet(auxD2);
     ui->left9->setStyleSheet(auxD3);
-
     ui->front1->setStyleSheet(auxF7);
     ui->front2->setStyleSheet(auxF4);
     ui->front3->setStyleSheet(auxF1);
@@ -765,26 +623,15 @@ void MainWindow::rotateF()
     ui->front7->setStyleSheet(auxF9);
     ui->front8->setStyleSheet(auxF6);
     ui->front9->setStyleSheet(auxF3);
-
     ui->front5->repaint();
     movimentos++;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::rotateFA()
 {
     if(!simulacao)
     {
-//            if(arduino->isWritable())
-//            {
-//                arduino->write("010");
                 delay(20000*del);
-//                std::cout << "010" << std::endl;
-//            }
-//            else
-//            {
-//                 std::cout << "Couldn't write to serial!" << std::endl;
-//            }
     }
     QString auxU7 = ui->up7->styleSheet();
     QString auxU8 = ui->up8->styleSheet();
@@ -798,7 +645,6 @@ void MainWindow::rotateFA()
     QString auxL3 = ui->left3->styleSheet();
     QString auxL6 = ui->left6->styleSheet();
     QString auxL9 = ui->left9->styleSheet();
-
     QString auxF1 = ui->front1->styleSheet();
     QString auxF2 = ui->front2->styleSheet();
     QString auxF3 = ui->front3->styleSheet();
@@ -807,7 +653,6 @@ void MainWindow::rotateFA()
     QString auxF7 = ui->front7->styleSheet();
     QString auxF8 = ui->front8->styleSheet();
     QString auxF9 = ui->front9->styleSheet();
-
     ui->left9->setStyleSheet(auxU7);
     ui->left6->setStyleSheet(auxU8);
     ui->left3->setStyleSheet(auxU9);
@@ -820,7 +665,6 @@ void MainWindow::rotateFA()
     ui->down1->setStyleSheet(auxL3);
     ui->down2->setStyleSheet(auxL6);
     ui->down3->setStyleSheet(auxL9);
-
     ui->front1->setStyleSheet(auxF3);
     ui->front2->setStyleSheet(auxF6);
     ui->front3->setStyleSheet(auxF9);
@@ -829,26 +673,15 @@ void MainWindow::rotateFA()
     ui->front7->setStyleSheet(auxF1);
     ui->front8->setStyleSheet(auxF4);
     ui->front9->setStyleSheet(auxF7);
-
     ui->front5->repaint();
     movimentos++;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::rotateB()
 {
     if(!simulacao)
     {
-//            if(arduino->isWritable())
-//            {
-//                arduino->write("013");
                 delay(27000*del);
-//                std::cout << "013" << std::endl;
-//            }
-//            else
-//            {
-//                 std::cout << "Couldn't write to serial!" << std::endl;
-//            }
     }
     QString auxU1 = ui->up1->styleSheet();
     QString auxU2 = ui->up2->styleSheet();
@@ -862,7 +695,6 @@ void MainWindow::rotateB()
     QString auxL1 = ui->left1->styleSheet();
     QString auxL4 = ui->left4->styleSheet();
     QString auxL7 = ui->left7->styleSheet();
-
     QString auxB1 = ui->back1->styleSheet();
     QString auxB2 = ui->back2->styleSheet();
     QString auxB3 = ui->back3->styleSheet();
@@ -871,7 +703,6 @@ void MainWindow::rotateB()
     QString auxB7 = ui->back7->styleSheet();
     QString auxB8 = ui->back8->styleSheet();
     QString auxB9 = ui->back9->styleSheet();
-
     ui->up1->setStyleSheet(auxR3);
     ui->up2->setStyleSheet(auxR6);
     ui->up3->setStyleSheet(auxR9);
@@ -884,7 +715,6 @@ void MainWindow::rotateB()
     ui->left1->setStyleSheet(auxU3);
     ui->left4->setStyleSheet(auxU2);
     ui->left7->setStyleSheet(auxU1);
-
     ui->back1->setStyleSheet(auxB7);
     ui->back2->setStyleSheet(auxB4);
     ui->back3->setStyleSheet(auxB1);
@@ -893,26 +723,15 @@ void MainWindow::rotateB()
     ui->back7->setStyleSheet(auxB9);
     ui->back8->setStyleSheet(auxB6);
     ui->back9->setStyleSheet(auxB3);
-
     ui->back5->repaint();
     movimentos++;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::rotateBA()
 {
     if(!simulacao)
     {
-//            if(arduino->isWritable())
-//            {
-//                arduino->write("014");
                 delay(19000*del);
-//                std::cout << "014" << std::endl;
-//            }
-//            else
-//            {
-//                 std::cout << "Couldn't write to serial!" << std::endl;
-//            }
     }
     QString auxU1 = ui->up1->styleSheet();
     QString auxU2 = ui->up2->styleSheet();
@@ -926,7 +745,6 @@ void MainWindow::rotateBA()
     QString auxL1 = ui->left1->styleSheet();
     QString auxL4 = ui->left4->styleSheet();
     QString auxL7 = ui->left7->styleSheet();
-
     QString auxB1 = ui->back1->styleSheet();
     QString auxB2 = ui->back2->styleSheet();
     QString auxB3 = ui->back3->styleSheet();
@@ -935,7 +753,6 @@ void MainWindow::rotateBA()
     QString auxB7 = ui->back7->styleSheet();
     QString auxB8 = ui->back8->styleSheet();
     QString auxB9 = ui->back9->styleSheet();
-
     ui->up1->setStyleSheet(auxL7);
     ui->up2->setStyleSheet(auxL4);
     ui->up3->setStyleSheet(auxL1);
@@ -948,7 +765,6 @@ void MainWindow::rotateBA()
     ui->left1->setStyleSheet(auxD7);
     ui->left4->setStyleSheet(auxD8);
     ui->left7->setStyleSheet(auxD9);
-
     ui->back1->setStyleSheet(auxB3);
     ui->back2->setStyleSheet(auxB6);
     ui->back3->setStyleSheet(auxB9);
@@ -957,15 +773,13 @@ void MainWindow::rotateBA()
     ui->back7->setStyleSheet(auxB1);
     ui->back8->setStyleSheet(auxB4);
     ui->back9->setStyleSheet(auxB7);
-
     ui->back5->repaint();
     movimentos++;
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::completeCube()
 {
-    ///*
+    
     ui->up1->setStyleSheet("background-color: blue");
     ui->up2->setStyleSheet("background-color: blue");
     ui->up3->setStyleSheet("background-color: blue");
@@ -975,7 +789,6 @@ void MainWindow::completeCube()
     ui->up7->setStyleSheet("background-color: blue");
     ui->up8->setStyleSheet("background-color: blue");
     ui->up9->setStyleSheet("background-color: blue");
-
     ui->front1->setStyleSheet("background-color: white");
     ui->front2->setStyleSheet("background-color: white");
     ui->front3->setStyleSheet("background-color: white");
@@ -985,7 +798,6 @@ void MainWindow::completeCube()
     ui->front7->setStyleSheet("background-color: white");
     ui->front8->setStyleSheet("background-color: white");
     ui->front9->setStyleSheet("background-color: white");
-
     ui->left1->setStyleSheet("background-color: orange");
     ui->left2->setStyleSheet("background-color: orange");
     ui->left3->setStyleSheet("background-color: orange");
@@ -995,7 +807,6 @@ void MainWindow::completeCube()
     ui->left7->setStyleSheet("background-color: orange");
     ui->left8->setStyleSheet("background-color: orange");
     ui->left9->setStyleSheet("background-color: orange");
-
     ui->right1->setStyleSheet("background-color: red");
     ui->right2->setStyleSheet("background-color: red");
     ui->right3->setStyleSheet("background-color: red");
@@ -1005,7 +816,6 @@ void MainWindow::completeCube()
     ui->right7->setStyleSheet("background-color: red");
     ui->right8->setStyleSheet("background-color: red");
     ui->right9->setStyleSheet("background-color: red");
-
     ui->down1->setStyleSheet("background-color: green");
     ui->down2->setStyleSheet("background-color: green");
     ui->down3->setStyleSheet("background-color: green");
@@ -1015,7 +825,6 @@ void MainWindow::completeCube()
     ui->down7->setStyleSheet("background-color: green");
     ui->down8->setStyleSheet("background-color: green");
     ui->down9->setStyleSheet("background-color: green");
-
     ui->back1->setStyleSheet("background-color: yellow");
     ui->back2->setStyleSheet("background-color: yellow");
     ui->back3->setStyleSheet("background-color: yellow");
@@ -1025,9 +834,7 @@ void MainWindow::completeCube()
     ui->back7->setStyleSheet("background-color: yellow");
     ui->back8->setStyleSheet("background-color: yellow");
     ui->back9->setStyleSheet("background-color: yellow");
-    //*/
-
-
+    
     /*
     ui->up5->setStyleSheet("background-color: blue");
     ui->down5->setStyleSheet("background-color: green");
@@ -1035,77 +842,59 @@ void MainWindow::completeCube()
     ui->front5->setStyleSheet("background-color: white");
     ui->left5->setStyleSheet("background-color: orange");
     ui->back5->setStyleSheet("background-color: yellow");
-
     ui->back1->setStyleSheet("background-color: blue");
     ui->down7->setStyleSheet("background-color: blue");
     ui->left7->setStyleSheet("background-color: blue");
     */
 }
-
 void MainWindow::on_U_clicked()
 {
-//    QElapsedTimer tempo;
-//    tempo.start();
    rotateU();
-//   std::cout << tempo.elapsed() << std::endl;
-
 }
-
 void MainWindow::on_UA_clicked()
 {
     rotateUA();
 }
-
 void MainWindow::on_D_clicked()
 {
     rotateD();
 }
-
 void MainWindow::on_DA_clicked()
 {
    rotateDA();
 }
-
 void MainWindow::on_R_clicked()
 {
     rotateR();
 }
-
 void MainWindow::on_RA_clicked()
 {
     rotateRA();
 }
-
 void MainWindow::on_L_clicked()
 {
     rotateL();
 }
-
 void MainWindow::on_LA_clicked()
 {
     rotateLA();
 }
-
 void MainWindow::on_F_clicked()
 {
     rotateF();
 }
-
 void MainWindow::on_FA_clicked()
 {
     rotateFA();
 }
-
 void MainWindow::on_B_clicked()
 {
     rotateB();
 }
-
 void MainWindow::on_BA_clicked()
 {
     rotateBA();
 }
-
 void MainWindow::CruzSul()
 {
     if(ui->up8->styleSheet() != ui->up5->styleSheet() || ui->front2->styleSheet() != ui->front5->styleSheet())
@@ -1265,7 +1054,6 @@ void MainWindow::CruzSul()
         }
     }
 }
-
 void MainWindow::CruzLeste()
 {
     if(ui->up6->styleSheet() != ui->up5->styleSheet() || ui->right2->styleSheet() != ui->right5->styleSheet())
@@ -1438,7 +1226,7 @@ void MainWindow::CruzLeste()
         }
         else if(ui->left6->styleSheet() == ui->right5->styleSheet() && ui->front4->styleSheet() == ui->up5->styleSheet())
         {
-            //rotateBA();
+            
             rotateU();
             rotateU();
             rotateLA();
@@ -1481,7 +1269,6 @@ void MainWindow::CruzLeste()
         }
     }
 }
-
 void MainWindow::CruzOeste()
 {
     if(ui->up4->styleSheet() != ui->up5->styleSheet() || ui->left2->styleSheet() != ui->right5->styleSheet())
@@ -1691,7 +1478,6 @@ void MainWindow::CruzOeste()
         }
     }
 }
-
 void MainWindow::CruzNorte()
 {
     if(ui->up2->styleSheet() != ui->up5->styleSheet() || ui->back8->styleSheet() != ui->back5->styleSheet())
@@ -1904,9 +1690,7 @@ void MainWindow::CruzNorte()
             ui->ultimo->setPlainText(ult);
         }
     }
-
 }
-
 void MainWindow::on_Cross_clicked()
 {
     while(ui->up2->styleSheet() != ui->up5->styleSheet() || ui->back8->styleSheet() != ui->back5->styleSheet() ||
@@ -1916,19 +1700,18 @@ void MainWindow::on_Cross_clicked()
     {
         CruzSul();
         CruzNorte();
-        //CruzSul();
-        //CruzNorte();
+        
+        
         CruzLeste();
         CruzOeste();
      }
-    //rotateD();
-    //rotateD();
-    //rotateF();
-    //rotateF();
-    //rotateBA();
-    //rotateBA();
+    
+    
+    
+    
+    
+    
 }
-
 void MainWindow::on_zerar_clicked()
 {
     completeCube();
@@ -1936,27 +1719,22 @@ void MainWindow::on_zerar_clicked()
     ui->qtdMovimentos->setPlainText(QString::number(movimentos));
     ui->ultimo->setPlainText(QString::number(movimentos));
 }
-
 void MainWindow::on_CrossSul_clicked()
 {
     CruzSul();
 }
-
 void MainWindow::on_CrossNorte_clicked()
 {
     CruzNorte();
 }
-
 void MainWindow::on_CruzLeste_clicked()
 {
     CruzLeste();
 }
-
 void MainWindow::on_CruzOeste_clicked()
 {
     CruzOeste();
 }
-
 void MainWindow::on_QuinaSudeste_clicked()
 {
     if(ui->up9->styleSheet() != ui->up5->styleSheet() || ui->front3->styleSheet() != ui->front5->styleSheet() || ui->right1->styleSheet() != ui->right5->styleSheet())
@@ -1966,14 +1744,14 @@ void MainWindow::on_QuinaSudeste_clicked()
             rotateRA();
             rotateDA();
             rotateR();
-            if(ui->front7->styleSheet() == ui->front5->styleSheet()) //correto
+            if(ui->front7->styleSheet() == ui->front5->styleSheet()) 
             {
                 rotateDA();
                 rotateFA();
                 rotateD();
                 rotateF();
             }
-            else if(ui->front7->styleSheet() == ui->left5->styleSheet()) //correto
+            else if(ui->front7->styleSheet() == ui->left5->styleSheet()) 
             {
                 rotateDA();
                 rotateDA();
@@ -1981,7 +1759,7 @@ void MainWindow::on_QuinaSudeste_clicked()
                 rotateD();
                 rotateL();
             }
-            else if(ui->front7->styleSheet() == ui->back5->styleSheet()) ////ok
+            else if(ui->front7->styleSheet() == ui->back5->styleSheet()) 
             {
                 rotateD();
                 rotateBA();
@@ -2015,7 +1793,7 @@ void MainWindow::on_QuinaSudeste_clicked()
                 rotateD();
                 rotateR();
             }
-            else if(ui->back3->styleSheet() == ui->back5->styleSheet())  ///errado
+            else if(ui->back3->styleSheet() == ui->back5->styleSheet())  
             {
                 rotateDA();
                 rotateBA();
@@ -2028,14 +1806,14 @@ void MainWindow::on_QuinaSudeste_clicked()
             rotateF();
             rotateDA();
             rotateFA();
-            if(ui->front9->styleSheet() == ui->front5->styleSheet()) //certo
+            if(ui->front9->styleSheet() == ui->front5->styleSheet()) 
             {
                 rotateD();
                 rotateF();
                 rotateDA();
                 rotateFA();
             }
-            else if(ui->front9->styleSheet() == ui->left5->styleSheet()) //certo
+            else if(ui->front9->styleSheet() == ui->left5->styleSheet()) 
             {
                 rotateL();
                 rotateDA();
@@ -2057,10 +1835,8 @@ void MainWindow::on_QuinaSudeste_clicked()
                 rotateBA();
             }
         }
-
     }
 }
-
 void MainWindow::on_up9_clicked()
 {
     if(ui->up9->styleSheet() == ui->up5->styleSheet())
@@ -2076,7 +1852,6 @@ void MainWindow::on_up9_clicked()
     else if(ui->up9->styleSheet() == ui->back5->styleSheet())
         ui->up9->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_front3_clicked()
 {
     if(ui->front3->styleSheet() == ui->up5->styleSheet())
@@ -2092,7 +1867,6 @@ void MainWindow::on_front3_clicked()
     else if(ui->front3->styleSheet() == ui->back5->styleSheet())
         ui->front3->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_right1_clicked()
 {
     if(ui->right1->styleSheet() == ui->up5->styleSheet())
@@ -2108,7 +1882,6 @@ void MainWindow::on_right1_clicked()
     else if(ui->right1->styleSheet() == ui->back5->styleSheet())
         ui->right1->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_QuinaSudoeste_clicked()
 {
     if(ui->up7->styleSheet() != ui->up5->styleSheet() || ui->front1->styleSheet() != ui->front5->styleSheet() || ui->left3->styleSheet() != ui->left5->styleSheet())
@@ -2227,7 +2000,6 @@ void MainWindow::on_QuinaSudoeste_clicked()
         }
     }
 }
-
 void MainWindow::on_left3_clicked()
 {
     if(ui->left3->styleSheet() == ui->up5->styleSheet())
@@ -2243,7 +2015,6 @@ void MainWindow::on_left3_clicked()
     else if(ui->left3->styleSheet() == ui->back5->styleSheet())
         ui->left3->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_front1_clicked()
 {
     if(ui->front1->styleSheet() == ui->up5->styleSheet())
@@ -2259,7 +2030,6 @@ void MainWindow::on_front1_clicked()
     else if(ui->front1->styleSheet() == ui->back5->styleSheet())
         ui->front1->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_up7_clicked()
 {
     if(ui->up7->styleSheet() == ui->up5->styleSheet())
@@ -2275,7 +2045,6 @@ void MainWindow::on_up7_clicked()
     else if(ui->up7->styleSheet() == ui->back5->styleSheet())
         ui->up7->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_QuinaNordeste_clicked()
 {
     if(ui->up3->styleSheet() != ui->up5->styleSheet() || ui->right3->styleSheet() != ui->right5->styleSheet() || ui->back9->styleSheet() != ui->back5->styleSheet())
@@ -2391,7 +2160,6 @@ void MainWindow::on_QuinaNordeste_clicked()
         }
     }
 }
-
 void MainWindow::on_up3_clicked()
 {
     if(ui->up3->styleSheet() == ui->up5->styleSheet())
@@ -2407,7 +2175,6 @@ void MainWindow::on_up3_clicked()
     else if(ui->up3->styleSheet() == ui->back5->styleSheet())
         ui->up3->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_right3_clicked()
 {
     if(ui->right3->styleSheet() == ui->up5->styleSheet())
@@ -2423,7 +2190,6 @@ void MainWindow::on_right3_clicked()
     else if(ui->right3->styleSheet() == ui->back5->styleSheet())
         ui->right3->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_back9_clicked()
 {
     if(ui->back9->styleSheet() == ui->up5->styleSheet())
@@ -2439,7 +2205,6 @@ void MainWindow::on_back9_clicked()
     else if(ui->back9->styleSheet() == ui->back5->styleSheet())
         ui->back9->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_up1_clicked()
 {
     if(ui->up1->styleSheet() == ui->up5->styleSheet())
@@ -2455,7 +2220,6 @@ void MainWindow::on_up1_clicked()
     else if(ui->up1->styleSheet() == ui->back5->styleSheet())
         ui->up1->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_left1_clicked()
 {
     if(ui->left1->styleSheet() == ui->up5->styleSheet())
@@ -2471,7 +2235,6 @@ void MainWindow::on_left1_clicked()
     else if(ui->left1->styleSheet() == ui->back5->styleSheet())
         ui->left1->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_back7_clicked()
 {
     if(ui->back7->styleSheet() == ui->up5->styleSheet())
@@ -2487,7 +2250,6 @@ void MainWindow::on_back7_clicked()
     else if(ui->back7->styleSheet() == ui->back5->styleSheet())
         ui->back7->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_QuinaNoroeste_clicked()
 {
     if(ui->up1->styleSheet() != ui->up5->styleSheet() || ui->left1->styleSheet() != ui->left5->styleSheet() || ui->back7->styleSheet() != ui->back5->styleSheet())
@@ -2605,7 +2367,6 @@ void MainWindow::on_QuinaNoroeste_clicked()
         }
     }
 }
-
 void MainWindow::on_SudesteBaixo_clicked()
 {
     if(ui->front9->styleSheet() == ui->up5->styleSheet() || ui->down3->styleSheet() == ui->up5->styleSheet() || ui->right7->styleSheet() == ui->up5->styleSheet())
@@ -2706,7 +2467,6 @@ void MainWindow::on_SudesteBaixo_clicked()
         }
     }
 }
-
 void MainWindow::on_front9_clicked()
 {
     if(ui->front9->styleSheet() == ui->up5->styleSheet())
@@ -2722,7 +2482,6 @@ void MainWindow::on_front9_clicked()
     else if(ui->front9->styleSheet() == ui->back5->styleSheet())
         ui->front9->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_right7_clicked()
 {
     if(ui->right7->styleSheet() == ui->up5->styleSheet())
@@ -2738,7 +2497,6 @@ void MainWindow::on_right7_clicked()
     else if(ui->right7->styleSheet() == ui->back5->styleSheet())
         ui->right7->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_down3_clicked()
 {
     if(ui->down3->styleSheet() == ui->up5->styleSheet())
@@ -2754,7 +2512,6 @@ void MainWindow::on_down3_clicked()
     else if(ui->down3->styleSheet() == ui->back5->styleSheet())
         ui->down3->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_SudoesteBaixo_clicked()
 {
     if(ui->front7->styleSheet() == ui->up5->styleSheet() || ui->down1->styleSheet() == ui->up5->styleSheet() || ui->left9->styleSheet() == ui->up5->styleSheet())
@@ -2855,7 +2612,6 @@ void MainWindow::on_SudoesteBaixo_clicked()
         }
     }
 }
-
 void MainWindow::on_front7_clicked()
 {
     if(ui->front7->styleSheet() == ui->up5->styleSheet())
@@ -2871,7 +2627,6 @@ void MainWindow::on_front7_clicked()
     else if(ui->front7->styleSheet() == ui->back5->styleSheet())
         ui->front7->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_left9_clicked()
 {
     if(ui->left9->styleSheet() == ui->up5->styleSheet())
@@ -2887,7 +2642,6 @@ void MainWindow::on_left9_clicked()
     else if(ui->left9->styleSheet() == ui->back5->styleSheet())
         ui->left9->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_down1_clicked()
 {
     if(ui->down1->styleSheet() == ui->up5->styleSheet())
@@ -2903,7 +2657,6 @@ void MainWindow::on_down1_clicked()
     else if(ui->down1->styleSheet() == ui->back5->styleSheet())
         ui->down1->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_NordesteBaixo_clicked()
 {
     if(ui->back3->styleSheet() == ui->up5->styleSheet() || ui->down9->styleSheet() == ui->up5->styleSheet() || ui->right9->styleSheet() == ui->up5->styleSheet())
@@ -3004,7 +2757,6 @@ void MainWindow::on_NordesteBaixo_clicked()
        }
     }
 }
-
 void MainWindow::on_down9_clicked()
 {
     if(ui->down9->styleSheet() == ui->up5->styleSheet())
@@ -3020,7 +2772,6 @@ void MainWindow::on_down9_clicked()
     else if(ui->down9->styleSheet() == ui->back5->styleSheet())
         ui->down9->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_right9_clicked()
 {
     if(ui->right9->styleSheet() == ui->up5->styleSheet())
@@ -3036,7 +2787,6 @@ void MainWindow::on_right9_clicked()
     else if(ui->right9->styleSheet() == ui->back5->styleSheet())
         ui->right9->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_back3_clicked()
 {
     if(ui->back3->styleSheet() == ui->up5->styleSheet())
@@ -3052,7 +2802,6 @@ void MainWindow::on_back3_clicked()
     else if(ui->back3->styleSheet() == ui->back5->styleSheet())
         ui->back3->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_NoroesteBaixo_clicked()
 {
     if(ui->back1->styleSheet() == ui->up5->styleSheet() || ui->down7->styleSheet() == ui->up5->styleSheet() || ui->left7->styleSheet() == ui->up5->styleSheet())
@@ -3153,7 +2902,6 @@ void MainWindow::on_NoroesteBaixo_clicked()
         }
     }
 }
-
 void MainWindow::on_back1_clicked()
 {
     if(ui->back1->styleSheet() == ui->up5->styleSheet())
@@ -3169,7 +2917,6 @@ void MainWindow::on_back1_clicked()
     else if(ui->back1->styleSheet() == ui->back5->styleSheet())
         ui->back1->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_down7_clicked()
 {
     if(ui->down7->styleSheet() == ui->up5->styleSheet())
@@ -3185,7 +2932,6 @@ void MainWindow::on_down7_clicked()
     else if(ui->down7->styleSheet() == ui->back5->styleSheet())
         ui->down7->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_left7_clicked()
 {
     if(ui->left7->styleSheet() == ui->up5->styleSheet())
@@ -3201,7 +2947,6 @@ void MainWindow::on_left7_clicked()
     else if(ui->left7->styleSheet() == ui->back5->styleSheet())
         ui->left7->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_Quinas_clicked()
 {
     while(ui->up1->styleSheet() != ui->up5->styleSheet() || ui->back7->styleSheet() != ui->back5->styleSheet() || ui->left1->styleSheet() != ui->left5->styleSheet()
@@ -3219,7 +2964,6 @@ void MainWindow::on_Quinas_clicked()
         on_NoroesteBaixo_clicked();
     }
 }
-
 void MainWindow::on_frontSecond_clicked()
 {
     if(ui->front4->styleSheet() != ui->front5->styleSheet() || ui->front6->styleSheet() != ui->front5->styleSheet() ||
@@ -3323,7 +3067,6 @@ void MainWindow::on_frontSecond_clicked()
         }
     }
 }
-
 void MainWindow::on_leftSecond_clicked()
 {
     if(ui->left4->styleSheet() != ui->left5->styleSheet() || ui->left6->styleSheet() != ui->left5->styleSheet() ||
@@ -3341,7 +3084,6 @@ void MainWindow::on_leftSecond_clicked()
             rotateL();
             ult = "1LL";
             ui->ultimo->setPlainText(ult);
-
         }
         else if(ui->left8->styleSheet() == ui->left5->styleSheet() && ui->down4->styleSheet() == ui->front5->styleSheet())
         {
@@ -3444,7 +3186,6 @@ void MainWindow::on_leftSecond_clicked()
         }
     }
 }
-
 void MainWindow::on_rightSecond_clicked()
 {
     if(ui->right4->styleSheet() != ui->right5->styleSheet() || ui->right6->styleSheet() != ui->right5->styleSheet() ||
@@ -3548,7 +3289,6 @@ void MainWindow::on_rightSecond_clicked()
         }
     }
 }
-
 void MainWindow::on_backSecond_clicked()
 {
     if(ui->back4->styleSheet() != ui->back5->styleSheet() || ui->back6->styleSheet() != ui->back5->styleSheet() ||
@@ -3652,7 +3392,6 @@ void MainWindow::on_backSecond_clicked()
         }
     }
 }
-
 void MainWindow::on_segundaCamada_clicked()
 {
     int j=0;
@@ -3662,18 +3401,16 @@ void MainWindow::on_segundaCamada_clicked()
           ui->right4->styleSheet() != ui->right5->styleSheet() || ui->right6->styleSheet() != ui->right5->styleSheet() ||
           ui->back4->styleSheet() != ui->back5->styleSheet() || ui->back6->styleSheet() != ui->back5->styleSheet())
     {
-        //i = qrand()%8;
-        //if(i == 0)
+        
+        
             on_rightSecond_clicked();
-        //else if(i == 1)
+        
             on_frontSecond_clicked();
-        //else if(i == 2)
+        
             on_backSecond_clicked();
-        //else if(i == 3)
+        
             on_leftSecond_clicked();
-
         j++;
-
         if(j==25)
         {
             k = qrand()%4;
@@ -3687,7 +3424,6 @@ void MainWindow::on_segundaCamada_clicked()
                 debugaRight();
             j = 0;
         }
-
         /*on_rightSecond_clicked();
         on_rightSecond_clicked();
         on_rightSecond_clicked();
@@ -3711,9 +3447,7 @@ void MainWindow::on_segundaCamada_clicked()
         on_leftSecond_clicked();
         on_leftSecond_clicked();
         debugaLeft();
-
         i++;
-
         on_frontSecond_clicked();
         on_leftSecond_clicked();
         on_rightSecond_clicked();
@@ -3730,20 +3464,15 @@ void MainWindow::on_segundaCamada_clicked()
         on_leftSecond_clicked();
         on_rightSecond_clicked();
         on_backSecond_clicked();*/
-        //if(i%50 == 0)
-       // {
-       //     debugaBack();
-       //     debugaFront();
-       //     debugaRight();
-       //     debugaLeft();
-       // }*/
-
-
-
+        
+       
+       
+       
+       
+       
+       
     }
-
 }
-
 void MainWindow::debugaFront()
 {
     if(ui->front4->styleSheet() != ui->front5->styleSheet() || ui->front6->styleSheet() != ui->front5->styleSheet() ||
@@ -3880,7 +3609,6 @@ void MainWindow::debugaFront()
             }
         }
 }
-
 void MainWindow::debugaLeft()
 {
     if(ui->left4->styleSheet() != ui->left5->styleSheet() || ui->left6->styleSheet() != ui->left5->styleSheet() ||
@@ -4017,7 +3745,6 @@ void MainWindow::debugaLeft()
             }
         }
 }
-
 void MainWindow::debugaRight()
 {
     if(ui->right4->styleSheet() != ui->right5->styleSheet() || ui->right6->styleSheet() != ui->right5->styleSheet() ||
@@ -4154,7 +3881,6 @@ void MainWindow::debugaRight()
             }
         }
 }
-
 void MainWindow::debugaBack()
 {
     if(ui->back4->styleSheet() != ui->back5->styleSheet() || ui->back6->styleSheet() != ui->back5->styleSheet() ||
@@ -4298,26 +4024,17 @@ void MainWindow::on_consertaSegunda_clicked()
     debugaRight();
     debugaBack();
 }
-
 void MainWindow::on_Tudo_clicked()
 {
     QElapsedTimer tempo;
     int movimentos_old;
     int dif;
     tempo.start();
-//    for(int i = 0; i < 10; i++)
-//    {
-//        std::cout << simulacao << std::endl;
-//        ui->simulation->setPlainText(QString::number(i));
         movimentos_old=0;
         on_Randomize_clicked();
-//        tempo.restart();
-//        cross << QString::number(tempo.elapsed()).toStdString() + "\n";
-//        tempo.restart();
         on_Cross_clicked();
         cross << std::to_string(movimentos)+"\n";
         cross << QString::number(tempo.elapsed()).toStdString() + "\n";
-//        tempo.restart();
         movimentos_old = movimentos;
         on_Quinas_clicked();
         dif = movimentos-movimentos_old;
@@ -4326,7 +4043,6 @@ void MainWindow::on_Tudo_clicked()
         quinas << " ";
         quinas << std::to_string(dif)+"\n";
         quinas << QString::number(tempo.elapsed()).toStdString() + "\n";
-//        tempo.restart();
         on_segundaCamada_clicked();
         dif = movimentos-movimentos_old;
         movimentos_old = movimentos;
@@ -4334,7 +4050,6 @@ void MainWindow::on_Tudo_clicked()
         segundacamada << " ";
         segundacamada << std::to_string(dif)+"\n";
         segundacamada << QString::number(tempo.elapsed()).toStdString() + "\n";
-//        tempo.restart();
         on_CrossDown_clicked();
         dif = movimentos-movimentos_old;
         movimentos_old = movimentos;
@@ -4342,7 +4057,6 @@ void MainWindow::on_Tudo_clicked()
         crossdown << " ";
         crossdown << std::to_string(dif)+"\n";
         crossdown << QString::number(tempo.elapsed()).toStdString() + "\n";
-//        tempo.restart();
         on_CantosDown_clicked();
         dif = movimentos-movimentos_old;
         movimentos_old = movimentos;
@@ -4350,7 +4064,6 @@ void MainWindow::on_Tudo_clicked()
         cantosdown << " ";
         cantosdown << std::to_string(dif)+"\n";
         cantosdown << QString::number(tempo.elapsed()).toStdString() + "\n";
-//        tempo.restart();
         on_Place_clicked();
         dif = movimentos-movimentos_old;
         movimentos_old = movimentos;
@@ -4358,7 +4071,6 @@ void MainWindow::on_Tudo_clicked()
         place << " ";
         place << std::to_string(dif)+"\n";
         place << QString::number(tempo.elapsed()).toStdString() + "\n";
-//        tempo.restart();
         on_Turn_clicked();
         dif = movimentos-movimentos_old;
         movimentos_old = movimentos;
@@ -4367,7 +4079,6 @@ void MainWindow::on_Tudo_clicked()
         turn << std::to_string(dif)+"\n";
         turn << QString::number(tempo.elapsed()).toStdString() + "\n";
         std::cout << QString::number(tempo.elapsed()).toStdString() << std::endl;
-//    }
     cross.close();
     quinas.close();
     segundacamada.close();
@@ -4376,10 +4087,8 @@ void MainWindow::on_Tudo_clicked()
     place.close();
     turn.close();
 }
-
 void MainWindow::on_CrossDown_clicked()
 {
-//    std::cout << "qq" << std::endl;
     if(ui->down2->styleSheet() != ui->down5->styleSheet() && ui->down4->styleSheet() != ui->down5->styleSheet() &&
             ui->down6->styleSheet() != ui->down5->styleSheet() && ui->down8->styleSheet() != ui->down5->styleSheet())
     {
@@ -4390,12 +4099,10 @@ void MainWindow::on_CrossDown_clicked()
         rotateDA();
         rotateFA();
     }
-//    std::cout << "ww" << std::endl;
     while((ui->down2->styleSheet() != ui->down5->styleSheet() || ui->down4->styleSheet() != ui->down5->styleSheet()) &&
           (ui->down2->styleSheet() != ui->down5->styleSheet() || ui->down8->styleSheet() != ui->down5->styleSheet()) &&
            (ui->down4->styleSheet() != ui->down5->styleSheet() || ui->down6->styleSheet() != ui->down5->styleSheet()))
         rotateD();
-//    std::cout << "ee" << std::endl;
     if(ui->down6->styleSheet() != ui->down5->styleSheet() && ui->down8->styleSheet() != ui->down5->styleSheet())
     {
         rotateF();
@@ -4405,14 +4112,12 @@ void MainWindow::on_CrossDown_clicked()
         rotateDA();
         rotateFA();
     }
-//    std::cout << "yy" << std::endl;
-    ///////////////// ERRO PODE ESTAR AQUI
+    
     if((ui->down2->styleSheet() == ui->down5->styleSheet() &&
         ui->down8->styleSheet() == ui->down5->styleSheet()) &&
             ui->down4->styleSheet() != ui->down5->styleSheet() &&
             ui->down6->styleSheet() != ui->down5->styleSheet())
         rotateD();
-//    std::cout << "rr" << std::endl;
     if(ui->down2->styleSheet() != ui->down5->styleSheet() || ui->down4->styleSheet() != ui->down5->styleSheet() ||
             ui->down6->styleSheet() != ui->down5->styleSheet() || ui->down8->styleSheet() != ui->down5->styleSheet())
     {
@@ -4423,9 +4128,7 @@ void MainWindow::on_CrossDown_clicked()
         rotateDA();
         rotateFA();
     }
-//    std::cout << "tt" << std::endl;
 }
-
 void MainWindow::on_CantosDown_clicked()
 {
     int i;
@@ -4605,7 +4308,6 @@ void MainWindow::on_CantosDown_clicked()
                 rotateD();
                 rotateD();
             }
-
             if(ui->left8->styleSheet() == ui->left5->styleSheet() && ui->right8->styleSheet() == ui->right5->styleSheet())
             {
                 rotateL();
@@ -4617,7 +4319,6 @@ void MainWindow::on_CantosDown_clicked()
                 rotateDA();
                 rotateLA();
             }
-
         }
         if(ui->front8->styleSheet() != ui->front5->styleSheet() && ui->left8->styleSheet() != ui->left5->styleSheet() &&
                 ui->back2->styleSheet() != ui->back5->styleSheet() && ui->right8->styleSheet() != ui->right5->styleSheet())
@@ -4633,11 +4334,8 @@ void MainWindow::on_CantosDown_clicked()
             rotateLA();
             rotateD();
         }
-
-
     }*/
 }
-
 bool MainWindow::sudestecorreto()
 {
     if((ui->front9->styleSheet() == ui->front5->styleSheet() || ui->front9->styleSheet() == ui->down5->styleSheet() || ui->front9->styleSheet() == ui->right5->styleSheet()) &&
@@ -4647,7 +4345,6 @@ bool MainWindow::sudestecorreto()
     else
         return false;
 }
-
 bool MainWindow::sudoestecorreto()
 {
     if((ui->front7->styleSheet() == ui->front5->styleSheet() || ui->front7->styleSheet() == ui->down5->styleSheet() || ui->front7->styleSheet() == ui->left5->styleSheet()) &&
@@ -4657,7 +4354,6 @@ bool MainWindow::sudoestecorreto()
     else
         return false;
 }
-
 bool MainWindow::nordestecorreto()
 {
     if((ui->back3->styleSheet() == ui->back5->styleSheet() || ui->back3->styleSheet() == ui->down5->styleSheet() || ui->back3->styleSheet() == ui->right5->styleSheet()) &&
@@ -4667,7 +4363,6 @@ bool MainWindow::nordestecorreto()
     else
         return false;
 }
-
 bool MainWindow::noroestecorreto()
 {
     if((ui->back1->styleSheet() == ui->back5->styleSheet() || ui->back1->styleSheet() == ui->down5->styleSheet() || ui->back1->styleSheet() == ui->left5->styleSheet()) &&
@@ -4677,7 +4372,6 @@ bool MainWindow::noroestecorreto()
     else
         return false;
 }
-
 void MainWindow::on_Place_clicked()
 {
     while(!sudestecorreto() || !sudoestecorreto() || !nordestecorreto() || !noroestecorreto())
@@ -4694,7 +4388,6 @@ void MainWindow::on_Place_clicked()
             rotateDA();
             ult = "1SS";
             ui->ultimo->setPlainText(ult);
-
         }
         else if(sudestecorreto())
         {
@@ -4721,7 +4414,6 @@ void MainWindow::on_Place_clicked()
             rotateDA();
             ult = "3SS";
             ui->ultimo->setPlainText(ult);
-
         }
         else if(nordestecorreto())
         {
@@ -4751,7 +4443,6 @@ void MainWindow::on_Place_clicked()
         }
     }
 }
-
 void MainWindow::on_Turn_clicked()
 {
     while(ui->front1->styleSheet() != ui->front5->styleSheet() || ui->front2->styleSheet() != ui->front5->styleSheet() || ui->front3->styleSheet() != ui->front5->styleSheet() ||
@@ -4947,11 +4638,9 @@ void MainWindow::on_Turn_clicked()
         }
     }
 }
-
 void MainWindow::on_otimoButton_clicked()
 {
     QString input = "";
-
     input += color(ui->right3->styleSheet());
     input += color(ui->right6->styleSheet());
     input += color(ui->right9->styleSheet());
@@ -4962,7 +4651,6 @@ void MainWindow::on_otimoButton_clicked()
     input += color(ui->right7->styleSheet());
     input += color(ui->up3->styleSheet());
     input += color(ui->up6->styleSheet());
-
     input += color(ui->up9->styleSheet());
     input += color(ui->front3->styleSheet());
     input += color(ui->front6->styleSheet());
@@ -4973,7 +4661,6 @@ void MainWindow::on_otimoButton_clicked()
     input += color(ui->back3->styleSheet());
     input += color(ui->back6->styleSheet());
     input += color(ui->back9->styleSheet());
-
     input += color(ui->up2->styleSheet());
     input += color(ui->up8->styleSheet());
     input += color(ui->front2->styleSheet());
@@ -4984,7 +4671,6 @@ void MainWindow::on_otimoButton_clicked()
     input += color(ui->back8->styleSheet());
     input += color(ui->up1->styleSheet());
     input += color(ui->up4->styleSheet());
-
     input += color(ui->up7->styleSheet());
     input += color(ui->front1->styleSheet());
     input += color(ui->front4->styleSheet());
@@ -4995,7 +4681,6 @@ void MainWindow::on_otimoButton_clicked()
     input += color(ui->back1->styleSheet());
     input += color(ui->back4->styleSheet());
     input += color(ui->back7->styleSheet());
-
     input += color(ui->left3->styleSheet());
     input += color(ui->left6->styleSheet());
     input += color(ui->left9->styleSheet());
@@ -5004,49 +4689,38 @@ void MainWindow::on_otimoButton_clicked()
     input += color(ui->left1->styleSheet());
     input += color(ui->left4->styleSheet());
     input += color(ui->left7->styleSheet());
-
-//    input = "rybwybyowoyorgwoowgbogrgobrbowgwwryybywyrrgbbggr";
-
     std::cout << input.toStdString() << std::endl;
-
     QElapsedTimer timer;
-
     timer.start();
-
     QString program = "../Rubiks-Cube-Solver/format.sh";
-
     QStringList arguments;
-
     QProcess *myProcess = new QProcess(this);
     myProcess->start(program,(QStringList) arguments << input );
-//    std::cout << "1";
-    //QString line;
+    
     std::string line;
     QString entrada;
-//    std::cout << "1";
     if (myProcess->waitForFinished())
     {
         myProcess->close();
         std::ifstream myfile ("format.txt");
-    //    std::cout << "1";
+    
          if (myfile.is_open())
           {
-    //          std::cout << "3";
+    
             while ( std::getline (myfile,line ))
             {
                 std::cout << "size: " << line.size() << std::endl;
                 if(line.size() == 120)
                    entrada = QString::fromStdString(line);
-    //            std::cout << "1";
+    
               std::cout << line << '\n';
             }
             std::cout << "size: " << line.size() << std::endl;
-    //        std::cout << "1";
+    
             myfile.close();
-    //        std::cout << "1";
+    
           }
          std::cout << "começa a executar o run" << std::endl;
-
     }
     program = "../Rubiks-Cube-Solver/run.sh";
     QStringList arguments2;
@@ -5056,18 +4730,13 @@ void MainWindow::on_otimoButton_clicked()
     myProcess2->write("exit\n\r");
     if (myProcess2->waitForFinished(-1))
     {
-
         std::cout << "run ficou pronto run do solver" << std::endl;
         std::ifstream myfile2 ("result.txt");
-//    std::cout << "1";
      if (myfile2.is_open())
       {
-//          std::cout << "3";
          otimotempo << QString::number(timer.elapsed()).toStdString() + "\n";
-//         std::cout << "tempo proc: " + QString::number(timer.restart()).toStdString() << std::endl;
         while ( std::getline (myfile2,line ))
         {
-
             if(line.size() == 1 || line.size() == 2)
             {
                 solve(line);
@@ -5082,7 +4751,6 @@ void MainWindow::on_otimoButton_clicked()
       }
     }
 }
-
 QString MainWindow::color(QString cor)
 {
     if (cor.toStdString() == "background-color: blue")
@@ -5098,7 +4766,6 @@ QString MainWindow::color(QString cor)
     else
         return QString("g");
 }
-
 void MainWindow::solve(std::string s)
 {
     if(s == "2F")
@@ -5108,10 +4775,8 @@ void MainWindow::solve(std::string s)
     }
     else if( s == "F")
         rotateF();
-
     else if ( s == "F'" )
         rotateFA();
-
     else if ( s == "2T" )
     {
         rotateR();
@@ -5119,10 +4784,8 @@ void MainWindow::solve(std::string s)
     }
     else if ( s == "T" )
         rotateR();
-
     else if ( s == "T'" )
         rotateRA();
-
     else if ( s == "2D" )
     {
         rotateL();
@@ -5130,10 +4793,8 @@ void MainWindow::solve(std::string s)
     }
     else if ( s == "D" )
         rotateL();
-
     else if ( s == "D'" )
         rotateLA();
-
     else if ( s == "2L" )
     {
         rotateU();
@@ -5141,10 +4802,8 @@ void MainWindow::solve(std::string s)
     }
     else if ( s == "L" )
         rotateU();
-
     else if ( s == "L'" )
         rotateUA();
-
     else if ( s == "2R" )
     {
         rotateD();
@@ -5152,10 +4811,8 @@ void MainWindow::solve(std::string s)
     }
     else if ( s == "R" )
         rotateD();
-
     else if ( s == "R'" )
         rotateDA();
-
     else if ( s == "2B" )
     {
         rotateB();
@@ -5163,49 +4820,19 @@ void MainWindow::solve(std::string s)
     }
     else if ( s == "B" )
         rotateB();
-
     else if ( s == "B'" )
         rotateBA();
-
     else
         std::cout << "String não reconhecida solve()" << std::endl;
 }
-
 void MainWindow::camera()
 {
-//    cviewer = new cameraviewer(this);
-//    cviewer->show();
-//    QList<QCameraInfo> cameras = QCameraInfo::availableCameras();
-//    mCamera = new QCamera(cameras[0]);
-//    mCameraViewFinder = new QCameraViewfinder(this);
-//    mCamera->setViewfinder(mCameraViewFinder);
-//    mCameraImageCapture = new QCameraImageCapture(mCamera, this);
-//    mLayout = new QVBoxLayout;
-//    mLayout->addWidget(mCameraViewFinder);
-//    mCameraImageCapture->setCaptureDestination(QCameraImageCapture::CaptureToBuffer);
-//    mCamera->setCaptureMode(QCamera::CaptureStillImage);
-//    cviewer->setLayout(mLayout);
-//    cviewer->show();
-
-
     mCamera->start();
-    //on half pressed shutter button
-
-
-    //on shutter button pressed
-//    mCameraImageCapture->capture();
-
-    //on shutter button released
-    //mCamera->unlock();
-
-
-//    cviewer->setLayout(mLayout);
-//    cviewer->show();
-
-
-//    mCamera->start();
+    
+    
+    
+    
 }
-
 void MainWindow::setModel(std::vector<std::string> styles, int c)
 {
     if(c == 0)
@@ -5281,7 +4908,6 @@ void MainWindow::setModel(std::vector<std::string> styles, int c)
         ui->right9->setStyleSheet(QString::fromStdString(styles[8]));
     }
 }
-
 bool MainWindow::verificaCoerencia()
 {
     std::vector<QString> numberOfColors;
@@ -5294,7 +4920,6 @@ bool MainWindow::verificaCoerencia()
     numberOfColors.push_back(ui->up7->styleSheet());
     numberOfColors.push_back(ui->up8->styleSheet());
     numberOfColors.push_back(ui->up9->styleSheet());
-
     numberOfColors.push_back(ui->front1->styleSheet());
     numberOfColors.push_back(ui->front2->styleSheet());
     numberOfColors.push_back(ui->front3->styleSheet());
@@ -5304,7 +4929,6 @@ bool MainWindow::verificaCoerencia()
     numberOfColors.push_back(ui->front7->styleSheet());
     numberOfColors.push_back(ui->front8->styleSheet());
     numberOfColors.push_back(ui->front9->styleSheet());
-
     numberOfColors.push_back(ui->down1->styleSheet());
     numberOfColors.push_back(ui->down2->styleSheet());
     numberOfColors.push_back(ui->down3->styleSheet());
@@ -5314,7 +4938,6 @@ bool MainWindow::verificaCoerencia()
     numberOfColors.push_back(ui->down7->styleSheet());
     numberOfColors.push_back(ui->down8->styleSheet());
     numberOfColors.push_back(ui->down9->styleSheet());
-
     numberOfColors.push_back(ui->back1->styleSheet());
     numberOfColors.push_back(ui->back2->styleSheet());
     numberOfColors.push_back(ui->back3->styleSheet());
@@ -5324,7 +4947,6 @@ bool MainWindow::verificaCoerencia()
     numberOfColors.push_back(ui->back7->styleSheet());
     numberOfColors.push_back(ui->back8->styleSheet());
     numberOfColors.push_back(ui->back9->styleSheet());
-
     numberOfColors.push_back(ui->left1->styleSheet());
     numberOfColors.push_back(ui->left2->styleSheet());
     numberOfColors.push_back(ui->left3->styleSheet());
@@ -5334,7 +4956,6 @@ bool MainWindow::verificaCoerencia()
     numberOfColors.push_back(ui->left7->styleSheet());
     numberOfColors.push_back(ui->left8->styleSheet());
     numberOfColors.push_back(ui->left9->styleSheet());
-
     numberOfColors.push_back(ui->right1->styleSheet());
     numberOfColors.push_back(ui->right2->styleSheet());
     numberOfColors.push_back(ui->right3->styleSheet());
@@ -5344,21 +4965,18 @@ bool MainWindow::verificaCoerencia()
     numberOfColors.push_back(ui->right7->styleSheet());
     numberOfColors.push_back(ui->right8->styleSheet());
     numberOfColors.push_back(ui->right9->styleSheet());
-
     int b = std::count(numberOfColors.begin(), numberOfColors.end(), QString("background-color: blue"));
     int w = std::count(numberOfColors.begin(), numberOfColors.end(), QString("background-color: white"));
     int o = std::count(numberOfColors.begin(), numberOfColors.end(), QString("background-color: orange"));
     int r = std::count(numberOfColors.begin(), numberOfColors.end(), QString("background-color: red"));
     int y = std::count(numberOfColors.begin(), numberOfColors.end(), QString("background-color: yellow"));
     int g = std::count(numberOfColors.begin(), numberOfColors.end(), QString("background-color: green"));
-
     std::cout << "b = " << b << std::endl;
     std::cout << "w = " << w << std::endl;
     std::cout << "o = " << o << std::endl;
     std::cout << "r = " << r << std::endl;
     std::cout << "y = " << y << std::endl;
     std::cout << "g = " << g << std::endl;
-
     if(b == 9 &&
        w == b &&
        o == w &&
@@ -5377,7 +4995,6 @@ bool MainWindow::verificaCoerencia()
 }
 void MainWindow::on_pushButton_clicked()
 {
-//    calibrar();
     if(!simulacao)
     {
         double R=0,G=0,B=0;
@@ -5386,8 +5003,8 @@ void MainWindow::on_pushButton_clicked()
         cv::Mat pic1;
         cv::Mat pic2;
         std::vector <std::string> styles;
-    //    for(lado = 0; lado < 6; lado++)
-    //    {
+    
+    
             while (!cam.isOpened())
             {
                     std::cout << "3" << std::endl;
@@ -5397,8 +5014,8 @@ void MainWindow::on_pushButton_clicked()
             vector<vector<Point> > squares;
             while (!cam.isOpened())
             {
-                    //std::cout << "3" << std::endl;
-                    //std::cout << "Failed to make connection to cam" << std::endl;
+                    
+                    
                     cam.open(0);
             }
             cam >> pic1;
@@ -5415,11 +5032,10 @@ void MainWindow::on_pushButton_clicked()
             std::cout << "debug lado" << std::endl;
             drawSquares(pic1, squares, styles, conf);
             squares.clear();
-    //        setModel(styles, lado);
-    //        styles.clear();
+    
+    
     }
 }
-
 void MainWindow::on_pushButton_2_clicked()
 {
     if(simulacao==0)
@@ -5443,8 +5059,8 @@ void MainWindow::on_pushButton_2_clicked()
                 vector<vector<Point> > squares;
                 while (!cam.isOpened())
                 {
-                        //std::cout << "3" << std::endl;
-                        //std::cout << "Failed to make connection to cam" << std::endl;
+                        
+                        
                         cam.open(0);
                 }
                 cam >> pic1;
@@ -5461,7 +5077,6 @@ void MainWindow::on_pushButton_2_clicked()
                 squares.clear();
                 setModel(styles, lado);
                 styles.clear();
-
                 std::string comando_aux = "0" + std::to_string(lado+1);
                 char* comando = new char[comando_aux.length()];
                 strcpy(comando, comando_aux.c_str());
@@ -5482,12 +5097,10 @@ void MainWindow::on_pushButton_2_clicked()
                 {
                      std::cout << "Couldn't write to serial!" << std::endl;
                 }
-
             }
             if(lado == 6)
             {
                 lado = 0;
-
                 if(verificaCoerencia())
                     QMessageBox::information(this,tr("Sucesso"),tr("A configuração do cubo é factível."));
                 else
@@ -5496,8 +5109,6 @@ void MainWindow::on_pushButton_2_clicked()
                     on_pushButton_2_clicked();
                 }
             }
-
-
             std::cout << "R: " << R << std::endl;
             std::cout << "G: " << G << std::endl;
             std::cout << "B: " << B << std::endl;
@@ -5509,10 +5120,8 @@ void MainWindow::on_pushButton_2_clicked()
         }
     }
 }
-
 void MainWindow::calibrar()
 {
-
     CalibrationOn = true;
     for(int i = 0; i < 6; i++)
     {
@@ -5589,10 +5198,8 @@ void MainWindow::calibrar()
             c.push_back(teste::StyleSheet2Char((ui->back8->styleSheet()).toStdString()));
             c.push_back(teste::StyleSheet2Char((ui->back9->styleSheet()).toStdString()));
         }
-//        std::cout << "aqui2" << std::endl;
         takePictureAndProcess(c);
-//        std::cout << "aqui3" << std::endl;
-        // usa os métodos do arduino dependendo do valor do i
+        
         lado++;
         std::string comando_aux = "0" + std::to_string(i+1);
         char* comando = new char[comando_aux.length()];
@@ -5606,17 +5213,15 @@ void MainWindow::calibrar()
                 delay(9000);
             else if(i+1 == 5)
                 delay(7000);
-//            delay(20000);
             std::cout << comando << std::endl;
         }
         else
         {
              std::cout << "Couldn't write to serial!" << std::endl;
         }
-
     }
     verificaCoerencia();
-    //divide o vector calibrateVector por 900 e coloca no método pra salvar
+    
     for(int i = 0; i < calibrateVector.size(); i++)
         calibrateVector[i] /= 900;
     config aux;
@@ -5642,7 +5247,6 @@ void MainWindow::calibrar()
     calibrateVector = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     CalibrationOn = false;
 }
-
 void MainWindow::on_back8_clicked()
 {
     if(ui->back8->styleSheet() == ui->up5->styleSheet())
@@ -5658,7 +5262,6 @@ void MainWindow::on_back8_clicked()
     else if(ui->back8->styleSheet() == ui->back5->styleSheet())
         ui->back8->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_back2_clicked()
 {
     if(ui->back2->styleSheet() == ui->up5->styleSheet())
@@ -5674,7 +5277,6 @@ void MainWindow::on_back2_clicked()
     else if(ui->back2->styleSheet() == ui->back5->styleSheet())
         ui->back2->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_back6_clicked()
 {
     if(ui->back6->styleSheet() == ui->up5->styleSheet())
@@ -5690,7 +5292,6 @@ void MainWindow::on_back6_clicked()
     else if(ui->back6->styleSheet() == ui->back5->styleSheet())
         ui->back6->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_back4_clicked()
 {
     if(ui->back4->styleSheet() == ui->up5->styleSheet())
@@ -5706,7 +5307,6 @@ void MainWindow::on_back4_clicked()
     else if(ui->back4->styleSheet() == ui->back5->styleSheet())
         ui->back4->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_down8_clicked()
 {
     if(ui->down8->styleSheet() == ui->up5->styleSheet())
@@ -5722,7 +5322,6 @@ void MainWindow::on_down8_clicked()
     else if(ui->down8->styleSheet() == ui->back5->styleSheet())
         ui->down8->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_down6_clicked()
 {
     if(ui->down6->styleSheet() == ui->up5->styleSheet())
@@ -5738,7 +5337,6 @@ void MainWindow::on_down6_clicked()
     else if(ui->down6->styleSheet() == ui->back5->styleSheet())
         ui->down6->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_down4_clicked()
 {
     if(ui->down4->styleSheet() == ui->up5->styleSheet())
@@ -5754,7 +5352,6 @@ void MainWindow::on_down4_clicked()
     else if(ui->down4->styleSheet() == ui->back5->styleSheet())
         ui->down4->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_down2_clicked()
 {
     if(ui->down2->styleSheet() == ui->up5->styleSheet())
@@ -5770,7 +5367,6 @@ void MainWindow::on_down2_clicked()
     else if(ui->down2->styleSheet() == ui->back5->styleSheet())
         ui->down2->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_front8_clicked()
 {
     if(ui->front8->styleSheet() == ui->up5->styleSheet())
@@ -5786,7 +5382,6 @@ void MainWindow::on_front8_clicked()
     else if(ui->front8->styleSheet() == ui->back5->styleSheet())
         ui->front8->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_front4_clicked()
 {
     if(ui->front4->styleSheet() == ui->up5->styleSheet())
@@ -5802,7 +5397,6 @@ void MainWindow::on_front4_clicked()
     else if(ui->front4->styleSheet() == ui->back5->styleSheet())
         ui->front4->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_front6_clicked()
 {
     if(ui->front6->styleSheet() == ui->up5->styleSheet())
@@ -5818,7 +5412,6 @@ void MainWindow::on_front6_clicked()
     else if(ui->front6->styleSheet() == ui->back5->styleSheet())
         ui->front6->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_front2_clicked()
 {
     if(ui->front2->styleSheet() == ui->up5->styleSheet())
@@ -5834,7 +5427,6 @@ void MainWindow::on_front2_clicked()
     else if(ui->front2->styleSheet() == ui->back5->styleSheet())
         ui->front2->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_left8_clicked()
 {
     if(ui->left8->styleSheet() == ui->up5->styleSheet())
@@ -5850,7 +5442,6 @@ void MainWindow::on_left8_clicked()
     else if(ui->left8->styleSheet() == ui->back5->styleSheet())
         ui->left8->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_left4_clicked()
 {
     if(ui->left4->styleSheet() == ui->up5->styleSheet())
@@ -5866,7 +5457,6 @@ void MainWindow::on_left4_clicked()
     else if(ui->left4->styleSheet() == ui->back5->styleSheet())
         ui->left4->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_left2_clicked()
 {
     if(ui->left2->styleSheet() == ui->up5->styleSheet())
@@ -5882,7 +5472,6 @@ void MainWindow::on_left2_clicked()
     else if(ui->left2->styleSheet() == ui->back5->styleSheet())
         ui->left2->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_left6_clicked()
 {
     if(ui->left6->styleSheet() == ui->up5->styleSheet())
@@ -5898,7 +5487,6 @@ void MainWindow::on_left6_clicked()
     else if(ui->left6->styleSheet() == ui->back5->styleSheet())
         ui->left6->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_right4_clicked()
 {
     if(ui->right4->styleSheet() == ui->up5->styleSheet())
@@ -5914,7 +5502,6 @@ void MainWindow::on_right4_clicked()
     else if(ui->right4->styleSheet() == ui->back5->styleSheet())
         ui->right4->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_right8_clicked()
 {
     if(ui->right8->styleSheet() == ui->up5->styleSheet())
@@ -5930,7 +5517,6 @@ void MainWindow::on_right8_clicked()
     else if(ui->right8->styleSheet() == ui->back5->styleSheet())
         ui->right8->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_right6_clicked()
 {
     if(ui->right6->styleSheet() == ui->up5->styleSheet())
@@ -5946,7 +5532,6 @@ void MainWindow::on_right6_clicked()
     else if(ui->right6->styleSheet() == ui->back5->styleSheet())
         ui->right6->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_right2_clicked()
 {
     if(ui->right2->styleSheet() == ui->up5->styleSheet())
@@ -5962,7 +5547,6 @@ void MainWindow::on_right2_clicked()
     else if(ui->right2->styleSheet() == ui->back5->styleSheet())
         ui->right2->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_up8_clicked()
 {
     if(ui->up8->styleSheet() == ui->up5->styleSheet())
@@ -5978,7 +5562,6 @@ void MainWindow::on_up8_clicked()
     else if(ui->up8->styleSheet() == ui->back5->styleSheet())
         ui->up8->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_up4_clicked()
 {
     if(ui->up4->styleSheet() == ui->up5->styleSheet())
@@ -5994,7 +5577,6 @@ void MainWindow::on_up4_clicked()
     else if(ui->up4->styleSheet() == ui->back5->styleSheet())
         ui->up4->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_up6_clicked()
 {
     if(ui->up6->styleSheet() == ui->up5->styleSheet())
@@ -6010,7 +5592,6 @@ void MainWindow::on_up6_clicked()
     else if(ui->up6->styleSheet() == ui->back5->styleSheet())
         ui->up6->setStyleSheet("background-color: blue");
 }
-
 void MainWindow::on_up2_clicked()
 {
     if(ui->up2->styleSheet() == ui->up5->styleSheet())
@@ -6026,9 +5607,6 @@ void MainWindow::on_up2_clicked()
     else if(ui->up2->styleSheet() == ui->back5->styleSheet())
         ui->up2->setStyleSheet("background-color: blue");
 }
-
-
-
 void MainWindow::takePictureAndProcess(std::vector<char> coresFaceAtual)
 {
     double R=0,G=0,B=0;
@@ -6036,10 +5614,8 @@ void MainWindow::takePictureAndProcess(std::vector<char> coresFaceAtual)
     cv::Mat pic1;
     cv::Mat pic2;
     std::vector <std::string> styles;
-//    std::cout << "2" << std::endl;
     while (!cam.isOpened())
     {
-//            std::cout << "3" << std::endl;
             std::cout << "Failed to make connection to cam" << std::endl;
             cam.open(1);
     }
@@ -6052,30 +5628,24 @@ void MainWindow::takePictureAndProcess(std::vector<char> coresFaceAtual)
         std::cout << lado << " " << i  << "/100" << std::endl;
         while (!cam.isOpened())
         {
-                //std::cout << "3" << std::endl;
-                //std::cout << "Failed to make connection to cam" << std::endl;
+                
+                
                 cam.open(1);
         }
         cam >> pic1;
         cv::flip(pic1,pic1,-1);
-//        std::cout << "LARANJA " << i << "/99" << std::endl;
         while(squares.empty() || squares.size() != 9)
         {
-            //std::cout << "entra" << std::endl;
-//            cv::flip(pic1,pic1,2);
+            
             imshow("antes find", pic1);
             findSquares(pic1, squares);
             cam >> pic1;
             cv::flip(pic1,pic1,-1);
         }
-
         cam.~VideoCapture();
         std::vector<double> faceColors = drawSquares(pic1, squares, styles, conf);
-//        std::cout << "tamanho calibrateVector: " << calibrateVector.size() << std::endl;
-//        std::cout << "tamanho faceColors: " << faceColors.size() << std::endl;
         for(int i = 0 ; i < coresFaceAtual.size(); i++)
         {
-//            std::cout << "faceatual: " << coresFaceAtual[i] << std::endl;
             if(coresFaceAtual[i] == 'G')
             {
                 calibrateVector[0] += faceColors[i*3];
@@ -6113,46 +5683,22 @@ void MainWindow::takePictureAndProcess(std::vector<char> coresFaceAtual)
                 calibrateVector[17] += faceColors[i*3+2];
             }
         }
-//        std::cout << "depois ifzao" << std::endl;
         squares.clear();
-//        setModel(styles, lado);
-//        lado++;
-//        if(lado == 6)
-//        {
-//            lado = 0;
-//            verificaCoerencia();
-//        }
     }
-//    styles.clear();
 }
-
 void MainWindow::on_camadasReal_clicked()
 {
-//    simulacao = 0;
-//    std::cout << "11" << std::endl;
     on_Cross_clicked();
-//    std::cout << "22" << std::endl;
     on_Quinas_clicked();
-//    std::cout << "33" << std::endl;
     on_segundaCamada_clicked();
-//    std::cout << "44" << std::endl;
     on_CrossDown_clicked();
-//    std::cout << "55" << std::endl;
     on_CantosDown_clicked();
-//    std::cout << "66" << std::endl;
     on_Place_clicked();
-//    std::cout << "77" << std::endl;
     on_Turn_clicked();
-//    std::cout << "88" << std::endl;
-//    simulacao = 1;
 }
-
 void MainWindow::on_otimoReal_clicked()
 {
-//    simulacao = 0;
-
     QString input = "";
-
     input += color(ui->right3->styleSheet());
     input += color(ui->right6->styleSheet());
     input += color(ui->right9->styleSheet());
@@ -6163,7 +5709,6 @@ void MainWindow::on_otimoReal_clicked()
     input += color(ui->right7->styleSheet());
     input += color(ui->up3->styleSheet());
     input += color(ui->up6->styleSheet());
-
     input += color(ui->up9->styleSheet());
     input += color(ui->front3->styleSheet());
     input += color(ui->front6->styleSheet());
@@ -6174,7 +5719,6 @@ void MainWindow::on_otimoReal_clicked()
     input += color(ui->back3->styleSheet());
     input += color(ui->back6->styleSheet());
     input += color(ui->back9->styleSheet());
-
     input += color(ui->up2->styleSheet());
     input += color(ui->up8->styleSheet());
     input += color(ui->front2->styleSheet());
@@ -6185,7 +5729,6 @@ void MainWindow::on_otimoReal_clicked()
     input += color(ui->back8->styleSheet());
     input += color(ui->up1->styleSheet());
     input += color(ui->up4->styleSheet());
-
     input += color(ui->up7->styleSheet());
     input += color(ui->front1->styleSheet());
     input += color(ui->front4->styleSheet());
@@ -6196,7 +5739,6 @@ void MainWindow::on_otimoReal_clicked()
     input += color(ui->back1->styleSheet());
     input += color(ui->back4->styleSheet());
     input += color(ui->back7->styleSheet());
-
     input += color(ui->left3->styleSheet());
     input += color(ui->left6->styleSheet());
     input += color(ui->left9->styleSheet());
@@ -6205,44 +5747,36 @@ void MainWindow::on_otimoReal_clicked()
     input += color(ui->left1->styleSheet());
     input += color(ui->left4->styleSheet());
     input += color(ui->left7->styleSheet());
-
     std::cout << input.toStdString() << std::endl;
-
-
     QString program = "/home/lain/Desktop/TCC/backup_note/Rubiks-Cube-Solver/format.sh";
-
     QStringList arguments;
-
     QProcess *myProcess = new QProcess(this);
     myProcess->start(program,(QStringList) arguments << input );
-//    std::cout << "1";
-    //QString line;
+    
     std::string line;
     QString entrada;
-//    std::cout << "1";
     if (myProcess->waitForFinished())
     {
         myProcess->close();
         std::ifstream myfile ("format.txt");
-    //    std::cout << "1";
+    
          if (myfile.is_open())
           {
-    //          std::cout << "3";
+    
             while ( std::getline (myfile,line ))
             {
                 std::cout << "size: " << line.size() << std::endl;
                 if(line.size() == 120)
                    entrada = QString::fromStdString(line);
-    //            std::cout << "1";
+    
               std::cout << line << '\n';
             }
             std::cout << "size: " << line.size() << std::endl;
-    //        std::cout << "1";
+    
             myfile.close();
-    //        std::cout << "1";
+    
           }
          std::cout << "começa a executar o run" << std::endl;
-
     }
     program = "/home/lain/Desktop/TCC/backup_note/Rubiks-Cube-Solver/run.sh";
     QStringList arguments2;
@@ -6254,13 +5788,10 @@ void MainWindow::on_otimoReal_clicked()
     {
     std::cout << "run ficou pronto run do solver" << std::endl;
     std::ifstream myfile2 ("result.txt");
-//    std::cout << "1";
      if (myfile2.is_open())
       {
-//          std::cout << "3";
         while ( std::getline (myfile2,line ))
         {
-
             if(line.size() == 1 || line.size() == 2)
             {
                 solve(line);
@@ -6271,16 +5802,10 @@ void MainWindow::on_otimoReal_clicked()
         myfile2.close();
       }
     }
-
-//    simulacao = 1;
 }
-
 void MainWindow::on_toggleMode_clicked()
 {
-
-
 }
-
 void MainWindow::on_pushButton_3_clicked()
 {
     if(simulacao == 1)

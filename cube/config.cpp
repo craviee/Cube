@@ -1,20 +1,13 @@
 #include "config.h"
 #include <fstream>
 #include <iostream>
-
 double Gr=0,Gg,Gb,Rr,Rg,Rb,Br,Bg,Bb,Or,Og,Ob,Yr,Yg,Yb,Wr,Wg,Wb;
-
 config::config()
 {
-
 }
-
 config::~config(void) {
-   //cout << "Object is being deleted" << endl;
+   
 }
-
-
-
 inline bool config::exists (const std::string& name) {
     if (FILE *file = fopen(name.c_str(), "r")) {
         fclose(file);
@@ -23,7 +16,6 @@ inline bool config::exists (const std::string& name) {
         return false;
     }
 }
-
 void config::writeCalibrateColors(config* c, config* aux)
 {
     std::fstream t;
@@ -64,7 +56,6 @@ void config::writeCalibrateColors(config* c, config* aux)
     t << c->Wg << std::endl;
     c->Wb = aux->Wb;
     t << c->Wb << std::endl;
-
     std::cout << "Gr: " << c->Gr << std::endl;
     std::cout << "Gg: " << c->Gg << std::endl;
     std::cout << "Gb: " << c->Gb << std::endl;
@@ -84,20 +75,16 @@ void config::writeCalibrateColors(config* c, config* aux)
     std::cout << "Wg: " << c->Wg << std::endl;
     std::cout << "Wb: " << c->Wb << std::endl;
 }
-
 void config::readCalibrateColors(config* c)
 {
     std::cout << "ENTRA AQUI PELO AMOR DE DEUS" << std::endl;
     if(exists("ColorValues.config") == true)
     {
-        //double d = 0.0;
-        //c.Gr = 0.1;
-//        std::cout << "1" << std::endl;
+        
+        
         std::fstream t;
         t.open("ColorValues.config", std::fstream::in | std::fstream::out);
-//        std::cout << "2" << std::endl;
         std::string line;
-//        std::cout << "3" << std::endl;
         getline(t,line);
         c->Gr = std::stod(line);
         getline(t,line);
