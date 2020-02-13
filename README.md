@@ -23,8 +23,8 @@ alt="Video 1" width="240" height="180" border="10" /></a>
 alt="Video 1" width="240" height="180" border="10" /></a>
 
 ## Images
-![alt text](https://github.com/craviee/cube/blob/master/images/1.png "Image 1")
+![Random Cube](https://github.com/craviee/cube/blob/master/images/random.png "Random Cube")
 
-![alt text](https://github.com/craviee/cube/blob/master/images/2.png "Image 2")
+![Solved Cube](https://github.com/craviee/cube/blob/master/images/solved.png "Solved Cube")
 
-![alt text](https://github.com/craviee/cube/blob/master/images/3.png "Image 3")
+![Color Detection](https://github.com/craviee/cube/blob/master/images/color_detection.png "Color Detection")
