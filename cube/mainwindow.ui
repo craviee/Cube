@@ -11,10 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Cube Solver</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="front1">
+   <widget class="QPushButton" name="front1Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -33,7 +33,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="front2">
+   <widget class="QPushButton" name="front2Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -52,7 +52,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="front3">
+   <widget class="QPushButton" name="front3Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -71,7 +71,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="front4">
+   <widget class="QPushButton" name="front4Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -90,7 +90,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="front6">
+   <widget class="QPushButton" name="front6Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -109,7 +109,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="front5">
+   <widget class="QPushButton" name="front5Button">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -125,7 +125,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="front7">
+   <widget class="QPushButton" name="front7Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -144,7 +144,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="front9">
+   <widget class="QPushButton" name="front9Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -163,7 +163,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="front8">
+   <widget class="QPushButton" name="front8Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -182,7 +182,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="down6">
+   <widget class="QPushButton" name="down6Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -201,7 +201,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="down8">
+   <widget class="QPushButton" name="down8Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -220,7 +220,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="down1">
+   <widget class="QPushButton" name="down1Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -239,7 +239,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="down4">
+   <widget class="QPushButton" name="down4Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -258,7 +258,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="down3">
+   <widget class="QPushButton" name="down3Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -277,7 +277,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="down9">
+   <widget class="QPushButton" name="down9Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -296,7 +296,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="down7">
+   <widget class="QPushButton" name="down7Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -315,7 +315,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="down5">
+   <widget class="QPushButton" name="down5Button">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -331,7 +331,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="down2">
+   <widget class="QPushButton" name="down2Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -350,7 +350,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="right6">
+   <widget class="QPushButton" name="right6Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -369,7 +369,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="right8">
+   <widget class="QPushButton" name="right8Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -388,7 +388,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="right1">
+   <widget class="QPushButton" name="right1Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -407,7 +407,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="right4">
+   <widget class="QPushButton" name="right4Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -426,7 +426,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="right3">
+   <widget class="QPushButton" name="right3Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -445,7 +445,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="right9">
+   <widget class="QPushButton" name="right9Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -464,7 +464,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="right7">
+   <widget class="QPushButton" name="right7Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -483,7 +483,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="right5">
+   <widget class="QPushButton" name="right5Button">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -499,7 +499,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="right2">
+   <widget class="QPushButton" name="right2Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -518,7 +518,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="left6">
+   <widget class="QPushButton" name="left6Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -537,7 +537,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="left8">
+   <widget class="QPushButton" name="left8Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -556,7 +556,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="left1">
+   <widget class="QPushButton" name="left1Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -575,7 +575,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="left4">
+   <widget class="QPushButton" name="left4Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -594,7 +594,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="left3">
+   <widget class="QPushButton" name="left3Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -613,7 +613,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="left9">
+   <widget class="QPushButton" name="left9Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -632,7 +632,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="left7">
+   <widget class="QPushButton" name="left7Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -651,7 +651,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="left5">
+   <widget class="QPushButton" name="left5Button">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -667,7 +667,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="left2">
+   <widget class="QPushButton" name="left2Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -686,7 +686,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="up6">
+   <widget class="QPushButton" name="up6Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -705,7 +705,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="up8">
+   <widget class="QPushButton" name="up8Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -724,7 +724,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="up1">
+   <widget class="QPushButton" name="up1Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -743,7 +743,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="up4">
+   <widget class="QPushButton" name="up4Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -762,7 +762,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="up3">
+   <widget class="QPushButton" name="up3Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -781,7 +781,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="up9">
+   <widget class="QPushButton" name="up9Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -800,7 +800,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="up7">
+   <widget class="QPushButton" name="up7Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -819,7 +819,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="up5">
+   <widget class="QPushButton" name="up5Button">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -835,7 +835,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="up2">
+   <widget class="QPushButton" name="up2Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -854,7 +854,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="back6">
+   <widget class="QPushButton" name="back6Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -873,7 +873,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="back8">
+   <widget class="QPushButton" name="back8Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -892,7 +892,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="back1">
+   <widget class="QPushButton" name="back1Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -911,7 +911,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="back4">
+   <widget class="QPushButton" name="back4Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -930,7 +930,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="back3">
+   <widget class="QPushButton" name="back3Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -949,7 +949,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="back9">
+   <widget class="QPushButton" name="back9Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -968,7 +968,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="back7">
+   <widget class="QPushButton" name="back7Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -987,7 +987,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="back5">
+   <widget class="QPushButton" name="back5Button">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -1003,7 +1003,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="back2">
+   <widget class="QPushButton" name="back2Button">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -1031,51 +1031,51 @@
       <height>291</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="layerStepsLayout">
      <item>
-      <widget class="QPushButton" name="Cross">
+      <widget class="QPushButton" name="crossButton">
        <property name="text">
         <string>Cross</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="Quinas">
+      <widget class="QPushButton" name="firstLayerCornersButton">
        <property name="text">
         <string>First Layer Corners</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="segundaCamada">
+      <widget class="QPushButton" name="secondLayerButton">
        <property name="text">
         <string>Second Layer</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="CrossDown">
+      <widget class="QPushButton" name="downCrossButton">
        <property name="text">
         <string>Down Cross</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="CantosDown">
+      <widget class="QPushButton" name="backEdgesButton">
        <property name="text">
         <string>Back Edges</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="Place">
+      <widget class="QPushButton" name="placeDownEdgesButton">
        <property name="text">
         <string>Place Down Edges</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="Turn">
+      <widget class="QPushButton" name="turnDownEdgesButton">
        <property name="text">
         <string>Turn Down Edges</string>
        </property>
@@ -1092,46 +1092,46 @@
       <height>241</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="rotationsLayout">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <layout class="QVBoxLayout" name="clockwiseRotationsLayout">
        <item>
-        <widget class="QPushButton" name="U">
+        <widget class="QPushButton" name="rotationUButton">
          <property name="text">
           <string>U</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="D">
+        <widget class="QPushButton" name="rotationDButton">
          <property name="text">
           <string>D</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="R">
+        <widget class="QPushButton" name="rotationRButton">
          <property name="text">
           <string>R</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="L">
+        <widget class="QPushButton" name="rotationLButton">
          <property name="text">
           <string>L</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="F">
+        <widget class="QPushButton" name="rotationFButton">
          <property name="text">
           <string>F</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="B">
+        <widget class="QPushButton" name="rotationBButton">
          <property name="text">
           <string>B</string>
          </property>
@@ -1140,44 +1140,44 @@
       </layout>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QVBoxLayout" name="anticlockwiseRotationsLayout">
        <item>
-        <widget class="QPushButton" name="UA">
+        <widget class="QPushButton" name="rotationUAButton">
          <property name="text">
           <string>U'</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="DA">
+        <widget class="QPushButton" name="rotationDAButton">
          <property name="text">
           <string>D'</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="RA">
+        <widget class="QPushButton" name="rotationRAButton">
          <property name="text">
           <string>R'</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="LA">
+        <widget class="QPushButton" name="rotationLAButton">
          <property name="text">
           <string>L'</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="FA">
+        <widget class="QPushButton" name="rotationFAButton">
          <property name="text">
           <string>F'</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="BA">
+        <widget class="QPushButton" name="rotationBAButton">
          <property name="text">
           <string>B'</string>
          </property>
@@ -1196,16 +1196,16 @@
       <height>36</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="randomRestartLayout">
      <item>
-      <widget class="QPushButton" name="Randomize">
+      <widget class="QPushButton" name="randomButton">
        <property name="text">
         <string>Random</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="zerar">
+      <widget class="QPushButton" name="restartButton">
        <property name="text">
         <string>Restart</string>
        </property>
@@ -1219,19 +1219,19 @@
       <x>10</x>
       <y>50</y>
       <width>181</width>
-      <height>16</height>
+      <height>21</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <layout class="QHBoxLayout" name="rotationsNumberLayout">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="rotationsNumberLabel">
        <property name="text">
         <string>#Rotations:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QTextBrowser" name="qtdMovimentos"/>
+      <widget class="QTextBrowser" name="rotationsNumberTextBox"/>
      </item>
     </layout>
    </widget>
@@ -1241,21 +1241,21 @@
       <x>200</x>
       <y>0</y>
       <width>191</width>
-      <height>61</height>
+      <height>31</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_5">
+    <layout class="QVBoxLayout" name="modeLayout">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <layout class="QHBoxLayout" name="modeTextLayout">
        <item>
-        <widget class="QLabel" name="modo">
+        <widget class="QLabel" name="modeLabel">
          <property name="text">
           <string>Mode:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTextBrowser" name="simulation">
+        <widget class="QTextBrowser" name="modeTextBox">
          <property name="html">
           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -1267,16 +1267,9 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_3">
-       <property name="text">
-        <string>Change mode</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="readColorsButton">
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -1290,7 +1283,7 @@ p, li { white-space: pre-wrap; }
 Colors</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="colorCalibrationButton">
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -1304,7 +1297,7 @@ Colors</string>
 Calibration</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="otimoButton">
+   <widget class="QPushButton" name="solveOptimalButton">
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -1318,7 +1311,7 @@ Calibration</string>
 Optimal</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Tudo">
+   <widget class="QPushButton" name="solveLanesButton">
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -1332,22 +1325,19 @@ Optimal</string>
 Lanes</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>865</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuCube">
-    <property name="title">
-     <string>&amp;Cube</string>
+   <widget class="QPushButton" name="toggleModeButton">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>40</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Change mode</string>
     </property>
    </widget>
-   <addaction name="menuCube"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
