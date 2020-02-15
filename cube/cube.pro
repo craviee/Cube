@@ -23,6 +23,7 @@ SOURCES += main.cpp\
     config.cpp
 
 HEADERS  += mainwindow.h \
+    color.h \
     config.h
 
 FORMS    += mainwindow.ui
