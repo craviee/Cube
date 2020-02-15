@@ -18,7 +18,9 @@ INCLUDEPATH += /usr/include/opencv4
 LIBS += -L/usr/local/lib -lopencv_core -lopencv_imgcodecs -lopencv_highgui -lopencv_imgproc -lopencv_videoio
 
 SOURCES += main.cpp\
+    cube.cpp \
         mainwindow.cpp \
+    rotator.cpp \
     square.cpp \
     squares.cpp \
     config.cpp
@@ -26,6 +28,10 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     color.h \
     config.h \
+    cube.h \
+    direction.h \
+    face.h \
+    rotator.h \
     square.h
 
 FORMS    += mainwindow.ui
