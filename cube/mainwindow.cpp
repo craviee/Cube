@@ -31,6 +31,8 @@
 #include "opencv2/opencv.hpp"
 #include <QElapsedTimer>
 
+
+
 void delay( int millisecondsToWait )
 {
     QTime dieTime = QTime::currentTime().addMSecs( millisecondsToWait );
@@ -47,7 +49,7 @@ static const quint16 arduino_uno_product_id = 67;
 QString arduino_port_name = "";
 bool arduino_is_available = false;
 bool CalibrationOn = false;
-int movimentos = 0;
+int rotationsNumber = 0;
 QString ult = "";
 QCamera *mCamera;
 config conf;
@@ -57,15 +59,19 @@ QCameraViewfinder *mCameraViewFinder;
 QCameraImageCapture *mCameraImageCapture;
 QVBoxLayout *mLayout;
 int lado = 0;
+
+std::unique_ptr<Cube> cube;
+std::map<std::string, Square> squares;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    
     ui->setupUi(this);
+    setupCube();
     completeCube();
     conf.readCalibrateColors(&conf);
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    setRotationsNumber(0);
     foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
             if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier()){
                 if(serialPortInfo.vendorIdentifier() == arduino_uno_vendor_id){
@@ -98,6 +104,70 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+void MainWindow::setupCube()
+{
+    squares["front1"]= Square{ui->front1Button};
+    squares["front2"]= Square{ui->front2Button};
+    squares["front3"]= Square{ui->front3Button};
+    squares["front4"]= Square{ui->front4Button};
+    squares["front5"]= Square{ui->front5Button};
+    squares["front6"]= Square{ui->front6Button};
+    squares["front7"]= Square{ui->front7Button};
+    squares["front8"]= Square{ui->front8Button};
+    squares["front9"]= Square{ui->front9Button};
+    squares["back1"]= Square{ui->back1Button};
+    squares["back2"]= Square{ui->back2Button};
+    squares["back3"]= Square{ui->back3Button};
+    squares["back4"]= Square{ui->back4Button};
+    squares["back5"]= Square{ui->back5Button};
+    squares["back6"]= Square{ui->back6Button};
+    squares["back7"]= Square{ui->back7Button};
+    squares["back8"]= Square{ui->back8Button};
+    squares["back9"]= Square{ui->back9Button};
+    squares["up1"]= Square{ui->up1Button};
+    squares["up2"]= Square{ui->up2Button};
+    squares["up3"]= Square{ui->up3Button};
+    squares["up4"]= Square{ui->up4Button};
+    squares["up5"]= Square{ui->up5Button};
+    squares["up6"]= Square{ui->up6Button};
+    squares["up7"]= Square{ui->up7Button};
+    squares["up8"]= Square{ui->up8Button};
+    squares["up9"]= Square{ui->up9Button};
+    squares["down1"]= Square{ui->down1Button};
+    squares["down2"]= Square{ui->down2Button};
+    squares["down3"]= Square{ui->down3Button};
+    squares["down4"]= Square{ui->down4Button};
+    squares["down5"]= Square{ui->down5Button};
+    squares["down6"]= Square{ui->down6Button};
+    squares["down7"]= Square{ui->down7Button};
+    squares["down8"]= Square{ui->down8Button};
+    squares["down9"]= Square{ui->down9Button};
+    squares["left1"]= Square{ui->left1Button};
+    squares["left2"]= Square{ui->left2Button};
+    squares["left3"]= Square{ui->left3Button};
+    squares["left4"]= Square{ui->left4Button};
+    squares["left5"]= Square{ui->left5Button};
+    squares["left6"]= Square{ui->left6Button};
+    squares["left7"]= Square{ui->left7Button};
+    squares["left8"]= Square{ui->left8Button};
+    squares["left9"]= Square{ui->left9Button};
+    squares["right1"]= Square{ui->right1Button};
+    squares["right2"]= Square{ui->right2Button};
+    squares["right3"]= Square{ui->right3Button};
+    squares["right4"]= Square{ui->right4Button};
+    squares["right5"]= Square{ui->right5Button};
+    squares["right6"]= Square{ui->right6Button};
+    squares["right7"]= Square{ui->right7Button};
+    squares["right8"]= Square{ui->right8Button};
+    squares["right9"]= Square{ui->right9Button};
+    cube = std::make_unique<Cube>(squares);
+    std::cout << "done" << std::endl;
+}
+void MainWindow::setRotationsNumber(int rotationsNumber)
+{
+    this->rotationsNumber = rotationsNumber;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::on_randomButton_clicked()
 {
@@ -137,8 +207,8 @@ void MainWindow::on_randomButton_clicked()
             rotateBA();
     }
     simulacao = aux;
-    movimentos = 0;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber = 0;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::rotateU()
 {
@@ -187,8 +257,8 @@ void MainWindow::rotateU()
     ui->up8Button->setStyleSheet(auxU6);
     ui->up9Button->setStyleSheet(auxU3);
     ui->up5Button->repaint();
-    movimentos++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber++;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::rotateUA()
 {
@@ -237,8 +307,8 @@ void MainWindow::rotateUA()
     ui->up8Button->setStyleSheet(auxU4);
     ui->up9Button->setStyleSheet(auxU7);
     ui->up5Button->repaint();
-    movimentos++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber++;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::rotateD()
 {
@@ -287,8 +357,8 @@ void MainWindow::rotateD()
     ui->down8Button->setStyleSheet(auxD6);
     ui->down9Button->setStyleSheet(auxD3);
     ui->down5Button->repaint();
-    movimentos++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber++;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::rotateDA()
 {
@@ -337,8 +407,8 @@ void MainWindow::rotateDA()
     ui->down8Button->setStyleSheet(auxD4);
     ui->down9Button->setStyleSheet(auxD7);
     ui->down5Button->repaint();
-    movimentos++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber++;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::rotateR()
 {
@@ -387,8 +457,8 @@ void MainWindow::rotateR()
     ui->right8Button->setStyleSheet(auxR6);
     ui->right9Button->setStyleSheet(auxR3);
     ui->right5Button->repaint();
-    movimentos++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber++;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::rotateRA()
 {
@@ -437,8 +507,8 @@ void MainWindow::rotateRA()
     ui->right8Button->setStyleSheet(auxR4);
     ui->right9Button->setStyleSheet(auxR7);
     ui->right5Button->repaint();
-    movimentos++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber++;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::rotateL()
 {
@@ -487,8 +557,8 @@ void MainWindow::rotateL()
     ui->left8Button->setStyleSheet(auxL6);
     ui->left9Button->setStyleSheet(auxL3);
     ui->left5Button->repaint();
-    movimentos++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber++;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::rotateLA()
 {
@@ -537,8 +607,8 @@ void MainWindow::rotateLA()
     ui->left8Button->setStyleSheet(auxL4);
     ui->left9Button->setStyleSheet(auxL7);
     ui->left5Button->repaint();
-    movimentos++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber++;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::rotateF()
 {
@@ -587,8 +657,8 @@ void MainWindow::rotateF()
     ui->front8Button->setStyleSheet(auxF6);
     ui->front9Button->setStyleSheet(auxF3);
     ui->front5Button->repaint();
-    movimentos++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber++;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::rotateFA()
 {
@@ -637,8 +707,8 @@ void MainWindow::rotateFA()
     ui->front8Button->setStyleSheet(auxF4);
     ui->front9Button->setStyleSheet(auxF7);
     ui->front5Button->repaint();
-    movimentos++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber++;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::rotateB()
 {
@@ -687,8 +757,8 @@ void MainWindow::rotateB()
     ui->back8Button->setStyleSheet(auxB6);
     ui->back9Button->setStyleSheet(auxB3);
     ui->back5Button->repaint();
-    movimentos++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber++;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::rotateBA()
 {
@@ -737,12 +807,11 @@ void MainWindow::rotateBA()
     ui->back8Button->setStyleSheet(auxB4);
     ui->back9Button->setStyleSheet(auxB7);
     ui->back5Button->repaint();
-    movimentos++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber++;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::completeCube()
 {
-    
     ui->up1Button->setStyleSheet("background-color: blue");
     ui->up2Button->setStyleSheet("background-color: blue");
     ui->up3Button->setStyleSheet("background-color: blue");
@@ -824,7 +893,8 @@ void MainWindow::on_rotationDButton_clicked()
 }
 void MainWindow::on_rotationDAButton_clicked()
 {
-   rotateDA();
+    cube->rotateDA();
+    setRotationsNumber(rotationsNumber+1);
 }
 void MainWindow::on_rotationRButton_clicked()
 {
@@ -1678,8 +1748,8 @@ void MainWindow::on_crossButton_clicked()
 void MainWindow::on_restartButton_clicked()
 {
     completeCube();
-    movimentos = 0;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(movimentos));
+    rotationsNumber = 0;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::QuinaSudeste()
 {
@@ -5389,7 +5459,6 @@ void MainWindow::on_solveOptimalButton_clicked()
       }
     }
 }
-
 void MainWindow::on_toggleModeButton_clicked()
 {
     if(simulacao == 1)
