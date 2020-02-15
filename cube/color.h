@@ -1,14 +1,12 @@
-#ifndef COLOR_H
-#define COLOR_H
+#pragma once
 
-enum class color
+enum class Color
 {
     RED,
     BLUE,
     ORANGE,
     WHITE,
     GREEN,
-    YELLOW
+    YELLOW,
+    ERROR
 };
-
-#endif // COLOR_H
