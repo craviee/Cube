@@ -19,12 +19,14 @@ LIBS += -L/usr/local/lib -lopencv_core -lopencv_imgcodecs -lopencv_highgui -lope
 
 SOURCES += main.cpp\
         mainwindow.cpp \
+    square.cpp \
     squares.cpp \
     config.cpp
 
 HEADERS  += mainwindow.h \
     color.h \
-    config.h
+    config.h \
+    square.h
 
 FORMS    += mainwindow.ui
 
