@@ -19,7 +19,7 @@ LIBS += -L/usr/local/lib -lopencv_core -lopencv_imgcodecs -lopencv_highgui -lope
 
 SOURCES += main.cpp\
     cube.cpp \
-        mainwindow.cpp \
+    mainwindow.cpp \
     rotator.cpp \
     square.cpp \
     squares.cpp \

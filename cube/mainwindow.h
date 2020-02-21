@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QFile>
 
+#include "cube.h"
+#include "square.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -14,37 +17,12 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-      QFile t;
+    QFile t;
     ~MainWindow();
-
-private slots:
-    void on_randomButton_clicked();
-
-    void on_rotationUButton_clicked();
-
+    int rotationsNumber;
+    std::unique_ptr<Cube> cube;
+    std::map<std::string, Square> squares;
     void completeCube();
-
-    void on_rotationUAButton_clicked();
-
-    void on_rotationDButton_clicked();
-
-    void on_rotationDAButton_clicked();
-
-    void on_rotationRButton_clicked();
-
-    void on_rotationRAButton_clicked();
-
-    void on_rotationLButton_clicked();
-
-    void on_rotationLAButton_clicked();
-
-    void on_rotationFButton_clicked();
-
-    void on_rotationFAButton_clicked();
-
-    void on_rotationBButton_clicked();
-
-    void on_rotationBAButton_clicked();
 
     void rotateU();
 
@@ -70,8 +48,6 @@ private slots:
 
     void rotateBA();
 
-    void on_crossButton_clicked();
-
     void CruzSul();
 
     void CruzNorte();
@@ -79,6 +55,39 @@ private slots:
     void CruzOeste();
 
     void CruzLeste();
+
+private slots:
+    void on_randomButton_clicked();
+
+    void on_rotationUButton_clicked();
+
+
+
+    void on_rotationUAButton_clicked();
+
+    void on_rotationDButton_clicked();
+
+    void on_rotationDAButton_clicked();
+
+    void on_rotationRButton_clicked();
+
+    void on_rotationRAButton_clicked();
+
+    void on_rotationLButton_clicked();
+
+    void on_rotationLAButton_clicked();
+
+    void on_rotationFButton_clicked();
+
+    void on_rotationFAButton_clicked();
+
+    void on_rotationBButton_clicked();
+
+    void on_rotationBAButton_clicked();
+
+    void on_crossButton_clicked();
+
+
 
     void on_restartButton_clicked();
 
@@ -251,6 +260,10 @@ private slots:
     void on_solveLanesButton_clicked();
 
     void on_toggleModeButton_clicked();
+
+    void setupCube();
+
+    void setRotationsNumber(int rotationsNumber);
 
 private:
     Ui::MainWindow *ui;
