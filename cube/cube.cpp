@@ -13,6 +13,8 @@ void Cube::initialize()
     }
 }
 
+void Cube::randomize() { rotator.randomRotations(RANDOM_ROTATIONS); }
+
 // The reason why repaint() is called is to trigger the whole UI to repaint itself
 // causing the smoth sensation of rotation
 void Cube::rotateD() { rotator.rotateD(); squares["front1"].repaint(); }

@@ -97,6 +97,32 @@ void Rotator::rotateRA()
     rotateFace(Face::RIGHT, Direction::ANTI_CLOCKWISE);
 }
 
+void Rotator::randomRotations(int numberRotations)
+{
+    QRandomGenerator generator{};
+    int rotation;
+
+    for(int i = 0; i < numberRotations; i++)
+    {
+        rotation = generator.bounded(0, 12);
+        switch (rotation)
+        {
+            case 0: rotateU(); break;
+            case 1: rotateUA(); break;
+            case 2: rotateD(); break;
+            case 3: rotateDA(); break;
+            case 4: rotateF(); break;
+            case 5: rotateFA(); break;
+            case 6: rotateB(); break;
+            case 7: rotateBA(); break;
+            case 8: rotateL(); break;
+            case 9: rotateLA(); break;
+            case 10: rotateR(); break;
+            case 11: rotateRA(); break;
+        }
+    }
+}
+
 void Rotator::rotate(std::string square1, std::string square2, std::string square3, std::string square4)
 {
     Color auxRotationColor1,auxRotationColor2,

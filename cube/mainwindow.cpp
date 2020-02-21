@@ -3163,53 +3163,9 @@ void MainWindow::takePictureAndProcess(std::vector<char> coresFaceAtual)
 }
 
 
-void MainWindow::on_randomButton_clicked()
-{
-    
-    int i;
-    int random2;
-    int random = 20;
-    int aux = simulacao;
-    random += qrand()%31;
-    simulacao = 1;
-    for(i = 0; i < random; i++)
-    {
-        random2 = qrand()%12;
-        if(random2 == 0)
-            cube->rotateU();
-        else if(random2 == 1)
-            cube->rotateUA();
-        else if(random2 == 2)
-            cube->rotateD();
-        else if(random2 == 3)
-            cube->rotateDA();
-        else if(random2 == 4)
-            cube->rotateR();
-        else if(random2 == 5)
-            cube->rotateRA();
-        else if(random2 == 6)
-            cube->rotateL();
-        else if(random2 == 7)
-            cube->rotateLA();
-        else if(random2 == 8)
-            cube->rotateF();
-        else if(random2 == 9)
-            cube->rotateFA();
-        else if(random2 == 10)
-            cube->rotateB();
-        else if(random2 == 11)
-            cube->rotateBA();
-    }
-    simulacao = aux;
-    rotationsNumber = 0;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
-}
+void MainWindow::on_randomButton_clicked() { cube->randomize(); }
 
-void MainWindow::on_restartButton_clicked()
-{
-    cube->initialize();
-    setRotationsNumber(0);
-}
+void MainWindow::on_restartButton_clicked() { cube->initialize(); setRotationsNumber(0); }
 
 void MainWindow::on_toggleModeButton_clicked()
 {
