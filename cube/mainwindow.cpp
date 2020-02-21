@@ -49,7 +49,6 @@ static const quint16 arduino_uno_product_id = 67;
 QString arduino_port_name = "";
 bool arduino_is_available = false;
 bool CalibrationOn = false;
-int rotationsNumber = 0;
 QString ult = "";
 QCamera *mCamera;
 config conf;
@@ -65,8 +64,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setupCube();
-    completeCube();
+    setupSquares();
+    cube = std::make_unique<Cube>(squares);
+    cube->initialize();
     conf.readCalibrateColors(&conf);
     setRotationsNumber(0);
     foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
@@ -104,7 +104,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setupCube()
+void MainWindow::setupSquares()
 {
     squares["front1"]= Square{ui->front1Button};
     squares["front2"]= Square{ui->front2Button};
@@ -160,8 +160,6 @@ void MainWindow::setupCube()
     squares["right7"]= Square{ui->right7Button};
     squares["right8"]= Square{ui->right8Button};
     squares["right9"]= Square{ui->right9Button};
-    cube = std::make_unique<Cube>(squares);
-    std::cout << "done" << std::endl;
 }
 
 void MainWindow::setRotationsNumber(int rotationsNumber)
@@ -186,63 +184,6 @@ void MainWindow::changeColor(QPushButton *button)
         button->setStyleSheet("background-color: blue");
 }
 
-void MainWindow::completeCube()
-{
-    ui->up1Button->setStyleSheet("background-color: blue");
-    ui->up2Button->setStyleSheet("background-color: blue");
-    ui->up3Button->setStyleSheet("background-color: blue");
-    ui->up4Button->setStyleSheet("background-color: blue");
-    ui->up5Button->setStyleSheet("background-color: blue");
-    ui->up6Button->setStyleSheet("background-color: blue");
-    ui->up7Button->setStyleSheet("background-color: blue");
-    ui->up8Button->setStyleSheet("background-color: blue");
-    ui->up9Button->setStyleSheet("background-color: blue");
-    ui->front1Button->setStyleSheet("background-color: white");
-    ui->front2Button->setStyleSheet("background-color: white");
-    ui->front3Button->setStyleSheet("background-color: white");
-    ui->front4Button->setStyleSheet("background-color: white");
-    ui->front5Button->setStyleSheet("background-color: white");
-    ui->front6Button->setStyleSheet("background-color: white");
-    ui->front7Button->setStyleSheet("background-color: white");
-    ui->front8Button->setStyleSheet("background-color: white");
-    ui->front9Button->setStyleSheet("background-color: white");
-    ui->left1Button->setStyleSheet("background-color: orange");
-    ui->left2Button->setStyleSheet("background-color: orange");
-    ui->left3Button->setStyleSheet("background-color: orange");
-    ui->left4Button->setStyleSheet("background-color: orange");
-    ui->left5Button->setStyleSheet("background-color: orange");
-    ui->left6Button->setStyleSheet("background-color: orange");
-    ui->left7Button->setStyleSheet("background-color: orange");
-    ui->left8Button->setStyleSheet("background-color: orange");
-    ui->left9Button->setStyleSheet("background-color: orange");
-    ui->right1Button->setStyleSheet("background-color: red");
-    ui->right2Button->setStyleSheet("background-color: red");
-    ui->right3Button->setStyleSheet("background-color: red");
-    ui->right4Button->setStyleSheet("background-color: red");
-    ui->right5Button->setStyleSheet("background-color: red");
-    ui->right6Button->setStyleSheet("background-color: red");
-    ui->right7Button->setStyleSheet("background-color: red");
-    ui->right8Button->setStyleSheet("background-color: red");
-    ui->right9Button->setStyleSheet("background-color: red");
-    ui->down1Button->setStyleSheet("background-color: green");
-    ui->down2Button->setStyleSheet("background-color: green");
-    ui->down3Button->setStyleSheet("background-color: green");
-    ui->down4Button->setStyleSheet("background-color: green");
-    ui->down5Button->setStyleSheet("background-color: green");
-    ui->down6Button->setStyleSheet("background-color: green");
-    ui->down7Button->setStyleSheet("background-color: green");
-    ui->down8Button->setStyleSheet("background-color: green");
-    ui->down9Button->setStyleSheet("background-color: green");
-    ui->back1Button->setStyleSheet("background-color: yellow");
-    ui->back2Button->setStyleSheet("background-color: yellow");
-    ui->back3Button->setStyleSheet("background-color: yellow");
-    ui->back4Button->setStyleSheet("background-color: yellow");
-    ui->back5Button->setStyleSheet("background-color: yellow");
-    ui->back6Button->setStyleSheet("background-color: yellow");
-    ui->back7Button->setStyleSheet("background-color: yellow");
-    ui->back8Button->setStyleSheet("background-color: yellow");
-    ui->back9Button->setStyleSheet("background-color: yellow");
-}
 void MainWindow::CruzSul()
 {
     if(ui->up8Button->styleSheet() != ui->up5Button->styleSheet() || ui->front2Button->styleSheet() != ui->front5Button->styleSheet())
@@ -3266,9 +3207,8 @@ void MainWindow::on_randomButton_clicked()
 
 void MainWindow::on_restartButton_clicked()
 {
-    completeCube();
-    rotationsNumber = 0;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
+    cube->initialize();
+    setRotationsNumber(0);
 }
 
 void MainWindow::on_toggleModeButton_clicked()
@@ -3878,6 +3818,7 @@ void MainWindow::on_turnDownEdgesButton_clicked()
         }
     }
 }
+
 void MainWindow::on_solveLanesButton_clicked()
 {
     on_crossButton_clicked();
@@ -3888,6 +3829,7 @@ void MainWindow::on_solveLanesButton_clicked()
     on_placeDownEdgesButton_clicked();
     on_turnDownEdgesButton_clicked();
 }
+
 void MainWindow::on_solveOptimalButton_clicked()
 {
     QString input = "";
@@ -3995,6 +3937,7 @@ void MainWindow::on_solveOptimalButton_clicked()
       }
     }
 }
+
 void MainWindow::on_colorCalibrationButton_clicked()
 {
     if(!simulacao)
@@ -4035,6 +3978,7 @@ void MainWindow::on_colorCalibrationButton_clicked()
         squares.clear();
     }
 }
+
 void MainWindow::on_readColorsButton_clicked()
 {
     if(simulacao==0)
@@ -4119,6 +4063,7 @@ void MainWindow::on_readColorsButton_clicked()
         }
     }
 }
+
 void MainWindow::on_rotationUButton_clicked() { cube->rotateU(); setRotationsNumber(rotationsNumber+1); }
 void MainWindow::on_rotationUAButton_clicked() { cube->rotateUA(); setRotationsNumber(rotationsNumber+1); }
 void MainWindow::on_rotationDButton_clicked() { cube->rotateD(); setRotationsNumber(rotationsNumber+1); }

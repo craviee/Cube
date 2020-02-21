@@ -17,7 +17,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void setupCube();
+    void setupSquares();
     void setRotationsNumber(int rotationsNumber);
     void changeColor(QPushButton *square);
 
@@ -26,8 +26,6 @@ public:
     std::map<std::string, Square> squares;
 
     // Will be excluded
-    QFile t;
-    void completeCube();
     void CruzSul();
     void CruzNorte();
     void CruzOeste();
