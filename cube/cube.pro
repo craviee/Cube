@@ -31,6 +31,7 @@ HEADERS  += mainwindow.h \
     cube.h \
     direction.h \
     face.h \
+    mode.h \
     rotator.h \
     square.h
 

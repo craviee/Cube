@@ -5,6 +5,7 @@
 
 #include "cube.h"
 #include "square.h"
+#include "mode.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +23,7 @@ public:
     void changeColor(QPushButton *square);
 
     int rotationsNumber;
+    Mode mode;
     std::unique_ptr<Cube> cube;
     std::map<std::string, Square> squares;
 
