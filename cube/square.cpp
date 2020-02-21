@@ -45,3 +45,8 @@ void Square::setColor(Color color)
         break;
     }
 }
+
+void Square::repaint()
+{
+    squarePiece->repaint();
+}
