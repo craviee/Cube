@@ -184,7 +184,7 @@ void MainWindow::on_randomButton_clicked()
         if(random2 == 0)
             rotateU();
         else if(random2 == 1)
-            rotateUA();
+            cube->rotateUA();
         else if(random2 == 2)
             rotateD();
         else if(random2 == 3)
@@ -885,7 +885,8 @@ void MainWindow::on_rotationUButton_clicked()
 }
 void MainWindow::on_rotationUAButton_clicked()
 {
-    rotateUA();
+    cube->rotateUA();
+    setRotationsNumber(rotationsNumber+1);
 }
 void MainWindow::on_rotationDButton_clicked()
 {
@@ -935,13 +936,13 @@ void MainWindow::CruzSul()
         if(ui->front2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up8Button->styleSheet() == ui->front5Button->styleSheet())
         {
             rotateF();
-            rotateUA();
+            cube->rotateUA();
             rotateR();
             rotateU();
         }
         else if(ui->front6Button->styleSheet() == ui->up5Button->styleSheet() && ui->right4Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateUA();
+            cube->rotateUA();
             rotateR();
             rotateU();
         }
@@ -953,7 +954,7 @@ void MainWindow::CruzSul()
         {
             rotateU();
             rotateLA();
-            rotateUA();
+            cube->rotateUA();
         }
         else if(ui->front4Button->styleSheet() == ui->front5Button->styleSheet() && ui->left6Button->styleSheet() == ui->up5Button->styleSheet())
         {
@@ -967,7 +968,7 @@ void MainWindow::CruzSul()
         else if(ui->front8Button->styleSheet() == ui->up5Button->styleSheet() && ui->down2Button->styleSheet() == ui->front5Button->styleSheet())
         {
             rotateFA();
-            rotateUA();
+            cube->rotateUA();
             rotateR();
             rotateU();
         }
@@ -979,19 +980,19 @@ void MainWindow::CruzSul()
         {
             rotateU();
             rotateF();
-            rotateUA();
+            cube->rotateUA();
             rotateR();
             rotateU();
         }
         else if(ui->left2Button->styleSheet() == ui->front5Button->styleSheet() && ui->up4Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateUA();
+            cube->rotateUA();
         }
         else if(ui->left2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up4Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateUA();
+            cube->rotateUA();
             rotateF();
-            rotateUA();
+            cube->rotateUA();
             rotateR();
             rotateU();
         }
@@ -1005,7 +1006,7 @@ void MainWindow::CruzSul()
         {
             rotateDA();
             rotateFA();
-            rotateUA();
+            cube->rotateUA();
             rotateR();
             rotateU();
         }
@@ -1019,7 +1020,7 @@ void MainWindow::CruzSul()
         {
             rotateD();
             rotateFA();
-            rotateUA();
+            cube->rotateUA();
             rotateR();
             rotateU();
         }
@@ -1033,7 +1034,7 @@ void MainWindow::CruzSul()
             rotateU();
             rotateU();
             rotateF();
-            rotateUA();
+            cube->rotateUA();
             rotateR();
             rotateU();
         }
@@ -1049,7 +1050,7 @@ void MainWindow::CruzSul()
             rotateU();
             rotateU();
             rotateF();
-            rotateUA();
+            cube->rotateUA();
             rotateR();
             rotateU();
         }
@@ -1065,7 +1066,7 @@ void MainWindow::CruzSul()
             rotateU();
             rotateU();
             rotateF();
-            rotateUA();
+            cube->rotateUA();
             rotateR();
             rotateU();
         }
@@ -1081,7 +1082,7 @@ void MainWindow::CruzSul()
             rotateD();
             rotateD();
             rotateFA();
-            rotateUA();
+            cube->rotateUA();
             rotateR();
             rotateU();
         }
@@ -1094,7 +1095,7 @@ void MainWindow::CruzLeste()
         if(ui->up6Button->styleSheet() == ui->right5Button->styleSheet() && ui->right2Button->styleSheet() == ui->up5Button->styleSheet())
         {
             rotateR();
-            rotateUA();
+            cube->rotateUA();
             rotateB();
             rotateU();
             ult = "1L";
@@ -1102,7 +1103,7 @@ void MainWindow::CruzLeste()
         }
         else if(ui->right6Button->styleSheet() == ui->up5Button->styleSheet() && ui->back6Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateUA();
+            cube->rotateUA();
             rotateB();
             rotateU();
             ult = "2L";
@@ -1118,7 +1119,7 @@ void MainWindow::CruzLeste()
         {
             rotateU();
             rotateFA();
-            rotateUA();
+            cube->rotateUA();
             ult = "4L";
             
         }
@@ -1138,7 +1139,7 @@ void MainWindow::CruzLeste()
         else if(ui->right8Button->styleSheet() == ui->up5Button->styleSheet() && ui->down6Button->styleSheet() == ui->right5Button->styleSheet())
         {
             rotateRA();
-            rotateUA();
+            cube->rotateUA();
             rotateB();
             rotateU();
             ult = "7L";
@@ -1147,7 +1148,7 @@ void MainWindow::CruzLeste()
         else if(ui->back8Button->styleSheet() == ui->right5Button->styleSheet() && ui->up2Button->styleSheet() == ui->up5Button->styleSheet())
         {
             rotateBA();
-            rotateUA();
+            cube->rotateUA();
             rotateB();
             rotateU();
             ult = "8L";
@@ -1157,7 +1158,7 @@ void MainWindow::CruzLeste()
         {
             rotateU();
             rotateR();
-            rotateUA();
+            cube->rotateUA();
             rotateB();
             rotateU();
             ult = "9L";
@@ -1168,7 +1169,7 @@ void MainWindow::CruzLeste()
             rotateFA();
             rotateU();
             rotateF();
-            rotateUA();
+            cube->rotateUA();
             ult = "10L";
             
         }
@@ -1191,7 +1192,7 @@ void MainWindow::CruzLeste()
         {
             rotateDA();
             rotateRA();
-            rotateUA();
+            cube->rotateUA();
             rotateB();
             rotateU();
             ult = "13L";
@@ -1209,7 +1210,7 @@ void MainWindow::CruzLeste()
         {
             rotateD();
             rotateRA();
-            rotateUA();
+            cube->rotateUA();
             rotateB();
             rotateU();
             ult = "15L";
@@ -1231,7 +1232,7 @@ void MainWindow::CruzLeste()
             rotateU();
             rotateU();
             rotateR();
-            rotateUA();
+            cube->rotateUA();
             rotateB();
             rotateU();
             ult = "17L";
@@ -1251,7 +1252,7 @@ void MainWindow::CruzLeste()
             rotateU();
             rotateU();
             rotateR();
-            rotateUA();
+            cube->rotateUA();
             rotateB();
             rotateU();
             ult = "19L";
@@ -1263,8 +1264,8 @@ void MainWindow::CruzLeste()
             rotateU();
             rotateU();
             rotateLA();
-            rotateUA();
-            rotateUA();
+            cube->rotateUA();
+            cube->rotateUA();
             ult = "20L";
             
         }
@@ -1274,7 +1275,7 @@ void MainWindow::CruzLeste()
             rotateU();
             rotateU();
             rotateR();
-            rotateUA();
+            cube->rotateUA();
             rotateB();
             rotateU();
             ult = "21L";
@@ -1294,7 +1295,7 @@ void MainWindow::CruzLeste()
             rotateD();
             rotateD();
             rotateRA();
-            rotateUA();
+            cube->rotateUA();
             rotateB();
             rotateU();
             ult = "23L";
@@ -1309,7 +1310,7 @@ void MainWindow::CruzOeste()
         if(ui->left2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up4Button->styleSheet() == ui->left5Button->styleSheet())
         {
             rotateL();
-            rotateUA();
+            cube->rotateUA();
             rotateF();
             rotateU();
             ult = "1O";
@@ -1317,7 +1318,7 @@ void MainWindow::CruzOeste()
         }
         else if(ui->left6Button->styleSheet() == ui->up5Button->styleSheet() && ui->front4Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateUA();
+            cube->rotateUA();
             rotateF();
             rotateU();
             ult = "2O";
@@ -1333,7 +1334,7 @@ void MainWindow::CruzOeste()
         {
             rotateU();
             rotateBA();
-            rotateUA();
+            cube->rotateUA();
             ult = "4O";
             
         }
@@ -1353,7 +1354,7 @@ void MainWindow::CruzOeste()
         else if(ui->left8Button->styleSheet() == ui->up5Button->styleSheet() && ui->down4Button->styleSheet() == ui->left5Button->styleSheet())
         {
             rotateLA();
-            rotateUA();
+            cube->rotateUA();
             rotateF();
             rotateU();
             ult = "7O";
@@ -1369,7 +1370,7 @@ void MainWindow::CruzOeste()
         {
             rotateU();
             rotateL();
-            rotateUA();
+            cube->rotateUA();
             rotateF();
             rotateU();
             ult = "9O";
@@ -1377,15 +1378,15 @@ void MainWindow::CruzOeste()
         }
         else if(ui->back8Button->styleSheet() == ui->left5Button->styleSheet() && ui->up2Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateUA();
+            cube->rotateUA();
             ult = "10O";
             
         }
         else if(ui->back8Button->styleSheet() == ui->up5Button->styleSheet() && ui->up2Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateUA();
+            cube->rotateUA();
             rotateL();
-            rotateUA();
+            cube->rotateUA();
             rotateF();
             rotateU();
             ult = "11O";
@@ -1403,7 +1404,7 @@ void MainWindow::CruzOeste()
         {
             rotateDA();
             rotateLA();
-            rotateUA();
+            cube->rotateUA();
             rotateF();
             rotateU();
             ult = "13O";
@@ -1421,7 +1422,7 @@ void MainWindow::CruzOeste()
         {
             rotateD();
             rotateLA();
-            rotateUA();
+            cube->rotateUA();
             rotateF();
             rotateU();
             ult = "15O";
@@ -1439,7 +1440,7 @@ void MainWindow::CruzOeste()
             rotateU();
             rotateU();
             rotateL();
-            rotateUA();
+            cube->rotateUA();
             rotateF();
             rotateU();
             ult = "17O";
@@ -1450,8 +1451,8 @@ void MainWindow::CruzOeste()
             rotateU();
             rotateU();
             rotateR();
-            rotateUA();
-            rotateUA();
+            cube->rotateUA();
+            cube->rotateUA();
             ult = "18O";
             
         }
@@ -1461,7 +1462,7 @@ void MainWindow::CruzOeste()
             rotateU();
             rotateU();
             rotateL();
-            rotateUA();
+            cube->rotateUA();
             rotateF();
             rotateU();
             ult = "19O";
@@ -1483,7 +1484,7 @@ void MainWindow::CruzOeste()
             rotateU();
             rotateU();
             rotateL();
-            rotateUA();
+            cube->rotateUA();
             rotateF();
             rotateU();
             ult = "21O";
@@ -1503,7 +1504,7 @@ void MainWindow::CruzOeste()
             rotateD();
             rotateD();
             rotateLA();
-            rotateUA();
+            cube->rotateUA();
             rotateF();
             rotateU();
             ult = "23O";
@@ -1518,7 +1519,7 @@ void MainWindow::CruzNorte()
         if(ui->up2Button->styleSheet() == ui->back5Button->styleSheet() && ui->back8Button->styleSheet() == ui->up5Button->styleSheet())
         {
             rotateB();
-            rotateUA();
+            cube->rotateUA();
             rotateL();
             rotateU();
             ult = "1N";
@@ -1526,7 +1527,7 @@ void MainWindow::CruzNorte()
         }
         else if(ui->back4Button->styleSheet() == ui->up5Button->styleSheet() && ui->left4Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateUA();
+            cube->rotateUA();
             rotateL();
             rotateU();
             ult = "2N";
@@ -1542,7 +1543,7 @@ void MainWindow::CruzNorte()
         {
             rotateU();
             rotateRA();
-            rotateUA();
+            cube->rotateUA();
             ult = "4N";
             
         }
@@ -1562,7 +1563,7 @@ void MainWindow::CruzNorte()
         else if(ui->back2Button->styleSheet() == ui->up5Button->styleSheet() && ui->down8Button->styleSheet() == ui->back5Button->styleSheet())
         {
             rotateBA();
-            rotateUA();
+            cube->rotateUA();
             rotateL();
             rotateU();
             ult = "7N";
@@ -1571,7 +1572,7 @@ void MainWindow::CruzNorte()
         else if(ui->left2Button->styleSheet() == ui->back5Button->styleSheet() && ui->up4Button->styleSheet() == ui->up5Button->styleSheet())
         {
             rotateLA();
-            rotateUA();
+            cube->rotateUA();
             rotateL();
             rotateU();
             ult = "8N";
@@ -1581,7 +1582,7 @@ void MainWindow::CruzNorte()
         {
             rotateU();
             rotateB();
-            rotateUA();
+            cube->rotateUA();
             rotateL();
             rotateU();
             ult = "9N";
@@ -1592,15 +1593,15 @@ void MainWindow::CruzNorte()
             rotateR();
             rotateU();
             rotateRA();
-            rotateUA();
+            cube->rotateUA();
             ult = "10N";
             
         }
         else if(ui->right2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up6Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateUA();
+            cube->rotateUA();
             rotateB();
-            rotateUA();
+            cube->rotateUA();
             rotateL();
             rotateU();
             ult = "11N";
@@ -1618,7 +1619,7 @@ void MainWindow::CruzNorte()
         {
             rotateDA();
             rotateBA();
-            rotateUA();
+            cube->rotateUA();
             rotateL();
             rotateU();
             ult = "13N";
@@ -1636,7 +1637,7 @@ void MainWindow::CruzNorte()
         {
             rotateD();
             rotateBA();
-            rotateUA();
+            cube->rotateUA();
             rotateL();
             rotateU();
             ult = "15N";
@@ -1654,7 +1655,7 @@ void MainWindow::CruzNorte()
             rotateU();
             rotateU();
             rotateB();
-            rotateUA();
+            cube->rotateUA();
             rotateL();
             rotateU();
             ult = "17N";
@@ -1674,7 +1675,7 @@ void MainWindow::CruzNorte()
             rotateU();
             rotateU();
             rotateB();
-            rotateUA();
+            cube->rotateUA();
             rotateL();
             rotateU();
             ult = "19N";
@@ -1694,7 +1695,7 @@ void MainWindow::CruzNorte()
             rotateU();
             rotateU();
             rotateB();
-            rotateUA();
+            cube->rotateUA();
             rotateL();
             rotateU();
             ult = "21N";
@@ -1716,7 +1717,7 @@ void MainWindow::CruzNorte()
             rotateD();
             rotateD();
             rotateBA();
-            rotateUA();
+            cube->rotateUA();
             rotateL();
             rotateU();
             ult = "23N";
@@ -4589,7 +4590,7 @@ void MainWindow::solve(std::string s)
     else if ( s == "L" )
         rotateU();
     else if ( s == "L'" )
-        rotateUA();
+        cube->rotateUA();
     else if ( s == "2R" )
     {
         rotateD();

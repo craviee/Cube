@@ -8,6 +8,14 @@ void Rotator::rotateDA()
     rotateFace(Face::DOWN, Direction::ANTI_CLOCKWISE);
 }
 
+void Rotator::rotateUA()
+{
+    rotate("front1", "right1", "back9", "left1");
+    rotate("front2", "right2", "back8", "left2");
+    rotate("front3", "right3", "back7", "left3");
+    rotateFace(Face::UP, Direction::ANTI_CLOCKWISE);
+}
+
 void Rotator::rotate(std::string square1, std::string square2, std::string square3, std::string square4)
 {
     Color auxRotationColor1,auxRotationColor2,

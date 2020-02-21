@@ -10,6 +10,7 @@ class Cube
     public:
         Cube(std::map<std::string, Square> squares) : squares{squares}, rotator{squares}{}
         void rotateDA();
+        void rotateUA();
     private:
         std::map<std::string, Square> squares;
         Rotator rotator;
