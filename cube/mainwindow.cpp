@@ -60,9 +60,6 @@ QCameraImageCapture *mCameraImageCapture;
 QVBoxLayout *mLayout;
 int lado = 0;
 
-std::unique_ptr<Cube> cube;
-std::map<std::string, Square> squares;
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -101,10 +98,12 @@ MainWindow::MainWindow(QWidget *parent) :
             std::cout << "Arduido não está ativo" << std::endl;
         }
 }
+
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 void MainWindow::setupCube()
 {
     squares["front1"]= Square{ui->front1Button};
@@ -164,52 +163,29 @@ void MainWindow::setupCube()
     cube = std::make_unique<Cube>(squares);
     std::cout << "done" << std::endl;
 }
+
 void MainWindow::setRotationsNumber(int rotationsNumber)
 {
     this->rotationsNumber = rotationsNumber;
     ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
-void MainWindow::on_randomButton_clicked()
+
+void MainWindow::changeColor(QPushButton *button)
 {
-    
-    int i;
-    int random2;
-    int random = 20;
-    int aux = simulacao;
-    random += qrand()%31;
-    simulacao = 1;
-    for(i = 0; i < random; i++)
-    {
-        random2 = qrand()%12;
-        if(random2 == 0)
-            cube->rotateU();
-        else if(random2 == 1)
-            cube->rotateUA();
-        else if(random2 == 2)
-            cube->rotateD();
-        else if(random2 == 3)
-            cube->rotateDA();
-        else if(random2 == 4)
-            cube->rotateR();
-        else if(random2 == 5)
-            cube->rotateRA();
-        else if(random2 == 6)
-            cube->rotateL();
-        else if(random2 == 7)
-            cube->rotateLA();
-        else if(random2 == 8)
-            cube->rotateF();
-        else if(random2 == 9)
-            cube->rotateFA();
-        else if(random2 == 10)
-            cube->rotateB();
-        else if(random2 == 11)
-            cube->rotateBA();
-    }
-    simulacao = aux;
-    rotationsNumber = 0;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
+    if(button->styleSheet() == ui->up5Button->styleSheet())
+        button->setStyleSheet("background-color: white");
+    else if(button->styleSheet() == ui->front5Button->styleSheet())
+        button->setStyleSheet("background-color: orange");
+    else if(button->styleSheet() == ui->left5Button->styleSheet())
+        button->setStyleSheet("background-color: red");
+    else if(button->styleSheet() == ui->right5Button->styleSheet())
+        button->setStyleSheet("background-color: green");
+    else if(button->styleSheet() == ui->down5Button->styleSheet())
+        button->setStyleSheet("background-color: yellow");
+    else if(button->styleSheet() == ui->back5Button->styleSheet())
+        button->setStyleSheet("background-color: blue");
 }
+
 void MainWindow::completeCube()
 {
     ui->up1Button->setStyleSheet("background-color: blue");
@@ -266,66 +242,6 @@ void MainWindow::completeCube()
     ui->back7Button->setStyleSheet("background-color: yellow");
     ui->back8Button->setStyleSheet("background-color: yellow");
     ui->back9Button->setStyleSheet("background-color: yellow");
-}
-void MainWindow::on_rotationUButton_clicked()
-{
-   cube->rotateU();
-   setRotationsNumber(rotationsNumber+1);
-}
-void MainWindow::on_rotationUAButton_clicked()
-{
-    cube->rotateUA();
-    setRotationsNumber(rotationsNumber+1);
-}
-void MainWindow::on_rotationDButton_clicked()
-{
-    cube->rotateD();
-    setRotationsNumber(rotationsNumber+1);
-}
-void MainWindow::on_rotationDAButton_clicked()
-{
-    cube->rotateDA();
-    setRotationsNumber(rotationsNumber+1);
-}
-void MainWindow::on_rotationRButton_clicked()
-{
-    cube->rotateR();
-    setRotationsNumber(rotationsNumber+1);
-}
-void MainWindow::on_rotationRAButton_clicked()
-{
-    cube->rotateRA();
-    setRotationsNumber(rotationsNumber+1);
-}
-void MainWindow::on_rotationLButton_clicked()
-{
-    cube->rotateL();
-    setRotationsNumber(rotationsNumber+1);
-}
-void MainWindow::on_rotationLAButton_clicked()
-{
-    cube->rotateLA();
-    setRotationsNumber(rotationsNumber+1);
-}
-void MainWindow::on_rotationFButton_clicked()
-{
-    cube->rotateF();
-    setRotationsNumber(rotationsNumber+1);
-}
-void MainWindow::on_rotationFAButton_clicked()
-{
-    cube->rotateFA();
-    setRotationsNumber(rotationsNumber+1);
-}
-void MainWindow::on_rotationBButton_clicked()
-{
-    cube->rotateB();
-    setRotationsNumber(rotationsNumber+1);
-}
-void MainWindow::on_rotationBAButton_clicked()
-{
-    cube->rotateBA();
-    setRotationsNumber(rotationsNumber+1);
 }
 void MainWindow::CruzSul()
 {
@@ -1123,33 +1039,6 @@ void MainWindow::CruzNorte()
         }
     }
 }
-void MainWindow::on_crossButton_clicked()
-{
-    while(ui->up2Button->styleSheet() != ui->up5Button->styleSheet() || ui->back8Button->styleSheet() != ui->back5Button->styleSheet() ||
-          ui->up4Button->styleSheet() != ui->up5Button->styleSheet() || ui->left2Button->styleSheet() != ui->left5Button->styleSheet() ||
-          ui->up6Button->styleSheet() != ui->up5Button->styleSheet() || ui->right2Button->styleSheet() != ui->right5Button->styleSheet() ||
-          ui->up8Button->styleSheet() != ui->up5Button->styleSheet() || ui->front2Button->styleSheet() != ui->front5Button->styleSheet() )
-    {
-        CruzSul();
-        CruzNorte();
-        
-        
-        CruzLeste();
-        CruzOeste();
-     }
-    
-    
-    
-    
-    
-    
-}
-void MainWindow::on_restartButton_clicked()
-{
-    completeCube();
-    rotationsNumber = 0;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
-}
 void MainWindow::QuinaSudeste()
 {
     if(ui->up9Button->styleSheet() != ui->up5Button->styleSheet() || ui->front3Button->styleSheet() != ui->front5Button->styleSheet() || ui->right1Button->styleSheet() != ui->right5Button->styleSheet())
@@ -1251,51 +1140,6 @@ void MainWindow::QuinaSudeste()
             }
         }
     }
-}
-void MainWindow::on_up9Button_clicked()
-{
-    if(ui->up9Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->up9Button->setStyleSheet("background-color: white");
-    else if(ui->up9Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->up9Button->setStyleSheet("background-color: orange");
-    else if(ui->up9Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->up9Button->setStyleSheet("background-color: red");
-    else if(ui->up9Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->up9Button->setStyleSheet("background-color: green");
-    else if(ui->up9Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->up9Button->setStyleSheet("background-color: yellow");
-    else if(ui->up9Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->up9Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_front3Button_clicked()
-{
-    if(ui->front3Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->front3Button->setStyleSheet("background-color: white");
-    else if(ui->front3Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->front3Button->setStyleSheet("background-color: orange");
-    else if(ui->front3Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->front3Button->setStyleSheet("background-color: red");
-    else if(ui->front3Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->front3Button->setStyleSheet("background-color: green");
-    else if(ui->front3Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->front3Button->setStyleSheet("background-color: yellow");
-    else if(ui->front3Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->front3Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_right1Button_clicked()
-{
-    if(ui->right1Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->right1Button->setStyleSheet("background-color: white");
-    else if(ui->right1Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->right1Button->setStyleSheet("background-color: orange");
-    else if(ui->right1Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->right1Button->setStyleSheet("background-color: red");
-    else if(ui->right1Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->right1Button->setStyleSheet("background-color: green");
-    else if(ui->right1Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->right1Button->setStyleSheet("background-color: yellow");
-    else if(ui->right1Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->right1Button->setStyleSheet("background-color: blue");
 }
 void MainWindow::QuinaSudoeste()
 {
@@ -1415,51 +1259,6 @@ void MainWindow::QuinaSudoeste()
         }
     }
 }
-void MainWindow::on_left3Button_clicked()
-{
-    if(ui->left3Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->left3Button->setStyleSheet("background-color: white");
-    else if(ui->left3Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->left3Button->setStyleSheet("background-color: orange");
-    else if(ui->left3Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->left3Button->setStyleSheet("background-color: red");
-    else if(ui->left3Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->left3Button->setStyleSheet("background-color: green");
-    else if(ui->left3Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->left3Button->setStyleSheet("background-color: yellow");
-    else if(ui->left3Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->left3Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_front1Button_clicked()
-{
-    if(ui->front1Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->front1Button->setStyleSheet("background-color: white");
-    else if(ui->front1Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->front1Button->setStyleSheet("background-color: orange");
-    else if(ui->front1Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->front1Button->setStyleSheet("background-color: red");
-    else if(ui->front1Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->front1Button->setStyleSheet("background-color: green");
-    else if(ui->front1Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->front1Button->setStyleSheet("background-color: yellow");
-    else if(ui->front1Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->front1Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_up7Button_clicked()
-{
-    if(ui->up7Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->up7Button->setStyleSheet("background-color: white");
-    else if(ui->up7Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->up7Button->setStyleSheet("background-color: orange");
-    else if(ui->up7Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->up7Button->setStyleSheet("background-color: red");
-    else if(ui->up7Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->up7Button->setStyleSheet("background-color: green");
-    else if(ui->up7Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->up7Button->setStyleSheet("background-color: yellow");
-    else if(ui->up7Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->up7Button->setStyleSheet("background-color: blue");
-}
 void MainWindow::QuinaNordeste()
 {
     if(ui->up3Button->styleSheet() != ui->up5Button->styleSheet() || ui->right3Button->styleSheet() != ui->right5Button->styleSheet() || ui->back9Button->styleSheet() != ui->back5Button->styleSheet())
@@ -1574,96 +1373,6 @@ void MainWindow::QuinaNordeste()
             cube->rotateBA();
         }
     }
-}
-void MainWindow::on_up3Button_clicked()
-{
-    if(ui->up3Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->up3Button->setStyleSheet("background-color: white");
-    else if(ui->up3Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->up3Button->setStyleSheet("background-color: orange");
-    else if(ui->up3Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->up3Button->setStyleSheet("background-color: red");
-    else if(ui->up3Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->up3Button->setStyleSheet("background-color: green");
-    else if(ui->up3Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->up3Button->setStyleSheet("background-color: yellow");
-    else if(ui->up3Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->up3Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_right3Button_clicked()
-{
-    if(ui->right3Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->right3Button->setStyleSheet("background-color: white");
-    else if(ui->right3Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->right3Button->setStyleSheet("background-color: orange");
-    else if(ui->right3Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->right3Button->setStyleSheet("background-color: red");
-    else if(ui->right3Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->right3Button->setStyleSheet("background-color: green");
-    else if(ui->right3Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->right3Button->setStyleSheet("background-color: yellow");
-    else if(ui->right3Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->right3Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_back9Button_clicked()
-{
-    if(ui->back9Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->back9Button->setStyleSheet("background-color: white");
-    else if(ui->back9Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->back9Button->setStyleSheet("background-color: orange");
-    else if(ui->back9Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->back9Button->setStyleSheet("background-color: red");
-    else if(ui->back9Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->back9Button->setStyleSheet("background-color: green");
-    else if(ui->back9Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->back9Button->setStyleSheet("background-color: yellow");
-    else if(ui->back9Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->back9Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_up1Button_clicked()
-{
-    if(ui->up1Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->up1Button->setStyleSheet("background-color: white");
-    else if(ui->up1Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->up1Button->setStyleSheet("background-color: orange");
-    else if(ui->up1Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->up1Button->setStyleSheet("background-color: red");
-    else if(ui->up1Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->up1Button->setStyleSheet("background-color: green");
-    else if(ui->up1Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->up1Button->setStyleSheet("background-color: yellow");
-    else if(ui->up1Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->up1Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_left1Button_clicked()
-{
-    if(ui->left1Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->left1Button->setStyleSheet("background-color: white");
-    else if(ui->left1Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->left1Button->setStyleSheet("background-color: orange");
-    else if(ui->left1Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->left1Button->setStyleSheet("background-color: red");
-    else if(ui->left1Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->left1Button->setStyleSheet("background-color: green");
-    else if(ui->left1Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->left1Button->setStyleSheet("background-color: yellow");
-    else if(ui->left1Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->left1Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_back7Button_clicked()
-{
-    if(ui->back7Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->back7Button->setStyleSheet("background-color: white");
-    else if(ui->back7Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->back7Button->setStyleSheet("background-color: orange");
-    else if(ui->back7Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->back7Button->setStyleSheet("background-color: red");
-    else if(ui->back7Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->back7Button->setStyleSheet("background-color: green");
-    else if(ui->back7Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->back7Button->setStyleSheet("background-color: yellow");
-    else if(ui->back7Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->back7Button->setStyleSheet("background-color: blue");
 }
 void MainWindow::QuinaNoroeste()
 {
@@ -1882,51 +1591,6 @@ void MainWindow::SudesteBaixo()
         }
     }
 }
-void MainWindow::on_front9Button_clicked()
-{
-    if(ui->front9Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->front9Button->setStyleSheet("background-color: white");
-    else if(ui->front9Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->front9Button->setStyleSheet("background-color: orange");
-    else if(ui->front9Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->front9Button->setStyleSheet("background-color: red");
-    else if(ui->front9Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->front9Button->setStyleSheet("background-color: green");
-    else if(ui->front9Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->front9Button->setStyleSheet("background-color: yellow");
-    else if(ui->front9Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->front9Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_right7Button_clicked()
-{
-    if(ui->right7Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->right7Button->setStyleSheet("background-color: white");
-    else if(ui->right7Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->right7Button->setStyleSheet("background-color: orange");
-    else if(ui->right7Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->right7Button->setStyleSheet("background-color: red");
-    else if(ui->right7Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->right7Button->setStyleSheet("background-color: green");
-    else if(ui->right7Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->right7Button->setStyleSheet("background-color: yellow");
-    else if(ui->right7Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->right7Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_down3Button_clicked()
-{
-    if(ui->down3Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->down3Button->setStyleSheet("background-color: white");
-    else if(ui->down3Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->down3Button->setStyleSheet("background-color: orange");
-    else if(ui->down3Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->down3Button->setStyleSheet("background-color: red");
-    else if(ui->down3Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->down3Button->setStyleSheet("background-color: green");
-    else if(ui->down3Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->down3Button->setStyleSheet("background-color: yellow");
-    else if(ui->down3Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->down3Button->setStyleSheet("background-color: blue");
-}
 void MainWindow::SudoesteBaixo()
 {
     if(ui->front7Button->styleSheet() == ui->up5Button->styleSheet() || ui->down1Button->styleSheet() == ui->up5Button->styleSheet() || ui->left9Button->styleSheet() == ui->up5Button->styleSheet())
@@ -2025,358 +1689,6 @@ void MainWindow::SudoesteBaixo()
             cube->rotateDA();
             cube->rotateRA();
         }
-    }
-}
-void MainWindow::on_front7Button_clicked()
-{
-    if(ui->front7Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->front7Button->setStyleSheet("background-color: white");
-    else if(ui->front7Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->front7Button->setStyleSheet("background-color: orange");
-    else if(ui->front7Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->front7Button->setStyleSheet("background-color: red");
-    else if(ui->front7Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->front7Button->setStyleSheet("background-color: green");
-    else if(ui->front7Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->front7Button->setStyleSheet("background-color: yellow");
-    else if(ui->front7Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->front7Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_left9Button_clicked()
-{
-    if(ui->left9Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->left9Button->setStyleSheet("background-color: white");
-    else if(ui->left9Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->left9Button->setStyleSheet("background-color: orange");
-    else if(ui->left9Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->left9Button->setStyleSheet("background-color: red");
-    else if(ui->left9Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->left9Button->setStyleSheet("background-color: green");
-    else if(ui->left9Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->left9Button->setStyleSheet("background-color: yellow");
-    else if(ui->left9Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->left9Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_down1Button_clicked()
-{
-    if(ui->down1Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->down1Button->setStyleSheet("background-color: white");
-    else if(ui->down1Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->down1Button->setStyleSheet("background-color: orange");
-    else if(ui->down1Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->down1Button->setStyleSheet("background-color: red");
-    else if(ui->down1Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->down1Button->setStyleSheet("background-color: green");
-    else if(ui->down1Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->down1Button->setStyleSheet("background-color: yellow");
-    else if(ui->down1Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->down1Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::NordesteBaixo()
-{
-    if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() || ui->down9Button->styleSheet() == ui->up5Button->styleSheet() || ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
-    {
-       if(ui->back3Button->styleSheet() == ui->front5Button->styleSheet() && ui->down9Button->styleSheet() == ui->up5Button->styleSheet() && ui->right9Button->styleSheet() == ui->right5Button->styleSheet())
-       {
-            cube->rotateR();
-            cube->rotateDA();
-            cube->rotateRA();
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateR();
-       }
-       else if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() && ui->down9Button->styleSheet() == ui->right5Button->styleSheet() && ui->right9Button->styleSheet() == ui->front5Button->styleSheet())
-       {
-            cube->rotateF();
-            cube->rotateDA();
-            cube->rotateFA();
-       }
-       else if(ui->back3Button->styleSheet() == ui->right5Button->styleSheet() && ui->down9Button->styleSheet() == ui->front5Button->styleSheet() && ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
-       {
-            cube->rotateDA();
-            cube->rotateDA();
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateR();
-       }
-       else if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() && ui->down9Button->styleSheet() == ui->front5Button->styleSheet() && ui->right9Button->styleSheet() == ui->left5Button->styleSheet())
-       {
-            cube->rotateDA();
-            cube->rotateL();
-            cube->rotateDA();
-            cube->rotateLA();
-       }
-       else if(ui->back3Button->styleSheet() == ui->front5Button->styleSheet() && ui->down9Button->styleSheet() == ui->left5Button->styleSheet() && ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
-       {
-            cube->rotateD();
-            cube->rotateFA();
-            cube->rotateD();
-            cube->rotateF();
-       }
-       else if(ui->back3Button->styleSheet() == ui->left5Button->styleSheet() && ui->down9Button->styleSheet() == ui->up5Button->styleSheet() && ui->right9Button->styleSheet() == ui->front5Button->styleSheet())
-       {
-            cube->rotateR();
-            cube->rotateDA();
-            cube->rotateRA();
-            cube->rotateDA();
-            cube->rotateFA();
-            cube->rotateD();
-            cube->rotateF();
-       }
-       else if(ui->back3Button->styleSheet() == ui->back5Button->styleSheet() && ui->down9Button->styleSheet() == ui->up5Button->styleSheet() && ui->right9Button->styleSheet() == ui->left5Button->styleSheet())
-       {
-            cube->rotateBA();
-            cube->rotateD();
-            cube->rotateB();
-            cube->rotateB();
-            cube->rotateDA();
-            cube->rotateBA();
-       }
-       else if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() && ui->down9Button->styleSheet() == ui->left5Button->styleSheet() && ui->right9Button->styleSheet() == ui->back5Button->styleSheet())
-       {
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateB();
-            cube->rotateDA();
-            cube->rotateBA();
-       }
-       else if(ui->back3Button->styleSheet() == ui->left5Button->styleSheet() && ui->down9Button->styleSheet() == ui->back5Button->styleSheet() && ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
-       {
-            cube->rotateLA();
-            cube->rotateD();
-            cube->rotateL();
-       }
-       else if(ui->back3Button->styleSheet() == ui->back5Button->styleSheet() && ui->down9Button->styleSheet() == ui->right5Button->styleSheet() && ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
-       {
-            cube->rotateDA();
-            cube->rotateBA();
-            cube->rotateD();
-            cube->rotateB();
-       }
-       else if(ui->back3Button->styleSheet() == ui->right5Button->styleSheet() && ui->down9Button->styleSheet() == ui->up5Button->styleSheet() && ui->right9Button->styleSheet() == ui->back5Button->styleSheet())
-       {
-            cube->rotateR();
-            cube->rotateDA();
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateBA();
-            cube->rotateD();
-            cube->rotateB();
-       }
-       else if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() && ui->down9Button->styleSheet() == ui->back5Button->styleSheet() && ui->right9Button->styleSheet() == ui->right5Button->styleSheet())
-       {
-            cube->rotateD();
-            cube->rotateR();
-            cube->rotateDA();
-            cube->rotateRA();
-       }
-    }
-}
-void MainWindow::on_down9Button_clicked()
-{
-    if(ui->down9Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->down9Button->setStyleSheet("background-color: white");
-    else if(ui->down9Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->down9Button->setStyleSheet("background-color: orange");
-    else if(ui->down9Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->down9Button->setStyleSheet("background-color: red");
-    else if(ui->down9Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->down9Button->setStyleSheet("background-color: green");
-    else if(ui->down9Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->down9Button->setStyleSheet("background-color: yellow");
-    else if(ui->down9Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->down9Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_right9Button_clicked()
-{
-    if(ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->right9Button->setStyleSheet("background-color: white");
-    else if(ui->right9Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->right9Button->setStyleSheet("background-color: orange");
-    else if(ui->right9Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->right9Button->setStyleSheet("background-color: red");
-    else if(ui->right9Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->right9Button->setStyleSheet("background-color: green");
-    else if(ui->right9Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->right9Button->setStyleSheet("background-color: yellow");
-    else if(ui->right9Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->right9Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_back3Button_clicked()
-{
-    if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->back3Button->setStyleSheet("background-color: white");
-    else if(ui->back3Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->back3Button->setStyleSheet("background-color: orange");
-    else if(ui->back3Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->back3Button->setStyleSheet("background-color: red");
-    else if(ui->back3Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->back3Button->setStyleSheet("background-color: green");
-    else if(ui->back3Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->back3Button->setStyleSheet("background-color: yellow");
-    else if(ui->back3Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->back3Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::NoroesteBaixo()
-{
-    if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() || ui->down7Button->styleSheet() == ui->up5Button->styleSheet() || ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
-    {
-        if(ui->back1Button->styleSheet() == ui->front5Button->styleSheet() && ui->down7Button->styleSheet() == ui->right5Button->styleSheet() && ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
-        {
-            cube->rotateDA();
-            cube->rotateF();
-            cube->rotateDA();
-            cube->rotateFA();
-        }
-        else if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() && ui->down7Button->styleSheet() == ui->front5Button->styleSheet() && ui->left7Button->styleSheet() == ui->right5Button->styleSheet())
-        {
-            cube->rotateD();
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateR();
-        }
-        else if(ui->back1Button->styleSheet() == ui->right5Button->styleSheet() && ui->down7Button->styleSheet() == ui->up5Button->styleSheet() && ui->left7Button->styleSheet() == ui->front5Button->styleSheet())
-        {
-            cube->rotateLA();
-            cube->rotateD();
-            cube->rotateL();
-            cube->rotateD();
-            cube->rotateF();
-            cube->rotateDA();
-            cube->rotateFA();
-        }
-        else if(ui->back1Button->styleSheet() == ui->front5Button->styleSheet() && ui->down7Button->styleSheet() == ui->up5Button->styleSheet() && ui->left7Button->styleSheet() == ui->left5Button->styleSheet())
-        {
-            cube->rotateLA();
-            cube->rotateD();
-            cube->rotateL();
-            cube->rotateL();
-            cube->rotateDA();
-            cube->rotateLA();
-        }
-        else if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() && ui->down7Button->styleSheet() == ui->left5Button->styleSheet() && ui->left7Button->styleSheet() == ui->front5Button->styleSheet())
-        {
-            cube->rotateFA();
-            cube->rotateD();
-            cube->rotateF();
-        }
-        else if(ui->back1Button->styleSheet() == ui->left5Button->styleSheet() && ui->down7Button->styleSheet() == ui->front5Button->styleSheet() && ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
-        {
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateL();
-            cube->rotateDA();
-            cube->rotateLA();
-        }
-        else if(ui->back1Button->styleSheet() == ui->left5Button->styleSheet() && ui->down7Button->styleSheet() == ui->up5Button->styleSheet() && ui->left7Button->styleSheet() == ui->back5Button->styleSheet())
-        {
-            cube->rotateB();
-            cube->rotateDA();
-            cube->rotateBA();
-            cube->rotateD();
-            cube->rotateLA();
-            cube->rotateD();
-            cube->rotateL();
-        }
-        else if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() && ui->down7Button->styleSheet() == ui->back5Button->styleSheet() && ui->left7Button->styleSheet() == ui->left5Button->styleSheet())
-        {
-            cube->rotateDA();
-            cube->rotateLA();
-            cube->rotateD();
-            cube->rotateL();
-        }
-        else if(ui->back1Button->styleSheet() == ui->back5Button->styleSheet() && ui->down7Button->styleSheet() == ui->left5Button->styleSheet() && ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
-        {
-            cube->rotateD();
-            cube->rotateB();
-            cube->rotateDA();
-            cube->rotateBA();
-        }
-        else if(ui->back1Button->styleSheet() == ui->back5Button->styleSheet() && ui->down7Button->styleSheet() == ui->up5Button->styleSheet() && ui->left7Button->styleSheet() == ui->right5Button->styleSheet())
-        {
-            cube->rotateB();
-            cube->rotateDA();
-            cube->rotateBA();
-            cube->rotateBA();
-            cube->rotateD();
-            cube->rotateB();
-        }
-        else if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() && ui->down7Button->styleSheet() == ui->right5Button->styleSheet() && ui->left7Button->styleSheet() == ui->back5Button->styleSheet())
-        {
-            cube->rotateDA();
-            cube->rotateDA();
-            cube->rotateBA();
-            cube->rotateD();
-            cube->rotateB();
-        }
-        else if(ui->back1Button->styleSheet() == ui->right5Button->styleSheet() && ui->down7Button->styleSheet() == ui->back5Button->styleSheet() && ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
-        {
-            cube->rotateR();
-            cube->rotateDA();
-            cube->rotateRA();
-        }
-    }
-}
-void MainWindow::on_back1Button_clicked()
-{
-    if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->back1Button->setStyleSheet("background-color: white");
-    else if(ui->back1Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->back1Button->setStyleSheet("background-color: orange");
-    else if(ui->back1Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->back1Button->setStyleSheet("background-color: red");
-    else if(ui->back1Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->back1Button->setStyleSheet("background-color: green");
-    else if(ui->back1Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->back1Button->setStyleSheet("background-color: yellow");
-    else if(ui->back1Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->back1Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_down7Button_clicked()
-{
-    if(ui->down7Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->down7Button->setStyleSheet("background-color: white");
-    else if(ui->down7Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->down7Button->setStyleSheet("background-color: orange");
-    else if(ui->down7Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->down7Button->setStyleSheet("background-color: red");
-    else if(ui->down7Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->down7Button->setStyleSheet("background-color: green");
-    else if(ui->down7Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->down7Button->setStyleSheet("background-color: yellow");
-    else if(ui->down7Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->down7Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_left7Button_clicked()
-{
-    if(ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->left7Button->setStyleSheet("background-color: white");
-    else if(ui->left7Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->left7Button->setStyleSheet("background-color: orange");
-    else if(ui->left7Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->left7Button->setStyleSheet("background-color: red");
-    else if(ui->left7Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->left7Button->setStyleSheet("background-color: green");
-    else if(ui->left7Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->left7Button->setStyleSheet("background-color: yellow");
-    else if(ui->left7Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->left7Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_firstLayerCornersButton_clicked()
-{
-    while(ui->up1Button->styleSheet() != ui->up5Button->styleSheet() || ui->back7Button->styleSheet() != ui->back5Button->styleSheet() || ui->left1Button->styleSheet() != ui->left5Button->styleSheet()
-          || ui->up3Button->styleSheet() != ui->up5Button->styleSheet() || ui->back9Button->styleSheet() != ui->back5Button->styleSheet() || ui->right3Button->styleSheet() != ui->right5Button->styleSheet()
-          || ui->up7Button->styleSheet() != ui->up5Button->styleSheet() || ui->front1Button->styleSheet() != ui->front5Button->styleSheet() || ui->left3Button->styleSheet() != ui->left5Button->styleSheet()
-          || ui->up9Button->styleSheet() != ui->up5Button->styleSheet() || ui->front3Button->styleSheet() != ui->front5Button->styleSheet() || ui->right1Button->styleSheet() != ui->right5Button->styleSheet())
-    {
-        QuinaNordeste();
-        QuinaNoroeste();
-        QuinaSudeste();
-        QuinaSudoeste();
-        SudesteBaixo();
-        SudoesteBaixo();
-        NordesteBaixo();
-        NoroesteBaixo();
     }
 }
 void MainWindow::frontSecond()
@@ -2807,38 +2119,204 @@ void MainWindow::backSecond()
         }
     }
 }
-void MainWindow::on_secondLayerButton_clicked()
+void MainWindow::NordesteBaixo()
 {
-    int j=0;
-    int k=0;
-    while(ui->front4Button->styleSheet() != ui->front5Button->styleSheet() || ui->front6Button->styleSheet() != ui->front5Button->styleSheet() ||
-          ui->left4Button->styleSheet() != ui->left5Button->styleSheet() || ui->left6Button->styleSheet() != ui->left5Button->styleSheet() ||
-          ui->right4Button->styleSheet() != ui->right5Button->styleSheet() || ui->right6Button->styleSheet() != ui->right5Button->styleSheet() ||
-          ui->back4Button->styleSheet() != ui->back5Button->styleSheet() || ui->back6Button->styleSheet() != ui->back5Button->styleSheet())
+    if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() || ui->down9Button->styleSheet() == ui->up5Button->styleSheet() || ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
     {
-        
-        
-            rightSecond();
-        
-            frontSecond();
-        
-            backSecond();
-        
-            leftSecond();
-        j++;
-        if(j==25)
+       if(ui->back3Button->styleSheet() == ui->front5Button->styleSheet() && ui->down9Button->styleSheet() == ui->up5Button->styleSheet() && ui->right9Button->styleSheet() == ui->right5Button->styleSheet())
+       {
+            cube->rotateR();
+            cube->rotateDA();
+            cube->rotateRA();
+            cube->rotateRA();
+            cube->rotateD();
+            cube->rotateR();
+       }
+       else if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() && ui->down9Button->styleSheet() == ui->right5Button->styleSheet() && ui->right9Button->styleSheet() == ui->front5Button->styleSheet())
+       {
+            cube->rotateF();
+            cube->rotateDA();
+            cube->rotateFA();
+       }
+       else if(ui->back3Button->styleSheet() == ui->right5Button->styleSheet() && ui->down9Button->styleSheet() == ui->front5Button->styleSheet() && ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
+       {
+            cube->rotateDA();
+            cube->rotateDA();
+            cube->rotateRA();
+            cube->rotateD();
+            cube->rotateR();
+       }
+       else if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() && ui->down9Button->styleSheet() == ui->front5Button->styleSheet() && ui->right9Button->styleSheet() == ui->left5Button->styleSheet())
+       {
+            cube->rotateDA();
+            cube->rotateL();
+            cube->rotateDA();
+            cube->rotateLA();
+       }
+       else if(ui->back3Button->styleSheet() == ui->front5Button->styleSheet() && ui->down9Button->styleSheet() == ui->left5Button->styleSheet() && ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
+       {
+            cube->rotateD();
+            cube->rotateFA();
+            cube->rotateD();
+            cube->rotateF();
+       }
+       else if(ui->back3Button->styleSheet() == ui->left5Button->styleSheet() && ui->down9Button->styleSheet() == ui->up5Button->styleSheet() && ui->right9Button->styleSheet() == ui->front5Button->styleSheet())
+       {
+            cube->rotateR();
+            cube->rotateDA();
+            cube->rotateRA();
+            cube->rotateDA();
+            cube->rotateFA();
+            cube->rotateD();
+            cube->rotateF();
+       }
+       else if(ui->back3Button->styleSheet() == ui->back5Button->styleSheet() && ui->down9Button->styleSheet() == ui->up5Button->styleSheet() && ui->right9Button->styleSheet() == ui->left5Button->styleSheet())
+       {
+            cube->rotateBA();
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateB();
+            cube->rotateDA();
+            cube->rotateBA();
+       }
+       else if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() && ui->down9Button->styleSheet() == ui->left5Button->styleSheet() && ui->right9Button->styleSheet() == ui->back5Button->styleSheet())
+       {
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateDA();
+            cube->rotateBA();
+       }
+       else if(ui->back3Button->styleSheet() == ui->left5Button->styleSheet() && ui->down9Button->styleSheet() == ui->back5Button->styleSheet() && ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
+       {
+            cube->rotateLA();
+            cube->rotateD();
+            cube->rotateL();
+       }
+       else if(ui->back3Button->styleSheet() == ui->back5Button->styleSheet() && ui->down9Button->styleSheet() == ui->right5Button->styleSheet() && ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
+       {
+            cube->rotateDA();
+            cube->rotateBA();
+            cube->rotateD();
+            cube->rotateB();
+       }
+       else if(ui->back3Button->styleSheet() == ui->right5Button->styleSheet() && ui->down9Button->styleSheet() == ui->up5Button->styleSheet() && ui->right9Button->styleSheet() == ui->back5Button->styleSheet())
+       {
+            cube->rotateR();
+            cube->rotateDA();
+            cube->rotateRA();
+            cube->rotateD();
+            cube->rotateBA();
+            cube->rotateD();
+            cube->rotateB();
+       }
+       else if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() && ui->down9Button->styleSheet() == ui->back5Button->styleSheet() && ui->right9Button->styleSheet() == ui->right5Button->styleSheet())
+       {
+            cube->rotateD();
+            cube->rotateR();
+            cube->rotateDA();
+            cube->rotateRA();
+       }
+    }
+}
+void MainWindow::NoroesteBaixo()
+{
+    if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() || ui->down7Button->styleSheet() == ui->up5Button->styleSheet() || ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
+    {
+        if(ui->back1Button->styleSheet() == ui->front5Button->styleSheet() && ui->down7Button->styleSheet() == ui->right5Button->styleSheet() && ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            k = qrand()%4;
-            if(k == 0)
-                debugaBack();
-            else if(k == 1)
-                debugaFront();
-            else if(k == 2)
-                debugaLeft();
-            else if(k == 3)
-                debugaRight();
-            j = 0;
-        }       
+            cube->rotateDA();
+            cube->rotateF();
+            cube->rotateDA();
+            cube->rotateFA();
+        }
+        else if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() && ui->down7Button->styleSheet() == ui->front5Button->styleSheet() && ui->left7Button->styleSheet() == ui->right5Button->styleSheet())
+        {
+            cube->rotateD();
+            cube->rotateRA();
+            cube->rotateD();
+            cube->rotateR();
+        }
+        else if(ui->back1Button->styleSheet() == ui->right5Button->styleSheet() && ui->down7Button->styleSheet() == ui->up5Button->styleSheet() && ui->left7Button->styleSheet() == ui->front5Button->styleSheet())
+        {
+            cube->rotateLA();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateDA();
+            cube->rotateFA();
+        }
+        else if(ui->back1Button->styleSheet() == ui->front5Button->styleSheet() && ui->down7Button->styleSheet() == ui->up5Button->styleSheet() && ui->left7Button->styleSheet() == ui->left5Button->styleSheet())
+        {
+            cube->rotateLA();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateL();
+            cube->rotateDA();
+            cube->rotateLA();
+        }
+        else if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() && ui->down7Button->styleSheet() == ui->left5Button->styleSheet() && ui->left7Button->styleSheet() == ui->front5Button->styleSheet())
+        {
+            cube->rotateFA();
+            cube->rotateD();
+            cube->rotateF();
+        }
+        else if(ui->back1Button->styleSheet() == ui->left5Button->styleSheet() && ui->down7Button->styleSheet() == ui->front5Button->styleSheet() && ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
+        {
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateDA();
+            cube->rotateLA();
+        }
+        else if(ui->back1Button->styleSheet() == ui->left5Button->styleSheet() && ui->down7Button->styleSheet() == ui->up5Button->styleSheet() && ui->left7Button->styleSheet() == ui->back5Button->styleSheet())
+        {
+            cube->rotateB();
+            cube->rotateDA();
+            cube->rotateBA();
+            cube->rotateD();
+            cube->rotateLA();
+            cube->rotateD();
+            cube->rotateL();
+        }
+        else if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() && ui->down7Button->styleSheet() == ui->back5Button->styleSheet() && ui->left7Button->styleSheet() == ui->left5Button->styleSheet())
+        {
+            cube->rotateDA();
+            cube->rotateLA();
+            cube->rotateD();
+            cube->rotateL();
+        }
+        else if(ui->back1Button->styleSheet() == ui->back5Button->styleSheet() && ui->down7Button->styleSheet() == ui->left5Button->styleSheet() && ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
+        {
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateDA();
+            cube->rotateBA();
+        }
+        else if(ui->back1Button->styleSheet() == ui->back5Button->styleSheet() && ui->down7Button->styleSheet() == ui->up5Button->styleSheet() && ui->left7Button->styleSheet() == ui->right5Button->styleSheet())
+        {
+            cube->rotateB();
+            cube->rotateDA();
+            cube->rotateBA();
+            cube->rotateBA();
+            cube->rotateD();
+            cube->rotateB();
+        }
+        else if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() && ui->down7Button->styleSheet() == ui->right5Button->styleSheet() && ui->left7Button->styleSheet() == ui->back5Button->styleSheet())
+        {
+            cube->rotateDA();
+            cube->rotateDA();
+            cube->rotateBA();
+            cube->rotateD();
+            cube->rotateB();
+        }
+        else if(ui->back1Button->styleSheet() == ui->right5Button->styleSheet() && ui->down7Button->styleSheet() == ui->back5Button->styleSheet() && ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
+        {
+            cube->rotateR();
+            cube->rotateDA();
+            cube->rotateRA();
+        }
     }
 }
 void MainWindow::debugaFront()
@@ -3385,255 +2863,6 @@ void MainWindow::debugaBack()
         }
     }
 }
-void MainWindow::on_downCrossButton_clicked()
-{
-    if(ui->down2Button->styleSheet() != ui->down5Button->styleSheet() && ui->down4Button->styleSheet() != ui->down5Button->styleSheet() &&
-            ui->down6Button->styleSheet() != ui->down5Button->styleSheet() && ui->down8Button->styleSheet() != ui->down5Button->styleSheet())
-    {
-        cube->rotateF();
-        cube->rotateL();
-        cube->rotateD();
-        cube->rotateLA();
-        cube->rotateDA();
-        cube->rotateFA();
-    }
-    while((ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down4Button->styleSheet() != ui->down5Button->styleSheet()) &&
-          (ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down8Button->styleSheet() != ui->down5Button->styleSheet()) &&
-           (ui->down4Button->styleSheet() != ui->down5Button->styleSheet() || ui->down6Button->styleSheet() != ui->down5Button->styleSheet()))
-        cube->rotateD();
-    if(ui->down6Button->styleSheet() != ui->down5Button->styleSheet() && ui->down8Button->styleSheet() != ui->down5Button->styleSheet())
-    {
-        cube->rotateF();
-        cube->rotateL();
-        cube->rotateD();
-        cube->rotateLA();
-        cube->rotateDA();
-        cube->rotateFA();
-    }
-    
-    if((ui->down2Button->styleSheet() == ui->down5Button->styleSheet() &&
-        ui->down8Button->styleSheet() == ui->down5Button->styleSheet()) &&
-            ui->down4Button->styleSheet() != ui->down5Button->styleSheet() &&
-            ui->down6Button->styleSheet() != ui->down5Button->styleSheet())
-        cube->rotateD();
-    if(ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down4Button->styleSheet() != ui->down5Button->styleSheet() ||
-            ui->down6Button->styleSheet() != ui->down5Button->styleSheet() || ui->down8Button->styleSheet() != ui->down5Button->styleSheet())
-    {
-        cube->rotateF();
-        cube->rotateL();
-        cube->rotateD();
-        cube->rotateLA();
-        cube->rotateDA();
-        cube->rotateFA();
-    }
-}
-void MainWindow::on_backEdgesButton_clicked()
-{
-    int i;
-    int j=0;
-    while(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() || ui->left8Button->styleSheet() != ui->left5Button->styleSheet() ||
-          ui->back2Button->styleSheet() != ui->back5Button->styleSheet() || ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
-    {
-        j++;
-        if (j%30==0)
-            cube->rotateDA();
-        if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() || ui->left8Button->styleSheet() != ui->left5Button->styleSheet() ||
-                ui->back2Button->styleSheet() != ui->back5Button->styleSheet() || ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
-        {
-            i = 0;
-            if(ui->front8Button->styleSheet() == ui->front5Button->styleSheet())
-                i++;
-            if(ui->left8Button->styleSheet() == ui->left5Button->styleSheet())
-                i++;
-            if(ui->right8Button->styleSheet() == ui->right5Button->styleSheet())
-                i++;
-            if(ui->back2Button->styleSheet() == ui->back5Button->styleSheet())
-                i++;
-            if(i == 0)
-            {
-                cube->rotateD();
-                cube->rotateD();
-            }
-            if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
-            {
-                cube->rotateL();
-                cube->rotateD();
-                cube->rotateD();
-                cube->rotateLA();
-                cube->rotateDA();
-                cube->rotateL();
-                cube->rotateDA();
-                cube->rotateLA();
-                cube->rotateDA();
-            }
-            else if(ui->back2Button->styleSheet() != ui->back2Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
-            {
-                cube->rotateB();
-                cube->rotateD();
-                cube->rotateD();
-                cube->rotateBA();
-                cube->rotateDA();
-                cube->rotateB();
-                cube->rotateDA();
-                cube->rotateBA();
-                cube->rotateDA();
-            }
-            else if(ui->back2Button->styleSheet() != ui->back5Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
-            {
-                cube->rotateR();
-                cube->rotateD();
-                cube->rotateD();
-                cube->rotateRA();
-                cube->rotateDA();
-                cube->rotateR();
-                cube->rotateDA();
-                cube->rotateRA();
-                cube->rotateDA();
-            }
-            else if(ui->front8Button->styleSheet() != ui->front2Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
-            {
-                cube->rotateF();
-                cube->rotateD();
-                cube->rotateD();
-                cube->rotateFA();
-                cube->rotateDA();
-                cube->rotateF();
-                cube->rotateDA();
-                cube->rotateFA();
-                cube->rotateDA();
-            }
-            else
-                cube->rotateDA();
-        }
-    }
-    /*int i = 0;
-    while(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() || ui->left8Button->styleSheet() != ui->left5Button->styleSheet() ||
-          ui->back2Button->styleSheet() != ui->back5Button->styleSheet() || ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
-    {
-        if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() || ui->left8Button->styleSheet() != ui->left5Button->styleSheet() ||
-                ui->back2Button->styleSheet() != ui->back5Button->styleSheet() || ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
-        {
-            i = 0;
-            if(ui->front8Button->styleSheet() == ui->front5Button->styleSheet())
-                i++;
-            if(ui->left8Button->styleSheet() == ui->left5Button->styleSheet())
-                i++;
-            if(ui->right8Button->styleSheet() == ui->right5Button->styleSheet())
-                i++;
-            if(ui->back2Button->styleSheet() == ui->back5Button->styleSheet())
-                i++;
-            if(i == 1)
-            {
-                cube->rotateD();
-            }
-            else if (i == 1)
-            {
-                cube->rotateL();
-                cube->rotateD();
-                cube->rotateD();
-                cube->rotateLA();
-                cube->rotateDA();
-                cube->rotateL();
-                cube->rotateDA();
-                cube->rotateLA();
-                cube->rotateDA();
-            }
-            if(i == 2)
-            {
-                if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
-                {
-                    cube->rotateL();
-                    cube->rotateD();
-                    cube->rotateD();
-                    cube->rotateLA();
-                    cube->rotateDA();
-                    cube->rotateL();
-                    cube->rotateDA();
-                    cube->rotateLA();
-                    cube->rotateDA();
-                }
-                else if(ui->back2Button->styleSheet() != ui->back2Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
-                {
-                    cube->rotateF();
-                    cube->rotateD();
-                    cube->rotateD();
-                    cube->rotateFA();
-                    cube->rotateDA();
-                    cube->rotateF();
-                    cube->rotateDA();
-                    cube->rotateFA();
-                    cube->rotateDA();
-                }
-                else if(ui->back2Button->styleSheet() != ui->back5Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
-                {
-                    cube->rotateL();
-                    cube->rotateD();
-                    cube->rotateD();
-                    cube->rotateLA();
-                    cube->rotateDA();
-                    cube->rotateL();
-                    cube->rotateDA();
-                    cube->rotateLA();
-                    cube->rotateDA();
-                }
-                else if(ui->front8Button->styleSheet() != ui->front2Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
-                {
-                    cube->rotateF();
-                    cube->rotateD();
-                    cube->rotateD();
-                    cube->rotateFA();
-                    cube->rotateDA();
-                    cube->rotateF();
-                    cube->rotateDA();
-                    cube->rotateFA();
-                    cube->rotateDA();
-                }
-                else
-                {
-                    cube->rotateL();
-                    cube->rotateD();
-                    cube->rotateD();
-                    cube->rotateLA();
-                    cube->rotateDA();
-                    cube->rotateL();
-                    cube->rotateDA();
-                    cube->rotateLA();
-                    cube->rotateDA();
-                }
-            }
-            else
-            {
-                cube->rotateD();
-                cube->rotateD();
-            }
-            if(ui->left8Button->styleSheet() == ui->left5Button->styleSheet() && ui->right8Button->styleSheet() == ui->right5Button->styleSheet())
-            {
-                cube->rotateL();
-                cube->rotateD();
-                cube->rotateD();
-                cube->rotateLA();
-                cube->rotateDA();
-                cube->rotateL();
-                cube->rotateDA();
-                cube->rotateLA();
-            }
-        }
-        if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet() &&
-                ui->back2Button->styleSheet() != ui->back5Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
-        {
-            cube->rotateDA();
-            cube->rotateL();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateLA();
-            cube->rotateDA();
-            cube->rotateL();
-            cube->rotateDA();
-            cube->rotateLA();
-            cube->rotateD();
-        }
-    }*/
-}
 bool MainWindow::sudestecorreto()
 {
     if((ui->front9Button->styleSheet() == ui->front5Button->styleSheet() || ui->front9Button->styleSheet() == ui->down5Button->styleSheet() || ui->front9Button->styleSheet() == ui->right5Button->styleSheet()) &&
@@ -3669,272 +2898,6 @@ bool MainWindow::noroestecorreto()
         return true;
     else
         return false;
-}
-void MainWindow::on_placeDownEdgesButton_clicked()
-{
-    while(!sudestecorreto() || !sudoestecorreto() || !nordestecorreto() || !noroestecorreto())
-    {
-        if(sudoestecorreto())
-        {
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateL();
-            cube->rotateDA();
-            cube->rotateR();
-            cube->rotateD();
-            cube->rotateLA();
-            cube->rotateDA();
-            ult = "1SS";
-            
-        }
-        else if(sudestecorreto())
-        {
-            cube->rotateBA();
-            cube->rotateD();
-            cube->rotateF();
-            cube->rotateDA();
-            cube->rotateB();
-            cube->rotateD();
-            cube->rotateFA();
-            cube->rotateDA();
-            ult = "2SS";
-            
-        }
-        else if(noroestecorreto())
-        {
-            cube->rotateFA();
-            cube->rotateD();
-            cube->rotateB();
-            cube->rotateDA();
-            cube->rotateF();
-            cube->rotateD();
-            cube->rotateBA();
-            cube->rotateDA();
-            ult = "3SS";
-            
-        }
-        else if(nordestecorreto())
-        {
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateL();
-            cube->rotateDA();
-            cube->rotateR();
-            cube->rotateD();
-            cube->rotateLA();
-            cube->rotateDA();
-            ult = "4SS";
-            
-        }
-        else
-        {
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateL();
-            cube->rotateDA();
-            cube->rotateR();
-            cube->rotateD();
-            cube->rotateLA();
-            cube->rotateDA();
-            ult = "5SS";
-            
-        }
-    }
-}
-void MainWindow::on_turnDownEdgesButton_clicked()
-{
-    while(ui->front1Button->styleSheet() != ui->front5Button->styleSheet() || ui->front2Button->styleSheet() != ui->front5Button->styleSheet() || ui->front3Button->styleSheet() != ui->front5Button->styleSheet() ||
-          ui->front4Button->styleSheet() != ui->front5Button->styleSheet() || ui->front6Button->styleSheet() != ui->front5Button->styleSheet() || ui->front7Button->styleSheet() != ui->front5Button->styleSheet() ||
-          ui->front8Button->styleSheet() != ui->front5Button->styleSheet() || ui->front9Button->styleSheet() != ui->front5Button->styleSheet() ||
-          ui->left1Button->styleSheet() != ui->left5Button->styleSheet() || ui->left2Button->styleSheet() != ui->left5Button->styleSheet() || ui->left3Button->styleSheet() != ui->left5Button->styleSheet() ||
-          ui->left4Button->styleSheet() != ui->left5Button->styleSheet() || ui->left6Button->styleSheet() != ui->left5Button->styleSheet() || ui->left7Button->styleSheet() != ui->left5Button->styleSheet() ||
-          ui->left8Button->styleSheet() != ui->left5Button->styleSheet() || ui->left9Button->styleSheet() != ui->left5Button->styleSheet() ||
-          ui->right1Button->styleSheet() != ui->right5Button->styleSheet() || ui->right2Button->styleSheet() != ui->right5Button->styleSheet() || ui->right3Button->styleSheet() != ui->right5Button->styleSheet() ||
-          ui->right4Button->styleSheet() != ui->right5Button->styleSheet() || ui->right6Button->styleSheet() != ui->right5Button->styleSheet() || ui->right7Button->styleSheet() != ui->right5Button->styleSheet() ||
-          ui->right8Button->styleSheet() != ui->right5Button->styleSheet() || ui->right9Button->styleSheet() != ui->right5Button->styleSheet() ||
-          ui->back1Button->styleSheet() != ui->back5Button->styleSheet() || ui->back2Button->styleSheet() != ui->back5Button->styleSheet() || ui->back3Button->styleSheet() != ui->back5Button->styleSheet() ||
-          ui->back4Button->styleSheet() != ui->back5Button->styleSheet() || ui->back6Button->styleSheet() != ui->back5Button->styleSheet() || ui->back7Button->styleSheet() != ui->back5Button->styleSheet() ||
-          ui->back8Button->styleSheet() != ui->back5Button->styleSheet() || ui->back9Button->styleSheet() != ui->back5Button->styleSheet() ||
-          ui->up1Button->styleSheet() != ui->up5Button->styleSheet() || ui->up2Button->styleSheet() != ui->up5Button->styleSheet() || ui->up3Button->styleSheet() != ui->up5Button->styleSheet() ||
-          ui->up4Button->styleSheet() != ui->up5Button->styleSheet() || ui->up6Button->styleSheet() != ui->up5Button->styleSheet() || ui->up7Button->styleSheet() != ui->up5Button->styleSheet() ||
-          ui->up8Button->styleSheet() != ui->up5Button->styleSheet() || ui->up9Button->styleSheet() != ui->up5Button->styleSheet() ||
-          ui->down1Button->styleSheet() != ui->down5Button->styleSheet() || ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down3Button->styleSheet() != ui->down5Button->styleSheet() ||
-          ui->down4Button->styleSheet() != ui->down5Button->styleSheet() || ui->down6Button->styleSheet() != ui->down5Button->styleSheet() || ui->down7Button->styleSheet() != ui->down5Button->styleSheet() ||
-          ui->down8Button->styleSheet() != ui->down5Button->styleSheet() || ui->down9Button->styleSheet() != ui->down5Button->styleSheet())
-    {
-        if((ui->front7Button->styleSheet() != ui->front5Button->styleSheet() || ui->left9Button->styleSheet() != ui->left5Button->styleSheet() || ui->down1Button->styleSheet() != ui->down5Button->styleSheet()) &&
-                (ui->back1Button->styleSheet() != ui->back5Button->styleSheet() || ui->left7Button->styleSheet() != ui->left5Button->styleSheet() || ui->down7Button->styleSheet() != ui->down7Button->styleSheet()))
-        {
-            cube->rotateL();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateLA();
-            cube->rotateDA();
-            cube->rotateL();
-            cube->rotateDA();
-            cube->rotateLA();
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateR();
-            cube->rotateD();
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateR();
-            ult = "1FF";
-            
-        }
-        else if((ui->back1Button->styleSheet() != ui->back5Button->styleSheet() || ui->left7Button->styleSheet() != ui->left5Button->styleSheet() || ui->down7Button->styleSheet() != ui->down7Button->styleSheet()) &&
-                (ui->back3Button->styleSheet() != ui->back5Button->styleSheet() || ui->right9Button->styleSheet() != ui->right5Button->styleSheet() || ui->down9Button->styleSheet() != ui->down7Button->styleSheet()))
-        {
-            cube->rotateB();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateBA();
-            cube->rotateDA();
-            cube->rotateB();
-            cube->rotateDA();
-            cube->rotateBA();
-            cube->rotateFA();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateF();
-            cube->rotateD();
-            cube->rotateFA();
-            cube->rotateD();
-            cube->rotateF();
-            ult = "2FF";
-            
-        }
-        else if((ui->back3Button->styleSheet() != ui->back5Button->styleSheet() || ui->right9Button->styleSheet() != ui->right5Button->styleSheet() || ui->down9Button->styleSheet() != ui->down7Button->styleSheet()) &&
-                (ui->front9Button->styleSheet() != ui->front5Button->styleSheet() || ui->right7Button->styleSheet() != ui->right5Button->styleSheet() || ui->down3Button->styleSheet() != ui->down7Button->styleSheet()))
-        {
-            cube->rotateR();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateRA();
-            cube->rotateDA();
-            cube->rotateR();
-            cube->rotateDA();
-            cube->rotateRA();
-            cube->rotateLA();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateL();
-            cube->rotateD();
-            cube->rotateLA();
-            cube->rotateD();
-            cube->rotateL();
-            ult = "3FF";
-            
-        }
-        else if((ui->front9Button->styleSheet() != ui->front5Button->styleSheet() || ui->right7Button->styleSheet() != ui->right5Button->styleSheet() || ui->down3Button->styleSheet() != ui->down7Button->styleSheet()) &&
-                (ui->front7Button->styleSheet() != ui->front5Button->styleSheet() || ui->left9Button->styleSheet() != ui->left5Button->styleSheet() || ui->down1Button->styleSheet() != ui->down5Button->styleSheet()))
-        {
-            cube->rotateF();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateFA();
-            cube->rotateDA();
-            cube->rotateF();
-            cube->rotateDA();
-            cube->rotateFA();
-            cube->rotateBA();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateB();
-            cube->rotateD();
-            cube->rotateBA();
-            cube->rotateD();
-            cube->rotateB();
-            ult = "4FF";
-            
-        }
-        else if(ui->front7Button->styleSheet() != ui->front5Button->styleSheet() || ui->left9Button->styleSheet() != ui->left5Button->styleSheet() || ui->down1Button->styleSheet() != ui->down5Button->styleSheet())
-        {
-            cube->rotateL();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateLA();
-            cube->rotateDA();
-            cube->rotateL();
-            cube->rotateDA();
-            cube->rotateLA();
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateR();
-            cube->rotateD();
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateR();
-            ult = "5FF";
-            
-        }
-        else if(ui->back1Button->styleSheet() != ui->back5Button->styleSheet() || ui->left7Button->styleSheet() != ui->left5Button->styleSheet() || ui->down7Button->styleSheet() != ui->down7Button->styleSheet())
-        {
-            cube->rotateB();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateBA();
-            cube->rotateDA();
-            cube->rotateB();
-            cube->rotateDA();
-            cube->rotateBA();
-            cube->rotateFA();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateF();
-            cube->rotateD();
-            cube->rotateFA();
-            cube->rotateD();
-            cube->rotateF();
-            ult = "6FF";
-            
-        }
-        else if(ui->back3Button->styleSheet() != ui->back5Button->styleSheet() || ui->right9Button->styleSheet() != ui->right5Button->styleSheet() || ui->down9Button->styleSheet() != ui->down7Button->styleSheet())
-        {
-            cube->rotateR();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateRA();
-            cube->rotateDA();
-            cube->rotateR();
-            cube->rotateDA();
-            cube->rotateRA();
-            cube->rotateLA();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateL();
-            cube->rotateD();
-            cube->rotateLA();
-            cube->rotateD();
-            cube->rotateL();
-            ult = "7FF";
-            
-        }
-        else if(ui->front9Button->styleSheet() != ui->front5Button->styleSheet() || ui->right7Button->styleSheet() != ui->right5Button->styleSheet() || ui->down3Button->styleSheet() != ui->down7Button->styleSheet())
-        {
-            cube->rotateF();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateFA();
-            cube->rotateDA();
-            cube->rotateF();
-            cube->rotateDA();
-            cube->rotateFA();
-            cube->rotateBA();
-            cube->rotateD();
-            cube->rotateD();
-            cube->rotateB();
-            cube->rotateD();
-            cube->rotateBA();
-            cube->rotateD();
-            cube->rotateB();
-            ult = "8FF";
-            
-        }
-    }
 }
 QString MainWindow::color(QString cor)
 {
@@ -4178,6 +3141,860 @@ bool MainWindow::verificaCoerencia()
         return false;
     }
 }
+void MainWindow::takePictureAndProcess(std::vector<char> coresFaceAtual)
+{
+    double R=0,G=0,B=0;
+    cv::VideoCapture cam(1);
+    cv::Mat pic1;
+    cv::Mat pic2;
+    std::vector <std::string> styles;
+    while (!cam.isOpened())
+    {
+            std::cout << "Failed to make connection to cam" << std::endl;
+            cam.open(1);
+    }
+    cam >> pic1;
+    cv::flip(pic1,pic1,-1);
+    vector<vector<Point> > squares;
+    for(int i = 0; i < 100; i++)
+    {
+        delay(1000);
+        std::cout << lado << " " << i  << "/100" << std::endl;
+        while (!cam.isOpened())
+        {
+                
+                
+                cam.open(1);
+        }
+        cam >> pic1;
+        cv::flip(pic1,pic1,-1);
+        while(squares.empty() || squares.size() != 9)
+        {
+            
+            imshow("antes find", pic1);
+            findSquares(pic1, squares);
+            cam >> pic1;
+            cv::flip(pic1,pic1,-1);
+        }
+        cam.~VideoCapture();
+        std::vector<double> faceColors = drawSquares(pic1, squares, styles, conf);
+        for(int i = 0 ; i < coresFaceAtual.size(); i++)
+        {
+            if(coresFaceAtual[i] == 'G')
+            {
+                calibrateVector[0] += faceColors[i*3];
+                calibrateVector[1] += faceColors[i*3+1];
+                calibrateVector[2] += faceColors[i*3+2];
+            }
+            else if(coresFaceAtual[i] == 'R')
+            {
+                calibrateVector[3] += faceColors[i*3];
+                calibrateVector[4] += faceColors[i*3+1];
+                calibrateVector[5] += faceColors[i*3+2];
+            }
+            else if(coresFaceAtual[i] == 'B')
+            {
+                calibrateVector[6] += faceColors[i*3];
+                calibrateVector[7] += faceColors[i*3+1];
+                calibrateVector[8] += faceColors[i*3+2];
+            }
+            else if(coresFaceAtual[i] == 'O')
+            {
+                calibrateVector[9] += faceColors[i*3];
+                calibrateVector[10] += faceColors[i*3+1];
+                calibrateVector[11] += faceColors[i*3+2];
+            }
+            else if(coresFaceAtual[i] == 'Y')
+            {
+                calibrateVector[12] += faceColors[i*3];
+                calibrateVector[13] += faceColors[i*3+1];
+                calibrateVector[14] += faceColors[i*3+2];
+            }
+            else if(coresFaceAtual[i] == 'W')
+            {
+                calibrateVector[15] += faceColors[i*3];
+                calibrateVector[16] += faceColors[i*3+1];
+                calibrateVector[17] += faceColors[i*3+2];
+            }
+        }
+        squares.clear();
+    }
+}
+
+
+void MainWindow::on_randomButton_clicked()
+{
+    
+    int i;
+    int random2;
+    int random = 20;
+    int aux = simulacao;
+    random += qrand()%31;
+    simulacao = 1;
+    for(i = 0; i < random; i++)
+    {
+        random2 = qrand()%12;
+        if(random2 == 0)
+            cube->rotateU();
+        else if(random2 == 1)
+            cube->rotateUA();
+        else if(random2 == 2)
+            cube->rotateD();
+        else if(random2 == 3)
+            cube->rotateDA();
+        else if(random2 == 4)
+            cube->rotateR();
+        else if(random2 == 5)
+            cube->rotateRA();
+        else if(random2 == 6)
+            cube->rotateL();
+        else if(random2 == 7)
+            cube->rotateLA();
+        else if(random2 == 8)
+            cube->rotateF();
+        else if(random2 == 9)
+            cube->rotateFA();
+        else if(random2 == 10)
+            cube->rotateB();
+        else if(random2 == 11)
+            cube->rotateBA();
+    }
+    simulacao = aux;
+    rotationsNumber = 0;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
+}
+
+void MainWindow::on_restartButton_clicked()
+{
+    completeCube();
+    rotationsNumber = 0;
+    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
+}
+
+void MainWindow::on_toggleModeButton_clicked()
+{
+    if(simulacao == 1)
+    {
+        ui->modeTextBox->setPlainText(QString("Arduino"));
+        simulacao = 0;
+    }
+    else if(simulacao == 0)
+    {
+        ui->modeTextBox->setPlainText(QString("Simulation"));
+        simulacao = 1;
+    }
+}
+
+void MainWindow::on_crossButton_clicked()
+{
+    while(ui->up2Button->styleSheet() != ui->up5Button->styleSheet() || ui->back8Button->styleSheet() != ui->back5Button->styleSheet() ||
+          ui->up4Button->styleSheet() != ui->up5Button->styleSheet() || ui->left2Button->styleSheet() != ui->left5Button->styleSheet() ||
+          ui->up6Button->styleSheet() != ui->up5Button->styleSheet() || ui->right2Button->styleSheet() != ui->right5Button->styleSheet() ||
+          ui->up8Button->styleSheet() != ui->up5Button->styleSheet() || ui->front2Button->styleSheet() != ui->front5Button->styleSheet() )
+    {
+        CruzSul();
+        CruzNorte();
+        
+        
+        CruzLeste();
+        CruzOeste();
+     }
+    
+    
+    
+    
+    
+    
+}
+
+void MainWindow::on_firstLayerCornersButton_clicked()
+{
+    while(ui->up1Button->styleSheet() != ui->up5Button->styleSheet() || ui->back7Button->styleSheet() != ui->back5Button->styleSheet() || ui->left1Button->styleSheet() != ui->left5Button->styleSheet()
+          || ui->up3Button->styleSheet() != ui->up5Button->styleSheet() || ui->back9Button->styleSheet() != ui->back5Button->styleSheet() || ui->right3Button->styleSheet() != ui->right5Button->styleSheet()
+          || ui->up7Button->styleSheet() != ui->up5Button->styleSheet() || ui->front1Button->styleSheet() != ui->front5Button->styleSheet() || ui->left3Button->styleSheet() != ui->left5Button->styleSheet()
+          || ui->up9Button->styleSheet() != ui->up5Button->styleSheet() || ui->front3Button->styleSheet() != ui->front5Button->styleSheet() || ui->right1Button->styleSheet() != ui->right5Button->styleSheet())
+    {
+        QuinaNordeste();
+        QuinaNoroeste();
+        QuinaSudeste();
+        QuinaSudoeste();
+        SudesteBaixo();
+        SudoesteBaixo();
+        NordesteBaixo();
+        NoroesteBaixo();
+    }
+}
+
+void MainWindow::on_secondLayerButton_clicked()
+{
+    int j=0;
+    int k=0;
+    while(ui->front4Button->styleSheet() != ui->front5Button->styleSheet() || ui->front6Button->styleSheet() != ui->front5Button->styleSheet() ||
+          ui->left4Button->styleSheet() != ui->left5Button->styleSheet() || ui->left6Button->styleSheet() != ui->left5Button->styleSheet() ||
+          ui->right4Button->styleSheet() != ui->right5Button->styleSheet() || ui->right6Button->styleSheet() != ui->right5Button->styleSheet() ||
+          ui->back4Button->styleSheet() != ui->back5Button->styleSheet() || ui->back6Button->styleSheet() != ui->back5Button->styleSheet())
+    {
+        
+        
+            rightSecond();
+        
+            frontSecond();
+        
+            backSecond();
+        
+            leftSecond();
+        j++;
+        if(j==25)
+        {
+            k = qrand()%4;
+            if(k == 0)
+                debugaBack();
+            else if(k == 1)
+                debugaFront();
+            else if(k == 2)
+                debugaLeft();
+            else if(k == 3)
+                debugaRight();
+            j = 0;
+        }       
+    }
+}
+
+void MainWindow::on_downCrossButton_clicked()
+{
+    if(ui->down2Button->styleSheet() != ui->down5Button->styleSheet() && ui->down4Button->styleSheet() != ui->down5Button->styleSheet() &&
+            ui->down6Button->styleSheet() != ui->down5Button->styleSheet() && ui->down8Button->styleSheet() != ui->down5Button->styleSheet())
+    {
+        cube->rotateF();
+        cube->rotateL();
+        cube->rotateD();
+        cube->rotateLA();
+        cube->rotateDA();
+        cube->rotateFA();
+    }
+    while((ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down4Button->styleSheet() != ui->down5Button->styleSheet()) &&
+          (ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down8Button->styleSheet() != ui->down5Button->styleSheet()) &&
+           (ui->down4Button->styleSheet() != ui->down5Button->styleSheet() || ui->down6Button->styleSheet() != ui->down5Button->styleSheet()))
+        cube->rotateD();
+    if(ui->down6Button->styleSheet() != ui->down5Button->styleSheet() && ui->down8Button->styleSheet() != ui->down5Button->styleSheet())
+    {
+        cube->rotateF();
+        cube->rotateL();
+        cube->rotateD();
+        cube->rotateLA();
+        cube->rotateDA();
+        cube->rotateFA();
+    }
+    
+    if((ui->down2Button->styleSheet() == ui->down5Button->styleSheet() &&
+        ui->down8Button->styleSheet() == ui->down5Button->styleSheet()) &&
+            ui->down4Button->styleSheet() != ui->down5Button->styleSheet() &&
+            ui->down6Button->styleSheet() != ui->down5Button->styleSheet())
+        cube->rotateD();
+    if(ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down4Button->styleSheet() != ui->down5Button->styleSheet() ||
+            ui->down6Button->styleSheet() != ui->down5Button->styleSheet() || ui->down8Button->styleSheet() != ui->down5Button->styleSheet())
+    {
+        cube->rotateF();
+        cube->rotateL();
+        cube->rotateD();
+        cube->rotateLA();
+        cube->rotateDA();
+        cube->rotateFA();
+    }
+}
+
+void MainWindow::on_backEdgesButton_clicked()
+{
+    int i;
+    int j=0;
+    while(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() || ui->left8Button->styleSheet() != ui->left5Button->styleSheet() ||
+          ui->back2Button->styleSheet() != ui->back5Button->styleSheet() || ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
+    {
+        j++;
+        if (j%30==0)
+            cube->rotateDA();
+        if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() || ui->left8Button->styleSheet() != ui->left5Button->styleSheet() ||
+                ui->back2Button->styleSheet() != ui->back5Button->styleSheet() || ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
+        {
+            i = 0;
+            if(ui->front8Button->styleSheet() == ui->front5Button->styleSheet())
+                i++;
+            if(ui->left8Button->styleSheet() == ui->left5Button->styleSheet())
+                i++;
+            if(ui->right8Button->styleSheet() == ui->right5Button->styleSheet())
+                i++;
+            if(ui->back2Button->styleSheet() == ui->back5Button->styleSheet())
+                i++;
+            if(i == 0)
+            {
+                cube->rotateD();
+                cube->rotateD();
+            }
+            if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
+            {
+                cube->rotateL();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateLA();
+                cube->rotateDA();
+                cube->rotateL();
+                cube->rotateDA();
+                cube->rotateLA();
+                cube->rotateDA();
+            }
+            else if(ui->back2Button->styleSheet() != ui->back2Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
+            {
+                cube->rotateB();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateBA();
+                cube->rotateDA();
+                cube->rotateB();
+                cube->rotateDA();
+                cube->rotateBA();
+                cube->rotateDA();
+            }
+            else if(ui->back2Button->styleSheet() != ui->back5Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
+            {
+                cube->rotateR();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateRA();
+                cube->rotateDA();
+                cube->rotateR();
+                cube->rotateDA();
+                cube->rotateRA();
+                cube->rotateDA();
+            }
+            else if(ui->front8Button->styleSheet() != ui->front2Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
+            {
+                cube->rotateF();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateFA();
+                cube->rotateDA();
+                cube->rotateF();
+                cube->rotateDA();
+                cube->rotateFA();
+                cube->rotateDA();
+            }
+            else
+                cube->rotateDA();
+        }
+    }
+    /*int i = 0;
+    while(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() || ui->left8Button->styleSheet() != ui->left5Button->styleSheet() ||
+          ui->back2Button->styleSheet() != ui->back5Button->styleSheet() || ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
+    {
+        if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() || ui->left8Button->styleSheet() != ui->left5Button->styleSheet() ||
+                ui->back2Button->styleSheet() != ui->back5Button->styleSheet() || ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
+        {
+            i = 0;
+            if(ui->front8Button->styleSheet() == ui->front5Button->styleSheet())
+                i++;
+            if(ui->left8Button->styleSheet() == ui->left5Button->styleSheet())
+                i++;
+            if(ui->right8Button->styleSheet() == ui->right5Button->styleSheet())
+                i++;
+            if(ui->back2Button->styleSheet() == ui->back5Button->styleSheet())
+                i++;
+            if(i == 1)
+            {
+                cube->rotateD();
+            }
+            else if (i == 1)
+            {
+                cube->rotateL();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateLA();
+                cube->rotateDA();
+                cube->rotateL();
+                cube->rotateDA();
+                cube->rotateLA();
+                cube->rotateDA();
+            }
+            if(i == 2)
+            {
+                if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
+                {
+                    cube->rotateL();
+                    cube->rotateD();
+                    cube->rotateD();
+                    cube->rotateLA();
+                    cube->rotateDA();
+                    cube->rotateL();
+                    cube->rotateDA();
+                    cube->rotateLA();
+                    cube->rotateDA();
+                }
+                else if(ui->back2Button->styleSheet() != ui->back2Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
+                {
+                    cube->rotateF();
+                    cube->rotateD();
+                    cube->rotateD();
+                    cube->rotateFA();
+                    cube->rotateDA();
+                    cube->rotateF();
+                    cube->rotateDA();
+                    cube->rotateFA();
+                    cube->rotateDA();
+                }
+                else if(ui->back2Button->styleSheet() != ui->back5Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
+                {
+                    cube->rotateL();
+                    cube->rotateD();
+                    cube->rotateD();
+                    cube->rotateLA();
+                    cube->rotateDA();
+                    cube->rotateL();
+                    cube->rotateDA();
+                    cube->rotateLA();
+                    cube->rotateDA();
+                }
+                else if(ui->front8Button->styleSheet() != ui->front2Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
+                {
+                    cube->rotateF();
+                    cube->rotateD();
+                    cube->rotateD();
+                    cube->rotateFA();
+                    cube->rotateDA();
+                    cube->rotateF();
+                    cube->rotateDA();
+                    cube->rotateFA();
+                    cube->rotateDA();
+                }
+                else
+                {
+                    cube->rotateL();
+                    cube->rotateD();
+                    cube->rotateD();
+                    cube->rotateLA();
+                    cube->rotateDA();
+                    cube->rotateL();
+                    cube->rotateDA();
+                    cube->rotateLA();
+                    cube->rotateDA();
+                }
+            }
+            else
+            {
+                cube->rotateD();
+                cube->rotateD();
+            }
+            if(ui->left8Button->styleSheet() == ui->left5Button->styleSheet() && ui->right8Button->styleSheet() == ui->right5Button->styleSheet())
+            {
+                cube->rotateL();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateLA();
+                cube->rotateDA();
+                cube->rotateL();
+                cube->rotateDA();
+                cube->rotateLA();
+            }
+        }
+        if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet() &&
+                ui->back2Button->styleSheet() != ui->back5Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
+        {
+            cube->rotateDA();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateLA();
+            cube->rotateDA();
+            cube->rotateL();
+            cube->rotateDA();
+            cube->rotateLA();
+            cube->rotateD();
+        }
+    }*/
+}
+
+void MainWindow::on_placeDownEdgesButton_clicked()
+{
+    while(!sudestecorreto() || !sudoestecorreto() || !nordestecorreto() || !noroestecorreto())
+    {
+        if(sudoestecorreto())
+        {
+            cube->rotateRA();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateDA();
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateLA();
+            cube->rotateDA();
+            ult = "1SS";
+            
+        }
+        else if(sudestecorreto())
+        {
+            cube->rotateBA();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateDA();
+            cube->rotateB();
+            cube->rotateD();
+            cube->rotateFA();
+            cube->rotateDA();
+            ult = "2SS";
+            
+        }
+        else if(noroestecorreto())
+        {
+            cube->rotateFA();
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateDA();
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateBA();
+            cube->rotateDA();
+            ult = "3SS";
+            
+        }
+        else if(nordestecorreto())
+        {
+            cube->rotateRA();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateDA();
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateLA();
+            cube->rotateDA();
+            ult = "4SS";
+            
+        }
+        else
+        {
+            cube->rotateRA();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateDA();
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateLA();
+            cube->rotateDA();
+            ult = "5SS";
+            
+        }
+    }
+}
+
+void MainWindow::on_turnDownEdgesButton_clicked()
+{
+    while(ui->front1Button->styleSheet() != ui->front5Button->styleSheet() || ui->front2Button->styleSheet() != ui->front5Button->styleSheet() || ui->front3Button->styleSheet() != ui->front5Button->styleSheet() ||
+          ui->front4Button->styleSheet() != ui->front5Button->styleSheet() || ui->front6Button->styleSheet() != ui->front5Button->styleSheet() || ui->front7Button->styleSheet() != ui->front5Button->styleSheet() ||
+          ui->front8Button->styleSheet() != ui->front5Button->styleSheet() || ui->front9Button->styleSheet() != ui->front5Button->styleSheet() ||
+          ui->left1Button->styleSheet() != ui->left5Button->styleSheet() || ui->left2Button->styleSheet() != ui->left5Button->styleSheet() || ui->left3Button->styleSheet() != ui->left5Button->styleSheet() ||
+          ui->left4Button->styleSheet() != ui->left5Button->styleSheet() || ui->left6Button->styleSheet() != ui->left5Button->styleSheet() || ui->left7Button->styleSheet() != ui->left5Button->styleSheet() ||
+          ui->left8Button->styleSheet() != ui->left5Button->styleSheet() || ui->left9Button->styleSheet() != ui->left5Button->styleSheet() ||
+          ui->right1Button->styleSheet() != ui->right5Button->styleSheet() || ui->right2Button->styleSheet() != ui->right5Button->styleSheet() || ui->right3Button->styleSheet() != ui->right5Button->styleSheet() ||
+          ui->right4Button->styleSheet() != ui->right5Button->styleSheet() || ui->right6Button->styleSheet() != ui->right5Button->styleSheet() || ui->right7Button->styleSheet() != ui->right5Button->styleSheet() ||
+          ui->right8Button->styleSheet() != ui->right5Button->styleSheet() || ui->right9Button->styleSheet() != ui->right5Button->styleSheet() ||
+          ui->back1Button->styleSheet() != ui->back5Button->styleSheet() || ui->back2Button->styleSheet() != ui->back5Button->styleSheet() || ui->back3Button->styleSheet() != ui->back5Button->styleSheet() ||
+          ui->back4Button->styleSheet() != ui->back5Button->styleSheet() || ui->back6Button->styleSheet() != ui->back5Button->styleSheet() || ui->back7Button->styleSheet() != ui->back5Button->styleSheet() ||
+          ui->back8Button->styleSheet() != ui->back5Button->styleSheet() || ui->back9Button->styleSheet() != ui->back5Button->styleSheet() ||
+          ui->up1Button->styleSheet() != ui->up5Button->styleSheet() || ui->up2Button->styleSheet() != ui->up5Button->styleSheet() || ui->up3Button->styleSheet() != ui->up5Button->styleSheet() ||
+          ui->up4Button->styleSheet() != ui->up5Button->styleSheet() || ui->up6Button->styleSheet() != ui->up5Button->styleSheet() || ui->up7Button->styleSheet() != ui->up5Button->styleSheet() ||
+          ui->up8Button->styleSheet() != ui->up5Button->styleSheet() || ui->up9Button->styleSheet() != ui->up5Button->styleSheet() ||
+          ui->down1Button->styleSheet() != ui->down5Button->styleSheet() || ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down3Button->styleSheet() != ui->down5Button->styleSheet() ||
+          ui->down4Button->styleSheet() != ui->down5Button->styleSheet() || ui->down6Button->styleSheet() != ui->down5Button->styleSheet() || ui->down7Button->styleSheet() != ui->down5Button->styleSheet() ||
+          ui->down8Button->styleSheet() != ui->down5Button->styleSheet() || ui->down9Button->styleSheet() != ui->down5Button->styleSheet())
+    {
+        if((ui->front7Button->styleSheet() != ui->front5Button->styleSheet() || ui->left9Button->styleSheet() != ui->left5Button->styleSheet() || ui->down1Button->styleSheet() != ui->down5Button->styleSheet()) &&
+                (ui->back1Button->styleSheet() != ui->back5Button->styleSheet() || ui->left7Button->styleSheet() != ui->left5Button->styleSheet() || ui->down7Button->styleSheet() != ui->down7Button->styleSheet()))
+        {
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateLA();
+            cube->rotateDA();
+            cube->rotateL();
+            cube->rotateDA();
+            cube->rotateLA();
+            cube->rotateRA();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateRA();
+            cube->rotateD();
+            cube->rotateR();
+            ult = "1FF";
+            
+        }
+        else if((ui->back1Button->styleSheet() != ui->back5Button->styleSheet() || ui->left7Button->styleSheet() != ui->left5Button->styleSheet() || ui->down7Button->styleSheet() != ui->down7Button->styleSheet()) &&
+                (ui->back3Button->styleSheet() != ui->back5Button->styleSheet() || ui->right9Button->styleSheet() != ui->right5Button->styleSheet() || ui->down9Button->styleSheet() != ui->down7Button->styleSheet()))
+        {
+            cube->rotateB();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateBA();
+            cube->rotateDA();
+            cube->rotateB();
+            cube->rotateDA();
+            cube->rotateBA();
+            cube->rotateFA();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateFA();
+            cube->rotateD();
+            cube->rotateF();
+            ult = "2FF";
+            
+        }
+        else if((ui->back3Button->styleSheet() != ui->back5Button->styleSheet() || ui->right9Button->styleSheet() != ui->right5Button->styleSheet() || ui->down9Button->styleSheet() != ui->down7Button->styleSheet()) &&
+                (ui->front9Button->styleSheet() != ui->front5Button->styleSheet() || ui->right7Button->styleSheet() != ui->right5Button->styleSheet() || ui->down3Button->styleSheet() != ui->down7Button->styleSheet()))
+        {
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateRA();
+            cube->rotateDA();
+            cube->rotateR();
+            cube->rotateDA();
+            cube->rotateRA();
+            cube->rotateLA();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateLA();
+            cube->rotateD();
+            cube->rotateL();
+            ult = "3FF";
+            
+        }
+        else if((ui->front9Button->styleSheet() != ui->front5Button->styleSheet() || ui->right7Button->styleSheet() != ui->right5Button->styleSheet() || ui->down3Button->styleSheet() != ui->down7Button->styleSheet()) &&
+                (ui->front7Button->styleSheet() != ui->front5Button->styleSheet() || ui->left9Button->styleSheet() != ui->left5Button->styleSheet() || ui->down1Button->styleSheet() != ui->down5Button->styleSheet()))
+        {
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateFA();
+            cube->rotateDA();
+            cube->rotateF();
+            cube->rotateDA();
+            cube->rotateFA();
+            cube->rotateBA();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateD();
+            cube->rotateBA();
+            cube->rotateD();
+            cube->rotateB();
+            ult = "4FF";
+            
+        }
+        else if(ui->front7Button->styleSheet() != ui->front5Button->styleSheet() || ui->left9Button->styleSheet() != ui->left5Button->styleSheet() || ui->down1Button->styleSheet() != ui->down5Button->styleSheet())
+        {
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateLA();
+            cube->rotateDA();
+            cube->rotateL();
+            cube->rotateDA();
+            cube->rotateLA();
+            cube->rotateRA();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateRA();
+            cube->rotateD();
+            cube->rotateR();
+            ult = "5FF";
+            
+        }
+        else if(ui->back1Button->styleSheet() != ui->back5Button->styleSheet() || ui->left7Button->styleSheet() != ui->left5Button->styleSheet() || ui->down7Button->styleSheet() != ui->down7Button->styleSheet())
+        {
+            cube->rotateB();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateBA();
+            cube->rotateDA();
+            cube->rotateB();
+            cube->rotateDA();
+            cube->rotateBA();
+            cube->rotateFA();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateFA();
+            cube->rotateD();
+            cube->rotateF();
+            ult = "6FF";
+            
+        }
+        else if(ui->back3Button->styleSheet() != ui->back5Button->styleSheet() || ui->right9Button->styleSheet() != ui->right5Button->styleSheet() || ui->down9Button->styleSheet() != ui->down7Button->styleSheet())
+        {
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateRA();
+            cube->rotateDA();
+            cube->rotateR();
+            cube->rotateDA();
+            cube->rotateRA();
+            cube->rotateLA();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateLA();
+            cube->rotateD();
+            cube->rotateL();
+            ult = "7FF";
+            
+        }
+        else if(ui->front9Button->styleSheet() != ui->front5Button->styleSheet() || ui->right7Button->styleSheet() != ui->right5Button->styleSheet() || ui->down3Button->styleSheet() != ui->down7Button->styleSheet())
+        {
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateFA();
+            cube->rotateDA();
+            cube->rotateF();
+            cube->rotateDA();
+            cube->rotateFA();
+            cube->rotateBA();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateD();
+            cube->rotateBA();
+            cube->rotateD();
+            cube->rotateB();
+            ult = "8FF";
+            
+        }
+    }
+}
+void MainWindow::on_solveLanesButton_clicked()
+{
+    on_crossButton_clicked();
+    on_firstLayerCornersButton_clicked();
+    on_secondLayerButton_clicked();
+    on_downCrossButton_clicked();
+    on_backEdgesButton_clicked();
+    on_placeDownEdgesButton_clicked();
+    on_turnDownEdgesButton_clicked();
+}
+void MainWindow::on_solveOptimalButton_clicked()
+{
+    QString input = "";
+    input += color(ui->right3Button->styleSheet());
+    input += color(ui->right6Button->styleSheet());
+    input += color(ui->right9Button->styleSheet());
+    input += color(ui->right2Button->styleSheet());
+    input += color(ui->right8Button->styleSheet());
+    input += color(ui->right1Button->styleSheet());
+    input += color(ui->right4Button->styleSheet());
+    input += color(ui->right7Button->styleSheet());
+    input += color(ui->up3Button->styleSheet());
+    input += color(ui->up6Button->styleSheet());
+    input += color(ui->up9Button->styleSheet());
+    input += color(ui->front3Button->styleSheet());
+    input += color(ui->front6Button->styleSheet());
+    input += color(ui->front9Button->styleSheet());
+    input += color(ui->down3Button->styleSheet());
+    input += color(ui->down6Button->styleSheet());
+    input += color(ui->down9Button->styleSheet());
+    input += color(ui->back3Button->styleSheet());
+    input += color(ui->back6Button->styleSheet());
+    input += color(ui->back9Button->styleSheet());
+    input += color(ui->up2Button->styleSheet());
+    input += color(ui->up8Button->styleSheet());
+    input += color(ui->front2Button->styleSheet());
+    input += color(ui->front8Button->styleSheet());
+    input += color(ui->down2Button->styleSheet());
+    input += color(ui->down8Button->styleSheet());
+    input += color(ui->back2Button->styleSheet());
+    input += color(ui->back8Button->styleSheet());
+    input += color(ui->up1Button->styleSheet());
+    input += color(ui->up4Button->styleSheet());
+    input += color(ui->up7Button->styleSheet());
+    input += color(ui->front1Button->styleSheet());
+    input += color(ui->front4Button->styleSheet());
+    input += color(ui->front7Button->styleSheet());
+    input += color(ui->down1Button->styleSheet());
+    input += color(ui->down4Button->styleSheet());
+    input += color(ui->down7Button->styleSheet());
+    input += color(ui->back1Button->styleSheet());
+    input += color(ui->back4Button->styleSheet());
+    input += color(ui->back7Button->styleSheet());
+    input += color(ui->left3Button->styleSheet());
+    input += color(ui->left6Button->styleSheet());
+    input += color(ui->left9Button->styleSheet());
+    input += color(ui->left2Button->styleSheet());
+    input += color(ui->left8Button->styleSheet());
+    input += color(ui->left1Button->styleSheet());
+    input += color(ui->left4Button->styleSheet());
+    input += color(ui->left7Button->styleSheet());
+    std::cout << input.toStdString() << std::endl;
+    QString program = "/home/lain/Desktop/TCC/backup_note/Rubiks-Cube-Solver/format.sh";
+    QStringList arguments;
+    QProcess *myProcess = new QProcess(this);
+    myProcess->start(program,(QStringList) arguments << input );
+    
+    std::string line;
+    QString entrada;
+    if (myProcess->waitForFinished())
+    {
+        myProcess->close();
+        std::ifstream myfile ("format.txt");
+    
+         if (myfile.is_open())
+          {
+    
+            while ( std::getline (myfile,line ))
+            {
+                std::cout << "size: " << line.size() << std::endl;
+                if(line.size() == 120)
+                   entrada = QString::fromStdString(line);
+    
+              std::cout << line << '\n';
+            }
+            std::cout << "size: " << line.size() << std::endl;
+    
+            myfile.close();
+    
+          }
+         std::cout << "começa a executar o run" << std::endl;
+    }
+    program = "/home/lain/Desktop/TCC/backup_note/Rubiks-Cube-Solver/run.sh";
+    QStringList arguments2;
+    QProcess *myProcess2 = new QProcess();
+    myProcess2->start(program,(QStringList) arguments2 << entrada );
+   std::cout << "mandou o run do solver" << std::endl;
+    myProcess2->write("exit\n\r");
+    if (myProcess2->waitForFinished(-1))
+    {
+    std::cout << "run ficou pronto run do solver" << std::endl;
+    std::ifstream myfile2 ("result.txt");
+     if (myfile2.is_open())
+      {
+        while ( std::getline (myfile2,line ))
+        {
+            if(line.size() == 1 || line.size() == 2)
+            {
+                solve(line);
+            }
+          std::cout << line << '\n';
+          std::cout << "size: " << line.size() << std::endl;
+        }
+        myfile2.close();
+      }
+    }
+}
 void MainWindow::on_colorCalibrationButton_clicked()
 {
     if(!simulacao)
@@ -4302,572 +4119,64 @@ void MainWindow::on_readColorsButton_clicked()
         }
     }
 }
-void MainWindow::on_back8Button_clicked()
-{
-    if(ui->back8Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->back8Button->setStyleSheet("background-color: white");
-    else if(ui->back8Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->back8Button->setStyleSheet("background-color: orange");
-    else if(ui->back8Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->back8Button->setStyleSheet("background-color: red");
-    else if(ui->back8Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->back8Button->setStyleSheet("background-color: green");
-    else if(ui->back8Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->back8Button->setStyleSheet("background-color: yellow");
-    else if(ui->back8Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->back8Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_back2Button_clicked()
-{
-    if(ui->back2Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->back2Button->setStyleSheet("background-color: white");
-    else if(ui->back2Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->back2Button->setStyleSheet("background-color: orange");
-    else if(ui->back2Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->back2Button->setStyleSheet("background-color: red");
-    else if(ui->back2Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->back2Button->setStyleSheet("background-color: green");
-    else if(ui->back2Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->back2Button->setStyleSheet("background-color: yellow");
-    else if(ui->back2Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->back2Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_back6Button_clicked()
-{
-    if(ui->back6Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->back6Button->setStyleSheet("background-color: white");
-    else if(ui->back6Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->back6Button->setStyleSheet("background-color: orange");
-    else if(ui->back6Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->back6Button->setStyleSheet("background-color: red");
-    else if(ui->back6Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->back6Button->setStyleSheet("background-color: green");
-    else if(ui->back6Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->back6Button->setStyleSheet("background-color: yellow");
-    else if(ui->back6Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->back6Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_back4Button_clicked()
-{
-    if(ui->back4Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->back4Button->setStyleSheet("background-color: white");
-    else if(ui->back4Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->back4Button->setStyleSheet("background-color: orange");
-    else if(ui->back4Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->back4Button->setStyleSheet("background-color: red");
-    else if(ui->back4Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->back4Button->setStyleSheet("background-color: green");
-    else if(ui->back4Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->back4Button->setStyleSheet("background-color: yellow");
-    else if(ui->back4Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->back4Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_down8Button_clicked()
-{
-    if(ui->down8Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->down8Button->setStyleSheet("background-color: white");
-    else if(ui->down8Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->down8Button->setStyleSheet("background-color: orange");
-    else if(ui->down8Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->down8Button->setStyleSheet("background-color: red");
-    else if(ui->down8Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->down8Button->setStyleSheet("background-color: green");
-    else if(ui->down8Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->down8Button->setStyleSheet("background-color: yellow");
-    else if(ui->down8Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->down8Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_down6Button_clicked()
-{
-    if(ui->down6Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->down6Button->setStyleSheet("background-color: white");
-    else if(ui->down6Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->down6Button->setStyleSheet("background-color: orange");
-    else if(ui->down6Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->down6Button->setStyleSheet("background-color: red");
-    else if(ui->down6Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->down6Button->setStyleSheet("background-color: green");
-    else if(ui->down6Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->down6Button->setStyleSheet("background-color: yellow");
-    else if(ui->down6Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->down6Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_down4Button_clicked()
-{
-    if(ui->down4Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->down4Button->setStyleSheet("background-color: white");
-    else if(ui->down4Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->down4Button->setStyleSheet("background-color: orange");
-    else if(ui->down4Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->down4Button->setStyleSheet("background-color: red");
-    else if(ui->down4Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->down4Button->setStyleSheet("background-color: green");
-    else if(ui->down4Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->down4Button->setStyleSheet("background-color: yellow");
-    else if(ui->down4Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->down4Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_down2Button_clicked()
-{
-    if(ui->down2Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->down2Button->setStyleSheet("background-color: white");
-    else if(ui->down2Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->down2Button->setStyleSheet("background-color: orange");
-    else if(ui->down2Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->down2Button->setStyleSheet("background-color: red");
-    else if(ui->down2Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->down2Button->setStyleSheet("background-color: green");
-    else if(ui->down2Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->down2Button->setStyleSheet("background-color: yellow");
-    else if(ui->down2Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->down2Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_front8Button_clicked()
-{
-    if(ui->front8Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->front8Button->setStyleSheet("background-color: white");
-    else if(ui->front8Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->front8Button->setStyleSheet("background-color: orange");
-    else if(ui->front8Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->front8Button->setStyleSheet("background-color: red");
-    else if(ui->front8Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->front8Button->setStyleSheet("background-color: green");
-    else if(ui->front8Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->front8Button->setStyleSheet("background-color: yellow");
-    else if(ui->front8Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->front8Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_front4Button_clicked()
-{
-    if(ui->front4Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->front4Button->setStyleSheet("background-color: white");
-    else if(ui->front4Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->front4Button->setStyleSheet("background-color: orange");
-    else if(ui->front4Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->front4Button->setStyleSheet("background-color: red");
-    else if(ui->front4Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->front4Button->setStyleSheet("background-color: green");
-    else if(ui->front4Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->front4Button->setStyleSheet("background-color: yellow");
-    else if(ui->front4Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->front4Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_front6Button_clicked()
-{
-    if(ui->front6Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->front6Button->setStyleSheet("background-color: white");
-    else if(ui->front6Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->front6Button->setStyleSheet("background-color: orange");
-    else if(ui->front6Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->front6Button->setStyleSheet("background-color: red");
-    else if(ui->front6Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->front6Button->setStyleSheet("background-color: green");
-    else if(ui->front6Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->front6Button->setStyleSheet("background-color: yellow");
-    else if(ui->front6Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->front6Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_front2Button_clicked()
-{
-    if(ui->front2Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->front2Button->setStyleSheet("background-color: white");
-    else if(ui->front2Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->front2Button->setStyleSheet("background-color: orange");
-    else if(ui->front2Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->front2Button->setStyleSheet("background-color: red");
-    else if(ui->front2Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->front2Button->setStyleSheet("background-color: green");
-    else if(ui->front2Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->front2Button->setStyleSheet("background-color: yellow");
-    else if(ui->front2Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->front2Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_left8Button_clicked()
-{
-    if(ui->left8Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->left8Button->setStyleSheet("background-color: white");
-    else if(ui->left8Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->left8Button->setStyleSheet("background-color: orange");
-    else if(ui->left8Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->left8Button->setStyleSheet("background-color: red");
-    else if(ui->left8Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->left8Button->setStyleSheet("background-color: green");
-    else if(ui->left8Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->left8Button->setStyleSheet("background-color: yellow");
-    else if(ui->left8Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->left8Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_left4Button_clicked()
-{
-    if(ui->left4Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->left4Button->setStyleSheet("background-color: white");
-    else if(ui->left4Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->left4Button->setStyleSheet("background-color: orange");
-    else if(ui->left4Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->left4Button->setStyleSheet("background-color: red");
-    else if(ui->left4Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->left4Button->setStyleSheet("background-color: green");
-    else if(ui->left4Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->left4Button->setStyleSheet("background-color: yellow");
-    else if(ui->left4Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->left4Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_left2Button_clicked()
-{
-    if(ui->left2Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->left2Button->setStyleSheet("background-color: white");
-    else if(ui->left2Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->left2Button->setStyleSheet("background-color: orange");
-    else if(ui->left2Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->left2Button->setStyleSheet("background-color: red");
-    else if(ui->left2Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->left2Button->setStyleSheet("background-color: green");
-    else if(ui->left2Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->left2Button->setStyleSheet("background-color: yellow");
-    else if(ui->left2Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->left2Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_left6Button_clicked()
-{
-    if(ui->left6Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->left6Button->setStyleSheet("background-color: white");
-    else if(ui->left6Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->left6Button->setStyleSheet("background-color: orange");
-    else if(ui->left6Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->left6Button->setStyleSheet("background-color: red");
-    else if(ui->left6Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->left6Button->setStyleSheet("background-color: green");
-    else if(ui->left6Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->left6Button->setStyleSheet("background-color: yellow");
-    else if(ui->left6Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->left6Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_right4Button_clicked()
-{
-    if(ui->right4Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->right4Button->setStyleSheet("background-color: white");
-    else if(ui->right4Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->right4Button->setStyleSheet("background-color: orange");
-    else if(ui->right4Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->right4Button->setStyleSheet("background-color: red");
-    else if(ui->right4Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->right4Button->setStyleSheet("background-color: green");
-    else if(ui->right4Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->right4Button->setStyleSheet("background-color: yellow");
-    else if(ui->right4Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->right4Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_right8Button_clicked()
-{
-    if(ui->right8Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->right8Button->setStyleSheet("background-color: white");
-    else if(ui->right8Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->right8Button->setStyleSheet("background-color: orange");
-    else if(ui->right8Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->right8Button->setStyleSheet("background-color: red");
-    else if(ui->right8Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->right8Button->setStyleSheet("background-color: green");
-    else if(ui->right8Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->right8Button->setStyleSheet("background-color: yellow");
-    else if(ui->right8Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->right8Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_right6Button_clicked()
-{
-    if(ui->right6Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->right6Button->setStyleSheet("background-color: white");
-    else if(ui->right6Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->right6Button->setStyleSheet("background-color: orange");
-    else if(ui->right6Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->right6Button->setStyleSheet("background-color: red");
-    else if(ui->right6Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->right6Button->setStyleSheet("background-color: green");
-    else if(ui->right6Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->right6Button->setStyleSheet("background-color: yellow");
-    else if(ui->right6Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->right6Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_right2Button_clicked()
-{
-    if(ui->right2Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->right2Button->setStyleSheet("background-color: white");
-    else if(ui->right2Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->right2Button->setStyleSheet("background-color: orange");
-    else if(ui->right2Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->right2Button->setStyleSheet("background-color: red");
-    else if(ui->right2Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->right2Button->setStyleSheet("background-color: green");
-    else if(ui->right2Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->right2Button->setStyleSheet("background-color: yellow");
-    else if(ui->right2Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->right2Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_up8Button_clicked()
-{
-    if(ui->up8Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->up8Button->setStyleSheet("background-color: white");
-    else if(ui->up8Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->up8Button->setStyleSheet("background-color: orange");
-    else if(ui->up8Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->up8Button->setStyleSheet("background-color: red");
-    else if(ui->up8Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->up8Button->setStyleSheet("background-color: green");
-    else if(ui->up8Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->up8Button->setStyleSheet("background-color: yellow");
-    else if(ui->up8Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->up8Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_up4Button_clicked()
-{
-    if(ui->up4Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->up4Button->setStyleSheet("background-color: white");
-    else if(ui->up4Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->up4Button->setStyleSheet("background-color: orange");
-    else if(ui->up4Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->up4Button->setStyleSheet("background-color: red");
-    else if(ui->up4Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->up4Button->setStyleSheet("background-color: green");
-    else if(ui->up4Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->up4Button->setStyleSheet("background-color: yellow");
-    else if(ui->up4Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->up4Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_up6Button_clicked()
-{
-    if(ui->up6Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->up6Button->setStyleSheet("background-color: white");
-    else if(ui->up6Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->up6Button->setStyleSheet("background-color: orange");
-    else if(ui->up6Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->up6Button->setStyleSheet("background-color: red");
-    else if(ui->up6Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->up6Button->setStyleSheet("background-color: green");
-    else if(ui->up6Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->up6Button->setStyleSheet("background-color: yellow");
-    else if(ui->up6Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->up6Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::on_up2Button_clicked()
-{
-    if(ui->up2Button->styleSheet() == ui->up5Button->styleSheet())
-        ui->up2Button->setStyleSheet("background-color: white");
-    else if(ui->up2Button->styleSheet() == ui->front5Button->styleSheet())
-        ui->up2Button->setStyleSheet("background-color: orange");
-    else if(ui->up2Button->styleSheet() == ui->left5Button->styleSheet())
-        ui->up2Button->setStyleSheet("background-color: red");
-    else if(ui->up2Button->styleSheet() == ui->right5Button->styleSheet())
-        ui->up2Button->setStyleSheet("background-color: green");
-    else if(ui->up2Button->styleSheet() == ui->down5Button->styleSheet())
-        ui->up2Button->setStyleSheet("background-color: yellow");
-    else if(ui->up2Button->styleSheet() == ui->back5Button->styleSheet())
-        ui->up2Button->setStyleSheet("background-color: blue");
-}
-void MainWindow::takePictureAndProcess(std::vector<char> coresFaceAtual)
-{
-    double R=0,G=0,B=0;
-    cv::VideoCapture cam(1);
-    cv::Mat pic1;
-    cv::Mat pic2;
-    std::vector <std::string> styles;
-    while (!cam.isOpened())
-    {
-            std::cout << "Failed to make connection to cam" << std::endl;
-            cam.open(1);
-    }
-    cam >> pic1;
-    cv::flip(pic1,pic1,-1);
-    vector<vector<Point> > squares;
-    for(int i = 0; i < 100; i++)
-    {
-        delay(1000);
-        std::cout << lado << " " << i  << "/100" << std::endl;
-        while (!cam.isOpened())
-        {
-                
-                
-                cam.open(1);
-        }
-        cam >> pic1;
-        cv::flip(pic1,pic1,-1);
-        while(squares.empty() || squares.size() != 9)
-        {
-            
-            imshow("antes find", pic1);
-            findSquares(pic1, squares);
-            cam >> pic1;
-            cv::flip(pic1,pic1,-1);
-        }
-        cam.~VideoCapture();
-        std::vector<double> faceColors = drawSquares(pic1, squares, styles, conf);
-        for(int i = 0 ; i < coresFaceAtual.size(); i++)
-        {
-            if(coresFaceAtual[i] == 'G')
-            {
-                calibrateVector[0] += faceColors[i*3];
-                calibrateVector[1] += faceColors[i*3+1];
-                calibrateVector[2] += faceColors[i*3+2];
-            }
-            else if(coresFaceAtual[i] == 'R')
-            {
-                calibrateVector[3] += faceColors[i*3];
-                calibrateVector[4] += faceColors[i*3+1];
-                calibrateVector[5] += faceColors[i*3+2];
-            }
-            else if(coresFaceAtual[i] == 'B')
-            {
-                calibrateVector[6] += faceColors[i*3];
-                calibrateVector[7] += faceColors[i*3+1];
-                calibrateVector[8] += faceColors[i*3+2];
-            }
-            else if(coresFaceAtual[i] == 'O')
-            {
-                calibrateVector[9] += faceColors[i*3];
-                calibrateVector[10] += faceColors[i*3+1];
-                calibrateVector[11] += faceColors[i*3+2];
-            }
-            else if(coresFaceAtual[i] == 'Y')
-            {
-                calibrateVector[12] += faceColors[i*3];
-                calibrateVector[13] += faceColors[i*3+1];
-                calibrateVector[14] += faceColors[i*3+2];
-            }
-            else if(coresFaceAtual[i] == 'W')
-            {
-                calibrateVector[15] += faceColors[i*3];
-                calibrateVector[16] += faceColors[i*3+1];
-                calibrateVector[17] += faceColors[i*3+2];
-            }
-        }
-        squares.clear();
-    }
-}
-void MainWindow::on_solveLanesButton_clicked()
-{
-    on_crossButton_clicked();
-    on_firstLayerCornersButton_clicked();
-    on_secondLayerButton_clicked();
-    on_downCrossButton_clicked();
-    on_backEdgesButton_clicked();
-    on_placeDownEdgesButton_clicked();
-    on_turnDownEdgesButton_clicked();
-}
-void MainWindow::on_solveOptimalButton_clicked()
-{
-    QString input = "";
-    input += color(ui->right3Button->styleSheet());
-    input += color(ui->right6Button->styleSheet());
-    input += color(ui->right9Button->styleSheet());
-    input += color(ui->right2Button->styleSheet());
-    input += color(ui->right8Button->styleSheet());
-    input += color(ui->right1Button->styleSheet());
-    input += color(ui->right4Button->styleSheet());
-    input += color(ui->right7Button->styleSheet());
-    input += color(ui->up3Button->styleSheet());
-    input += color(ui->up6Button->styleSheet());
-    input += color(ui->up9Button->styleSheet());
-    input += color(ui->front3Button->styleSheet());
-    input += color(ui->front6Button->styleSheet());
-    input += color(ui->front9Button->styleSheet());
-    input += color(ui->down3Button->styleSheet());
-    input += color(ui->down6Button->styleSheet());
-    input += color(ui->down9Button->styleSheet());
-    input += color(ui->back3Button->styleSheet());
-    input += color(ui->back6Button->styleSheet());
-    input += color(ui->back9Button->styleSheet());
-    input += color(ui->up2Button->styleSheet());
-    input += color(ui->up8Button->styleSheet());
-    input += color(ui->front2Button->styleSheet());
-    input += color(ui->front8Button->styleSheet());
-    input += color(ui->down2Button->styleSheet());
-    input += color(ui->down8Button->styleSheet());
-    input += color(ui->back2Button->styleSheet());
-    input += color(ui->back8Button->styleSheet());
-    input += color(ui->up1Button->styleSheet());
-    input += color(ui->up4Button->styleSheet());
-    input += color(ui->up7Button->styleSheet());
-    input += color(ui->front1Button->styleSheet());
-    input += color(ui->front4Button->styleSheet());
-    input += color(ui->front7Button->styleSheet());
-    input += color(ui->down1Button->styleSheet());
-    input += color(ui->down4Button->styleSheet());
-    input += color(ui->down7Button->styleSheet());
-    input += color(ui->back1Button->styleSheet());
-    input += color(ui->back4Button->styleSheet());
-    input += color(ui->back7Button->styleSheet());
-    input += color(ui->left3Button->styleSheet());
-    input += color(ui->left6Button->styleSheet());
-    input += color(ui->left9Button->styleSheet());
-    input += color(ui->left2Button->styleSheet());
-    input += color(ui->left8Button->styleSheet());
-    input += color(ui->left1Button->styleSheet());
-    input += color(ui->left4Button->styleSheet());
-    input += color(ui->left7Button->styleSheet());
-    std::cout << input.toStdString() << std::endl;
-    QString program = "/home/lain/Desktop/TCC/backup_note/Rubiks-Cube-Solver/format.sh";
-    QStringList arguments;
-    QProcess *myProcess = new QProcess(this);
-    myProcess->start(program,(QStringList) arguments << input );
-    
-    std::string line;
-    QString entrada;
-    if (myProcess->waitForFinished())
-    {
-        myProcess->close();
-        std::ifstream myfile ("format.txt");
-    
-         if (myfile.is_open())
-          {
-    
-            while ( std::getline (myfile,line ))
-            {
-                std::cout << "size: " << line.size() << std::endl;
-                if(line.size() == 120)
-                   entrada = QString::fromStdString(line);
-    
-              std::cout << line << '\n';
-            }
-            std::cout << "size: " << line.size() << std::endl;
-    
-            myfile.close();
-    
-          }
-         std::cout << "começa a executar o run" << std::endl;
-    }
-    program = "/home/lain/Desktop/TCC/backup_note/Rubiks-Cube-Solver/run.sh";
-    QStringList arguments2;
-    QProcess *myProcess2 = new QProcess();
-    myProcess2->start(program,(QStringList) arguments2 << entrada );
-   std::cout << "mandou o run do solver" << std::endl;
-    myProcess2->write("exit\n\r");
-    if (myProcess2->waitForFinished(-1))
-    {
-    std::cout << "run ficou pronto run do solver" << std::endl;
-    std::ifstream myfile2 ("result.txt");
-     if (myfile2.is_open())
-      {
-        while ( std::getline (myfile2,line ))
-        {
-            if(line.size() == 1 || line.size() == 2)
-            {
-                solve(line);
-            }
-          std::cout << line << '\n';
-          std::cout << "size: " << line.size() << std::endl;
-        }
-        myfile2.close();
-      }
-    }
-}
-void MainWindow::on_toggleModeButton_clicked()
-{
-    if(simulacao == 1)
-    {
-        ui->modeTextBox->setPlainText(QString("Arduino"));
-        simulacao = 0;
-    }
-    else if(simulacao == 0)
-    {
-        ui->modeTextBox->setPlainText(QString("Simulation"));
-        simulacao = 1;
-    }
-}
+void MainWindow::on_rotationUButton_clicked() { cube->rotateU(); setRotationsNumber(rotationsNumber+1); }
+void MainWindow::on_rotationUAButton_clicked() { cube->rotateUA(); setRotationsNumber(rotationsNumber+1); }
+void MainWindow::on_rotationDButton_clicked() { cube->rotateD(); setRotationsNumber(rotationsNumber+1); }
+void MainWindow::on_rotationDAButton_clicked() { cube->rotateDA(); setRotationsNumber(rotationsNumber+1); }
+void MainWindow::on_rotationRButton_clicked() { cube->rotateR(); setRotationsNumber(rotationsNumber+1); }
+void MainWindow::on_rotationRAButton_clicked() { cube->rotateRA(); setRotationsNumber(rotationsNumber+1); }
+void MainWindow::on_rotationLButton_clicked() { cube->rotateL(); setRotationsNumber(rotationsNumber+1); }
+void MainWindow::on_rotationLAButton_clicked() { cube->rotateLA(); setRotationsNumber(rotationsNumber+1); }
+void MainWindow::on_rotationFButton_clicked() { cube->rotateF(); setRotationsNumber(rotationsNumber+1); }
+void MainWindow::on_rotationFAButton_clicked() { cube->rotateFA(); setRotationsNumber(rotationsNumber+1); }
+void MainWindow::on_rotationBButton_clicked() { cube->rotateB(); setRotationsNumber(rotationsNumber+1); }
+void MainWindow::on_rotationBAButton_clicked() { cube->rotateBA(); setRotationsNumber(rotationsNumber+1); }
+
+void MainWindow::on_up9Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_front3Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_right1Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_left3Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_front1Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_up7Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_up3Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_right3Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_back9Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_up1Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_left1Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_back7Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_front9Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_right7Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_down3Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_front7Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_left9Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_down1Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_down9Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_right9Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_back3Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_back1Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_down7Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_left7Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_back8Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_back2Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_back6Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_back4Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_down8Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_down6Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_down4Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_down2Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_front8Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_front4Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_front6Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_front2Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_left8Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_left4Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_left2Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_left6Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_right4Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_right8Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_right6Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_right2Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_up8Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_up4Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_up6Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
+void MainWindow::on_up2Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
