@@ -80,22 +80,30 @@ std::string Rotator::enum2str(Face face)
 void Rotator::rotateFace(Face face, Direction direction)
 {
     Color auxRotationColor1,auxRotationColor2, auxRotationColor3,
-    auxRotationColor4, auxRotationColor5, auxRotationColor6,
-    auxRotationColor7, auxRotationColor8;
+    auxRotationColor4, auxRotationColor6, auxRotationColor7,
+    auxRotationColor8, auxRotationColor9;
     std::string faceStr = enum2str(face);
 
     auxRotationColor1 = squares[faceStr + "1"].getColor();
     auxRotationColor2 = squares[faceStr + "2"].getColor();
     auxRotationColor3 = squares[faceStr + "3"].getColor();
     auxRotationColor4 = squares[faceStr + "4"].getColor();
-    auxRotationColor5 = squares[faceStr + "6"].getColor();
-    auxRotationColor6 = squares[faceStr + "7"].getColor();
-    auxRotationColor7 = squares[faceStr + "8"].getColor();
-    auxRotationColor8 = squares[faceStr + "9"].getColor();
+    // 5 is always fixed
+    auxRotationColor6 = squares[faceStr + "6"].getColor();
+    auxRotationColor7 = squares[faceStr + "7"].getColor();
+    auxRotationColor8 = squares[faceStr + "8"].getColor();
+    auxRotationColor9 = squares[faceStr + "9"].getColor();
 
     if(direction == Direction::CLOCKWISE)
     {
-
+        squares[faceStr + "1"].setColor(auxRotationColor7);
+        squares[faceStr + "2"].setColor(auxRotationColor4);
+        squares[faceStr + "3"].setColor(auxRotationColor1);
+        squares[faceStr + "4"].setColor(auxRotationColor8);
+        squares[faceStr + "6"].setColor(auxRotationColor2);
+        squares[faceStr + "7"].setColor(auxRotationColor9);
+        squares[faceStr + "8"].setColor(auxRotationColor6);
+        squares[faceStr + "9"].setColor(auxRotationColor3);
     }
     else if(direction == Direction::ANTI_CLOCKWISE)
     {
@@ -103,9 +111,9 @@ void Rotator::rotateFace(Face face, Direction direction)
         squares[faceStr + "4"].setColor(auxRotationColor2);
         squares[faceStr + "1"].setColor(auxRotationColor3);
         squares[faceStr + "8"].setColor(auxRotationColor4);
-        squares[faceStr + "2"].setColor(auxRotationColor5);
-        squares[faceStr + "9"].setColor(auxRotationColor6);
-        squares[faceStr + "6"].setColor(auxRotationColor7);
-        squares[faceStr + "3"].setColor(auxRotationColor8);
+        squares[faceStr + "2"].setColor(auxRotationColor6);
+        squares[faceStr + "9"].setColor(auxRotationColor7);
+        squares[faceStr + "6"].setColor(auxRotationColor8);
+        squares[faceStr + "3"].setColor(auxRotationColor9);
     }
 }
