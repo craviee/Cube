@@ -6,7 +6,6 @@
 class Square
 {
     public:
-        Square(){}
         Square(QPushButton* squarePiece) : squarePiece{squarePiece}{}
         Color getColor();
         void setColor(Color color);
