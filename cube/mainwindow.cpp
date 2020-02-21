@@ -182,332 +182,32 @@ void MainWindow::on_randomButton_clicked()
     {
         random2 = qrand()%12;
         if(random2 == 0)
-            rotateU();
+            cube->rotateU();
         else if(random2 == 1)
             cube->rotateUA();
         else if(random2 == 2)
-            rotateD();
+            cube->rotateD();
         else if(random2 == 3)
             cube->rotateDA();
         else if(random2 == 4)
-            rotateR();
+            cube->rotateR();
         else if(random2 == 5)
             cube->rotateRA();
         else if(random2 == 6)
-            rotateL();
+            cube->rotateL();
         else if(random2 == 7)
             cube->rotateLA();
         else if(random2 == 8)
-            rotateF();
+            cube->rotateF();
         else if(random2 == 9)
             cube->rotateFA();
         else if(random2 == 10)
-            rotateB();
+            cube->rotateB();
         else if(random2 == 11)
             cube->rotateBA();
     }
     simulacao = aux;
     rotationsNumber = 0;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
-}
-void MainWindow::rotateU()
-{
-    if(!simulacao)
-    {
-                delay(35000*del);
-    }
-    QString auxF1 = ui->front1Button->styleSheet();
-    QString auxF2 = ui->front2Button->styleSheet();
-    QString auxF3 = ui->front3Button->styleSheet();
-    QString auxL1 = ui->left1Button->styleSheet();
-    QString auxL2 = ui->left2Button->styleSheet();
-    QString auxL3 = ui->left3Button->styleSheet();
-    QString auxR1 = ui->right1Button->styleSheet();
-    QString auxR2 = ui->right2Button->styleSheet();
-    QString auxR3 = ui->right3Button->styleSheet();
-    QString auxB7 = ui->back7Button->styleSheet();
-    QString auxB8 = ui->back8Button->styleSheet();
-    QString auxB9 = ui->back9Button->styleSheet();
-    QString auxU1 = ui->up1Button->styleSheet();
-    QString auxU2 = ui->up2Button->styleSheet();
-    QString auxU3 = ui->up3Button->styleSheet();
-    QString auxU4 = ui->up4Button->styleSheet();
-    QString auxU6 = ui->up6Button->styleSheet();
-    QString auxU7 = ui->up7Button->styleSheet();
-    QString auxU8 = ui->up8Button->styleSheet();
-    QString auxU9 = ui->up9Button->styleSheet();
-    ui->front1Button->setStyleSheet(auxR1);
-    ui->front2Button->setStyleSheet(auxR2);
-    ui->front3Button->setStyleSheet(auxR3);
-    ui->left1Button->setStyleSheet(auxF1);
-    ui->left2Button->setStyleSheet(auxF2);
-    ui->left3Button->setStyleSheet(auxF3);
-    ui->right1Button->setStyleSheet(auxB9);
-    ui->right2Button->setStyleSheet(auxB8);
-    ui->right3Button->setStyleSheet(auxB7);
-    ui->back9Button->setStyleSheet(auxL1);
-    ui->back8Button->setStyleSheet(auxL2);
-    ui->back7Button->setStyleSheet(auxL3);
-    ui->up1Button->setStyleSheet(auxU7);
-    ui->up2Button->setStyleSheet(auxU4);
-    ui->up3Button->setStyleSheet(auxU1);
-    ui->up4Button->setStyleSheet(auxU8);
-    ui->up6Button->setStyleSheet(auxU2);
-    ui->up7Button->setStyleSheet(auxU9);
-    ui->up8Button->setStyleSheet(auxU6);
-    ui->up9Button->setStyleSheet(auxU3);
-    ui->up5Button->repaint();
-    rotationsNumber++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
-}
-void MainWindow::rotateD()
-{
-    if(!simulacao)
-    {
-                delay(31000*del);
-    }
-    QString auxF7 = ui->front7Button->styleSheet();
-    QString auxF8 = ui->front8Button->styleSheet();
-    QString auxF9 = ui->front9Button->styleSheet();
-    QString auxL7 = ui->left7Button->styleSheet();
-    QString auxL8 = ui->left8Button->styleSheet();
-    QString auxL9 = ui->left9Button->styleSheet();
-    QString auxR7 = ui->right7Button->styleSheet();
-    QString auxR8 = ui->right8Button->styleSheet();
-    QString auxR9 = ui->right9Button->styleSheet();
-    QString auxB1 = ui->back1Button->styleSheet();
-    QString auxB2 = ui->back2Button->styleSheet();
-    QString auxB3 = ui->back3Button->styleSheet();
-    QString auxD1 = ui->down1Button->styleSheet();
-    QString auxD2 = ui->down2Button->styleSheet();
-    QString auxD3 = ui->down3Button->styleSheet();
-    QString auxD4 = ui->down4Button->styleSheet();
-    QString auxD6 = ui->down6Button->styleSheet();
-    QString auxD7 = ui->down7Button->styleSheet();
-    QString auxD8 = ui->down8Button->styleSheet();
-    QString auxD9 = ui->down9Button->styleSheet();
-    ui->front7Button->setStyleSheet(auxL7);
-    ui->front8Button->setStyleSheet(auxL8);
-    ui->front9Button->setStyleSheet(auxL9);
-    ui->left7Button->setStyleSheet(auxB3);
-    ui->left8Button->setStyleSheet(auxB2);
-    ui->left9Button->setStyleSheet(auxB1);
-    ui->right7Button->setStyleSheet(auxF7);
-    ui->right8Button->setStyleSheet(auxF8);
-    ui->right9Button->setStyleSheet(auxF9);
-    ui->back3Button->setStyleSheet(auxR7);
-    ui->back2Button->setStyleSheet(auxR8);
-    ui->back1Button->setStyleSheet(auxR9);
-    ui->down1Button->setStyleSheet(auxD7);
-    ui->down2Button->setStyleSheet(auxD4);
-    ui->down3Button->setStyleSheet(auxD1);
-    ui->down4Button->setStyleSheet(auxD8);
-    ui->down6Button->setStyleSheet(auxD2);
-    ui->down7Button->setStyleSheet(auxD9);
-    ui->down8Button->setStyleSheet(auxD6);
-    ui->down9Button->setStyleSheet(auxD3);
-    ui->down5Button->repaint();
-    rotationsNumber++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
-}
-void MainWindow::rotateR()
-{
-    if(!simulacao)
-    {
-                delay(39000*del);
-    }
-    QString auxF3 = ui->front3Button->styleSheet();
-    QString auxF6 = ui->front6Button->styleSheet();
-    QString auxF9 = ui->front9Button->styleSheet();
-    QString auxU3 = ui->up3Button->styleSheet();
-    QString auxU6 = ui->up6Button->styleSheet();
-    QString auxU9 = ui->up9Button->styleSheet();
-    QString auxB3 = ui->back3Button->styleSheet();
-    QString auxB6 = ui->back6Button->styleSheet();
-    QString auxB9 = ui->back9Button->styleSheet();
-    QString auxD3 = ui->down3Button->styleSheet();
-    QString auxD6 = ui->down6Button->styleSheet();
-    QString auxD9 = ui->down9Button->styleSheet();
-    QString auxR1 = ui->right1Button->styleSheet();
-    QString auxR2 = ui->right2Button->styleSheet();
-    QString auxR3 = ui->right3Button->styleSheet();
-    QString auxR4 = ui->right4Button->styleSheet();
-    QString auxR6 = ui->right6Button->styleSheet();
-    QString auxR7 = ui->right7Button->styleSheet();
-    QString auxR8 = ui->right8Button->styleSheet();
-    QString auxR9 = ui->right9Button->styleSheet();
-    ui->front3Button->setStyleSheet(auxD3);
-    ui->front6Button->setStyleSheet(auxD6);
-    ui->front9Button->setStyleSheet(auxD9);
-    ui->up3Button->setStyleSheet(auxF3);
-    ui->up6Button->setStyleSheet(auxF6);
-    ui->up9Button->setStyleSheet(auxF9);
-    ui->back3Button->setStyleSheet(auxU3);
-    ui->back6Button->setStyleSheet(auxU6);
-    ui->back9Button->setStyleSheet(auxU9);
-    ui->down3Button->setStyleSheet(auxB3);
-    ui->down6Button->setStyleSheet(auxB6);
-    ui->down9Button->setStyleSheet(auxB9);
-    ui->right1Button->setStyleSheet(auxR7);
-    ui->right2Button->setStyleSheet(auxR4);
-    ui->right3Button->setStyleSheet(auxR1);
-    ui->right4Button->setStyleSheet(auxR8);
-    ui->right6Button->setStyleSheet(auxR2);
-    ui->right7Button->setStyleSheet(auxR9);
-    ui->right8Button->setStyleSheet(auxR6);
-    ui->right9Button->setStyleSheet(auxR3);
-    ui->right5Button->repaint();
-    rotationsNumber++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
-}
-void MainWindow::rotateL()
-{
-    if(!simulacao)
-    {
-                delay(39000*del);
-    }
-    QString auxF1 = ui->front1Button->styleSheet();
-    QString auxF4 = ui->front4Button->styleSheet();
-    QString auxF7 = ui->front7Button->styleSheet();
-    QString auxU1 = ui->up1Button->styleSheet();
-    QString auxU4 = ui->up4Button->styleSheet();
-    QString auxU7 = ui->up7Button->styleSheet();
-    QString auxB1 = ui->back1Button->styleSheet();
-    QString auxB4 = ui->back4Button->styleSheet();
-    QString auxB7 = ui->back7Button->styleSheet();
-    QString auxD1 = ui->down1Button->styleSheet();
-    QString auxD4 = ui->down4Button->styleSheet();
-    QString auxD7 = ui->down7Button->styleSheet();
-    QString auxL1 = ui->left1Button->styleSheet();
-    QString auxL2 = ui->left2Button->styleSheet();
-    QString auxL3 = ui->left3Button->styleSheet();
-    QString auxL4 = ui->left4Button->styleSheet();
-    QString auxL6 = ui->left6Button->styleSheet();
-    QString auxL7 = ui->left7Button->styleSheet();
-    QString auxL8 = ui->left8Button->styleSheet();
-    QString auxL9 = ui->left9Button->styleSheet();
-    ui->front1Button->setStyleSheet(auxU1);
-    ui->front4Button->setStyleSheet(auxU4);
-    ui->front7Button->setStyleSheet(auxU7);
-    ui->up1Button->setStyleSheet(auxB1);
-    ui->up4Button->setStyleSheet(auxB4);
-    ui->up7Button->setStyleSheet(auxB7);
-    ui->back1Button->setStyleSheet(auxD1);
-    ui->back4Button->setStyleSheet(auxD4);
-    ui->back7Button->setStyleSheet(auxD7);
-    ui->down1Button->setStyleSheet(auxF1);
-    ui->down4Button->setStyleSheet(auxF4);
-    ui->down7Button->setStyleSheet(auxF7);
-    ui->left1Button->setStyleSheet(auxL7);
-    ui->left2Button->setStyleSheet(auxL4);
-    ui->left3Button->setStyleSheet(auxL1);
-    ui->left4Button->setStyleSheet(auxL8);
-    ui->left6Button->setStyleSheet(auxL2);
-    ui->left7Button->setStyleSheet(auxL9);
-    ui->left8Button->setStyleSheet(auxL6);
-    ui->left9Button->setStyleSheet(auxL3);
-    ui->left5Button->repaint();
-    rotationsNumber++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
-}
-void MainWindow::rotateF()
-{
-    if(!simulacao)
-    {
-                delay(35000*del);
-    }
-    QString auxU7 = ui->up7Button->styleSheet();
-    QString auxU8 = ui->up8Button->styleSheet();
-    QString auxU9 = ui->up9Button->styleSheet();
-    QString auxR1 = ui->right1Button->styleSheet();
-    QString auxR4 = ui->right4Button->styleSheet();
-    QString auxR7 = ui->right7Button->styleSheet();
-    QString auxD1 = ui->down1Button->styleSheet();
-    QString auxD2 = ui->down2Button->styleSheet();
-    QString auxD3 = ui->down3Button->styleSheet();
-    QString auxL3 = ui->left3Button->styleSheet();
-    QString auxL6 = ui->left6Button->styleSheet();
-    QString auxL9 = ui->left9Button->styleSheet();
-    QString auxF1 = ui->front1Button->styleSheet();
-    QString auxF2 = ui->front2Button->styleSheet();
-    QString auxF3 = ui->front3Button->styleSheet();
-    QString auxF4 = ui->front4Button->styleSheet();
-    QString auxF6 = ui->front6Button->styleSheet();
-    QString auxF7 = ui->front7Button->styleSheet();
-    QString auxF8 = ui->front8Button->styleSheet();
-    QString auxF9 = ui->front9Button->styleSheet();
-    ui->up7Button->setStyleSheet(auxL9);
-    ui->up8Button->setStyleSheet(auxL6);
-    ui->up9Button->setStyleSheet(auxL3);
-    ui->right1Button->setStyleSheet(auxU7);
-    ui->right4Button->setStyleSheet(auxU8);
-    ui->right7Button->setStyleSheet(auxU9);
-    ui->down1Button->setStyleSheet(auxR7);
-    ui->down2Button->setStyleSheet(auxR4);
-    ui->down3Button->setStyleSheet(auxR1);
-    ui->left3Button->setStyleSheet(auxD1);
-    ui->left6Button->setStyleSheet(auxD2);
-    ui->left9Button->setStyleSheet(auxD3);
-    ui->front1Button->setStyleSheet(auxF7);
-    ui->front2Button->setStyleSheet(auxF4);
-    ui->front3Button->setStyleSheet(auxF1);
-    ui->front4Button->setStyleSheet(auxF8);
-    ui->front6Button->setStyleSheet(auxF2);
-    ui->front7Button->setStyleSheet(auxF9);
-    ui->front8Button->setStyleSheet(auxF6);
-    ui->front9Button->setStyleSheet(auxF3);
-    ui->front5Button->repaint();
-    rotationsNumber++;
-    ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
-}
-void MainWindow::rotateB()
-{
-    if(!simulacao)
-    {
-                delay(27000*del);
-    }
-    QString auxU1 = ui->up1Button->styleSheet();
-    QString auxU2 = ui->up2Button->styleSheet();
-    QString auxU3 = ui->up3Button->styleSheet();
-    QString auxR3 = ui->right3Button->styleSheet();
-    QString auxR6 = ui->right6Button->styleSheet();
-    QString auxR9 = ui->right9Button->styleSheet();
-    QString auxD7 = ui->down7Button->styleSheet();
-    QString auxD8 = ui->down8Button->styleSheet();
-    QString auxD9 = ui->down9Button->styleSheet();
-    QString auxL1 = ui->left1Button->styleSheet();
-    QString auxL4 = ui->left4Button->styleSheet();
-    QString auxL7 = ui->left7Button->styleSheet();
-    QString auxB1 = ui->back1Button->styleSheet();
-    QString auxB2 = ui->back2Button->styleSheet();
-    QString auxB3 = ui->back3Button->styleSheet();
-    QString auxB4 = ui->back4Button->styleSheet();
-    QString auxB6 = ui->back6Button->styleSheet();
-    QString auxB7 = ui->back7Button->styleSheet();
-    QString auxB8 = ui->back8Button->styleSheet();
-    QString auxB9 = ui->back9Button->styleSheet();
-    ui->up1Button->setStyleSheet(auxR3);
-    ui->up2Button->setStyleSheet(auxR6);
-    ui->up3Button->setStyleSheet(auxR9);
-    ui->right3Button->setStyleSheet(auxD9);
-    ui->right6Button->setStyleSheet(auxD8);
-    ui->right9Button->setStyleSheet(auxD7);
-    ui->down7Button->setStyleSheet(auxL1);
-    ui->down8Button->setStyleSheet(auxL4);
-    ui->down9Button->setStyleSheet(auxL7);
-    ui->left1Button->setStyleSheet(auxU3);
-    ui->left4Button->setStyleSheet(auxU2);
-    ui->left7Button->setStyleSheet(auxU1);
-    ui->back1Button->setStyleSheet(auxB7);
-    ui->back2Button->setStyleSheet(auxB4);
-    ui->back3Button->setStyleSheet(auxB1);
-    ui->back4Button->setStyleSheet(auxB8);
-    ui->back6Button->setStyleSheet(auxB2);
-    ui->back7Button->setStyleSheet(auxB9);
-    ui->back8Button->setStyleSheet(auxB6);
-    ui->back9Button->setStyleSheet(auxB3);
-    ui->back5Button->repaint();
-    rotationsNumber++;
     ui->rotationsNumberTextBox->setPlainText(QString::number(rotationsNumber));
 }
 void MainWindow::completeCube()
@@ -566,22 +266,11 @@ void MainWindow::completeCube()
     ui->back7Button->setStyleSheet("background-color: yellow");
     ui->back8Button->setStyleSheet("background-color: yellow");
     ui->back9Button->setStyleSheet("background-color: yellow");
-    
-    /*
-    ui->up5Button->setStyleSheet("background-color: blue");
-    ui->down5Button->setStyleSheet("background-color: green");
-    ui->right5Button->setStyleSheet("background-color: red");
-    ui->front5Button->setStyleSheet("background-color: white");
-    ui->left5Button->setStyleSheet("background-color: orange");
-    ui->back5Button->setStyleSheet("background-color: yellow");
-    ui->back1Button->setStyleSheet("background-color: blue");
-    ui->down7Button->setStyleSheet("background-color: blue");
-    ui->left7Button->setStyleSheet("background-color: blue");
-    */
 }
 void MainWindow::on_rotationUButton_clicked()
 {
-   rotateU();
+   cube->rotateU();
+   setRotationsNumber(rotationsNumber+1);
 }
 void MainWindow::on_rotationUAButton_clicked()
 {
@@ -590,7 +279,8 @@ void MainWindow::on_rotationUAButton_clicked()
 }
 void MainWindow::on_rotationDButton_clicked()
 {
-    rotateD();
+    cube->rotateD();
+    setRotationsNumber(rotationsNumber+1);
 }
 void MainWindow::on_rotationDAButton_clicked()
 {
@@ -599,7 +289,8 @@ void MainWindow::on_rotationDAButton_clicked()
 }
 void MainWindow::on_rotationRButton_clicked()
 {
-    rotateR();
+    cube->rotateR();
+    setRotationsNumber(rotationsNumber+1);
 }
 void MainWindow::on_rotationRAButton_clicked()
 {
@@ -608,7 +299,8 @@ void MainWindow::on_rotationRAButton_clicked()
 }
 void MainWindow::on_rotationLButton_clicked()
 {
-    rotateL();
+    cube->rotateL();
+    setRotationsNumber(rotationsNumber+1);
 }
 void MainWindow::on_rotationLAButton_clicked()
 {
@@ -617,7 +309,8 @@ void MainWindow::on_rotationLAButton_clicked()
 }
 void MainWindow::on_rotationFButton_clicked()
 {
-    rotateF();
+    cube->rotateF();
+    setRotationsNumber(rotationsNumber+1);
 }
 void MainWindow::on_rotationFAButton_clicked()
 {
@@ -626,7 +319,8 @@ void MainWindow::on_rotationFAButton_clicked()
 }
 void MainWindow::on_rotationBButton_clicked()
 {
-    rotateB();
+    cube->rotateB();
+    setRotationsNumber(rotationsNumber+1);
 }
 void MainWindow::on_rotationBAButton_clicked()
 {
@@ -639,16 +333,16 @@ void MainWindow::CruzSul()
     {
         if(ui->front2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up8Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateF();
+            cube->rotateF();
             cube->rotateUA();
-            rotateR();
-            rotateU();
+            cube->rotateR();
+            cube->rotateU();
         }
         else if(ui->front6Button->styleSheet() == ui->up5Button->styleSheet() && ui->right4Button->styleSheet() == ui->front5Button->styleSheet())
         {
             cube->rotateUA();
-            rotateR();
-            rotateU();
+            cube->rotateR();
+            cube->rotateU();
         }
         else if(ui->front6Button->styleSheet() == ui->front5Button->styleSheet() && ui->right4Button->styleSheet() == ui->up5Button->styleSheet())
         {
@@ -656,37 +350,37 @@ void MainWindow::CruzSul()
         }
         else if(ui->front4Button->styleSheet() == ui->up5Button->styleSheet() && ui->left6Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateU();
+            cube->rotateU();
             cube->rotateLA();
             cube->rotateUA();
         }
         else if(ui->front4Button->styleSheet() == ui->front5Button->styleSheet() && ui->left6Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateF();
+            cube->rotateF();
         }
         else if(ui->front8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down2Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateF();
-            rotateF();
+            cube->rotateF();
+            cube->rotateF();
         }
         else if(ui->front8Button->styleSheet() == ui->up5Button->styleSheet() && ui->down2Button->styleSheet() == ui->front5Button->styleSheet())
         {
             cube->rotateFA();
             cube->rotateUA();
-            rotateR();
-            rotateU();
+            cube->rotateR();
+            cube->rotateU();
         }
         else if(ui->right2Button->styleSheet() == ui->front5Button->styleSheet() && ui->up6Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateU();
+            cube->rotateU();
         }
         else if(ui->right2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up6Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateU();
-            rotateF();
+            cube->rotateU();
+            cube->rotateF();
             cube->rotateUA();
-            rotateR();
-            rotateU();
+            cube->rotateR();
+            cube->rotateU();
         }
         else if(ui->left2Button->styleSheet() == ui->front5Button->styleSheet() && ui->up4Button->styleSheet() == ui->up5Button->styleSheet())
         {
@@ -695,100 +389,100 @@ void MainWindow::CruzSul()
         else if(ui->left2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up4Button->styleSheet() == ui->front5Button->styleSheet())
         {
             cube->rotateUA();
-            rotateF();
+            cube->rotateF();
             cube->rotateUA();
-            rotateR();
-            rotateU();
+            cube->rotateR();
+            cube->rotateU();
         }
         else if(ui->right8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down6Button->styleSheet() == ui->up5Button->styleSheet())
         {
             cube->rotateDA();
-            rotateF();
-            rotateF();
+            cube->rotateF();
+            cube->rotateF();
         }
         else if(ui->right8Button->styleSheet() == ui->up5Button->styleSheet() && ui->down6Button->styleSheet() == ui->front5Button->styleSheet())
         {
             cube->rotateDA();
             cube->rotateFA();
             cube->rotateUA();
-            rotateR();
-            rotateU();
+            cube->rotateR();
+            cube->rotateU();
         }
         else if(ui->left8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down4Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateD();
-            rotateF();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateF();
         }
         else if(ui->left8Button->styleSheet() == ui->up5Button->styleSheet() && ui->down4Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateD();
+            cube->rotateD();
             cube->rotateFA();
             cube->rotateUA();
-            rotateR();
-            rotateU();
+            cube->rotateR();
+            cube->rotateU();
         }
         else if(ui->back8Button->styleSheet() == ui->front5Button->styleSheet() && ui->up2Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateU();
-            rotateU();
+            cube->rotateU();
+            cube->rotateU();
         }
         else if(ui->back8Button->styleSheet() == ui->up5Button->styleSheet() && ui->up2Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateU();
-            rotateU();
-            rotateF();
+            cube->rotateU();
+            cube->rotateU();
+            cube->rotateF();
             cube->rotateUA();
-            rotateR();
-            rotateU();
+            cube->rotateR();
+            cube->rotateU();
         }
         else if(ui->back6Button->styleSheet() == ui->front5Button->styleSheet() && ui->right6Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateB();
-            rotateU();
-            rotateU();
+            cube->rotateB();
+            cube->rotateU();
+            cube->rotateU();
         }
         else if(ui->back6Button->styleSheet() == ui->up5Button->styleSheet() && ui->right6Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateB();
-            rotateU();
-            rotateU();
-            rotateF();
+            cube->rotateB();
+            cube->rotateU();
+            cube->rotateU();
+            cube->rotateF();
             cube->rotateUA();
-            rotateR();
-            rotateU();
+            cube->rotateR();
+            cube->rotateU();
         }
         else if(ui->back4Button->styleSheet() == ui->front5Button->styleSheet() && ui->left4Button->styleSheet() == ui->up5Button->styleSheet())
         {
             cube->rotateBA();
-            rotateU();
-            rotateU();
+            cube->rotateU();
+            cube->rotateU();
         }
         else if(ui->back4Button->styleSheet() == ui->up5Button->styleSheet() && ui->left4Button->styleSheet() == ui->front5Button->styleSheet())
         {
             cube->rotateBA();
-            rotateU();
-            rotateU();
-            rotateF();
+            cube->rotateU();
+            cube->rotateU();
+            cube->rotateF();
             cube->rotateUA();
-            rotateR();
-            rotateU();
+            cube->rotateR();
+            cube->rotateU();
         }
         else if(ui->back2Button->styleSheet() == ui->front5Button->styleSheet() && ui->down8Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateF();
-            rotateF();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateF();
         }
         else if(ui->back2Button->styleSheet() == ui->up5Button->styleSheet() && ui->down8Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateFA();
             cube->rotateUA();
-            rotateR();
-            rotateU();
+            cube->rotateR();
+            cube->rotateU();
         }
     }
 }
@@ -798,18 +492,18 @@ void MainWindow::CruzLeste()
     {
         if(ui->up6Button->styleSheet() == ui->right5Button->styleSheet() && ui->right2Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateR();
+            cube->rotateR();
             cube->rotateUA();
-            rotateB();
-            rotateU();
+            cube->rotateB();
+            cube->rotateU();
             ult = "1L";
             
         }
         else if(ui->right6Button->styleSheet() == ui->up5Button->styleSheet() && ui->back6Button->styleSheet() == ui->right5Button->styleSheet())
         {
             cube->rotateUA();
-            rotateB();
-            rotateU();
+            cube->rotateB();
+            cube->rotateU();
             ult = "2L";
             
         }
@@ -821,7 +515,7 @@ void MainWindow::CruzLeste()
         }
         else if(ui->right4Button->styleSheet() == ui->up5Button->styleSheet() && ui->front6Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateU();
+            cube->rotateU();
             cube->rotateFA();
             cube->rotateUA();
             ult = "4L";
@@ -829,14 +523,14 @@ void MainWindow::CruzLeste()
         }
         else if(ui->right4Button->styleSheet() == ui->right5Button->styleSheet() && ui->front6Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateR();
+            cube->rotateR();
             ult = "5L";
             
         }
         else if(ui->right8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down6Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateR();
-            rotateR();
+            cube->rotateR();
+            cube->rotateR();
             ult = "6L";
             
         }
@@ -844,8 +538,8 @@ void MainWindow::CruzLeste()
         {
             cube->rotateRA();
             cube->rotateUA();
-            rotateB();
-            rotateU();
+            cube->rotateB();
+            cube->rotateU();
             ult = "7L";
             
         }
@@ -853,42 +547,42 @@ void MainWindow::CruzLeste()
         {
             cube->rotateBA();
             cube->rotateUA();
-            rotateB();
-            rotateU();
+            cube->rotateB();
+            cube->rotateU();
             ult = "8L";
             
         }
         else if(ui->back8Button->styleSheet() == ui->up5Button->styleSheet() && ui->up2Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateU();
-            rotateR();
+            cube->rotateU();
+            cube->rotateR();
             cube->rotateUA();
-            rotateB();
-            rotateU();
+            cube->rotateB();
+            cube->rotateU();
             ult = "9L";
             
         }
         else if(ui->front2Button->styleSheet() == ui->right5Button->styleSheet() && ui->up8Button->styleSheet() == ui->up5Button->styleSheet())
         {
             cube->rotateFA();
-            rotateU();
-            rotateF();
+            cube->rotateU();
+            cube->rotateF();
             cube->rotateUA();
             ult = "10L";
             
         }
         else if(ui->front2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up8Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateF();
-            rotateR();
+            cube->rotateF();
+            cube->rotateR();
             ult = "11L";
             
         }
         else if(ui->back2Button->styleSheet() == ui->right5Button->styleSheet() && ui->down8Button->styleSheet() == ui->up5Button->styleSheet())
         {
             cube->rotateDA();
-            rotateR();
-            rotateR();
+            cube->rotateR();
+            cube->rotateR();
             ult = "12L";
             
         }
@@ -897,76 +591,76 @@ void MainWindow::CruzLeste()
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateUA();
-            rotateB();
-            rotateU();
+            cube->rotateB();
+            cube->rotateU();
             ult = "13L";
             
         }
         else if(ui->front8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down2Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateD();
-            rotateR();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
+            cube->rotateR();
             ult = "14L";
             
         }
         else if(ui->front8Button->styleSheet() == ui->up5Button->styleSheet() && ui->down2Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateD();
+            cube->rotateD();
             cube->rotateRA();
             cube->rotateUA();
-            rotateB();
-            rotateU();
+            cube->rotateB();
+            cube->rotateU();
             ult = "15L";
             
         }
         else if(ui->left2Button->styleSheet() == ui->right5Button->styleSheet() && ui->up4Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateL();
-            rotateL();
-            rotateD();
-            rotateD();
-            rotateR();
-            rotateR();
+            cube->rotateL();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateR();
+            cube->rotateR();
             ult = "16L";
             
         }
         else if(ui->left2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up4Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateU();
-            rotateU();
-            rotateR();
+            cube->rotateU();
+            cube->rotateU();
+            cube->rotateR();
             cube->rotateUA();
-            rotateB();
-            rotateU();
+            cube->rotateB();
+            cube->rotateU();
             ult = "17L";
             
         }
         else if(ui->left4Button->styleSheet() == ui->right5Button->styleSheet() && ui->back4Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateL();
-            rotateU();
-            rotateU();
+            cube->rotateL();
+            cube->rotateU();
+            cube->rotateU();
             ult = "18L";
             
         }
         else if(ui->left4Button->styleSheet() == ui->up5Button->styleSheet() && ui->back4Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateL();
-            rotateU();
-            rotateU();
-            rotateR();
+            cube->rotateL();
+            cube->rotateU();
+            cube->rotateU();
+            cube->rotateR();
             cube->rotateUA();
-            rotateB();
-            rotateU();
+            cube->rotateB();
+            cube->rotateU();
             ult = "19L";
             
         }
         else if(ui->left6Button->styleSheet() == ui->right5Button->styleSheet() && ui->front4Button->styleSheet() == ui->up5Button->styleSheet())
         {
             
-            rotateU();
-            rotateU();
+            cube->rotateU();
+            cube->rotateU();
             cube->rotateLA();
             cube->rotateUA();
             cube->rotateUA();
@@ -976,32 +670,32 @@ void MainWindow::CruzLeste()
         else if(ui->left6Button->styleSheet() == ui->up5Button->styleSheet() && ui->front4Button->styleSheet() == ui->right5Button->styleSheet())
         {
             cube->rotateLA();
-            rotateU();
-            rotateU();
-            rotateR();
+            cube->rotateU();
+            cube->rotateU();
+            cube->rotateR();
             cube->rotateUA();
-            rotateB();
-            rotateU();
+            cube->rotateB();
+            cube->rotateU();
             ult = "21L";
             
         }
         else if(ui->left8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down4Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateR();
-            rotateR();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateR();
+            cube->rotateR();
             ult = "22L";
             
         }
         else if(ui->left8Button->styleSheet() == ui->up5Button->styleSheet() && ui->down4Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateRA();
             cube->rotateUA();
-            rotateB();
-            rotateU();
+            cube->rotateB();
+            cube->rotateU();
             ult = "23L";
             
         }
@@ -1013,18 +707,18 @@ void MainWindow::CruzOeste()
     {
         if(ui->left2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up4Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateL();
+            cube->rotateL();
             cube->rotateUA();
-            rotateF();
-            rotateU();
+            cube->rotateF();
+            cube->rotateU();
             ult = "1O";
             
         }
         else if(ui->left6Button->styleSheet() == ui->up5Button->styleSheet() && ui->front4Button->styleSheet() == ui->left5Button->styleSheet())
         {
             cube->rotateUA();
-            rotateF();
-            rotateU();
+            cube->rotateF();
+            cube->rotateU();
             ult = "2O";
             
         }
@@ -1036,7 +730,7 @@ void MainWindow::CruzOeste()
         }
         else if(ui->left4Button->styleSheet() == ui->up5Button->styleSheet() && ui->back4Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateU();
+            cube->rotateU();
             cube->rotateBA();
             cube->rotateUA();
             ult = "4O";
@@ -1044,14 +738,14 @@ void MainWindow::CruzOeste()
         }
         else if(ui->left4Button->styleSheet() == ui->left5Button->styleSheet() && ui->back4Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateL();
+            cube->rotateL();
             ult = "5O";
             
         }
         else if(ui->left8Button->styleSheet() == ui->left5Button->styleSheet() && ui->down4Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateL();
-            rotateL();
+            cube->rotateL();
+            cube->rotateL();
             ult = "6O";
             
         }
@@ -1059,24 +753,24 @@ void MainWindow::CruzOeste()
         {
             cube->rotateLA();
             cube->rotateUA();
-            rotateF();
-            rotateU();
+            cube->rotateF();
+            cube->rotateU();
             ult = "7O";
             
         }
         else if(ui->front2Button->styleSheet() == ui->left5Button->styleSheet() && ui->up8Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateU();
+            cube->rotateU();
             ult = "8O";
             
         }
         else if(ui->front2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up8Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateU();
-            rotateL();
+            cube->rotateU();
+            cube->rotateL();
             cube->rotateUA();
-            rotateF();
-            rotateU();
+            cube->rotateF();
+            cube->rotateU();
             ult = "9O";
             
         }
@@ -1089,18 +783,18 @@ void MainWindow::CruzOeste()
         else if(ui->back8Button->styleSheet() == ui->up5Button->styleSheet() && ui->up2Button->styleSheet() == ui->left5Button->styleSheet())
         {
             cube->rotateUA();
-            rotateL();
+            cube->rotateL();
             cube->rotateUA();
-            rotateF();
-            rotateU();
+            cube->rotateF();
+            cube->rotateU();
             ult = "11O";
             
         }
         else if(ui->front8Button->styleSheet() == ui->left5Button->styleSheet() && ui->down2Button->styleSheet() == ui->up5Button->styleSheet())
         {
             cube->rotateDA();
-            rotateL();
-            rotateL();
+            cube->rotateL();
+            cube->rotateL();
             ult = "12O";
             
         }
@@ -1109,52 +803,52 @@ void MainWindow::CruzOeste()
             cube->rotateDA();
             cube->rotateLA();
             cube->rotateUA();
-            rotateF();
-            rotateU();
+            cube->rotateF();
+            cube->rotateU();
             ult = "13O";
             
         }
         else if(ui->back2Button->styleSheet() == ui->left5Button->styleSheet() && ui->down8Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateD();
-            rotateL();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateL();
             ult = "14O";
             
         }
         else if(ui->back2Button->styleSheet() == ui->up5Button->styleSheet() && ui->down8Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateD();
+            cube->rotateD();
             cube->rotateLA();
             cube->rotateUA();
-            rotateF();
-            rotateU();
+            cube->rotateF();
+            cube->rotateU();
             ult = "15O";
             
         }
         else if(ui->right2Button->styleSheet() == ui->left5Button->styleSheet() && ui->up6Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateU();
-            rotateU();
+            cube->rotateU();
+            cube->rotateU();
             ult = "16O";
             
         }
         else if(ui->right2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up6Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateU();
-            rotateU();
-            rotateL();
+            cube->rotateU();
+            cube->rotateU();
+            cube->rotateL();
             cube->rotateUA();
-            rotateF();
-            rotateU();
+            cube->rotateF();
+            cube->rotateU();
             ult = "17O";
             
         }
         else if(ui->right4Button->styleSheet() == ui->left5Button->styleSheet() && ui->front6Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateU();
-            rotateU();
-            rotateR();
+            cube->rotateU();
+            cube->rotateU();
+            cube->rotateR();
             cube->rotateUA();
             cube->rotateUA();
             ult = "18O";
@@ -1162,55 +856,55 @@ void MainWindow::CruzOeste()
         }
         else if(ui->right4Button->styleSheet() == ui->up5Button->styleSheet() && ui->front6Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateR();
-            rotateU();
-            rotateU();
-            rotateL();
+            cube->rotateR();
+            cube->rotateU();
+            cube->rotateU();
+            cube->rotateL();
             cube->rotateUA();
-            rotateF();
-            rotateU();
+            cube->rotateF();
+            cube->rotateU();
             ult = "19O";
             
         }
         else if(ui->right6Button->styleSheet() == ui->left5Button->styleSheet() && ui->back6Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateR();
-            rotateD();
-            rotateD();
-            rotateL();
-            rotateL();
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateL();
             ult = "20O";
             
         }
         else if(ui->right6Button->styleSheet() == ui->up5Button->styleSheet() && ui->back6Button->styleSheet() == ui->left5Button->styleSheet())
         {
             cube->rotateRA();
-            rotateU();
-            rotateU();
-            rotateL();
+            cube->rotateU();
+            cube->rotateU();
+            cube->rotateL();
             cube->rotateUA();
-            rotateF();
-            rotateU();
+            cube->rotateF();
+            cube->rotateU();
             ult = "21O";
             
         }
         else if(ui->right8Button->styleSheet() == ui->left5Button->styleSheet() && ui->down6Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateL();
-            rotateL();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateL();
             ult = "22O";
             
         }
         else if(ui->right8Button->styleSheet() == ui->up5Button->styleSheet() && ui->down6Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateLA();
             cube->rotateUA();
-            rotateF();
-            rotateU();
+            cube->rotateF();
+            cube->rotateU();
             ult = "23O";
             
         }
@@ -1222,18 +916,18 @@ void MainWindow::CruzNorte()
     {
         if(ui->up2Button->styleSheet() == ui->back5Button->styleSheet() && ui->back8Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateB();
+            cube->rotateB();
             cube->rotateUA();
-            rotateL();
-            rotateU();
+            cube->rotateL();
+            cube->rotateU();
             ult = "1N";
             
         }
         else if(ui->back4Button->styleSheet() == ui->up5Button->styleSheet() && ui->left4Button->styleSheet() == ui->back5Button->styleSheet())
         {
             cube->rotateUA();
-            rotateL();
-            rotateU();
+            cube->rotateL();
+            cube->rotateU();
             ult = "2N";
             
         }
@@ -1245,7 +939,7 @@ void MainWindow::CruzNorte()
         }
         else if(ui->back6Button->styleSheet() == ui->up5Button->styleSheet() && ui->right6Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateU();
+            cube->rotateU();
             cube->rotateRA();
             cube->rotateUA();
             ult = "4N";
@@ -1253,14 +947,14 @@ void MainWindow::CruzNorte()
         }
         else if(ui->back6Button->styleSheet() == ui->back5Button->styleSheet() && ui->right6Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateB();
+            cube->rotateB();
             ult = "5N";
             
         }
         else if(ui->back2Button->styleSheet() == ui->back5Button->styleSheet() && ui->down8Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateB();
-            rotateB();
+            cube->rotateB();
+            cube->rotateB();
             ult = "6N";
             
         }
@@ -1268,8 +962,8 @@ void MainWindow::CruzNorte()
         {
             cube->rotateBA();
             cube->rotateUA();
-            rotateL();
-            rotateU();
+            cube->rotateL();
+            cube->rotateU();
             ult = "7N";
             
         }
@@ -1277,25 +971,25 @@ void MainWindow::CruzNorte()
         {
             cube->rotateLA();
             cube->rotateUA();
-            rotateL();
-            rotateU();
+            cube->rotateL();
+            cube->rotateU();
             ult = "8N";
             
         }
         else if(ui->left2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up4Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateU();
-            rotateB();
+            cube->rotateU();
+            cube->rotateB();
             cube->rotateUA();
-            rotateL();
-            rotateU();
+            cube->rotateL();
+            cube->rotateU();
             ult = "9N";
             
         }
         else if(ui->right2Button->styleSheet() == ui->back5Button->styleSheet() && ui->up6Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateR();
-            rotateU();
+            cube->rotateR();
+            cube->rotateU();
             cube->rotateRA();
             cube->rotateUA();
             ult = "10N";
@@ -1304,18 +998,18 @@ void MainWindow::CruzNorte()
         else if(ui->right2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up6Button->styleSheet() == ui->back5Button->styleSheet())
         {
             cube->rotateUA();
-            rotateB();
+            cube->rotateB();
             cube->rotateUA();
-            rotateL();
-            rotateU();
+            cube->rotateL();
+            cube->rotateU();
             ult = "11N";
             
         }
         else if(ui->left8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down4Button->styleSheet() == ui->up5Button->styleSheet())
         {
             cube->rotateDA();
-            rotateB();
-            rotateB();
+            cube->rotateB();
+            cube->rotateB();
             ult = "12N";
             
         }
@@ -1324,93 +1018,93 @@ void MainWindow::CruzNorte()
             cube->rotateDA();
             cube->rotateBA();
             cube->rotateUA();
-            rotateL();
-            rotateU();
+            cube->rotateL();
+            cube->rotateU();
             ult = "13N";
             
         }
         else if(ui->right8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down6Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateD();
-            rotateB();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateB();
             ult = "14N";
             
         }
         else if(ui->right8Button->styleSheet() == ui->up5Button->styleSheet() && ui->down6Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateD();
+            cube->rotateD();
             cube->rotateBA();
             cube->rotateUA();
-            rotateL();
-            rotateU();
+            cube->rotateL();
+            cube->rotateU();
             ult = "15N";
             
         }
         else if(ui->front2Button->styleSheet() == ui->back5Button->styleSheet() && ui->up8Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateU();
-            rotateU();
+            cube->rotateU();
+            cube->rotateU();
             ult = "16N";
             
         }
         else if(ui->front2Button->styleSheet() == ui->up5Button->styleSheet() && ui->up8Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateU();
-            rotateU();
-            rotateB();
+            cube->rotateU();
+            cube->rotateU();
+            cube->rotateB();
             cube->rotateUA();
-            rotateL();
-            rotateU();
+            cube->rotateL();
+            cube->rotateU();
             ult = "17N";
             
         }
         else if(ui->front4Button->styleSheet() == ui->back5Button->styleSheet() && ui->left6Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateF();
-            rotateU();
-            rotateU();
+            cube->rotateF();
+            cube->rotateU();
+            cube->rotateU();
             ult = "18N";
             
         }
         else if(ui->front4Button->styleSheet() == ui->up5Button->styleSheet() && ui->left6Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateF();
-            rotateU();
-            rotateU();
-            rotateB();
+            cube->rotateF();
+            cube->rotateU();
+            cube->rotateU();
+            cube->rotateB();
             cube->rotateUA();
-            rotateL();
-            rotateU();
+            cube->rotateL();
+            cube->rotateU();
             ult = "19N";
             
         }
         else if(ui->front6Button->styleSheet() == ui->back5Button->styleSheet() && ui->right4Button->styleSheet() == ui->up5Button->styleSheet())
         {
             cube->rotateFA();
-            rotateU();
-            rotateU();
+            cube->rotateU();
+            cube->rotateU();
             ult = "20N";
             
         }
         else if(ui->front6Button->styleSheet() == ui->up5Button->styleSheet() && ui->right4Button->styleSheet() == ui->back5Button->styleSheet())
         {
             cube->rotateFA();
-            rotateU();
-            rotateU();
-            rotateB();
+            cube->rotateU();
+            cube->rotateU();
+            cube->rotateB();
             cube->rotateUA();
-            rotateL();
-            rotateU();
+            cube->rotateL();
+            cube->rotateU();
             ult = "21N";
             
         }
         else if(ui->front8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down2Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateF();
-            rotateF();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateF();
             cube->rotateBA();
             cube->rotateBA();
             ult = "22N";
@@ -1418,12 +1112,12 @@ void MainWindow::CruzNorte()
         }
         else if(ui->front8Button->styleSheet() == ui->up5Button->styleSheet() && ui->down2Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateBA();
             cube->rotateUA();
-            rotateL();
-            rotateU();
+            cube->rotateL();
+            cube->rotateU();
             ult = "23N";
             
         }
@@ -1464,94 +1158,94 @@ void MainWindow::QuinaSudeste()
         {
             cube->rotateRA();
             cube->rotateDA();
-            rotateR();
+            cube->rotateR();
             if(ui->front7Button->styleSheet() == ui->front5Button->styleSheet()) 
             {
                 cube->rotateDA();
                 cube->rotateFA();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateF();
             }
             else if(ui->front7Button->styleSheet() == ui->left5Button->styleSheet()) 
             {
                 cube->rotateDA();
                 cube->rotateDA();
                 cube->rotateLA();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateL();
             }
             else if(ui->front7Button->styleSheet() == ui->back5Button->styleSheet()) 
             {
-                rotateD();
+                cube->rotateD();
                 cube->rotateBA();
-                rotateD();
-                rotateB();
+                cube->rotateD();
+                cube->rotateB();
             }
         }
         else if(ui->front3Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateF();
-            rotateD();
+            cube->rotateF();
+            cube->rotateD();
             cube->rotateFA();
             if(ui->back3Button->styleSheet() == ui->front5Button->styleSheet())
             {
-                rotateD();
+                cube->rotateD();
                 cube->rotateFA();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateF();
             }
             else if(ui->back3Button->styleSheet() == ui->left5Button->styleSheet())
             {
                 cube->rotateLA();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateL();
             }
             else if(ui->back3Button->styleSheet() == ui->right5Button->styleSheet())
             {
                 cube->rotateDA();
                 cube->rotateDA();
                 cube->rotateRA();
-                rotateD();
-                rotateR();
+                cube->rotateD();
+                cube->rotateR();
             }
             else if(ui->back3Button->styleSheet() == ui->back5Button->styleSheet())  
             {
                 cube->rotateDA();
                 cube->rotateBA();
-                rotateD();
-                rotateB();
+                cube->rotateD();
+                cube->rotateB();
             }
         }
         else if(ui->right1Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateF();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
             if(ui->front9Button->styleSheet() == ui->front5Button->styleSheet()) 
             {
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateF();
                 cube->rotateDA();
                 cube->rotateFA();
             }
             else if(ui->front9Button->styleSheet() == ui->left5Button->styleSheet()) 
             {
-                rotateL();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
             }
             else if(ui->front9Button->styleSheet() == ui->right5Button->styleSheet())
             {
-                rotateD();
-                rotateD();
-                rotateR();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateR();
                 cube->rotateDA();
                 cube->rotateRA();
             }
             else if(ui->front9Button->styleSheet() == ui->back5Button->styleSheet())
             {
                 cube->rotateDA();
-                rotateB();
+                cube->rotateB();
                 cube->rotateDA();
                 cube->rotateBA();
             }
@@ -1609,64 +1303,64 @@ void MainWindow::QuinaSudoeste()
     {
         if(ui->up7Button->styleSheet() == ui->front5Button->styleSheet() && ui->front1Button->styleSheet() == ui->left5Button->styleSheet() && ui->left3Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateL();
-            rotateD();
+            cube->rotateL();
+            cube->rotateD();
             cube->rotateLA();
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
         }
         else if(ui->up7Button->styleSheet() == ui->left5Button->styleSheet() && ui->front1Button->styleSheet() == ui->up5Button->styleSheet() && ui->left3Button->styleSheet() == ui->front5Button->styleSheet())
         {
             cube->rotateFA();
             cube->rotateDA();
-            rotateF();
-            rotateD();
-            rotateD();
-            rotateL();
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
         }
         else if(ui->up7Button->styleSheet() == ui->up5Button->styleSheet() && ui->front1Button->styleSheet() == ui->right5Button->styleSheet() && ui->left3Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateL();
-            rotateD();
+            cube->rotateL();
+            cube->rotateD();
             cube->rotateLA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
         else if(ui->up7Button->styleSheet() == ui->right5Button->styleSheet() && ui->front1Button->styleSheet() == ui->front5Button->styleSheet() && ui->left3Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateL();
-            rotateD();
+            cube->rotateL();
+            cube->rotateD();
             cube->rotateLA();
             cube->rotateDA();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
         }
         else if(ui->up7Button->styleSheet() == ui->front5Button->styleSheet() && ui->front1Button->styleSheet() == ui->up5Button->styleSheet() && ui->left3Button->styleSheet() == ui->right5Button->styleSheet())
         {
             cube->rotateFA();
             cube->rotateDA();
-            rotateF();
+            cube->rotateF();
             cube->rotateDA();
-            rotateF();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
         else if(ui->up7Button->styleSheet() == ui->up5Button->styleSheet() && ui->front1Button->styleSheet() == ui->back5Button->styleSheet() && ui->left3Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateL();
-            rotateD();
+            cube->rotateL();
+            cube->rotateD();
             cube->rotateLA();
-            rotateD();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
         }
@@ -1674,48 +1368,48 @@ void MainWindow::QuinaSudoeste()
         {
             cube->rotateFA();
             cube->rotateDA();
-            rotateF();
-            rotateR();
+            cube->rotateF();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
         }
         else if(ui->up7Button->styleSheet() == ui->back5Button->styleSheet() && ui->front1Button->styleSheet() == ui->right5Button->styleSheet() && ui->left3Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateL();
-            rotateD();
+            cube->rotateL();
+            cube->rotateD();
             cube->rotateLA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->up7Button->styleSheet() == ui->up5Button->styleSheet() && ui->front1Button->styleSheet() == ui->left5Button->styleSheet() && ui->left3Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateL();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
         }
         else if(ui->up7Button->styleSheet() == ui->left5Button->styleSheet() && ui->front1Button->styleSheet() == ui->back5Button->styleSheet() && ui->left3Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateL();
-            rotateD();
+            cube->rotateL();
+            cube->rotateD();
             cube->rotateLA();
-            rotateD();
+            cube->rotateD();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
         }
         else if(ui->up7Button->styleSheet() == ui->back5Button->styleSheet() && ui->front1Button->styleSheet() == ui->up5Button->styleSheet() && ui->left3Button->styleSheet() == ui->left5Button->styleSheet())
         {
             cube->rotateFA();
             cube->rotateDA();
-            rotateF();
-            rotateD();
-            rotateB();
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
@@ -1774,51 +1468,51 @@ void MainWindow::QuinaNordeste()
         {
             cube->rotateBA();
             cube->rotateDA();
-            rotateB();
-            rotateD();
-            rotateD();
-            rotateR();
+            cube->rotateB();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
         }
         else if(ui->up3Button->styleSheet() == ui->back5Button->styleSheet() && ui->right3Button->styleSheet() == ui->up5Button->styleSheet() && ui->back9Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateR();
-            rotateD();
+            cube->rotateR();
+            cube->rotateD();
             cube->rotateRA();
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->up3Button->styleSheet() == ui->up5Button->styleSheet() && ui->right3Button->styleSheet() == ui->front5Button->styleSheet() && ui->back9Button->styleSheet() == ui->right5Button->styleSheet())
         {
              cube->rotateBA();
              cube->rotateDA();
-             rotateB();
+             cube->rotateB();
              cube->rotateDA();
              cube->rotateRA();
-             rotateD();
-             rotateR();
+             cube->rotateD();
+             cube->rotateR();
         }
         else if(ui->up3Button->styleSheet() == ui->right5Button->styleSheet() && ui->right3Button->styleSheet() == ui->up5Button->styleSheet() && ui->back9Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateR();
-            rotateD();
+            cube->rotateR();
+            cube->rotateD();
             cube->rotateRA();
-            rotateD();
+            cube->rotateD();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
         }
         else if(ui->up3Button->styleSheet() == ui->front5Button->styleSheet() && ui->right3Button->styleSheet() == ui->right5Button->styleSheet() && ui->back9Button->styleSheet() == ui->up5Button->styleSheet())
         {
             cube->rotateBA();
             cube->rotateDA();
-            rotateB();
-            rotateD();
-            rotateF();
+            cube->rotateB();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
@@ -1826,56 +1520,56 @@ void MainWindow::QuinaNordeste()
         {
             cube->rotateBA();
             cube->rotateDA();
-            rotateB();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
         }
         else if(ui->up3Button->styleSheet() == ui->left5Button->styleSheet() && ui->right3Button->styleSheet() == ui->front5Button->styleSheet() && ui->back9Button->styleSheet() == ui->up5Button->styleSheet())
         {
             cube->rotateBA();
             cube->rotateDA();
-            rotateB();
-            rotateL();
+            cube->rotateB();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
         }
         else if(ui->up3Button->styleSheet() == ui->front5Button->styleSheet() && ui->right3Button->styleSheet() == ui->up5Button->styleSheet() && ui->back9Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateR();
-            rotateD();
+            cube->rotateR();
+            cube->rotateD();
             cube->rotateRA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
         }
         else if(ui->up3Button->styleSheet() == ui->up5Button->styleSheet() && ui->right3Button->styleSheet() == ui->back5Button->styleSheet() && ui->back9Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateR();
-            rotateD();
+            cube->rotateR();
+            cube->rotateD();
             cube->rotateRA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
         else if(ui->up3Button->styleSheet() == ui->left5Button->styleSheet() && ui->right3Button->styleSheet() == ui->up5Button->styleSheet() && ui->back9Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateR();
+            cube->rotateR();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateRA();
         }
         else if(ui->up3Button->styleSheet() == ui->back5Button->styleSheet() && ui->right3Button->styleSheet() == ui->left5Button->styleSheet() && ui->back9Button->styleSheet() == ui->up5Button->styleSheet())
         {
             cube->rotateBA();
             cube->rotateDA();
-            rotateB();
+            cube->rotateB();
             cube->rotateDA();
-            rotateB();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
@@ -1977,82 +1671,82 @@ void MainWindow::QuinaNoroeste()
     {
         if(ui->up1Button->styleSheet() == ui->left5Button->styleSheet() && ui->left1Button->styleSheet() == ui->back5Button->styleSheet() && ui->back7Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateB();
-            rotateD();
+            cube->rotateB();
+            cube->rotateD();
             cube->rotateBA();
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
         }
         else if(ui->up1Button->styleSheet() == ui->back5Button->styleSheet() && ui->left1Button->styleSheet() == ui->up5Button->styleSheet() && ui->back7Button->styleSheet() == ui->left5Button->styleSheet())
         {
             cube->rotateLA();
             cube->rotateDA();
-            rotateL();
-            rotateD();
-            rotateD();
-            rotateB();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
         else if(ui->up1Button->styleSheet() == ui->up5Button->styleSheet() && ui->left1Button->styleSheet() == ui->right5Button->styleSheet() && ui->back7Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateB();
-            rotateD();
+            cube->rotateB();
+            cube->rotateD();
             cube->rotateBA();
-            rotateD();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
         else if(ui->up1Button->styleSheet() == ui->right5Button->styleSheet() && ui->left1Button->styleSheet() == ui->front5Button->styleSheet() && ui->back7Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateB();
-            rotateD();
+            cube->rotateB();
+            cube->rotateD();
             cube->rotateBA();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
         }
         else if(ui->up1Button->styleSheet() == ui->front5Button->styleSheet() && ui->left1Button->styleSheet() == ui->up5Button->styleSheet() && ui->back7Button->styleSheet() == ui->right5Button->styleSheet())
         {
             cube->rotateLA();
             cube->rotateDA();
-            rotateL();
-            rotateF();
+            cube->rotateL();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
         else if(ui->up1Button->styleSheet() == ui->up5Button->styleSheet() && ui->left1Button->styleSheet() == ui->front5Button->styleSheet() && ui->back7Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateB();
-            rotateD();
+            cube->rotateB();
+            cube->rotateD();
             cube->rotateBA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
         }
         else if(ui->up1Button->styleSheet() == ui->front5Button->styleSheet() && ui->left1Button->styleSheet() == ui->left5Button->styleSheet() && ui->back7Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateB();
-            rotateD();
+            cube->rotateB();
+            cube->rotateD();
             cube->rotateBA();
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
         }
         else if(ui->up1Button->styleSheet() == ui->left5Button->styleSheet() && ui->left1Button->styleSheet() == ui->up5Button->styleSheet() && ui->back7Button->styleSheet() == ui->front5Button->styleSheet())
         {
             cube->rotateLA();
-            rotateD();
-            rotateD();
-            rotateL();
-            rotateL();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
         }
@@ -2060,29 +1754,29 @@ void MainWindow::QuinaNoroeste()
         {
             cube->rotateLA();
             cube->rotateDA();
-            rotateL();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->up1Button->styleSheet() == ui->back5Button->styleSheet() && ui->left1Button->styleSheet() == ui->right5Button->styleSheet() && ui->back7Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateB();
-            rotateD();
+            cube->rotateB();
+            cube->rotateD();
             cube->rotateBA();
-            rotateD();
+            cube->rotateD();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->up1Button->styleSheet() == ui->right5Button->styleSheet() && ui->left1Button->styleSheet() == ui->up5Button->styleSheet() && ui->back7Button->styleSheet() == ui->back5Button->styleSheet())
         {
             cube->rotateLA();
             cube->rotateDA();
-            rotateL();
-            rotateD();
-            rotateR();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
         }
@@ -2094,8 +1788,8 @@ void MainWindow::SudesteBaixo()
     {
         if(ui->front9Button->styleSheet() == ui->front5Button->styleSheet() && ui->down3Button->styleSheet() == ui->right5Button->styleSheet() && ui->right7Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
@@ -2103,86 +1797,86 @@ void MainWindow::SudesteBaixo()
         {
             cube->rotateDA();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
         }
         else if(ui->front9Button->styleSheet() == ui->right5Button->styleSheet() && ui->down3Button->styleSheet() == ui->up5Button->styleSheet() && ui->right7Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateF();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
+            cube->rotateD();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
         }
         else if(ui->front9Button->styleSheet() == ui->front5Button->styleSheet() && ui->down3Button->styleSheet() == ui->up5Button->styleSheet() && ui->right7Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateF();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
         }
         else if(ui->front9Button->styleSheet() == ui->up5Button->styleSheet() && ui->down3Button->styleSheet() == ui->left5Button->styleSheet() && ui->right7Button->styleSheet() == ui->front5Button->styleSheet())
         {
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
         }
         else if(ui->front9Button->styleSheet() == ui->left5Button->styleSheet() && ui->down3Button->styleSheet() == ui->front5Button->styleSheet() && ui->right7Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateL();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
         }
         else if(ui->front9Button->styleSheet() == ui->left5Button->styleSheet() && ui->down3Button->styleSheet() == ui->up5Button->styleSheet() && ui->right7Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateF();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
         }
         else if(ui->front9Button->styleSheet() == ui->up5Button->styleSheet() && ui->down3Button->styleSheet() == ui->back5Button->styleSheet() && ui->right7Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateD();
+            cube->rotateD();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
         }
         else if(ui->front9Button->styleSheet() == ui->back5Button->styleSheet() && ui->down3Button->styleSheet() == ui->left5Button->styleSheet() && ui->right7Button->styleSheet() == ui->up5Button->styleSheet())
         {
             cube->rotateDA();
-            rotateB();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
         else if(ui->front9Button->styleSheet() == ui->back5Button->styleSheet() && ui->down3Button->styleSheet() == ui->up5Button->styleSheet() && ui->right7Button->styleSheet() == ui->right5Button->styleSheet())
         {
             cube->rotateRA();
-            rotateD();
-            rotateR();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
         }
         else if(ui->front9Button->styleSheet() == ui->up5Button->styleSheet() && ui->down3Button->styleSheet() == ui->right5Button->styleSheet() && ui->right7Button->styleSheet() == ui->back5Button->styleSheet())
         {
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->front9Button->styleSheet() == ui->right5Button->styleSheet() && ui->down3Button->styleSheet() == ui->back5Button->styleSheet() && ui->right7Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
         }
@@ -2240,30 +1934,30 @@ void MainWindow::SudoesteBaixo()
         if(ui->front7Button->styleSheet() == ui->front5Button->styleSheet() && ui->down1Button->styleSheet() == ui->up5Button->styleSheet() && ui->left9Button->styleSheet() == ui->right5Button->styleSheet())
         {
             cube->rotateFA();
-            rotateD();
-            rotateF();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
         else if(ui->front7Button->styleSheet() == ui->up5Button->styleSheet() && ui->down1Button->styleSheet() == ui->right5Button->styleSheet() && ui->left9Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
         else if(ui->front7Button->styleSheet() == ui->right5Button->styleSheet() && ui->down1Button->styleSheet() == ui->front5Button->styleSheet() && ui->left9Button->styleSheet() == ui->up5Button->styleSheet())
         {
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
         }
         else if(ui->front7Button->styleSheet() == ui->up5Button->styleSheet() && ui->down1Button->styleSheet() == ui->front5Button->styleSheet() && ui->left9Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
         }
@@ -2271,31 +1965,31 @@ void MainWindow::SudoesteBaixo()
         {
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
         }
         else if(ui->front7Button->styleSheet() == ui->left5Button->styleSheet() && ui->down1Button->styleSheet() == ui->up5Button->styleSheet() && ui->left9Button->styleSheet() == ui->front5Button->styleSheet())
         {
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
-            rotateL();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
         }
         else if(ui->front7Button->styleSheet() == ui->back5Button->styleSheet() && ui->down1Button->styleSheet() == ui->up5Button->styleSheet() && ui->left9Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateL();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
         }
         else if(ui->front7Button->styleSheet() == ui->up5Button->styleSheet() && ui->down1Button->styleSheet() == ui->left5Button->styleSheet() && ui->left9Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateB();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
@@ -2304,30 +1998,30 @@ void MainWindow::SudoesteBaixo()
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
         }
         else if(ui->front7Button->styleSheet() == ui->back5Button->styleSheet() && ui->down1Button->styleSheet() == ui->right5Button->styleSheet() && ui->left9Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateD();
+            cube->rotateD();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->front7Button->styleSheet() == ui->right5Button->styleSheet() && ui->down1Button->styleSheet() == ui->up5Button->styleSheet() && ui->left9Button->styleSheet() == ui->back5Button->styleSheet())
         {
             cube->rotateFA();
-            rotateD();
-            rotateF();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
         }
         else if(ui->front7Button->styleSheet() == ui->up5Button->styleSheet() && ui->down1Button->styleSheet() == ui->back5Button->styleSheet() && ui->left9Button->styleSheet() == ui->right5Button->styleSheet())
         {
             cube->rotateDA();
-            rotateR();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
         }
@@ -2384,16 +2078,16 @@ void MainWindow::NordesteBaixo()
     {
        if(ui->back3Button->styleSheet() == ui->front5Button->styleSheet() && ui->down9Button->styleSheet() == ui->up5Button->styleSheet() && ui->right9Button->styleSheet() == ui->right5Button->styleSheet())
        {
-            rotateR();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
        }
        else if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() && ui->down9Button->styleSheet() == ui->right5Button->styleSheet() && ui->right9Button->styleSheet() == ui->front5Button->styleSheet())
        {
-            rotateF();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
        }
@@ -2402,77 +2096,77 @@ void MainWindow::NordesteBaixo()
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
        }
        else if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() && ui->down9Button->styleSheet() == ui->front5Button->styleSheet() && ui->right9Button->styleSheet() == ui->left5Button->styleSheet())
        {
             cube->rotateDA();
-            rotateL();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
        }
        else if(ui->back3Button->styleSheet() == ui->front5Button->styleSheet() && ui->down9Button->styleSheet() == ui->left5Button->styleSheet() && ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
        {
-            rotateD();
+            cube->rotateD();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
        }
        else if(ui->back3Button->styleSheet() == ui->left5Button->styleSheet() && ui->down9Button->styleSheet() == ui->up5Button->styleSheet() && ui->right9Button->styleSheet() == ui->front5Button->styleSheet())
        {
-            rotateR();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
        }
        else if(ui->back3Button->styleSheet() == ui->back5Button->styleSheet() && ui->down9Button->styleSheet() == ui->up5Button->styleSheet() && ui->right9Button->styleSheet() == ui->left5Button->styleSheet())
        {
             cube->rotateBA();
-            rotateD();
-            rotateB();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
        }
        else if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() && ui->down9Button->styleSheet() == ui->left5Button->styleSheet() && ui->right9Button->styleSheet() == ui->back5Button->styleSheet())
        {
-            rotateD();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
        }
        else if(ui->back3Button->styleSheet() == ui->left5Button->styleSheet() && ui->down9Button->styleSheet() == ui->back5Button->styleSheet() && ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
        {
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
        }
        else if(ui->back3Button->styleSheet() == ui->back5Button->styleSheet() && ui->down9Button->styleSheet() == ui->right5Button->styleSheet() && ui->right9Button->styleSheet() == ui->up5Button->styleSheet())
        {
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
        }
        else if(ui->back3Button->styleSheet() == ui->right5Button->styleSheet() && ui->down9Button->styleSheet() == ui->up5Button->styleSheet() && ui->right9Button->styleSheet() == ui->back5Button->styleSheet())
        {
-            rotateR();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
-            rotateD();
+            cube->rotateD();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
        }
        else if(ui->back3Button->styleSheet() == ui->up5Button->styleSheet() && ui->down9Button->styleSheet() == ui->back5Button->styleSheet() && ui->right9Button->styleSheet() == ui->right5Button->styleSheet())
        {
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
        }
@@ -2530,94 +2224,94 @@ void MainWindow::NoroesteBaixo()
         if(ui->back1Button->styleSheet() == ui->front5Button->styleSheet() && ui->down7Button->styleSheet() == ui->right5Button->styleSheet() && ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
         {
             cube->rotateDA();
-            rotateF();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
         else if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() && ui->down7Button->styleSheet() == ui->front5Button->styleSheet() && ui->left7Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateD();
+            cube->rotateD();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
         }
         else if(ui->back1Button->styleSheet() == ui->right5Button->styleSheet() && ui->down7Button->styleSheet() == ui->up5Button->styleSheet() && ui->left7Button->styleSheet() == ui->front5Button->styleSheet())
         {
             cube->rotateLA();
-            rotateD();
-            rotateL();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
         else if(ui->back1Button->styleSheet() == ui->front5Button->styleSheet() && ui->down7Button->styleSheet() == ui->up5Button->styleSheet() && ui->left7Button->styleSheet() == ui->left5Button->styleSheet())
         {
             cube->rotateLA();
-            rotateD();
-            rotateL();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
         }
         else if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() && ui->down7Button->styleSheet() == ui->left5Button->styleSheet() && ui->left7Button->styleSheet() == ui->front5Button->styleSheet())
         {
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
         }
         else if(ui->back1Button->styleSheet() == ui->left5Button->styleSheet() && ui->down7Button->styleSheet() == ui->front5Button->styleSheet() && ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
         }
         else if(ui->back1Button->styleSheet() == ui->left5Button->styleSheet() && ui->down7Button->styleSheet() == ui->up5Button->styleSheet() && ui->left7Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateB();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
+            cube->rotateD();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
         }
         else if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() && ui->down7Button->styleSheet() == ui->back5Button->styleSheet() && ui->left7Button->styleSheet() == ui->left5Button->styleSheet())
         {
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
         }
         else if(ui->back1Button->styleSheet() == ui->back5Button->styleSheet() && ui->down7Button->styleSheet() == ui->left5Button->styleSheet() && ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
         else if(ui->back1Button->styleSheet() == ui->back5Button->styleSheet() && ui->down7Button->styleSheet() == ui->up5Button->styleSheet() && ui->left7Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateB();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->back1Button->styleSheet() == ui->up5Button->styleSheet() && ui->down7Button->styleSheet() == ui->right5Button->styleSheet() && ui->left7Button->styleSheet() == ui->back5Button->styleSheet())
         {
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->back1Button->styleSheet() == ui->right5Button->styleSheet() && ui->down7Button->styleSheet() == ui->back5Button->styleSheet() && ui->left7Button->styleSheet() == ui->up5Button->styleSheet())
         {
-            rotateR();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
         }
@@ -2692,97 +2386,97 @@ void MainWindow::frontSecond()
     {
         if(ui->front8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down2Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
         }
         else if(ui->front8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down2Button->styleSheet() == ui->right5Button->styleSheet())
         {
             cube->rotateDA();
             cube->rotateRA();
-            rotateD();
-            rotateR();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
         else if(ui->left8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down4Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
         }
         else if(ui->left8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down4Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateD();
+            cube->rotateD();
             cube->rotateDA();
             cube->rotateRA();
-            rotateD();
-            rotateR();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
         else if(ui->right8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down6Button->styleSheet() == ui->left5Button->styleSheet())
         {
             cube->rotateDA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
         }
         else if(ui->right8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down6Button->styleSheet() == ui->right5Button->styleSheet())
         {
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateRA();
-            rotateD();
-            rotateR();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
         else if(ui->back2Button->styleSheet() == ui->front5Button->styleSheet() && ui->down8Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
         }
         else if(ui->back2Button->styleSheet() == ui->front5Button->styleSheet() && ui->down8Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateDA();
             cube->rotateRA();
-            rotateD();
-            rotateR();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
         }
@@ -2795,14 +2489,14 @@ void MainWindow::leftSecond()
     {
         if(ui->left8Button->styleSheet() == ui->left5Button->styleSheet() && ui->down4Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             ult = "1LL";
             
         }
@@ -2810,10 +2504,10 @@ void MainWindow::leftSecond()
         {
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
             ult = "2LL";
@@ -2821,27 +2515,27 @@ void MainWindow::leftSecond()
         }
         else if(ui->back2Button->styleSheet() == ui->left5Button->styleSheet() && ui->down8Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             ult = "3LL";
             
         }
         else if(ui->back2Button->styleSheet() == ui->left5Button->styleSheet() && ui->down8Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateD();
+            cube->rotateD();
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
             ult = "4LL";
@@ -2850,14 +2544,14 @@ void MainWindow::leftSecond()
         else if(ui->front8Button->styleSheet() == ui->left5Button->styleSheet() && ui->down2Button->styleSheet() == ui->back5Button->styleSheet())
         {
             cube->rotateDA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             ult = "5LL";
             
         }
@@ -2866,10 +2560,10 @@ void MainWindow::leftSecond()
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
             ult = "6LL";
@@ -2877,29 +2571,29 @@ void MainWindow::leftSecond()
         }
         else if(ui->right8Button->styleSheet() == ui->left5Button->styleSheet() && ui->down6Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             ult = "7LL";
             
         }
         else if(ui->right8Button->styleSheet() == ui->left5Button->styleSheet() && ui->down6Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateDA();
             cube->rotateFA();
-            rotateD();
-            rotateF();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
             ult = "8LL";
@@ -2914,97 +2608,97 @@ void MainWindow::rightSecond()
     {
         if(ui->right8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down6Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
             cube->rotateDA();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
         }
         else if(ui->right8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down6Button->styleSheet() == ui->back5Button->styleSheet())
         {
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
         }
         else if(ui->front8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down2Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
             cube->rotateDA();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
         }
         else if(ui->front8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down2Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateD();
+            cube->rotateD();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
         }
         else if(ui->back2Button->styleSheet() == ui->right5Button->styleSheet() && ui->down8Button->styleSheet() == ui->front5Button->styleSheet())
         {
             cube->rotateDA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
             cube->rotateDA();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
         }
         else if(ui->back2Button->styleSheet() == ui->right5Button->styleSheet() && ui->down8Button->styleSheet() == ui->back5Button->styleSheet())
         {
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
         }
         else if(ui->left8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down4Button->styleSheet() == ui->front5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
             cube->rotateDA();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
         }
         else if(ui->left8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down4Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
         }
@@ -3017,97 +2711,97 @@ void MainWindow::backSecond()
     {
         if(ui->back2Button->styleSheet() == ui->back5Button->styleSheet() && ui->down8Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->back2Button->styleSheet() == ui->back5Button->styleSheet() && ui->down8Button->styleSheet() == ui->left5Button->styleSheet())
         {
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
         else if(ui->right8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down6Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->right8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down6Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateD();
+            cube->rotateD();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
         else if(ui->left8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down4Button->styleSheet() == ui->right5Button->styleSheet())
         {
             cube->rotateDA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->left8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down4Button->styleSheet() == ui->left5Button->styleSheet())
         {
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
         else if(ui->front8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down2Button->styleSheet() == ui->right5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->front8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down2Button->styleSheet() == ui->left5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
@@ -3154,132 +2848,132 @@ void MainWindow::debugaFront()
         {
             if(ui->front8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down2Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
                 cube->rotateDA();
                 cube->rotateFA();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateF();
             }
             else if(ui->front8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down2Button->styleSheet() == ui->down5Button->styleSheet())
             {
                 cube->rotateDA();
                 cube->rotateRA();
-                rotateD();
-                rotateR();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateR();
+                cube->rotateD();
+                cube->rotateF();
                 cube->rotateDA();
                 cube->rotateFA();
             }
             else if(ui->left8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down4Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
                 cube->rotateDA();
                 cube->rotateFA();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateF();
             }
             else if(ui->left8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down4Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
+                cube->rotateD();
                 cube->rotateDA();
                 cube->rotateRA();
-                rotateD();
-                rotateR();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateR();
+                cube->rotateD();
+                cube->rotateF();
                 cube->rotateDA();
                 cube->rotateFA();
             }
             else if(ui->right8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down6Button->styleSheet() == ui->down5Button->styleSheet())
             {
                 cube->rotateDA();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
                 cube->rotateDA();
                 cube->rotateFA();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateF();
             }
             else if(ui->right8Button->styleSheet() == ui->front5Button->styleSheet() && ui->down6Button->styleSheet() == ui->down5Button->styleSheet())
             {
                 cube->rotateDA();
                 cube->rotateDA();
                 cube->rotateRA();
-                rotateD();
-                rotateR();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateR();
+                cube->rotateD();
+                cube->rotateF();
                 cube->rotateDA();
                 cube->rotateFA();
             }
             else if(ui->back2Button->styleSheet() == ui->front5Button->styleSheet() && ui->down8Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
-                rotateD();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
                 cube->rotateDA();
                 cube->rotateFA();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateF();
             }
             else if(ui->back2Button->styleSheet() == ui->front5Button->styleSheet() && ui->down8Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
-                rotateD();
+                cube->rotateD();
+                cube->rotateD();
                 cube->rotateDA();
                 cube->rotateRA();
-                rotateD();
-                rotateR();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateR();
+                cube->rotateD();
+                cube->rotateF();
                 cube->rotateDA();
                 cube->rotateFA();
             }
             else if(ui->front4Button->styleSheet() == ui->left5Button->styleSheet() && ui->left6Button->styleSheet() == ui->front5Button->styleSheet())
             {
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
                 cube->rotateDA();
                 cube->rotateFA();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateF();
             }
             else if(ui->front6Button->styleSheet() == ui->right5Button->styleSheet() && ui->right4Button->styleSheet() == ui->front5Button->styleSheet())
             {
                 cube->rotateDA();
                 cube->rotateRA();
-                rotateD();
-                rotateR();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateR();
+                cube->rotateD();
+                cube->rotateF();
                 cube->rotateDA();
                 cube->rotateFA();
             }
             else
             {
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
                 cube->rotateDA();
                 cube->rotateFA();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateF();
             }
         }
 }
@@ -3290,132 +2984,132 @@ void MainWindow::debugaLeft()
         {
             if(ui->left8Button->styleSheet() == ui->left5Button->styleSheet() && ui->down4Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
-                rotateB();
+                cube->rotateD();
+                cube->rotateB();
                 cube->rotateDA();
                 cube->rotateBA();
                 cube->rotateDA();
                 cube->rotateLA();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateL();
             }
             else if(ui->left8Button->styleSheet() == ui->left5Button->styleSheet() && ui->down4Button->styleSheet() == ui->down5Button->styleSheet())
             {
                 cube->rotateDA();
                 cube->rotateFA();
-                rotateD();
-                rotateF();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateF();
+                cube->rotateD();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
             }
             else if(ui->back2Button->styleSheet() == ui->left5Button->styleSheet() && ui->down8Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
-                rotateD();
-                rotateB();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateB();
                 cube->rotateDA();
                 cube->rotateBA();
                 cube->rotateDA();
                 cube->rotateLA();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateL();
             }
             else if(ui->back2Button->styleSheet() == ui->left5Button->styleSheet() && ui->down8Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
+                cube->rotateD();
                 cube->rotateDA();
                 cube->rotateFA();
-                rotateD();
-                rotateF();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateF();
+                cube->rotateD();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
             }
             else if(ui->front8Button->styleSheet() == ui->left5Button->styleSheet() && ui->down2Button->styleSheet() == ui->down5Button->styleSheet())
             {
                 cube->rotateDA();
-                rotateD();
-                rotateB();
+                cube->rotateD();
+                cube->rotateB();
                 cube->rotateDA();
                 cube->rotateBA();
                 cube->rotateDA();
                 cube->rotateLA();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateL();
             }
             else if(ui->front8Button->styleSheet() == ui->left5Button->styleSheet() && ui->down2Button->styleSheet() == ui->down5Button->styleSheet())
             {
                 cube->rotateDA();
                 cube->rotateDA();
                 cube->rotateFA();
-                rotateD();
-                rotateF();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateF();
+                cube->rotateD();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
             }
             else if(ui->right8Button->styleSheet() == ui->left5Button->styleSheet() && ui->down6Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
-                rotateD();
-                rotateD();
-                rotateB();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateB();
                 cube->rotateDA();
                 cube->rotateBA();
                 cube->rotateDA();
                 cube->rotateLA();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateL();
             }
             else if(ui->right8Button->styleSheet() == ui->left5Button->styleSheet() && ui->down6Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
-                rotateD();
+                cube->rotateD();
+                cube->rotateD();
                 cube->rotateDA();
                 cube->rotateFA();
-                rotateD();
-                rotateF();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateF();
+                cube->rotateD();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
             }
             else if(ui->left4Button->styleSheet() == ui->down5Button->styleSheet() && ui->down4Button->styleSheet() == ui->left5Button->styleSheet())
             {
-                rotateD();
-                rotateB();
+                cube->rotateD();
+                cube->rotateB();
                 cube->rotateDA();
                 cube->rotateBA();
                 cube->rotateDA();
                 cube->rotateLA();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateL();
             }
             else if(ui->left6Button->styleSheet() == ui->front5Button->styleSheet() && ui->front4Button->styleSheet() == ui->left5Button->styleSheet())
             {
                 cube->rotateDA();
                 cube->rotateFA();
-                rotateD();
-                rotateF();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateF();
+                cube->rotateD();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
             }
             else
             {
-                rotateD();
-                rotateB();
+                cube->rotateD();
+                cube->rotateB();
                 cube->rotateDA();
                 cube->rotateBA();
                 cube->rotateDA();
                 cube->rotateLA();
-                rotateD();
-                rotateL();
+                cube->rotateD();
+                cube->rotateL();
             }
         }
 }
@@ -3426,132 +3120,132 @@ void MainWindow::debugaRight()
         {
             if(ui->right8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down6Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateF();
                 cube->rotateDA();
                 cube->rotateFA();
                 cube->rotateDA();
                 cube->rotateRA();
-                rotateD();
-                rotateR();
+                cube->rotateD();
+                cube->rotateR();
             }
             else if(ui->right8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down6Button->styleSheet() == ui->down5Button->styleSheet())
             {
                 cube->rotateDA();
                 cube->rotateBA();
-                rotateD();
-                rotateB();
-                rotateD();
-                rotateR();
+                cube->rotateD();
+                cube->rotateB();
+                cube->rotateD();
+                cube->rotateR();
                 cube->rotateDA();
                 cube->rotateRA();
             }
             else if(ui->front8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down2Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateF();
                 cube->rotateDA();
                 cube->rotateFA();
                 cube->rotateDA();
                 cube->rotateRA();
-                rotateD();
-                rotateR();
+                cube->rotateD();
+                cube->rotateR();
             }
             else if(ui->front8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down2Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
+                cube->rotateD();
                 cube->rotateDA();
                 cube->rotateBA();
-                rotateD();
-                rotateB();
-                rotateD();
-                rotateR();
+                cube->rotateD();
+                cube->rotateB();
+                cube->rotateD();
+                cube->rotateR();
                 cube->rotateDA();
                 cube->rotateRA();
             }
             else if(ui->back2Button->styleSheet() == ui->right5Button->styleSheet() && ui->down8Button->styleSheet() == ui->down5Button->styleSheet())
             {
                 cube->rotateDA();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateF();
                 cube->rotateDA();
                 cube->rotateFA();
                 cube->rotateDA();
                 cube->rotateRA();
-                rotateD();
-                rotateR();
+                cube->rotateD();
+                cube->rotateR();
             }
             else if(ui->back2Button->styleSheet() == ui->right5Button->styleSheet() && ui->down8Button->styleSheet() == ui->down5Button->styleSheet())
             {
                 cube->rotateDA();
                 cube->rotateDA();
                 cube->rotateBA();
-                rotateD();
-                rotateB();
-                rotateD();
-                rotateR();
+                cube->rotateD();
+                cube->rotateB();
+                cube->rotateD();
+                cube->rotateR();
                 cube->rotateDA();
                 cube->rotateRA();
             }
             else if(ui->left8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down4Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
-                rotateD();
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateD();
+                cube->rotateF();
                 cube->rotateDA();
                 cube->rotateFA();
                 cube->rotateDA();
                 cube->rotateRA();
-                rotateD();
-                rotateR();
+                cube->rotateD();
+                cube->rotateR();
             }
             else if(ui->left8Button->styleSheet() == ui->right5Button->styleSheet() && ui->down4Button->styleSheet() == ui->down5Button->styleSheet())
             {
-                rotateD();
-                rotateD();
+                cube->rotateD();
+                cube->rotateD();
                 cube->rotateDA();
                 cube->rotateBA();
-                rotateD();
-                rotateB();
-                rotateD();
-                rotateR();
+                cube->rotateD();
+                cube->rotateB();
+                cube->rotateD();
+                cube->rotateR();
                 cube->rotateDA();
                 cube->rotateRA();
             }
             else if(ui->right4Button->styleSheet() == ui->front5Button->styleSheet() && ui->front6Button->styleSheet() == ui->right5Button->styleSheet())
             {
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateF();
                 cube->rotateDA();
                 cube->rotateFA();
                 cube->rotateDA();
                 cube->rotateRA();
-                rotateD();
-                rotateR();
+                cube->rotateD();
+                cube->rotateR();
             }
             else if(ui->right6Button->styleSheet() == ui->down5Button->styleSheet() && ui->down6Button->styleSheet() == ui->right5Button->styleSheet())
             {
                 cube->rotateDA();
                 cube->rotateBA();
-                rotateD();
-                rotateB();
-                rotateD();
-                rotateR();
+                cube->rotateD();
+                cube->rotateB();
+                cube->rotateD();
+                cube->rotateR();
                 cube->rotateDA();
                 cube->rotateRA();
             }
             else
             {
-                rotateD();
-                rotateF();
+                cube->rotateD();
+                cube->rotateF();
                 cube->rotateDA();
                 cube->rotateFA();
                 cube->rotateDA();
                 cube->rotateRA();
-                rotateD();
-                rotateR();
+                cube->rotateD();
+                cube->rotateR();
             }
         }
 }
@@ -3562,132 +3256,132 @@ void MainWindow::debugaBack()
     {
         if(ui->back2Button->styleSheet() == ui->back5Button->styleSheet() && ui->down8Button->styleSheet() == ui->down5Button->styleSheet())
         {
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->back2Button->styleSheet() == ui->back5Button->styleSheet() && ui->down8Button->styleSheet() == ui->down5Button->styleSheet())
         {
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
         else if(ui->right8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down6Button->styleSheet() == ui->down5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->right8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down6Button->styleSheet() == ui->down5Button->styleSheet())
         {
-            rotateD();
+            cube->rotateD();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
         else if(ui->left8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down4Button->styleSheet() == ui->down5Button->styleSheet())
         {
             cube->rotateDA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->left8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down4Button->styleSheet() == ui->down5Button->styleSheet())
         {
             cube->rotateDA();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
         else if(ui->front8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down2Button->styleSheet() == ui->down5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->front8Button->styleSheet() == ui->back5Button->styleSheet() && ui->down2Button->styleSheet() == ui->down5Button->styleSheet())
         {
-            rotateD();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
         else if(ui->back6Button->styleSheet() == ui->right5Button->styleSheet() && ui->right6Button->styleSheet() == ui->back5Button->styleSheet())
         {
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
         else if(ui->back4Button->styleSheet() == ui->left5Button->styleSheet() && ui->left4Button->styleSheet() == ui->back5Button->styleSheet())
         {
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
-            rotateL();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
         }
         else
         {
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateDA();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
         }
     }
 }
@@ -3696,9 +3390,9 @@ void MainWindow::on_downCrossButton_clicked()
     if(ui->down2Button->styleSheet() != ui->down5Button->styleSheet() && ui->down4Button->styleSheet() != ui->down5Button->styleSheet() &&
             ui->down6Button->styleSheet() != ui->down5Button->styleSheet() && ui->down8Button->styleSheet() != ui->down5Button->styleSheet())
     {
-        rotateF();
-        rotateL();
-        rotateD();
+        cube->rotateF();
+        cube->rotateL();
+        cube->rotateD();
         cube->rotateLA();
         cube->rotateDA();
         cube->rotateFA();
@@ -3706,12 +3400,12 @@ void MainWindow::on_downCrossButton_clicked()
     while((ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down4Button->styleSheet() != ui->down5Button->styleSheet()) &&
           (ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down8Button->styleSheet() != ui->down5Button->styleSheet()) &&
            (ui->down4Button->styleSheet() != ui->down5Button->styleSheet() || ui->down6Button->styleSheet() != ui->down5Button->styleSheet()))
-        rotateD();
+        cube->rotateD();
     if(ui->down6Button->styleSheet() != ui->down5Button->styleSheet() && ui->down8Button->styleSheet() != ui->down5Button->styleSheet())
     {
-        rotateF();
-        rotateL();
-        rotateD();
+        cube->rotateF();
+        cube->rotateL();
+        cube->rotateD();
         cube->rotateLA();
         cube->rotateDA();
         cube->rotateFA();
@@ -3721,13 +3415,13 @@ void MainWindow::on_downCrossButton_clicked()
         ui->down8Button->styleSheet() == ui->down5Button->styleSheet()) &&
             ui->down4Button->styleSheet() != ui->down5Button->styleSheet() &&
             ui->down6Button->styleSheet() != ui->down5Button->styleSheet())
-        rotateD();
+        cube->rotateD();
     if(ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down4Button->styleSheet() != ui->down5Button->styleSheet() ||
             ui->down6Button->styleSheet() != ui->down5Button->styleSheet() || ui->down8Button->styleSheet() != ui->down5Button->styleSheet())
     {
-        rotateF();
-        rotateL();
-        rotateD();
+        cube->rotateF();
+        cube->rotateL();
+        cube->rotateD();
         cube->rotateLA();
         cube->rotateDA();
         cube->rotateFA();
@@ -3757,53 +3451,53 @@ void MainWindow::on_backEdgesButton_clicked()
                 i++;
             if(i == 0)
             {
-                rotateD();
-                rotateD();
+                cube->rotateD();
+                cube->rotateD();
             }
             if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
             {
-                rotateL();
-                rotateD();
-                rotateD();
+                cube->rotateL();
+                cube->rotateD();
+                cube->rotateD();
                 cube->rotateLA();
                 cube->rotateDA();
-                rotateL();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
                 cube->rotateDA();
             }
             else if(ui->back2Button->styleSheet() != ui->back2Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
             {
-                rotateB();
-                rotateD();
-                rotateD();
+                cube->rotateB();
+                cube->rotateD();
+                cube->rotateD();
                 cube->rotateBA();
                 cube->rotateDA();
-                rotateB();
+                cube->rotateB();
                 cube->rotateDA();
                 cube->rotateBA();
                 cube->rotateDA();
             }
             else if(ui->back2Button->styleSheet() != ui->back5Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
             {
-                rotateR();
-                rotateD();
-                rotateD();
+                cube->rotateR();
+                cube->rotateD();
+                cube->rotateD();
                 cube->rotateRA();
                 cube->rotateDA();
-                rotateR();
+                cube->rotateR();
                 cube->rotateDA();
                 cube->rotateRA();
                 cube->rotateDA();
             }
             else if(ui->front8Button->styleSheet() != ui->front2Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
             {
-                rotateF();
-                rotateD();
-                rotateD();
+                cube->rotateF();
+                cube->rotateD();
+                cube->rotateD();
                 cube->rotateFA();
                 cube->rotateDA();
-                rotateF();
+                cube->rotateF();
                 cube->rotateDA();
                 cube->rotateFA();
                 cube->rotateDA();
@@ -3830,16 +3524,16 @@ void MainWindow::on_backEdgesButton_clicked()
                 i++;
             if(i == 1)
             {
-                rotateD();
+                cube->rotateD();
             }
             else if (i == 1)
             {
-                rotateL();
-                rotateD();
-                rotateD();
+                cube->rotateL();
+                cube->rotateD();
+                cube->rotateD();
                 cube->rotateLA();
                 cube->rotateDA();
-                rotateL();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
                 cube->rotateDA();
@@ -3848,60 +3542,60 @@ void MainWindow::on_backEdgesButton_clicked()
             {
                 if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
                 {
-                    rotateL();
-                    rotateD();
-                    rotateD();
+                    cube->rotateL();
+                    cube->rotateD();
+                    cube->rotateD();
                     cube->rotateLA();
                     cube->rotateDA();
-                    rotateL();
+                    cube->rotateL();
                     cube->rotateDA();
                     cube->rotateLA();
                     cube->rotateDA();
                 }
                 else if(ui->back2Button->styleSheet() != ui->back2Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
                 {
-                    rotateF();
-                    rotateD();
-                    rotateD();
+                    cube->rotateF();
+                    cube->rotateD();
+                    cube->rotateD();
                     cube->rotateFA();
                     cube->rotateDA();
-                    rotateF();
+                    cube->rotateF();
                     cube->rotateDA();
                     cube->rotateFA();
                     cube->rotateDA();
                 }
                 else if(ui->back2Button->styleSheet() != ui->back5Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
                 {
-                    rotateL();
-                    rotateD();
-                    rotateD();
+                    cube->rotateL();
+                    cube->rotateD();
+                    cube->rotateD();
                     cube->rotateLA();
                     cube->rotateDA();
-                    rotateL();
+                    cube->rotateL();
                     cube->rotateDA();
                     cube->rotateLA();
                     cube->rotateDA();
                 }
                 else if(ui->front8Button->styleSheet() != ui->front2Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
                 {
-                    rotateF();
-                    rotateD();
-                    rotateD();
+                    cube->rotateF();
+                    cube->rotateD();
+                    cube->rotateD();
                     cube->rotateFA();
                     cube->rotateDA();
-                    rotateF();
+                    cube->rotateF();
                     cube->rotateDA();
                     cube->rotateFA();
                     cube->rotateDA();
                 }
                 else
                 {
-                    rotateL();
-                    rotateD();
-                    rotateD();
+                    cube->rotateL();
+                    cube->rotateD();
+                    cube->rotateD();
                     cube->rotateLA();
                     cube->rotateDA();
-                    rotateL();
+                    cube->rotateL();
                     cube->rotateDA();
                     cube->rotateLA();
                     cube->rotateDA();
@@ -3909,17 +3603,17 @@ void MainWindow::on_backEdgesButton_clicked()
             }
             else
             {
-                rotateD();
-                rotateD();
+                cube->rotateD();
+                cube->rotateD();
             }
             if(ui->left8Button->styleSheet() == ui->left5Button->styleSheet() && ui->right8Button->styleSheet() == ui->right5Button->styleSheet())
             {
-                rotateL();
-                rotateD();
-                rotateD();
+                cube->rotateL();
+                cube->rotateD();
+                cube->rotateD();
                 cube->rotateLA();
                 cube->rotateDA();
-                rotateL();
+                cube->rotateL();
                 cube->rotateDA();
                 cube->rotateLA();
             }
@@ -3928,15 +3622,15 @@ void MainWindow::on_backEdgesButton_clicked()
                 ui->back2Button->styleSheet() != ui->back5Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
         {
             cube->rotateDA();
-            rotateL();
-            rotateD();
-            rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateLA();
             cube->rotateDA();
-            rotateL();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
-            rotateD();
+            cube->rotateD();
         }
     }*/
 }
@@ -3983,11 +3677,11 @@ void MainWindow::on_placeDownEdgesButton_clicked()
         if(sudoestecorreto())
         {
             cube->rotateRA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
-            rotateR();
-            rotateD();
+            cube->rotateR();
+            cube->rotateD();
             cube->rotateLA();
             cube->rotateDA();
             ult = "1SS";
@@ -3996,11 +3690,11 @@ void MainWindow::on_placeDownEdgesButton_clicked()
         else if(sudestecorreto())
         {
             cube->rotateBA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
             cube->rotateDA();
-            rotateB();
-            rotateD();
+            cube->rotateB();
+            cube->rotateD();
             cube->rotateFA();
             cube->rotateDA();
             ult = "2SS";
@@ -4009,11 +3703,11 @@ void MainWindow::on_placeDownEdgesButton_clicked()
         else if(noroestecorreto())
         {
             cube->rotateFA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
             cube->rotateDA();
-            rotateF();
-            rotateD();
+            cube->rotateF();
+            cube->rotateD();
             cube->rotateBA();
             cube->rotateDA();
             ult = "3SS";
@@ -4022,11 +3716,11 @@ void MainWindow::on_placeDownEdgesButton_clicked()
         else if(nordestecorreto())
         {
             cube->rotateRA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
-            rotateR();
-            rotateD();
+            cube->rotateR();
+            cube->rotateD();
             cube->rotateLA();
             cube->rotateDA();
             ult = "4SS";
@@ -4035,11 +3729,11 @@ void MainWindow::on_placeDownEdgesButton_clicked()
         else
         {
             cube->rotateRA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             cube->rotateDA();
-            rotateR();
-            rotateD();
+            cube->rotateR();
+            cube->rotateD();
             cube->rotateLA();
             cube->rotateDA();
             ult = "5SS";
@@ -4071,172 +3765,172 @@ void MainWindow::on_turnDownEdgesButton_clicked()
         if((ui->front7Button->styleSheet() != ui->front5Button->styleSheet() || ui->left9Button->styleSheet() != ui->left5Button->styleSheet() || ui->down1Button->styleSheet() != ui->down5Button->styleSheet()) &&
                 (ui->back1Button->styleSheet() != ui->back5Button->styleSheet() || ui->left7Button->styleSheet() != ui->left5Button->styleSheet() || ui->down7Button->styleSheet() != ui->down7Button->styleSheet()))
         {
-            rotateL();
-            rotateD();
-            rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateLA();
             cube->rotateDA();
-            rotateL();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
             cube->rotateRA();
-            rotateD();
-            rotateD();
-            rotateR();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateR();
+            cube->rotateD();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
             ult = "1FF";
             
         }
         else if((ui->back1Button->styleSheet() != ui->back5Button->styleSheet() || ui->left7Button->styleSheet() != ui->left5Button->styleSheet() || ui->down7Button->styleSheet() != ui->down7Button->styleSheet()) &&
                 (ui->back3Button->styleSheet() != ui->back5Button->styleSheet() || ui->right9Button->styleSheet() != ui->right5Button->styleSheet() || ui->down9Button->styleSheet() != ui->down7Button->styleSheet()))
         {
-            rotateB();
-            rotateD();
-            rotateD();
+            cube->rotateB();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateBA();
             cube->rotateDA();
-            rotateB();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
             cube->rotateFA();
-            rotateD();
-            rotateD();
-            rotateF();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateD();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
             ult = "2FF";
             
         }
         else if((ui->back3Button->styleSheet() != ui->back5Button->styleSheet() || ui->right9Button->styleSheet() != ui->right5Button->styleSheet() || ui->down9Button->styleSheet() != ui->down7Button->styleSheet()) &&
                 (ui->front9Button->styleSheet() != ui->front5Button->styleSheet() || ui->right7Button->styleSheet() != ui->right5Button->styleSheet() || ui->down3Button->styleSheet() != ui->down7Button->styleSheet()))
         {
-            rotateR();
-            rotateD();
-            rotateD();
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateRA();
             cube->rotateDA();
-            rotateR();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateLA();
-            rotateD();
-            rotateD();
-            rotateL();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             ult = "3FF";
             
         }
         else if((ui->front9Button->styleSheet() != ui->front5Button->styleSheet() || ui->right7Button->styleSheet() != ui->right5Button->styleSheet() || ui->down3Button->styleSheet() != ui->down7Button->styleSheet()) &&
                 (ui->front7Button->styleSheet() != ui->front5Button->styleSheet() || ui->left9Button->styleSheet() != ui->left5Button->styleSheet() || ui->down1Button->styleSheet() != ui->down5Button->styleSheet()))
         {
-            rotateF();
-            rotateD();
-            rotateD();
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateFA();
             cube->rotateDA();
-            rotateF();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
             cube->rotateBA();
-            rotateD();
-            rotateD();
-            rotateB();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateD();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
             ult = "4FF";
             
         }
         else if(ui->front7Button->styleSheet() != ui->front5Button->styleSheet() || ui->left9Button->styleSheet() != ui->left5Button->styleSheet() || ui->down1Button->styleSheet() != ui->down5Button->styleSheet())
         {
-            rotateL();
-            rotateD();
-            rotateD();
+            cube->rotateL();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateLA();
             cube->rotateDA();
-            rotateL();
+            cube->rotateL();
             cube->rotateDA();
             cube->rotateLA();
             cube->rotateRA();
-            rotateD();
-            rotateD();
-            rotateR();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateR();
+            cube->rotateD();
             cube->rotateRA();
-            rotateD();
-            rotateR();
+            cube->rotateD();
+            cube->rotateR();
             ult = "5FF";
             
         }
         else if(ui->back1Button->styleSheet() != ui->back5Button->styleSheet() || ui->left7Button->styleSheet() != ui->left5Button->styleSheet() || ui->down7Button->styleSheet() != ui->down7Button->styleSheet())
         {
-            rotateB();
-            rotateD();
-            rotateD();
+            cube->rotateB();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateBA();
             cube->rotateDA();
-            rotateB();
+            cube->rotateB();
             cube->rotateDA();
             cube->rotateBA();
             cube->rotateFA();
-            rotateD();
-            rotateD();
-            rotateF();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateF();
+            cube->rotateD();
             cube->rotateFA();
-            rotateD();
-            rotateF();
+            cube->rotateD();
+            cube->rotateF();
             ult = "6FF";
             
         }
         else if(ui->back3Button->styleSheet() != ui->back5Button->styleSheet() || ui->right9Button->styleSheet() != ui->right5Button->styleSheet() || ui->down9Button->styleSheet() != ui->down7Button->styleSheet())
         {
-            rotateR();
-            rotateD();
-            rotateD();
+            cube->rotateR();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateRA();
             cube->rotateDA();
-            rotateR();
+            cube->rotateR();
             cube->rotateDA();
             cube->rotateRA();
             cube->rotateLA();
-            rotateD();
-            rotateD();
-            rotateL();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateL();
+            cube->rotateD();
             cube->rotateLA();
-            rotateD();
-            rotateL();
+            cube->rotateD();
+            cube->rotateL();
             ult = "7FF";
             
         }
         else if(ui->front9Button->styleSheet() != ui->front5Button->styleSheet() || ui->right7Button->styleSheet() != ui->right5Button->styleSheet() || ui->down3Button->styleSheet() != ui->down7Button->styleSheet())
         {
-            rotateF();
-            rotateD();
-            rotateD();
+            cube->rotateF();
+            cube->rotateD();
+            cube->rotateD();
             cube->rotateFA();
             cube->rotateDA();
-            rotateF();
+            cube->rotateF();
             cube->rotateDA();
             cube->rotateFA();
             cube->rotateBA();
-            rotateD();
-            rotateD();
-            rotateB();
-            rotateD();
+            cube->rotateD();
+            cube->rotateD();
+            cube->rotateB();
+            cube->rotateD();
             cube->rotateBA();
-            rotateD();
-            rotateB();
+            cube->rotateD();
+            cube->rotateB();
             ult = "8FF";
             
         }
@@ -4261,56 +3955,56 @@ void MainWindow::solve(std::string s)
 {
     if(s == "2F")
     {
-        rotateF();
-        rotateF();
+        cube->rotateF();
+        cube->rotateF();
     }
     else if( s == "F")
-        rotateF();
+        cube->rotateF();
     else if ( s == "F'" )
         cube->rotateFA();
     else if ( s == "2T" )
     {
-        rotateR();
-        rotateR();
+        cube->rotateR();
+        cube->rotateR();
     }
     else if ( s == "T" )
-        rotateR();
+        cube->rotateR();
     else if ( s == "T'" )
         cube->rotateRA();
     else if ( s == "2D" )
     {
-        rotateL();
-        rotateL();
+        cube->rotateL();
+        cube->rotateL();
     }
     else if ( s == "D" )
-        rotateL();
+        cube->rotateL();
     else if ( s == "D'" )
         cube->rotateLA();
     else if ( s == "2L" )
     {
-        rotateU();
-        rotateU();
+        cube->rotateU();
+        cube->rotateU();
     }
     else if ( s == "L" )
-        rotateU();
+        cube->rotateU();
     else if ( s == "L'" )
         cube->rotateUA();
     else if ( s == "2R" )
     {
-        rotateD();
-        rotateD();
+        cube->rotateD();
+        cube->rotateD();
     }
     else if ( s == "R" )
-        rotateD();
+        cube->rotateD();
     else if ( s == "R'" )
         cube->rotateDA();
     else if ( s == "2B" )
     {
-        rotateB();
-        rotateB();
+        cube->rotateB();
+        cube->rotateB();
     }
     else if ( s == "B" )
-        rotateB();
+        cube->rotateB();
     else if ( s == "B'" )
         cube->rotateBA();
     else

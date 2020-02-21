@@ -24,18 +24,6 @@ public:
     std::map<std::string, Square> squares;
     void completeCube();
 
-    void rotateU();
-
-    void rotateD();
-
-    void rotateR();
-
-    void rotateL();
-
-    void rotateF();
-
-    void rotateB();
-
     void CruzSul();
 
     void CruzNorte();

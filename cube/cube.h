@@ -9,6 +9,12 @@ class Cube
 {
     public:
         Cube(std::map<std::string, Square> squares) : squares{squares}, rotator{squares}{}
+        void rotateD();
+        void rotateU();
+        void rotateF();
+        void rotateB();
+        void rotateL();
+        void rotateR();
         void rotateDA();
         void rotateUA();
         void rotateFA();

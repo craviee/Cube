@@ -1,5 +1,54 @@
 #include "rotator.h"
 
+void Rotator::rotateD()
+{
+    rotate("right7", "back3", "left7", "front7");
+    rotate("right8", "back2", "left8", "front8");
+    rotate("right9", "back1", "left9", "front9");
+    rotateFace(Face::DOWN, Direction::CLOCKWISE);
+}
+
+void Rotator::rotateU()
+{
+
+    rotate("right1", "front1", "left1", "back9");
+    rotate("right2", "front2", "left2", "back8");
+    rotate("right3", "front3", "left3", "back7");
+    rotateFace(Face::UP, Direction::CLOCKWISE);
+}
+
+void Rotator::rotateF()
+{
+    rotate("left9", "up7", "right1", "down3");
+    rotate("left6", "up8", "right4", "down2");
+    rotate("left3", "up9", "right7", "down1");
+    rotateFace(Face::FRONT, Direction::CLOCKWISE);
+}
+
+void Rotator::rotateB()
+{
+    rotate("right3", "up1", "left7", "down9");
+    rotate("right6", "up2", "left4", "down8");
+    rotate("right9", "up3", "left1", "down7");
+    rotateFace(Face::BACK, Direction::CLOCKWISE);
+}
+
+void Rotator::rotateL()
+{
+    rotate("up1", "front1", "down1", "back1");
+    rotate("up4", "front4", "down4", "back4");
+    rotate("up7", "front7", "down7", "back7");
+    rotateFace(Face::LEFT, Direction::CLOCKWISE);
+}
+
+void Rotator::rotateR()
+{
+    rotate("down3", "front3", "up3", "back3");
+    rotate("down6", "front6", "up6", "back6");
+    rotate("down9", "front9", "up9", "back9");
+    rotateFace(Face::RIGHT, Direction::CLOCKWISE);
+}
+
 void Rotator::rotateDA()
 {
     rotate("front7", "left7", "back3", "right7");
