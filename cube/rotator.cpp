@@ -16,6 +16,38 @@ void Rotator::rotateUA()
     rotateFace(Face::UP, Direction::ANTI_CLOCKWISE);
 }
 
+void Rotator::rotateFA()
+{
+    rotate("up7", "left9", "down3", "right1");
+    rotate("up8", "left6", "down2", "right4");
+    rotate("up9", "left3", "down1", "right7");
+    rotateFace(Face::FRONT, Direction::ANTI_CLOCKWISE);
+}
+
+void Rotator::rotateBA()
+{
+    rotate("up1", "right3", "down9", "left7");
+    rotate("up2", "right6", "down8", "left4");
+    rotate("up3", "right9", "down7", "left1");
+    rotateFace(Face::BACK, Direction::ANTI_CLOCKWISE);
+}
+
+void Rotator::rotateLA()
+{
+    rotate("front1", "up1", "back1", "down1");
+    rotate("front4", "up4", "back4", "down4");
+    rotate("front7", "up7", "back7", "down7");
+    rotateFace(Face::LEFT, Direction::ANTI_CLOCKWISE);
+}
+
+void Rotator::rotateRA()
+{
+    rotate("front3", "down3", "back3", "up3");
+    rotate("front6", "down6", "back6", "up6");
+    rotate("front9", "down9", "back9", "up9");
+    rotateFace(Face::RIGHT, Direction::ANTI_CLOCKWISE);
+}
+
 void Rotator::rotate(std::string square1, std::string square2, std::string square3, std::string square4)
 {
     Color auxRotationColor1,auxRotationColor2,

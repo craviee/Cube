@@ -26,27 +26,15 @@ public:
 
     void rotateU();
 
-    void rotateUA();
-
     void rotateD();
-
-    void rotateDA();
 
     void rotateR();
 
-    void rotateRA();
-
     void rotateL();
-
-    void rotateLA();
 
     void rotateF();
 
-    void rotateFA();
-
     void rotateB();
-
-    void rotateBA();
 
     void CruzSul();
 
@@ -60,8 +48,6 @@ private slots:
     void on_randomButton_clicked();
 
     void on_rotationUButton_clicked();
-
-
 
     void on_rotationUAButton_clicked();
 
