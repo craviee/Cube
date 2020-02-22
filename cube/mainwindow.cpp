@@ -3859,7 +3859,8 @@ void MainWindow::on_solveOptimalButton_clicked()
     QStringList arguments2;
     QProcess *myProcess2 = new QProcess();
     myProcess2->start(program,(QStringList) arguments2 << entrada );
-   std::cout << "mandou o run do solver" << std::endl;
+    std::cout << "mandou o run do solver" << std::endl;
+    std::ifstream myfile2 ("result.txt");
     myProcess2->write("exit\n\r");
     if (myProcess2->waitForFinished(-1))
     {
