@@ -1,7 +1,8 @@
 #pragma once
 
 #include <QPushButton>
-#include "color.h"
+#include "enums.h"
+#include "utils.h"
 
 class Square
 {

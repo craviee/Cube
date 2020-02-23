@@ -8,6 +8,8 @@ QT       += core gui multimedia multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+CONFIG += C++17
+
 QT += widgets
 QT += serialport
 TARGET = cube
@@ -18,22 +20,24 @@ INCLUDEPATH += /usr/include/opencv4
 LIBS += -L/usr/local/lib -lopencv_core -lopencv_imgcodecs -lopencv_highgui -lopencv_imgproc -lopencv_videoio
 
 SOURCES += main.cpp\
+    arduino.cpp \
+    colorcalibrator.cpp \
     cube.cpp \
+    identification.cpp \
     mainwindow.cpp \
     rotator.cpp \
     square.cpp \
-    squares.cpp \
-    config.cpp
+    utils.cpp
 
 HEADERS  += mainwindow.h \
-    color.h \
-    config.h \
+    arduino.h \
+    colorcalibrator.h \
+    constants.h \
     cube.h \
-    direction.h \
-    face.h \
-    mode.h \
+    enums.h \
     rotator.h \
-    square.h
+    square.h \
+    utils.h
 
 FORMS    += mainwindow.ui
 

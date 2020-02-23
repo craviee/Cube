@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "squares.cpp"
-#include "config.h";
+#include "identification.cpp"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -31,8 +30,6 @@
 #include "opencv2/opencv.hpp"
 #include <QElapsedTimer>
 
-
-
 void delay( int millisecondsToWait )
 {
     QTime dieTime = QTime::currentTime().addMSecs( millisecondsToWait );
@@ -48,7 +45,6 @@ QString arduino_port_name = "";
 bool arduino_is_available = false;
 bool CalibrationOn = false;
 QCamera *mCamera;
-config conf;
 std::vector<double> calibrateVector = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 QCameraViewfinder *mCameraViewFinder;
 QCameraImageCapture *mCameraImageCapture;
@@ -61,37 +57,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setupSquares();
     cube = std::make_unique<Cube>(squares);
+    calibrator = std::make_unique<ColorCalibrator>(squares);
     cube->initialize();
-    conf.readCalibrateColors(&conf);
     setRotationsNumber(0);
-    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
-            if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier()){
-                if(serialPortInfo.vendorIdentifier() == arduino_uno_vendor_id){
-                    if(serialPortInfo.productIdentifier() == arduino_uno_product_id){
-                        arduino_port_name = "ttyACM1";
-                        std::cout << arduino_port_name.toStdString() << std::endl;
-                        arduino_is_available = true;
-                        std::cout << "arduino_is_available = true" << std::endl;
-                    }
-                }
-            }
-        }
-        if(arduino_is_available){
-            
-            arduino->setPortName(arduino_port_name);
-            arduino->setBaudRate(QSerialPort::Baud9600);
-            arduino->setDataBits(QSerialPort::Data8);
-            arduino->setParity(QSerialPort::NoParity);
-            arduino->setStopBits(QSerialPort::OneStop);
-            arduino->setFlowControl(QSerialPort::NoFlowControl);
-            if(arduino->open(QSerialPort::WriteOnly))
-                std::cout << "arduino aberto" << std::endl;
-            else
-                std::cout << "arduino não aberto" << std:: endl;
-        }else{
-            
-            std::cout << "Arduido não está ativo" << std::endl;
-        }
 }
 
 MainWindow::~MainWindow()
@@ -165,19 +133,28 @@ void MainWindow::setRotationsNumber(int rotationsNumber)
 
 void MainWindow::changeColor(QPushButton *button)
 {
-    if(button->styleSheet() == ui->up5Button->styleSheet())
-        button->setStyleSheet("background-color: white");
-    else if(button->styleSheet() == ui->front5Button->styleSheet())
-        button->setStyleSheet("background-color: orange");
-    else if(button->styleSheet() == ui->left5Button->styleSheet())
-        button->setStyleSheet("background-color: red");
-    else if(button->styleSheet() == ui->right5Button->styleSheet())
-        button->setStyleSheet("background-color: green");
-    else if(button->styleSheet() == ui->down5Button->styleSheet())
-        button->setStyleSheet("background-color: yellow");
-    else if(button->styleSheet() == ui->back5Button->styleSheet())
-        button->setStyleSheet("background-color: blue");
+    if(Utils::getColor(button) == Color::BLUE)
+        Utils::setColor(Color::WHITE, button);
+    else if(Utils::getColor(button) == Color::WHITE)
+        Utils::setColor(Color::ORANGE, button);
+    else if(Utils::getColor(button) == Color::ORANGE)
+        Utils::setColor(Color::RED, button);
+    else if(Utils::getColor(button) == Color::RED)
+        Utils::setColor(Color::GREEN, button);
+    else if(Utils::getColor(button) == Color::GREEN)
+        Utils::setColor(Color::YELLOW, button);
+    else if(Utils::getColor(button) == Color::YELLOW)
+        Utils::setColor(Color::BLUE, button);
 }
+
+void MainWindow::showDialog(std::string message)
+{
+    QMessageBox msgBox;
+    msgBox.setText(QString::fromStdString(message));
+    msgBox.exec();
+}
+
+//TODO: VALIDATES THE MODEL BEFORE EVERY ALGORITHM
 
 void MainWindow::CruzSul()
 {
@@ -2909,14 +2886,6 @@ void MainWindow::solve(std::string s)
     else
         std::cout << "String não reconhecida solve()" << std::endl;
 }
-void MainWindow::camera()
-{
-    mCamera->start();
-    
-    
-    
-    
-}
 void MainWindow::setModel(std::vector<std::string> styles, int c)
 {
     if(c == 0)
@@ -3079,82 +3048,82 @@ bool MainWindow::verificaCoerencia()
 }
 void MainWindow::takePictureAndProcess(std::vector<char> coresFaceAtual)
 {
-    double R=0,G=0,B=0;
-    cv::VideoCapture cam(1);
-    cv::Mat pic1;
-    cv::Mat pic2;
-    std::vector <std::string> styles;
-    while (!cam.isOpened())
-    {
-            std::cout << "Failed to make connection to cam" << std::endl;
-            cam.open(1);
-    }
-    cam >> pic1;
-    cv::flip(pic1,pic1,-1);
-    vector<vector<Point> > squares;
-    for(int i = 0; i < 100; i++)
-    {
-        delay(1000);
-        std::cout << lado << " " << i  << "/100" << std::endl;
-        while (!cam.isOpened())
-        {
+    // double R=0,G=0,B=0;
+    // cv::VideoCapture cam(1);
+    // cv::Mat pic1;
+    // cv::Mat pic2;
+    // std::vector <std::string> styles;
+    // while (!cam.isOpened())
+    // {
+    //         std::cout << "Failed to make connection to cam" << std::endl;
+    //         cam.open(1);
+    // }
+    // cam >> pic1;
+    // cv::flip(pic1,pic1,-1);
+    // vector<vector<Point> > squares;
+    // for(int i = 0; i < 100; i++)
+    // {
+    //     delay(1000);
+    //     std::cout << lado << " " << i  << "/100" << std::endl;
+    //     while (!cam.isOpened())
+    //     {
                 
                 
-                cam.open(1);
-        }
-        cam >> pic1;
-        cv::flip(pic1,pic1,-1);
-        while(squares.empty() || squares.size() != 9)
-        {
+    //             cam.open(1);
+    //     }
+    //     cam >> pic1;
+    //     cv::flip(pic1,pic1,-1);
+    //     while(squares.empty() || squares.size() != 9)
+    //     {
             
-            imshow("antes find", pic1);
-            findSquares(pic1, squares);
-            cam >> pic1;
-            cv::flip(pic1,pic1,-1);
-        }
-        cam.~VideoCapture();
-        std::vector<double> faceColors = drawSquares(pic1, squares, styles, conf);
-        for(int i = 0 ; i < coresFaceAtual.size(); i++)
-        {
-            if(coresFaceAtual[i] == 'G')
-            {
-                calibrateVector[0] += faceColors[i*3];
-                calibrateVector[1] += faceColors[i*3+1];
-                calibrateVector[2] += faceColors[i*3+2];
-            }
-            else if(coresFaceAtual[i] == 'R')
-            {
-                calibrateVector[3] += faceColors[i*3];
-                calibrateVector[4] += faceColors[i*3+1];
-                calibrateVector[5] += faceColors[i*3+2];
-            }
-            else if(coresFaceAtual[i] == 'B')
-            {
-                calibrateVector[6] += faceColors[i*3];
-                calibrateVector[7] += faceColors[i*3+1];
-                calibrateVector[8] += faceColors[i*3+2];
-            }
-            else if(coresFaceAtual[i] == 'O')
-            {
-                calibrateVector[9] += faceColors[i*3];
-                calibrateVector[10] += faceColors[i*3+1];
-                calibrateVector[11] += faceColors[i*3+2];
-            }
-            else if(coresFaceAtual[i] == 'Y')
-            {
-                calibrateVector[12] += faceColors[i*3];
-                calibrateVector[13] += faceColors[i*3+1];
-                calibrateVector[14] += faceColors[i*3+2];
-            }
-            else if(coresFaceAtual[i] == 'W')
-            {
-                calibrateVector[15] += faceColors[i*3];
-                calibrateVector[16] += faceColors[i*3+1];
-                calibrateVector[17] += faceColors[i*3+2];
-            }
-        }
-        squares.clear();
-    }
+    //         imshow("antes find", pic1);
+    //         findSquares(pic1, squares);
+    //         cam >> pic1;
+    //         cv::flip(pic1,pic1,-1);
+    //     }
+    //     cam.~VideoCapture();
+    //     std::vector<double> faceColors = drawSquares(pic1, squares, styles, conf);
+    //     for(int i = 0 ; i < coresFaceAtual.size(); i++)
+    //     {
+    //         if(coresFaceAtual[i] == 'G')
+    //         {
+    //             calibrateVector[0] += faceColors[i*3];
+    //             calibrateVector[1] += faceColors[i*3+1];
+    //             calibrateVector[2] += faceColors[i*3+2];
+    //         }
+    //         else if(coresFaceAtual[i] == 'R')
+    //         {
+    //             calibrateVector[3] += faceColors[i*3];
+    //             calibrateVector[4] += faceColors[i*3+1];
+    //             calibrateVector[5] += faceColors[i*3+2];
+    //         }
+    //         else if(coresFaceAtual[i] == 'B')
+    //         {
+    //             calibrateVector[6] += faceColors[i*3];
+    //             calibrateVector[7] += faceColors[i*3+1];
+    //             calibrateVector[8] += faceColors[i*3+2];
+    //         }
+    //         else if(coresFaceAtual[i] == 'O')
+    //         {
+    //             calibrateVector[9] += faceColors[i*3];
+    //             calibrateVector[10] += faceColors[i*3+1];
+    //             calibrateVector[11] += faceColors[i*3+2];
+    //         }
+    //         else if(coresFaceAtual[i] == 'Y')
+    //         {
+    //             calibrateVector[12] += faceColors[i*3];
+    //             calibrateVector[13] += faceColors[i*3+1];
+    //             calibrateVector[14] += faceColors[i*3+2];
+    //         }
+    //         else if(coresFaceAtual[i] == 'W')
+    //         {
+    //             calibrateVector[15] += faceColors[i*3];
+    //             calibrateVector[16] += faceColors[i*3+1];
+    //             calibrateVector[17] += faceColors[i*3+2];
+    //         }
+    //     }
+    //     squares.clear();
+    // }
 }
 
 
@@ -3884,43 +3853,8 @@ void MainWindow::on_solveOptimalButton_clicked()
 
 void MainWindow::on_colorCalibrationButton_clicked()
 {
-    if(mode == Mode::ROBOT)
-    {
-        double R=0,G=0,B=0;
-        lado = 0;
-        cv::VideoCapture cam(1);
-        cv::Mat pic1;
-        cv::Mat pic2;
-        std::vector <std::string> styles;
-
-        while (!cam.isOpened())
-        {
-                std::cout << "3" << std::endl;
-                std::cout << "Failed to make connection to cam" << std::endl;
-                cam.open(1);
-        }
-        vector<vector<Point> > squares;
-        while (!cam.isOpened())
-        {
-                
-                
-                cam.open(0);
-        }
-        cam >> pic1;
-        cv::flip(pic1,pic1,-1);
-        const char* wndname = "Original";
-        imshow(wndname, pic1);
-        while(squares.empty() || squares.size() != 9)
-        {
-            findSquares(pic1, squares);
-            cam >> pic1;
-            cv::flip(pic1,pic1,-1);
-        }
-        cam.~VideoCapture();
-        std::cout << "debug lado" << std::endl;
-        drawSquares(pic1, squares, styles, conf);
-        squares.clear();
-    }
+    mode == Mode::ROBOT ? calibrator->calibrate()
+    : showDialog(std::string("Error: The Calibration only works on ROBOT mode."));
 }
 
 void MainWindow::on_readColorsButton_clicked()
@@ -3943,7 +3877,7 @@ void MainWindow::on_readColorsButton_clicked()
                         std::cout << "Failed to make connection to cam" << std::endl;
                         cam.open(1);
                 }
-                vector<vector<Point> > squares;
+                std::vector<std::vector<cv::Point>> squares;
                 while (!cam.isOpened())
                 {
                         
@@ -3960,7 +3894,7 @@ void MainWindow::on_readColorsButton_clicked()
                 }
                 cam.~VideoCapture();
                 std::cout << "debug lado" << std::endl;
-                drawSquares(pic1, squares, styles, conf);
+                drawSquares(pic1, squares, styles/*, conf*/);
                 squares.clear();
                 setModel(styles, lado);
                 styles.clear();

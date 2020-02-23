@@ -2,10 +2,12 @@
 
 #include <QMainWindow>
 #include <QFile>
+#include <vector>
 
 #include "cube.h"
 #include "square.h"
-#include "mode.h"
+#include "enums.h"
+#include "colorcalibrator.h"
 
 namespace Ui {
 class MainWindow;
@@ -21,10 +23,12 @@ public:
     void setupSquares();
     void setRotationsNumber(int rotationsNumber);
     void changeColor(QPushButton *square);
+    void showDialog(std::string message);
 
     int rotationsNumber;
     Mode mode;
     std::unique_ptr<Cube> cube;
+    std::unique_ptr<ColorCalibrator> calibrator;
     std::map<std::string, Square> squares;
 
     // Will be excluded
@@ -54,7 +58,6 @@ public:
     bool noroestecorreto();
     QString color(QString cor);
     void solve(std::string s);
-    void camera();
     void setModel(std::vector<std::string> style, int c);
     bool verificaCoerencia();
     void takePictureAndProcess(std::vector<char> coresFaceAtual);

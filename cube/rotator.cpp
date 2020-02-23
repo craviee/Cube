@@ -138,26 +138,12 @@ void Rotator::rotate(std::string square1, std::string square2, std::string squar
     squares[square1].setColor(auxRotationColor4);
 }
 
-std::string Rotator::enum2str(Face face)
-{
-    switch (face)
-    {
-        case Face::UP: return "up";
-        case Face::DOWN: return "down";
-        case Face::FRONT: return "front";
-        case Face::BACK: return "back";
-        case Face::LEFT: return "left";
-        case Face::RIGHT: return "right";
-        default: return "error";
-    }
-}
-
 void Rotator::rotateFace(Face face, Direction direction)
 {
     Color auxRotationColor1,auxRotationColor2, auxRotationColor3,
     auxRotationColor4, auxRotationColor6, auxRotationColor7,
     auxRotationColor8, auxRotationColor9;
-    std::string faceStr = enum2str(face);
+    std::string faceStr = Utils::face2str(face);
 
     auxRotationColor1 = squares[faceStr + "1"].getColor();
     auxRotationColor2 = squares[faceStr + "2"].getColor();
