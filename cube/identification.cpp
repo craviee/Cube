@@ -10,28 +10,8 @@
 #include <math.h>
 #include <string.h>
 #include "constants.h"
+#include "enums.h"
 
-static std::string Char2StyleSheet(char c)
-{
-    std::string result = "background-color: ";
-    if(c == 'B') return (result + "blue");
-    else if(c == 'W') return (result + "white");
-    else if(c == 'O') return (result + "orange");
-    else if(c == 'R') return (result + "red");
-    else if(c == 'G') return (result + "green");
-    else if(c == 'Y') return (result + "yellow");
-    else return (result + "black");
-}
-static char StyleSheet2Char(std::string c)
-{
-    if(c == "background-color: blue") return 'B';
-    if(c == "background-color: white") return 'W';
-    if(c == "background-color: orange") return 'O';
-    if(c == "background-color: red") return 'R';
-    if(c == "background-color: green") return 'G';
-    if(c == "background-color: yellow") return 'Y';
-    else return 'X';
-}
 static std::vector<std::vector<cv::Point>> orderIdentifications(std::vector<std::vector<cv::Point>> squares)
 {
     int min_x_first, min_x_second, min_y_first, min_y_second;
@@ -55,58 +35,43 @@ static std::vector<std::vector<cv::Point>> orderIdentifications(std::vector<std:
     }
     return squares;
 }
-static cv::Scalar colorForLine(char c)
+static cv::Scalar getScalar(Color color)
 {
-    if(c == 'G')
-        return cv::Scalar(0,255,0);
-    else if(c == 'B')
-        return cv::Scalar(255,0,0);
-    else if(c == 'R')
-        return cv::Scalar(0,0,255);
-    else if(c == 'W')
-        return cv::Scalar(255,255,255);
-    else if(c == 'Y')
-        return cv::Scalar(0,255,255);
-    else if(c == 'O')
-        return cv::Scalar(0,165,255);
-    else
-        return cv::Scalar(0,0,0);
+    if(color == Color::GREEN) return cv::Scalar(0,255,0);
+    else if(color == Color::BLUE) return cv::Scalar(255,0,0);
+    else if(color == Color::RED) return cv::Scalar(0,0,255);
+    else if(color == Color::WHITE) return cv::Scalar(255,255,255);
+    else if(color == Color::YELLOW) return cv::Scalar(0,255,255);
+    else if(color == Color::ORANGE) return cv::Scalar(0,165,255);
+    else return cv::Scalar(0,0,0);
 }
-static char detectColor(double r, double g, double b/*, config& color*/)
+static Color detectColor(double redHue, double greenHue, double blueHue, std::map<std::string, double> configValues)
 {
-    char c = ' ';
-    // double mais_proximo = 1000;
-    // if(mais_proximo > (std::fabs(r-color.Gr) + std::fabs(g-color.Gg) + std::fabs(b-color.Gb)))
-    // {
-    //     mais_proximo = (std::fabs(r-color.Gr) + std::fabs(g-color.Gg) + std::fabs(b-color.Gb));
-    //     c = 'G';
-    // }
-    // if(mais_proximo > (std::fabs(r-color.Rr) + std::fabs(g-color.Rg) + std::fabs(b-color.Rb)))
-    // {
-    //     mais_proximo = (std::fabs(r-color.Rr) + std::fabs(g-color.Rg) + std::fabs(b-color.Rb));
-    //     c = 'R';
-    // }
-    // if(mais_proximo > (std::fabs(r-color.Br) + std::fabs(g-color.Bg) + std::fabs(b-color.Bb)))
-    // {
-    //     mais_proximo = (std::fabs(r-color.Br) + std::fabs(g-color.Bg) + std::fabs(b-color.Bb));
-    //     c = 'B';
-    // }
-    // if(mais_proximo > (std::fabs(r-color.Or) + std::fabs(g-color.Og) + std::fabs(b-color.Ob)))
-    // {
-    //     mais_proximo = (std::fabs(r-color.Or) + std::fabs(g-color.Og) + std::fabs(b-color.Ob));
-    //     c = 'O';
-    // }
-    // if(mais_proximo > (std::fabs(r-color.Yr) + std::fabs(g-color.Yg) + std::fabs(b-color.Yb)))
-    // {
-    //     mais_proximo = (std::fabs(r-color.Yr) + std::fabs(g-color.Yg) + std::fabs(b-color.Yb));
-    //     c = 'Y';
-    // }
-    // if(mais_proximo > (std::fabs(r-color.Wr) + std::fabs(g-color.Wg) + std::fabs(b-color.Wb)))
-    // {
-    //     mais_proximo = (std::fabs(r-color.Wr) + std::fabs(g-color.Wg) + std::fabs(b-color.Wb));
-    //     c = 'W';
-    // }
-    return c;
+    Color identifiedColor = Color::ERROR;
+    // Starting with the largest distance possible
+    double colorDistance = 255*255*255;
+
+    double greenProximity = std::fabs(redHue-configValues["GreenFaceRedHue"]) 
+    + std::fabs(greenHue-configValues["GreenFaceGreenHue"]) + std::fabs(blueHue-configValues["GreenFaceBlueHue"]);
+    double redProximity = std::fabs(redHue-configValues["RedFaceRedHue"]) 
+    + std::fabs(greenHue-configValues["RedFaceGreenHue"]) + std::fabs(blueHue-configValues["RedFaceBlueHue"]);
+    double blueProximity = std::fabs(redHue-configValues["BlueFaceRedHue"]) 
+    + std::fabs(greenHue-configValues["BlueFaceGreenHue"]) + std::fabs(blueHue-configValues["BlueFaceBlueHue"]);
+    double orangeProximity = std::fabs(redHue-configValues["OrangeFaceRedHue"]) 
+    + std::fabs(greenHue-configValues["OrangeFaceGreenHue"]) + std::fabs(blueHue-configValues["OrangeFaceBlueHue"]);
+    double yellowProximity = std::fabs(redHue-configValues["YellowFaceRedHue"]) 
+    + std::fabs(greenHue-configValues["YellowFaceGreenHue"]) + std::fabs(blueHue-configValues["YellowFaceBlueHue"]);
+    double whiteProximity = std::fabs(redHue-configValues["WhiteFaceRedHue"]) 
+    + std::fabs(greenHue-configValues["WhiteFaceGreenHue"]) + std::fabs(blueHue-configValues["WhiteFaceBlueHue"]);
+
+    if(colorDistance > greenProximity) { colorDistance = greenProximity; identifiedColor = Color::GREEN; }
+    if(colorDistance > redProximity) { colorDistance = redProximity; identifiedColor = Color::RED; }
+    if(colorDistance > blueProximity) { colorDistance = blueProximity; identifiedColor = Color::BLUE; }
+    if(colorDistance > orangeProximity) { colorDistance = orangeProximity; identifiedColor = Color::ORANGE; }
+    if(colorDistance > yellowProximity) { colorDistance = yellowProximity; identifiedColor = Color::YELLOW; }
+    if(colorDistance > whiteProximity) { colorDistance = whiteProximity; identifiedColor = Color::WHITE; }
+
+    return identifiedColor;
 }
 
 static double angle( cv::Point pt1, cv::Point pt2, cv::Point pt0 )
@@ -187,85 +152,60 @@ static void findSquares( const cv::Mat& image, std::vector<std::vector<cv::Point
     }
 }
 
-static std::map<std::string, double> drawSquares( cv::Mat& image, std::vector<std::vector<cv::Point> >& squares, std::vector<std::string>& colors/*, config& conf*/)
+static void drawSquares( cv::Mat& image, std::vector<std::vector<cv::Point>>& squares, std::vector<Color> colors)
 {
-    std::map<std::string, double> result;
-    squares = orderIdentifications(squares);
-    int npoints = 4;
-    cv::Point pts[1][4];
-    cv::Scalar average;
-    double r=0,g=0,b=0,max_x,min_x,max_y,min_y;
-    char c;
     for( size_t i = 0; i < squares.size(); i++ )
     {
         const cv::Point* p = &squares[i][0];
         int n = (int)squares[i].size();
-        if (p-> x > 3 && p->y > 3)
-        {
-            pts[0][0] = cv::Point(squares[i][0].x, squares[i][0].y);
-            pts[0][1] = cv::Point(squares[i][1].x, squares[i][1].y);
-            pts[0][2] = cv::Point(squares[i][2].x, squares[i][2].y);
-            pts[0][3] = cv::Point(squares[i][3].x, squares[i][3].y);
-            const cv::Point* points[1] = {pts[0]};
-            max_x = std::max(squares[i][0].x, std::max(squares[i][1].x , std::max(squares[i][2].x, squares[i][3].x)));
-            max_y = std::max(squares[i][0].y, std::max(squares[i][1].y , std::max(squares[i][2].y, squares[i][3].y)));
-            min_x = std::min(squares[i][0].x, std::min(squares[i][1].x , std::min(squares[i][2].x, squares[i][3].x)));
-            min_y = std::min(squares[i][0].y, std::min(squares[i][1].y , std::min(squares[i][2].y, squares[i][3].y)));
-            cv::Mat miniMat = cv::Mat(image, cv::Rect(min_x, min_y, max_x-min_x, max_y-min_y));
-            average = cv::mean(miniMat);
-            r = average[0];
-            g = average[1];
-            b = average[2];
-            if(squares.size() == SQUARES_PER_FACE)
-            {
-                result[std::to_string(i+1) + "RedHue"] = r;
-                result[std::to_string(i+1) + "GreenHue"] = g;
-                result[std::to_string(i+1) + "BlueHue"] = b;
-            }
-            //c = detectColor(r,g,b,conf);
-            colors.push_back(Char2StyleSheet(c));
-            polylines(image, &p, &n, 1, true, colorForLine(c), 3, cv::LINE_AA);
-        }
+        polylines(image, &p, &n, 1, true, getScalar(colors[i]), 3, cv::LINE_AA);
     }
-    return result;
 }
 
-static std::map<std::string, double> getFaceHues( cv::Mat& image, std::vector<std::vector<cv::Point>>& squaresReaded)
+static cv::Scalar getHuesFromSquare(cv::Mat& image, std::vector<cv::Point>& square)
+{
+    cv::Point pts[1][4];
+    pts[0][0] = cv::Point(square[0].x, square[0].y);
+    pts[0][1] = cv::Point(square[1].x, square[1].y);
+    pts[0][2] = cv::Point(square[2].x, square[2].y);
+    pts[0][3] = cv::Point(square[3].x, square[3].y);
+    double max_x = std::max(square[0].x, std::max(square[1].x , std::max(square[2].x, square[3].x)));
+    double max_y = std::max(square[0].y, std::max(square[1].y , std::max(square[2].y, square[3].y)));
+    double min_x = std::min(square[0].x, std::min(square[1].x , std::min(square[2].x, square[3].x)));
+    double min_y = std::min(square[0].y, std::min(square[1].y , std::min(square[2].y, square[3].y)));
+    cv::Mat miniMat = cv::Mat(image, cv::Rect(min_x, min_y, max_x-min_x, max_y-min_y));
+    return cv::mean(miniMat);
+}
+
+static std::map<std::string, double> getFaceHues(cv::Mat& image, std::vector<std::vector<cv::Point>>& squaresReaded)
 {
     std::map<std::string, double> faceHues;
     squaresReaded = orderIdentifications(squaresReaded);
-    cv::Point pts[1][4];
-    cv::Scalar average;
-    cv::Mat miniMat;
+    cv::Scalar identifiedColor;
     double redHue,greenHue,blueHue;
-    double max_x,min_x,max_y,min_y;
     for( size_t i = 0; i < squaresReaded.size(); i++ )
     {
-        const cv::Point* p = &squaresReaded[i][0];
-        int n = (int)squaresReaded[i].size();
-        if (p-> x > 3 && p->y > 3)
-        {
-            pts[0][0] = cv::Point(squaresReaded[i][0].x, squaresReaded[i][0].y);
-            pts[0][1] = cv::Point(squaresReaded[i][1].x, squaresReaded[i][1].y);
-            pts[0][2] = cv::Point(squaresReaded[i][2].x, squaresReaded[i][2].y);
-            pts[0][3] = cv::Point(squaresReaded[i][3].x, squaresReaded[i][3].y);
-            const cv::Point* points[1] = {pts[0]};
-            max_x = std::max(squaresReaded[i][0].x, std::max(squaresReaded[i][1].x , std::max(squaresReaded[i][2].x, squaresReaded[i][3].x)));
-            max_y = std::max(squaresReaded[i][0].y, std::max(squaresReaded[i][1].y , std::max(squaresReaded[i][2].y, squaresReaded[i][3].y)));
-            min_x = std::min(squaresReaded[i][0].x, std::min(squaresReaded[i][1].x , std::min(squaresReaded[i][2].x, squaresReaded[i][3].x)));
-            min_y = std::min(squaresReaded[i][0].y, std::min(squaresReaded[i][1].y , std::min(squaresReaded[i][2].y, squaresReaded[i][3].y)));
-            miniMat = cv::Mat(image, cv::Rect(min_x, min_y, max_x-min_x, max_y-min_y));
-            average = cv::mean(miniMat);
-            redHue = average[0];
-            greenHue = average[1];
-            blueHue = average[2];
-            if(squaresReaded.size() == SQUARES_PER_FACE)
-            {
-                faceHues[std::to_string(i+1) + "RedHue"] = redHue;
-                faceHues[std::to_string(i+1) + "GreenHue"] = greenHue;
-                faceHues[std::to_string(i+1) + "BlueHue"] = blueHue;
-            }
-        }
+        identifiedColor = getHuesFromSquare(image, squaresReaded[i]);
+        redHue = identifiedColor[0];
+        greenHue = identifiedColor[1];
+        blueHue = identifiedColor[2];
+        faceHues[std::to_string(i+1) + "RedHue"] = redHue;
+        faceHues[std::to_string(i+1) + "GreenHue"] = greenHue;
+        faceHues[std::to_string(i+1) + "BlueHue"] = blueHue;
     }
     return faceHues;
+}
+
+static std::vector<Color> identifyColors(std::map<std::string, double> faceHues, std::map<std::string, double> configValues)
+{
+    std::vector<Color> identifiedColors;
+    double redHue, greenHue, blueHue;
+    for( size_t i = 0; i < faceHues.size(); i++ )
+    {
+        redHue = faceHues[std::to_string(i+1) + "RedHue"];
+        greenHue = faceHues[std::to_string(i+1) + "GreenHue"];
+        blueHue = faceHues[std::to_string(i+1) + "BlueHue"];
+        identifiedColors.push_back(detectColor(redHue, greenHue, blueHue, configValues));
+    }
+    return identifiedColors;
 }
