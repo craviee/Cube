@@ -4,6 +4,7 @@
 #include <string>
 #include "rotator.h"
 #include "square.h"
+#include "utils.h"
 
 #define SQUARES_PER_FACE 9
 #define RANDOM_ROTATIONS 30
@@ -14,6 +15,7 @@ class Cube
         Cube(std::map<std::string, Square> squares) : squares{squares}, rotator{squares}{}
         void initialize();
         void randomize();
+        bool isValid();
         void rotateD();
         void rotateU();
         void rotateF();

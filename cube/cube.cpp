@@ -15,6 +15,32 @@ void Cube::initialize()
 
 void Cube::randomize() { rotator.randomRotations(RANDOM_ROTATIONS); }
 
+bool Cube::isValid()
+{
+    std::map<Color, int> colorsNumber =
+    {{Color::BLUE, 0},
+    {Color::RED, 0},
+    {Color::GREEN, 0},
+    {Color::ORANGE, 0},
+    {Color::WHITE, 0},
+    {Color::YELLOW, 0}};
+
+    std::vector<Face> faces = 
+    { Face::BACK, Face::FRONT, Face::UP, Face::DOWN, Face::RIGHT, Face::LEFT };
+
+    for(size_t faceIndex = 0; faceIndex < faces.size(); faceIndex++)
+    {
+        for(int square = 1; square < SQUARES_PER_FACE; square++)
+        {
+            colorsNumber[squares[Utils::face2str(faces[faceIndex]) + std::to_string(square)].getColor()]++;
+        }
+    }
+    for(auto it=colorsNumber.begin(); it!=colorsNumber.end(); ++it)
+        if(it->second != 9)
+            return false;
+    return true;
+}
+
 // The reason why repaint() is called is to trigger the whole UI to repaint itself
 // causing the smoth sensation of rotation
 void Cube::rotateD() { rotator.rotateD(); squares["front1"].repaint(); }
