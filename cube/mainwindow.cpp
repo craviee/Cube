@@ -58,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setupSquares();
     cube = std::make_unique<Cube>(squares);
     calibrator = std::make_unique<ColorCalibrator>(squares);
+    reader = std::make_unique<ColorReader>(squares, calibrator->configValues);
     cube->initialize();
     setRotationsNumber(0);
 }
@@ -2812,21 +2813,6 @@ bool MainWindow::noroestecorreto()
     else
         return false;
 }
-QString MainWindow::color(QString cor)
-{
-    if (cor.toStdString() == "background-color: blue")
-        return QString("b");
-    else if (cor.toStdString() == "background-color: red")
-        return QString("r");
-    else if (cor.toStdString() == "background-color: white")
-        return QString("w");
-    else if (cor.toStdString() == "background-color: orange")
-        return QString("o");
-    else if (cor.toStdString() == "background-color: yellow")
-        return QString("y");
-    else
-        return QString("g");
-}
 void MainWindow::solve(std::string s)
 {
     if(s == "2F")
@@ -2886,246 +2872,6 @@ void MainWindow::solve(std::string s)
     else
         std::cout << "String não reconhecida solve()" << std::endl;
 }
-void MainWindow::setModel(std::vector<std::string> styles, int c)
-{
-    if(c == 0)
-    {
-        ui->up1Button->setStyleSheet(QString::fromStdString(styles[0]));
-        ui->up2Button->setStyleSheet(QString::fromStdString(styles[1]));
-        ui->up3Button->setStyleSheet(QString::fromStdString(styles[2]));
-        ui->up4Button->setStyleSheet(QString::fromStdString(styles[3]));
-        ui->up5Button->setStyleSheet(QString::fromStdString(styles[4]));
-        ui->up6Button->setStyleSheet(QString::fromStdString(styles[5]));
-        ui->up7Button->setStyleSheet(QString::fromStdString(styles[6]));
-        ui->up8Button->setStyleSheet(QString::fromStdString(styles[7]));
-        ui->up9Button->setStyleSheet(QString::fromStdString(styles[8]));
-    }
-    else if(c == 1)
-    {
-        ui->front1Button->setStyleSheet(QString::fromStdString(styles[0]));
-        ui->front2Button->setStyleSheet(QString::fromStdString(styles[1]));
-        ui->front3Button->setStyleSheet(QString::fromStdString(styles[2]));
-        ui->front4Button->setStyleSheet(QString::fromStdString(styles[3]));
-        ui->front5Button->setStyleSheet(QString::fromStdString(styles[4]));
-        ui->front6Button->setStyleSheet(QString::fromStdString(styles[5]));
-        ui->front7Button->setStyleSheet(QString::fromStdString(styles[6]));
-        ui->front8Button->setStyleSheet(QString::fromStdString(styles[7]));
-        ui->front9Button->setStyleSheet(QString::fromStdString(styles[8]));
-    }
-    else if(c == 2)
-    {
-        ui->down1Button->setStyleSheet(QString::fromStdString(styles[0]));
-        ui->down2Button->setStyleSheet(QString::fromStdString(styles[1]));
-        ui->down3Button->setStyleSheet(QString::fromStdString(styles[2]));
-        ui->down4Button->setStyleSheet(QString::fromStdString(styles[3]));
-        ui->down5Button->setStyleSheet(QString::fromStdString(styles[4]));
-        ui->down6Button->setStyleSheet(QString::fromStdString(styles[5]));
-        ui->down7Button->setStyleSheet(QString::fromStdString(styles[6]));
-        ui->down8Button->setStyleSheet(QString::fromStdString(styles[7]));
-        ui->down9Button->setStyleSheet(QString::fromStdString(styles[8]));
-    }
-    else if(c == 3)
-    {
-        ui->back1Button->setStyleSheet(QString::fromStdString(styles[0]));
-        ui->back2Button->setStyleSheet(QString::fromStdString(styles[1]));
-        ui->back3Button->setStyleSheet(QString::fromStdString(styles[2]));
-        ui->back4Button->setStyleSheet(QString::fromStdString(styles[3]));
-        ui->back5Button->setStyleSheet(QString::fromStdString(styles[4]));
-        ui->back6Button->setStyleSheet(QString::fromStdString(styles[5]));
-        ui->back7Button->setStyleSheet(QString::fromStdString(styles[6]));
-        ui->back8Button->setStyleSheet(QString::fromStdString(styles[7]));
-        ui->back9Button->setStyleSheet(QString::fromStdString(styles[8]));
-    }
-    else if(c == 5)
-    {
-        ui->left1Button->setStyleSheet(QString::fromStdString(styles[0]));
-        ui->left2Button->setStyleSheet(QString::fromStdString(styles[1]));
-        ui->left3Button->setStyleSheet(QString::fromStdString(styles[2]));
-        ui->left4Button->setStyleSheet(QString::fromStdString(styles[3]));
-        ui->left5Button->setStyleSheet(QString::fromStdString(styles[4]));
-        ui->left6Button->setStyleSheet(QString::fromStdString(styles[5]));
-        ui->left7Button->setStyleSheet(QString::fromStdString(styles[6]));
-        ui->left8Button->setStyleSheet(QString::fromStdString(styles[7]));
-        ui->left9Button->setStyleSheet(QString::fromStdString(styles[8]));
-    }
-    else if(c == 4)
-    {
-        ui->right1Button->setStyleSheet(QString::fromStdString(styles[0]));
-        ui->right2Button->setStyleSheet(QString::fromStdString(styles[1]));
-        ui->right3Button->setStyleSheet(QString::fromStdString(styles[2]));
-        ui->right4Button->setStyleSheet(QString::fromStdString(styles[3]));
-        ui->right5Button->setStyleSheet(QString::fromStdString(styles[4]));
-        ui->right6Button->setStyleSheet(QString::fromStdString(styles[5]));
-        ui->right7Button->setStyleSheet(QString::fromStdString(styles[6]));
-        ui->right8Button->setStyleSheet(QString::fromStdString(styles[7]));
-        ui->right9Button->setStyleSheet(QString::fromStdString(styles[8]));
-    }
-}
-bool MainWindow::verificaCoerencia()
-{
-    std::vector<QString> numberOfColors;
-    numberOfColors.push_back(ui->up1Button->styleSheet());
-    numberOfColors.push_back(ui->up2Button->styleSheet());
-    numberOfColors.push_back(ui->up3Button->styleSheet());
-    numberOfColors.push_back(ui->up4Button->styleSheet());
-    numberOfColors.push_back(ui->up5Button->styleSheet());
-    numberOfColors.push_back(ui->up6Button->styleSheet());
-    numberOfColors.push_back(ui->up7Button->styleSheet());
-    numberOfColors.push_back(ui->up8Button->styleSheet());
-    numberOfColors.push_back(ui->up9Button->styleSheet());
-    numberOfColors.push_back(ui->front1Button->styleSheet());
-    numberOfColors.push_back(ui->front2Button->styleSheet());
-    numberOfColors.push_back(ui->front3Button->styleSheet());
-    numberOfColors.push_back(ui->front4Button->styleSheet());
-    numberOfColors.push_back(ui->front5Button->styleSheet());
-    numberOfColors.push_back(ui->front6Button->styleSheet());
-    numberOfColors.push_back(ui->front7Button->styleSheet());
-    numberOfColors.push_back(ui->front8Button->styleSheet());
-    numberOfColors.push_back(ui->front9Button->styleSheet());
-    numberOfColors.push_back(ui->down1Button->styleSheet());
-    numberOfColors.push_back(ui->down2Button->styleSheet());
-    numberOfColors.push_back(ui->down3Button->styleSheet());
-    numberOfColors.push_back(ui->down4Button->styleSheet());
-    numberOfColors.push_back(ui->down5Button->styleSheet());
-    numberOfColors.push_back(ui->down6Button->styleSheet());
-    numberOfColors.push_back(ui->down7Button->styleSheet());
-    numberOfColors.push_back(ui->down8Button->styleSheet());
-    numberOfColors.push_back(ui->down9Button->styleSheet());
-    numberOfColors.push_back(ui->back1Button->styleSheet());
-    numberOfColors.push_back(ui->back2Button->styleSheet());
-    numberOfColors.push_back(ui->back3Button->styleSheet());
-    numberOfColors.push_back(ui->back4Button->styleSheet());
-    numberOfColors.push_back(ui->back5Button->styleSheet());
-    numberOfColors.push_back(ui->back6Button->styleSheet());
-    numberOfColors.push_back(ui->back7Button->styleSheet());
-    numberOfColors.push_back(ui->back8Button->styleSheet());
-    numberOfColors.push_back(ui->back9Button->styleSheet());
-    numberOfColors.push_back(ui->left1Button->styleSheet());
-    numberOfColors.push_back(ui->left2Button->styleSheet());
-    numberOfColors.push_back(ui->left3Button->styleSheet());
-    numberOfColors.push_back(ui->left4Button->styleSheet());
-    numberOfColors.push_back(ui->left5Button->styleSheet());
-    numberOfColors.push_back(ui->left6Button->styleSheet());
-    numberOfColors.push_back(ui->left7Button->styleSheet());
-    numberOfColors.push_back(ui->left8Button->styleSheet());
-    numberOfColors.push_back(ui->left9Button->styleSheet());
-    numberOfColors.push_back(ui->right1Button->styleSheet());
-    numberOfColors.push_back(ui->right2Button->styleSheet());
-    numberOfColors.push_back(ui->right3Button->styleSheet());
-    numberOfColors.push_back(ui->right4Button->styleSheet());
-    numberOfColors.push_back(ui->right5Button->styleSheet());
-    numberOfColors.push_back(ui->right6Button->styleSheet());
-    numberOfColors.push_back(ui->right7Button->styleSheet());
-    numberOfColors.push_back(ui->right8Button->styleSheet());
-    numberOfColors.push_back(ui->right9Button->styleSheet());
-    int b = std::count(numberOfColors.begin(), numberOfColors.end(), QString("background-color: blue"));
-    int w = std::count(numberOfColors.begin(), numberOfColors.end(), QString("background-color: white"));
-    int o = std::count(numberOfColors.begin(), numberOfColors.end(), QString("background-color: orange"));
-    int r = std::count(numberOfColors.begin(), numberOfColors.end(), QString("background-color: red"));
-    int y = std::count(numberOfColors.begin(), numberOfColors.end(), QString("background-color: yellow"));
-    int g = std::count(numberOfColors.begin(), numberOfColors.end(), QString("background-color: green"));
-    std::cout << "b = " << b << std::endl;
-    std::cout << "w = " << w << std::endl;
-    std::cout << "o = " << o << std::endl;
-    std::cout << "r = " << r << std::endl;
-    std::cout << "y = " << y << std::endl;
-    std::cout << "g = " << g << std::endl;
-    if(b == 9 &&
-       w == b &&
-       o == w &&
-       r == o &&
-       y == r &&
-       g == y)
-    {
-        std::cout << "Configuração de Cubo Válida!" << std::endl;
-        return true;
-    }
-    else
-    {
-        std::cout << "Configuração de Cubo Inválida!" << std::endl;
-        return false;
-    }
-}
-void MainWindow::takePictureAndProcess(std::vector<char> coresFaceAtual)
-{
-    // double R=0,G=0,B=0;
-    // cv::VideoCapture cam(1);
-    // cv::Mat pic1;
-    // cv::Mat pic2;
-    // std::vector <std::string> styles;
-    // while (!cam.isOpened())
-    // {
-    //         std::cout << "Failed to make connection to cam" << std::endl;
-    //         cam.open(1);
-    // }
-    // cam >> pic1;
-    // cv::flip(pic1,pic1,-1);
-    // vector<vector<Point> > squares;
-    // for(int i = 0; i < 100; i++)
-    // {
-    //     delay(1000);
-    //     std::cout << lado << " " << i  << "/100" << std::endl;
-    //     while (!cam.isOpened())
-    //     {
-                
-                
-    //             cam.open(1);
-    //     }
-    //     cam >> pic1;
-    //     cv::flip(pic1,pic1,-1);
-    //     while(squares.empty() || squares.size() != 9)
-    //     {
-            
-    //         imshow("antes find", pic1);
-    //         findSquares(pic1, squares);
-    //         cam >> pic1;
-    //         cv::flip(pic1,pic1,-1);
-    //     }
-    //     cam.~VideoCapture();
-    //     std::vector<double> faceColors = drawSquares(pic1, squares, styles, conf);
-    //     for(int i = 0 ; i < coresFaceAtual.size(); i++)
-    //     {
-    //         if(coresFaceAtual[i] == 'G')
-    //         {
-    //             calibrateVector[0] += faceColors[i*3];
-    //             calibrateVector[1] += faceColors[i*3+1];
-    //             calibrateVector[2] += faceColors[i*3+2];
-    //         }
-    //         else if(coresFaceAtual[i] == 'R')
-    //         {
-    //             calibrateVector[3] += faceColors[i*3];
-    //             calibrateVector[4] += faceColors[i*3+1];
-    //             calibrateVector[5] += faceColors[i*3+2];
-    //         }
-    //         else if(coresFaceAtual[i] == 'B')
-    //         {
-    //             calibrateVector[6] += faceColors[i*3];
-    //             calibrateVector[7] += faceColors[i*3+1];
-    //             calibrateVector[8] += faceColors[i*3+2];
-    //         }
-    //         else if(coresFaceAtual[i] == 'O')
-    //         {
-    //             calibrateVector[9] += faceColors[i*3];
-    //             calibrateVector[10] += faceColors[i*3+1];
-    //             calibrateVector[11] += faceColors[i*3+2];
-    //         }
-    //         else if(coresFaceAtual[i] == 'Y')
-    //         {
-    //             calibrateVector[12] += faceColors[i*3];
-    //             calibrateVector[13] += faceColors[i*3+1];
-    //             calibrateVector[14] += faceColors[i*3+2];
-    //         }
-    //         else if(coresFaceAtual[i] == 'W')
-    //         {
-    //             calibrateVector[15] += faceColors[i*3];
-    //             calibrateVector[16] += faceColors[i*3+1];
-    //             calibrateVector[17] += faceColors[i*3+2];
-    //         }
-    //     }
-    //     squares.clear();
-    // }
-}
-
 
 void MainWindow::on_randomButton_clicked() { cube->randomize(); }
 
@@ -3744,202 +3490,132 @@ void MainWindow::on_solveLanesButton_clicked()
 
 void MainWindow::on_solveOptimalButton_clicked()
 {
-    QString input = "";
-    input += color(ui->right3Button->styleSheet());
-    input += color(ui->right6Button->styleSheet());
-    input += color(ui->right9Button->styleSheet());
-    input += color(ui->right2Button->styleSheet());
-    input += color(ui->right8Button->styleSheet());
-    input += color(ui->right1Button->styleSheet());
-    input += color(ui->right4Button->styleSheet());
-    input += color(ui->right7Button->styleSheet());
-    input += color(ui->up3Button->styleSheet());
-    input += color(ui->up6Button->styleSheet());
-    input += color(ui->up9Button->styleSheet());
-    input += color(ui->front3Button->styleSheet());
-    input += color(ui->front6Button->styleSheet());
-    input += color(ui->front9Button->styleSheet());
-    input += color(ui->down3Button->styleSheet());
-    input += color(ui->down6Button->styleSheet());
-    input += color(ui->down9Button->styleSheet());
-    input += color(ui->back3Button->styleSheet());
-    input += color(ui->back6Button->styleSheet());
-    input += color(ui->back9Button->styleSheet());
-    input += color(ui->up2Button->styleSheet());
-    input += color(ui->up8Button->styleSheet());
-    input += color(ui->front2Button->styleSheet());
-    input += color(ui->front8Button->styleSheet());
-    input += color(ui->down2Button->styleSheet());
-    input += color(ui->down8Button->styleSheet());
-    input += color(ui->back2Button->styleSheet());
-    input += color(ui->back8Button->styleSheet());
-    input += color(ui->up1Button->styleSheet());
-    input += color(ui->up4Button->styleSheet());
-    input += color(ui->up7Button->styleSheet());
-    input += color(ui->front1Button->styleSheet());
-    input += color(ui->front4Button->styleSheet());
-    input += color(ui->front7Button->styleSheet());
-    input += color(ui->down1Button->styleSheet());
-    input += color(ui->down4Button->styleSheet());
-    input += color(ui->down7Button->styleSheet());
-    input += color(ui->back1Button->styleSheet());
-    input += color(ui->back4Button->styleSheet());
-    input += color(ui->back7Button->styleSheet());
-    input += color(ui->left3Button->styleSheet());
-    input += color(ui->left6Button->styleSheet());
-    input += color(ui->left9Button->styleSheet());
-    input += color(ui->left2Button->styleSheet());
-    input += color(ui->left8Button->styleSheet());
-    input += color(ui->left1Button->styleSheet());
-    input += color(ui->left4Button->styleSheet());
-    input += color(ui->left7Button->styleSheet());
-    std::cout << input.toStdString() << std::endl;
-    QString program = "/home/lain/Desktop/TCC/backup_note/Rubiks-Cube-Solver/format.sh";
-    QStringList arguments;
-    QProcess *myProcess = new QProcess(this);
-    myProcess->start(program,(QStringList) arguments << input );
+    // QString input = "";
+    // input += color(ui->right3Button->styleSheet());
+    // input += color(ui->right6Button->styleSheet());
+    // input += color(ui->right9Button->styleSheet());
+    // input += color(ui->right2Button->styleSheet());
+    // input += color(ui->right8Button->styleSheet());
+    // input += color(ui->right1Button->styleSheet());
+    // input += color(ui->right4Button->styleSheet());
+    // input += color(ui->right7Button->styleSheet());
+    // input += color(ui->up3Button->styleSheet());
+    // input += color(ui->up6Button->styleSheet());
+    // input += color(ui->up9Button->styleSheet());
+    // input += color(ui->front3Button->styleSheet());
+    // input += color(ui->front6Button->styleSheet());
+    // input += color(ui->front9Button->styleSheet());
+    // input += color(ui->down3Button->styleSheet());
+    // input += color(ui->down6Button->styleSheet());
+    // input += color(ui->down9Button->styleSheet());
+    // input += color(ui->back3Button->styleSheet());
+    // input += color(ui->back6Button->styleSheet());
+    // input += color(ui->back9Button->styleSheet());
+    // input += color(ui->up2Button->styleSheet());
+    // input += color(ui->up8Button->styleSheet());
+    // input += color(ui->front2Button->styleSheet());
+    // input += color(ui->front8Button->styleSheet());
+    // input += color(ui->down2Button->styleSheet());
+    // input += color(ui->down8Button->styleSheet());
+    // input += color(ui->back2Button->styleSheet());
+    // input += color(ui->back8Button->styleSheet());
+    // input += color(ui->up1Button->styleSheet());
+    // input += color(ui->up4Button->styleSheet());
+    // input += color(ui->up7Button->styleSheet());
+    // input += color(ui->front1Button->styleSheet());
+    // input += color(ui->front4Button->styleSheet());
+    // input += color(ui->front7Button->styleSheet());
+    // input += color(ui->down1Button->styleSheet());
+    // input += color(ui->down4Button->styleSheet());
+    // input += color(ui->down7Button->styleSheet());
+    // input += color(ui->back1Button->styleSheet());
+    // input += color(ui->back4Button->styleSheet());
+    // input += color(ui->back7Button->styleSheet());
+    // input += color(ui->left3Button->styleSheet());
+    // input += color(ui->left6Button->styleSheet());
+    // input += color(ui->left9Button->styleSheet());
+    // input += color(ui->left2Button->styleSheet());
+    // input += color(ui->left8Button->styleSheet());
+    // input += color(ui->left1Button->styleSheet());
+    // input += color(ui->left4Button->styleSheet());
+    // input += color(ui->left7Button->styleSheet());
+    // std::cout << input.toStdString() << std::endl;
+    // QString program = "/home/lain/Desktop/TCC/backup_note/Rubiks-Cube-Solver/format.sh";
+    // QStringList arguments;
+    // QProcess *myProcess = new QProcess(this);
+    // myProcess->start(program,(QStringList) arguments << input );
     
-    std::string line;
-    QString entrada;
-    if (myProcess->waitForFinished())
-    {
-        myProcess->close();
-        std::ifstream myfile ("format.txt");
+    // std::string line;
+    // QString entrada;
+    // if (myProcess->waitForFinished())
+    // {
+    //     myProcess->close();
+    //     std::ifstream myfile ("format.txt");
     
-         if (myfile.is_open())
-          {
+    //      if (myfile.is_open())
+    //       {
     
-            while ( std::getline (myfile,line ))
-            {
-                std::cout << "size: " << line.size() << std::endl;
-                if(line.size() == 120)
-                   entrada = QString::fromStdString(line);
+    //         while ( std::getline (myfile,line ))
+    //         {
+    //             std::cout << "size: " << line.size() << std::endl;
+    //             if(line.size() == 120)
+    //                entrada = QString::fromStdString(line);
     
-              std::cout << line << '\n';
-            }
-            std::cout << "size: " << line.size() << std::endl;
+    //           std::cout << line << '\n';
+    //         }
+    //         std::cout << "size: " << line.size() << std::endl;
     
-            myfile.close();
+    //         myfile.close();
     
-          }
-         std::cout << "começa a executar o run" << std::endl;
-    }
-    program = "/home/lain/Desktop/TCC/backup_note/Rubiks-Cube-Solver/run.sh";
-    QStringList arguments2;
-    QProcess *myProcess2 = new QProcess();
-    myProcess2->start(program,(QStringList) arguments2 << entrada );
-    std::cout << "mandou o run do solver" << std::endl;
-    std::ifstream myfile2 ("result.txt");
-    myProcess2->write("exit\n\r");
-    if (myProcess2->waitForFinished(-1))
-    {
-    std::cout << "run ficou pronto run do solver" << std::endl;
+    //       }
+    //      std::cout << "começa a executar o run" << std::endl;
+    // }
+    // program = "/home/lain/Desktop/TCC/backup_note/Rubiks-Cube-Solver/run.sh";
+    // QStringList arguments2;
+    // QProcess *myProcess2 = new QProcess();
+    // myProcess2->start(program,(QStringList) arguments2 << entrada );
+    // std::cout << "mandou o run do solver" << std::endl;
+    // std::ifstream myfile2 ("result.txt");
+    // myProcess2->write("exit\n\r");
+    // if (myProcess2->waitForFinished(-1))
+    // {
+    // std::cout << "run ficou pronto run do solver" << std::endl;
 
-     if (myfile2.is_open())
-      {
-        while ( std::getline (myfile2,line ))
-        {
-            if(line.size() == 1 || line.size() == 2)
-            {
-                solve(line);
-            }
-          std::cout << line << '\n';
-          std::cout << "size: " << line.size() << std::endl;
-        }
-        myfile2.close();
-      }
-    }
+    //  if (myfile2.is_open())
+    //   {
+    //     while ( std::getline (myfile2,line ))
+    //     {
+    //         if(line.size() == 1 || line.size() == 2)
+    //         {
+    //             solve(line);
+    //         }
+    //       std::cout << line << '\n';
+    //       std::cout << "size: " << line.size() << std::endl;
+    //     }
+    //     myfile2.close();
+    //   }
+    // }
 }
 
 void MainWindow::on_colorCalibrationButton_clicked()
 {
-    mode == Mode::ROBOT ? calibrator->calibrate()
-    : showDialog(std::string("Error: The Calibration only works on ROBOT mode."));
+    if(mode == Mode::ROBOT)
+    {
+        calibrator->calibrate();
+        showDialog(std::string("Calibration done with success."));
+    }
+    else showDialog(std::string("Error: The Calibration only works on ROBOT mode."));
 }
 
 void MainWindow::on_readColorsButton_clicked()
 {
     if(mode == Mode::ROBOT)
     {
-        try
-        {
-            double R=0,G=0,B=0;
-            lado = 0;
-            cv::VideoCapture cam(1);
-            cv::Mat pic1;
-            cv::Mat pic2;
-            std::vector <std::string> styles;
-            for(lado = 0; lado < 6; lado++)
-            {
-                while (!cam.isOpened())
-                {
-                        std::cout << "3" << std::endl;
-                        std::cout << "Failed to make connection to cam" << std::endl;
-                        cam.open(1);
-                }
-                std::vector<std::vector<cv::Point>> squares;
-                while (!cam.isOpened())
-                {
-                        
-                        
-                        cam.open(0);
-                }
-                cam >> pic1;
-                cv::flip(pic1,pic1,-1);
-                while(squares.empty() || squares.size() != 9)
-                {
-                    findSquares(pic1, squares);
-                    cam >> pic1;
-                    cv::flip(pic1,pic1,-1);
-                }
-                cam.~VideoCapture();
-                std::cout << "debug lado" << std::endl;
-                drawSquares(pic1, squares, styles/*, conf*/);
-                squares.clear();
-                setModel(styles, lado);
-                styles.clear();
-                std::string comando_aux = "0" + std::to_string(lado+1);
-                char* comando = new char[comando_aux.length()];
-                strcpy(comando, comando_aux.c_str());
-                if(arduino->isWritable())
-                {
-                    arduino->write(comando);
-                    if(lado+1 == 1 || lado+1 == 2 || lado+1 == 3)
-                        delay(5000);
-                    else if(lado+1 == 4)
-                        delay(9000);
-                    else if(lado+1 == 5)
-                        delay(7000);
-                    else if(lado+1 == 6)
-                        delay(12000);
-                    std::cout << comando << std::endl;
-                }
-                else
-                {
-                     std::cout << "Couldn't write to serial!" << std::endl;
-                }
-            }
-            if(lado == 6)
-            {
-                lado = 0;
-                if(verificaCoerencia())
-                    QMessageBox::information(this,tr("Sucesso"),tr("A configuração do cubo é factível."));
-                else
-                {
-                    QMessageBox::information(this,tr("Erro"),tr("Houve erro na identificação de cores\nSerá realizada uma nova leitura."));
-                    on_readColorsButton_clicked();
-                }
-            }
-            std::cout << "R: " << R << std::endl;
-            std::cout << "G: " << G << std::endl;
-            std::cout << "B: " << B << std::endl;
-        }
-        catch(...)
-        {
-            std::exception_ptr p = std::current_exception();
-            std::clog <<(p ? p.__cxa_exception_type()->name() : "null") << std::endl;
-        }
+        reader->read();
+        if(cube->isValid()) showDialog(std::string("Reading done with success."));
+        else showDialog(std::string("Error: The new cube have more than 9 squares of the same color."));
     }
+    else showDialog(std::string("Error: The Reading only works on ROBOT mode."));
 }
 
 void MainWindow::on_rotationUButton_clicked() { cube->rotateU(); setRotationsNumber(rotationsNumber+1); }

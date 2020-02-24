@@ -22,6 +22,7 @@ LIBS += -L/usr/local/lib -lopencv_core -lopencv_imgcodecs -lopencv_highgui -lope
 SOURCES += main.cpp\
     arduino.cpp \
     colorcalibrator.cpp \
+    colorreader.cpp \
     cube.cpp \
     identification.cpp \
     mainwindow.cpp \
@@ -32,6 +33,7 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     arduino.h \
     colorcalibrator.h \
+    colorreader.h \
     constants.h \
     cube.h \
     enums.h \

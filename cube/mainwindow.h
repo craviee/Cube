@@ -8,6 +8,7 @@
 #include "square.h"
 #include "enums.h"
 #include "colorcalibrator.h"
+#include "colorreader.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,6 +30,7 @@ public:
     Mode mode;
     std::unique_ptr<Cube> cube;
     std::unique_ptr<ColorCalibrator> calibrator;
+    std::unique_ptr<ColorReader> reader;
     std::map<std::string, Square> squares;
 
     // Will be excluded
@@ -56,11 +58,7 @@ public:
     bool sudoestecorreto();
     bool nordestecorreto();
     bool noroestecorreto();
-    QString color(QString cor);
     void solve(std::string s);
-    void setModel(std::vector<std::string> style, int c);
-    bool verificaCoerencia();
-    void takePictureAndProcess(std::vector<char> coresFaceAtual);
 
 private slots:
     void on_randomButton_clicked();

@@ -16,6 +16,7 @@ class ColorCalibrator
     public:
         ColorCalibrator(std::map<std::string, Square> squares);
         void calibrate();
+        std::map<std::string, double> configValues;
 
     private:
         bool configExists();
@@ -25,6 +26,6 @@ class ColorCalibrator
         void initializeConfigFile();
         void calibrateFace(Face currentFace);
         void sumCalibrationHues(int squareIndex, Face currentFace, std::map<std::string, double> faceHues);
-        std::map<std::string, double> configValues;
+        
         std::map<std::string, Square> squares;
 };

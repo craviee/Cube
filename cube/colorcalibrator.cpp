@@ -116,7 +116,7 @@ void ColorCalibrator::calibrateFace(Face currentFace)
 {
     cv::VideoCapture webcam(WEBCAM_ID);
     cv::Mat picture;
-
+    std::map<std::string, double> faceHues;
     std::vector<std::vector<cv::Point>> squaresReaded;
     for(int i = 0; i < CALIBRATION_PICTURES_PER_FACE; i++)
     {
@@ -130,14 +130,15 @@ void ColorCalibrator::calibrateFace(Face currentFace)
         // The flip is needed here because the camera is flipped 180º in my setup
         cv::flip(picture,picture,-1);
 
-        while(squaresReaded.size() != 9)
+        while(squaresReaded.size() != SQUARES_PER_FACE)
         {
+            squares.clear();
             findSquares(picture, squaresReaded);
             webcam >> picture;
             cv::flip(picture,picture,-1);
         }
         
-        std::map<std::string, double> faceHues = getFaceHues(picture, squaresReaded);
+        faceHues = getFaceHues(picture, squaresReaded);
 
         for(int squareIndex = 1 ; squareIndex <= SQUARES_PER_FACE; squareIndex++)
         {
