@@ -97,14 +97,12 @@ void ColorCalibrator::initializeConfig()
 void ColorCalibrator::calibrate()
 {
     std::vector<Face> faces = {Face::UP, Face::FRONT, Face::DOWN, Face::BACK, Face::RIGHT, Face::LEFT};
-    const char *command;
 
     initializeConfig();
     for(int faceIndex = 0; faceIndex < faces.size(); faceIndex++)
     {
         calibrateFace(faces[faceIndex]);
-        command = std::string("0" + std::to_string(faceIndex+1)).c_str();
-        microcontroller->runCommand(command);
+        microcontroller->runCommand(Utils::int2command(faceIndex+1));
     }
     // Divide each Hue by the time it was identified to get its average
     for (std::map<std::string,double>::iterator it=configValues.begin(); it!=configValues.end(); ++it)

@@ -7,7 +7,6 @@ ColorReader::ColorReader(std::map<std::string, Square> squares, std::map<std::st
 void ColorReader::read()
 {
     cv::VideoCapture webcam(WEBCAM_ID);
-    const char *command;
     std::vector<Face> faces = {Face::UP, Face::FRONT, Face::DOWN, Face::BACK, Face::RIGHT, Face::LEFT};
     std::map<std::string, double> faceHues;
     cv::Mat picture;
@@ -31,16 +30,7 @@ void ColorReader::read()
         identifiedColors = identifyColors(faceHues, configValues);
         drawSquares(picture, squaresIdentified, identifiedColors);
         updateModel(faces[faceIndex], identifiedColors);
-
-        command = std::string("0" + std::to_string(faceIndex+1)).c_str();
-        microcontroller->runCommand(command);
-    // }
-    // if(verificaCoerencia())
-    //     QMessageBox::information(this,tr("Sucesso"),tr("A configuração do cubo é factível."));
-    // else
-    // {
-    //     QMessageBox::information(this,tr("Erro"),tr("Houve erro na identificação de cores\nSerá realizada uma nova leitura."));
-    //     on_readColorsButton_clicked();
+        microcontroller->runCommand(Utils::int2command(faceIndex+1));
     }
     webcam.~VideoCapture();
 }

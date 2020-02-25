@@ -2,37 +2,52 @@
 
 Arduino::Arduino()
 {
-        // foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
-        //     if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier()){
-        //         if(serialPortInfo.vendorIdentifier() == arduino_uno_vendor_id){
-        //             if(serialPortInfo.productIdentifier() == arduino_uno_product_id){
-        //                 arduino_port_name = "ttyACM1";
-        //                 std::cout << arduino_port_name.toStdString() << std::endl;
-        //                 arduino_is_available = true;
-        //                 std::cout << "arduino_is_available = true" << std::endl;
-        //             }
-        //         }
-        //     }
-        // }
-        // if(arduino_is_available){
-            
-        //     arduino->setPortName(arduino_port_name);
-        //     arduino->setBaudRate(QSerialPort::Baud9600);
-        //     arduino->setDataBits(QSerialPort::Data8);
-        //     arduino->setParity(QSerialPort::NoParity);
-        //     arduino->setStopBits(QSerialPort::OneStop);
-        //     arduino->setFlowControl(QSerialPort::NoFlowControl);
-        //     if(arduino->open(QSerialPort::WriteOnly))
-        //         std::cout << "arduino aberto" << std::endl;
-        //     else
-        //         std::cout << "arduino não aberto" << std:: endl;
-        // }else{
-            
-        //     std::cout << "Arduido não está ativo" << std::endl;
-        // }
+    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+    {
+        if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier() &&
+        serialPortInfo.vendorIdentifier() == ARDUINO_UNO_VENDOR_ID &&
+        serialPortInfo.productIdentifier() == ARDUINO_UNO_PRODUCT_ID)
+        {
+            arduino->setPortName(serialPortInfo.portName());
+            arduino->setBaudRate(QSerialPort::Baud9600);
+            arduino->setDataBits(QSerialPort::Data8);
+            arduino->setParity(QSerialPort::NoParity);
+            arduino->setStopBits(QSerialPort::OneStop);
+            arduino->setFlowControl(QSerialPort::NoFlowControl);
+            arduino->open(QSerialPort::ReadWrite);
+            // Wait 1s for the initialization to be completed
+            Utils::delay(1000);
+        }
+    }
 }
 
-void Arduino::runCommand(const char* command)
+void Arduino::runCommand(Command command)
 {
+    const char* commandFormated = command2str(command).c_str();
+    arduino->write(commandFormated);
+    delayByCommand(command);
+}
 
+bool Arduino::isAvailable()
+{
+    return arduino->isReadable() && arduino->isWritable();
+}
+
+void Arduino::delayByCommand(Command command)
+{
+    
+}
+
+std::string Arduino::command2str(Command command)
+{
+    switch (command)
+    {
+        case Command::MOVE_UP: return "01";
+        case Command::MOVE_FRONT: return "02";
+        case Command::MOVE_DOWN: return "03";
+        case Command::MOVE_BACK: return "04";
+        case Command::MOVE_RIGHT: return "05";
+        case Command::MOVE_LEFT: return "06";
+        default: return "ERROR";
+    }
 }
