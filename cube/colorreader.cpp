@@ -1,12 +1,12 @@
 #include "colorreader.h"
 
-ColorReader::ColorReader(std::map<std::string, Square> squares, std::map<std::string, double> configValues)
-: squares{squares} , configValues{configValues} {}
+ColorReader::ColorReader(std::map<std::string, Square> squares, std::map<std::string, double> configValues
+, std::shared_ptr<Microcontroller> microcontroller)
+: squares{squares} , configValues{configValues}, microcontroller{microcontroller} {}
 
 void ColorReader::read()
 {
     cv::VideoCapture webcam(WEBCAM_ID);
-    Arduino robot;
     const char *command;
     std::vector<Face> faces = {Face::UP, Face::FRONT, Face::DOWN, Face::BACK, Face::RIGHT, Face::LEFT};
     std::map<std::string, double> faceHues;
@@ -33,7 +33,7 @@ void ColorReader::read()
         updateModel(faces[faceIndex], identifiedColors);
 
         command = std::string("0" + std::to_string(faceIndex+1)).c_str();
-        robot.runCommand(command);
+        microcontroller->runCommand(command);
     // }
     // if(verificaCoerencia())
     //     QMessageBox::information(this,tr("Sucesso"),tr("A configuração do cubo é factível."));

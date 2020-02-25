@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <map>
+#include <memory>
 #include "identification.cpp"
 #include "enums.h"
 #include "square.h"
@@ -14,7 +15,7 @@
 class ColorCalibrator
 {
     public:
-        ColorCalibrator(std::map<std::string, Square> squares);
+        ColorCalibrator(std::map<std::string, Square> squares, std::shared_ptr<Microcontroller> microcontroller);
         void calibrate();
         std::map<std::string, double> configValues;
 
@@ -26,6 +27,6 @@ class ColorCalibrator
         void initializeConfigFile();
         void calibrateFace(Face currentFace);
         void sumCalibrationHues(int squareIndex, Face currentFace, std::map<std::string, double> faceHues);
-        
+        std::shared_ptr<Microcontroller> microcontroller;
         std::map<std::string, Square> squares;
 };

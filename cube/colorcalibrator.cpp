@@ -1,6 +1,7 @@
 #include "colorcalibrator.h"
 
-ColorCalibrator::ColorCalibrator(std::map<std::string, Square> squares) : squares{squares}
+ColorCalibrator::ColorCalibrator(std::map<std::string, Square> squares, std::shared_ptr<Microcontroller> microcontroller)
+ : squares{squares}, microcontroller{microcontroller}
 {
     configExists() ? readConfig() : initializeConfig();
 }
@@ -96,7 +97,6 @@ void ColorCalibrator::initializeConfig()
 void ColorCalibrator::calibrate()
 {
     std::vector<Face> faces = {Face::UP, Face::FRONT, Face::DOWN, Face::BACK, Face::RIGHT, Face::LEFT};
-    Arduino robot;
     const char *command;
 
     initializeConfig();
@@ -104,7 +104,7 @@ void ColorCalibrator::calibrate()
     {
         calibrateFace(faces[faceIndex]);
         command = std::string("0" + std::to_string(faceIndex+1)).c_str();
-        robot.runCommand(command);
+        microcontroller->runCommand(command);
     }
     // Divide each Hue by the time it was identified to get its average
     for (std::map<std::string,double>::iterator it=configValues.begin(); it!=configValues.end(); ++it)
