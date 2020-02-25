@@ -4,6 +4,7 @@
 #include <QTime>
 #include <QCoreApplication>
 #include <QPushButton>
+#include <QMessageBox>
 #include "enums.h"
 
 class Utils
@@ -14,6 +15,8 @@ class Utils
         static void delay(int millisecondsToWait);
         static Color getColor(QPushButton *button);
         static void setColor(Color color, QPushButton *button);
+        static Command int2command(int command);
+        static void showDialog(std::string message);
     private:
         Utils(){}
 };

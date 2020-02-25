@@ -1,14 +1,15 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QFile>
 #include <vector>
-
 #include "cube.h"
 #include "square.h"
 #include "enums.h"
 #include "colorcalibrator.h"
 #include "colorreader.h"
+#include "arduino.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,6 +30,7 @@ public:
     int rotationsNumber;
     Mode mode;
     std::unique_ptr<Cube> cube;
+    std::shared_ptr<Microcontroller> microcontroller;
     std::unique_ptr<ColorCalibrator> calibrator;
     std::unique_ptr<ColorReader> reader;
     std::map<std::string, Square> squares;

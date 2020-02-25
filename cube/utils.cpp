@@ -10,8 +10,8 @@ std::string Utils::face2str(Face face)
         case Face::BACK: return "back";
         case Face::LEFT: return "left";
         case Face::RIGHT: return "right";
-        default: return "error";
     }
+    return "error";
 }
 
 std::string Utils::color2str(Color color)
@@ -81,4 +81,37 @@ void Utils::setColor(Color color, QPushButton *button)
         button->setStyleSheet("background-color: gray");
         break;
     }
+}
+
+Command Utils::int2command(int command)
+{
+    switch (command)
+    {
+        case 1: return Command::MOVE_FRONT;
+        case 2: return Command::MOVE_DOWN;
+        case 3: return Command::MOVE_BACK;
+        case 4: return Command::MOVE_RIGHT;
+        case 5: return Command::MOVE_LEFT;
+        case 6: return Command::MOVE_UP;
+        case 7: return Command::DO_U_ROTATION;
+        case 8: return Command::DO_UA_ROTATION;
+        case 9: return Command::DO_F_ROTATION;
+        case 10: return Command::DO_FA_ROTATION;
+        case 11: return Command::DO_D_ROTATION;
+        case 12: return Command::DO_DA_ROTATION;
+        case 13: return Command::DO_B_ROTATION;
+        case 14: return Command::DO_BA_ROTATION;
+        case 15: return Command::DO_R_ROTATION;
+        case 16: return Command::DO_RA_ROTATION;
+        case 17: return Command::DO_L_ROTATION;
+        case 18: return Command::DO_LA_ROTATION;        
+        default: return Command::ERROR;
+    }
+}
+
+void Utils::showDialog(std::string message)
+{
+    QMessageBox msgBox;
+    msgBox.setText(QString::fromStdString(message));
+    msgBox.exec();
 }

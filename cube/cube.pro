@@ -37,6 +37,7 @@ HEADERS  += mainwindow.h \
     constants.h \
     cube.h \
     enums.h \
+    microcontroller.h \
     rotator.h \
     square.h \
     utils.h

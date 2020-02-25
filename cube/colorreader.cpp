@@ -1,13 +1,12 @@
 #include "colorreader.h"
 
-ColorReader::ColorReader(std::map<std::string, Square> squares, std::map<std::string, double> configValues)
-: squares{squares} , configValues{configValues} {}
+ColorReader::ColorReader(std::map<std::string, Square> squares, std::map<std::string, double> configValues
+, std::shared_ptr<Microcontroller> microcontroller)
+: squares{squares} , configValues{configValues}, microcontroller{microcontroller} {}
 
 void ColorReader::read()
 {
     cv::VideoCapture webcam(WEBCAM_ID);
-    Arduino robot;
-    const char *command;
     std::vector<Face> faces = {Face::UP, Face::FRONT, Face::DOWN, Face::BACK, Face::RIGHT, Face::LEFT};
     std::map<std::string, double> faceHues;
     cv::Mat picture;
@@ -31,16 +30,14 @@ void ColorReader::read()
         identifiedColors = identifyColors(faceHues, configValues);
         drawSquares(picture, squaresIdentified, identifiedColors);
         updateModel(faces[faceIndex], identifiedColors);
-
-        command = std::string("0" + std::to_string(faceIndex+1)).c_str();
-        robot.runCommand(command);
-    // }
-    // if(verificaCoerencia())
-    //     QMessageBox::information(this,tr("Sucesso"),tr("A configuração do cubo é factível."));
-    // else
-    // {
-    //     QMessageBox::information(this,tr("Erro"),tr("Houve erro na identificação de cores\nSerá realizada uma nova leitura."));
-    //     on_readColorsButton_clicked();
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Utils::int2command(faceIndex+1));
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+        
     }
     webcam.~VideoCapture();
 }
