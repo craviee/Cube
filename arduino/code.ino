@@ -309,7 +309,3 @@ void rotate_clockwise(int n)
   base.write(90);
   delay(delay_time);
 }
-
-
-
-
