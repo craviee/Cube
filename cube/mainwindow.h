@@ -10,12 +10,13 @@
 #include "colorcalibrator.h"
 #include "colorreader.h"
 #include "arduino.h"
+#include "layerssolver.h"
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class MainWindow : public QMainWindow, public Observer<Solver>
 {
     Q_OBJECT
 
@@ -26,11 +27,14 @@ public:
     void setRotationsNumber(int rotationsNumber);
     void changeColor(QPushButton *square);
     void showDialog(std::string message);
+    void onUpdate(Solver& source, int number);
 
     int rotationsNumber;
     Mode mode;
     std::unique_ptr<Cube> cube;
     std::shared_ptr<Microcontroller> microcontroller;
+    std::shared_ptr<Solver> layersSolver;
+    std::shared_ptr<Solver> OptimalSolver;
     std::unique_ptr<ColorCalibrator> calibrator;
     std::unique_ptr<ColorReader> reader;
     std::map<std::string, Square> squares;

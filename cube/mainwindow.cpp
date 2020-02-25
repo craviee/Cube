@@ -8,6 +8,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setupSquares();
     cube = std::make_unique<Cube>(squares);
+    layersSolver = std::make_shared<LayersSolver>(rotationsNumber);
+    //optimalSolver = std::make_shared<OptimalSolver>(rotationsNumber);
+    layersSolver->subscribe(this);
+    //optimalSolver->subscribe(this);
+    cube->setSolver(layersSolver);
     microcontroller = std::make_shared<Arduino>();
     calibrator = std::make_unique<ColorCalibrator>(squares, microcontroller);
     reader = std::make_unique<ColorReader>(squares, calibrator->configValues, microcontroller);
@@ -99,6 +104,8 @@ void MainWindow::changeColor(QPushButton *button)
     else if(Utils::getColor(button) == Color::YELLOW)
         Utils::setColor(Color::BLUE, button);
 }
+
+void MainWindow::onUpdate(Solver& source, int number) { setRotationsNumber(number); }
 
 //TODO: VALIDATES THE MODEL BEFORE EVERY ALGORITHM
 
