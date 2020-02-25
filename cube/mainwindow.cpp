@@ -57,8 +57,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setupSquares();
     cube = std::make_unique<Cube>(squares);
-    calibrator = std::make_unique<ColorCalibrator>(squares);
-    reader = std::make_unique<ColorReader>(squares, calibrator->configValues);
+    microcontroller = std::make_shared<Arduino>();
+    calibrator = std::make_unique<ColorCalibrator>(squares, microcontroller);
+    reader = std::make_unique<ColorReader>(squares, calibrator->configValues, microcontroller);
     cube->initialize();
     setRotationsNumber(0);
 }

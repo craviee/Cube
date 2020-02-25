@@ -1,8 +1,10 @@
 #pragma once
 
-class Arduino
+#include "microcontroller.h"
+
+class Arduino : public Microcontroller
 {
-public:
-    Arduino();
-    void runCommand(const char* command);
+    public:
+        Arduino();
+        void runCommand(const char* command) override;
 };
