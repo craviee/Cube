@@ -5,9 +5,8 @@
 #include "rotator.h"
 #include "square.h"
 #include "utils.h"
-
-#define SQUARES_PER_FACE 9
-#define RANDOM_ROTATIONS 30
+#include "constants.h"
+#include "solver.h"
 
 class Cube
 {
@@ -15,6 +14,7 @@ class Cube
         Cube(std::map<std::string, Square> squares) : squares{squares}, rotator{squares}{}
         void initialize();
         void randomize();
+        void setSolver(std::shared_ptr<Solver> solver);
         bool isValid();
         void rotateD();
         void rotateU();
@@ -28,7 +28,9 @@ class Cube
         void rotateBA();
         void rotateLA();
         void rotateRA();
+        
     private:
         std::map<std::string, Square> squares;
         Rotator rotator;
+        std::shared_ptr<Solver> solver;
 };

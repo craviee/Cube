@@ -15,6 +15,8 @@ void Cube::initialize()
 
 void Cube::randomize() { rotator.randomRotations(RANDOM_ROTATIONS); }
 
+void Cube::setSolver(std::shared_ptr<Solver> solver) { this->solver = solver; }
+
 bool Cube::isValid()
 {
     std::map<Color, int> colorsNumber =
