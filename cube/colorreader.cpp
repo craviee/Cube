@@ -30,7 +30,14 @@ void ColorReader::read()
         identifiedColors = identifyColors(faceHues, configValues);
         drawSquares(picture, squaresIdentified, identifiedColors);
         updateModel(faces[faceIndex], identifiedColors);
-        microcontroller->runCommand(Utils::int2command(faceIndex+1));
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Utils::int2command(faceIndex+1));
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+        
     }
     webcam.~VideoCapture();
 }

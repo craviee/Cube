@@ -108,3 +108,10 @@ Command Utils::int2command(int command)
         default: return Command::ERROR;
     }
 }
+
+void Utils::showDialog(std::string message)
+{
+    QMessageBox msgBox;
+    msgBox.setText(QString::fromStdString(message));
+    msgBox.exec();
+}

@@ -102,7 +102,13 @@ void ColorCalibrator::calibrate()
     for(int faceIndex = 0; faceIndex < faces.size(); faceIndex++)
     {
         calibrateFace(faces[faceIndex]);
-        microcontroller->runCommand(Utils::int2command(faceIndex+1));
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Utils::int2command(faceIndex+1));
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
     }
     // Divide each Hue by the time it was identified to get its average
     for (std::map<std::string,double>::iterator it=configValues.begin(); it!=configValues.end(); ++it)

@@ -100,13 +100,6 @@ void MainWindow::changeColor(QPushButton *button)
         Utils::setColor(Color::BLUE, button);
 }
 
-void MainWindow::showDialog(std::string message)
-{
-    QMessageBox msgBox;
-    msgBox.setText(QString::fromStdString(message));
-    msgBox.exec();
-}
-
 //TODO: VALIDATES THE MODEL BEFORE EVERY ALGORITHM
 
 void MainWindow::CruzSul()
@@ -3554,9 +3547,9 @@ void MainWindow::on_colorCalibrationButton_clicked()
     if(mode == Mode::ROBOT)
     {
         calibrator->calibrate();
-        showDialog(std::string("Calibration done with success."));
+        Utils::showDialog(std::string("Calibration done with success."));
     }
-    else showDialog(std::string("Error: The Calibration only works on ROBOT mode."));
+    else Utils::showDialog(std::string("Error: The Calibration only works on ROBOT mode."));
 }
 
 void MainWindow::on_readColorsButton_clicked()
@@ -3564,24 +3557,203 @@ void MainWindow::on_readColorsButton_clicked()
     if(mode == Mode::ROBOT)
     {
         reader->read();
-        if(cube->isValid()) showDialog(std::string("Reading done with success."));
-        else showDialog(std::string("Error: The new cube have more than 9 squares of the same color."));
+        if(cube->isValid()) Utils::showDialog(std::string("Reading done with success."));
+        else Utils::showDialog(std::string("Error: The new cube have more than 9 squares of the same color."));
     }
-    else showDialog(std::string("Error: The Reading only works on ROBOT mode."));
+    else Utils::showDialog(std::string("Error: The Reading only works on ROBOT mode."));
 }
 
-void MainWindow::on_rotationUButton_clicked() { cube->rotateU(); setRotationsNumber(rotationsNumber+1); }
-void MainWindow::on_rotationUAButton_clicked() { cube->rotateUA(); setRotationsNumber(rotationsNumber+1); }
-void MainWindow::on_rotationDButton_clicked() { cube->rotateD(); setRotationsNumber(rotationsNumber+1); }
-void MainWindow::on_rotationDAButton_clicked() { cube->rotateDA(); setRotationsNumber(rotationsNumber+1); }
-void MainWindow::on_rotationRButton_clicked() { cube->rotateR(); setRotationsNumber(rotationsNumber+1); }
-void MainWindow::on_rotationRAButton_clicked() { cube->rotateRA(); setRotationsNumber(rotationsNumber+1); }
-void MainWindow::on_rotationLButton_clicked() { cube->rotateL(); setRotationsNumber(rotationsNumber+1); }
-void MainWindow::on_rotationLAButton_clicked() { cube->rotateLA(); setRotationsNumber(rotationsNumber+1); }
-void MainWindow::on_rotationFButton_clicked() { cube->rotateF(); setRotationsNumber(rotationsNumber+1); }
-void MainWindow::on_rotationFAButton_clicked() { cube->rotateFA(); setRotationsNumber(rotationsNumber+1); }
-void MainWindow::on_rotationBButton_clicked() { cube->rotateB(); setRotationsNumber(rotationsNumber+1); }
-void MainWindow::on_rotationBAButton_clicked() { cube->rotateBA(); setRotationsNumber(rotationsNumber+1); }
+void MainWindow::on_rotationUButton_clicked()
+{
+    if(mode == Mode::ROBOT)
+    {
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Command::DO_U_ROTATION);
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+    }
+    cube->rotateU();
+    setRotationsNumber(rotationsNumber+1);
+}
+
+void MainWindow::on_rotationUAButton_clicked()
+{
+    if(mode == Mode::ROBOT)
+    {
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Command::DO_UA_ROTATION);
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+    }
+    cube->rotateUA();
+    setRotationsNumber(rotationsNumber+1);
+}
+
+void MainWindow::on_rotationDButton_clicked()
+{
+    if(mode == Mode::ROBOT)
+    {
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Command::DO_D_ROTATION);
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+    }
+    cube->rotateD();
+    setRotationsNumber(rotationsNumber+1);
+}
+
+void MainWindow::on_rotationDAButton_clicked()
+{
+    if(mode == Mode::ROBOT)
+    {
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Command::DO_DA_ROTATION);
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+    }
+    cube->rotateDA();
+    setRotationsNumber(rotationsNumber+1);
+}
+
+void MainWindow::on_rotationRButton_clicked()
+{
+    if(mode == Mode::ROBOT)
+    {
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Command::DO_R_ROTATION);
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+    }
+    cube->rotateR();
+    setRotationsNumber(rotationsNumber+1);
+}
+
+void MainWindow::on_rotationRAButton_clicked()
+{
+    if(mode == Mode::ROBOT)
+    {
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Command::DO_RA_ROTATION);
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+    }
+    cube->rotateRA();
+    setRotationsNumber(rotationsNumber+1);
+}
+
+void MainWindow::on_rotationLButton_clicked()
+{
+    if(mode == Mode::ROBOT)
+    {
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Command::DO_L_ROTATION);
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+    }
+    cube->rotateL();
+    setRotationsNumber(rotationsNumber+1);
+}
+
+void MainWindow::on_rotationLAButton_clicked()
+{
+    if(mode == Mode::ROBOT)
+    {
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Command::DO_LA_ROTATION);
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+    }
+    cube->rotateLA();
+    setRotationsNumber(rotationsNumber+1);
+}
+
+void MainWindow::on_rotationFButton_clicked()
+{
+    if(mode == Mode::ROBOT)
+    {
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Command::DO_F_ROTATION);
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+    }
+    cube->rotateF();
+    setRotationsNumber(rotationsNumber+1);
+}
+
+void MainWindow::on_rotationFAButton_clicked()
+{
+    if(mode == Mode::ROBOT)
+    {
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Command::DO_FA_ROTATION);
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+    }
+    cube->rotateFA();
+    setRotationsNumber(rotationsNumber+1);
+}
+
+void MainWindow::on_rotationBButton_clicked()
+{
+    if(mode == Mode::ROBOT)
+    {
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Command::DO_B_ROTATION);
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+    }
+    cube->rotateB();
+    setRotationsNumber(rotationsNumber+1);
+}
+
+void MainWindow::on_rotationBAButton_clicked()
+{
+    if(mode == Mode::ROBOT)
+    {
+        if(microcontroller->isAvailable())
+            microcontroller->runCommand(Command::DO_BA_ROTATION);
+        else
+        {
+            Utils::showDialog("Microcontroller is not available.");
+            return;
+        }
+    }
+    cube->rotateBA();
+    setRotationsNumber(rotationsNumber+1);
+}
 
 void MainWindow::on_up9Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
 void MainWindow::on_front3Button_clicked() { changeColor(qobject_cast<QPushButton*>(sender())); }
