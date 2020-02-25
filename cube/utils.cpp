@@ -10,8 +10,8 @@ std::string Utils::face2str(Face face)
         case Face::BACK: return "back";
         case Face::LEFT: return "left";
         case Face::RIGHT: return "right";
-        default: return "error";
     }
+    return "error";
 }
 
 std::string Utils::color2str(Color color)
