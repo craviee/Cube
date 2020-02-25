@@ -14,6 +14,7 @@ class Utils
         static void delay(int millisecondsToWait);
         static Color getColor(QPushButton *button);
         static void setColor(Color color, QPushButton *button);
+        static Command int2command(int command);
     private:
         Utils(){}
 };

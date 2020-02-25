@@ -82,3 +82,17 @@ void Utils::setColor(Color color, QPushButton *button)
         break;
     }
 }
+
+Command Utils::int2command(int command)
+{
+    switch (command)
+    {
+        case 1: return Command::MOVE_UP;
+        case 2: return Command::MOVE_FRONT;
+        case 3: return Command::MOVE_DOWN;
+        case 4: return Command::MOVE_BACK;
+        case 5: return Command::MOVE_RIGHT;
+        case 6: return Command::MOVE_LEFT;
+        default: return Command::ERROR;
+    }
+}
