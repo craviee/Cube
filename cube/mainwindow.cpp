@@ -1,54 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "identification.cpp"
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <cstdio>
-#include <unistd.h>
-#include <qthread.h>
-#include <fstream>
-#include <string>
-#include <QTime>
-#include <vector>
-#include <sstream>
-#include <QProcess>
-#include <QCamera>
-#include <QMessageBox>
-#include <QCameraViewfinder>
-#include <QCameraImageCapture>
-#include <QVBoxLayout>
-#include <QCameraInfo>
-#include <QFileDialog>
-#include <QBuffer>
-#include <QSerialPort>
-#include <QSerialPortInfo>
-#include "opencv2/core/core.hpp"
-#include "opencv2/objdetect/objdetect.hpp"
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
-#include "opencv2/opencv.hpp"
-#include <QElapsedTimer>
-
-void delay( int millisecondsToWait )
-{
-    QTime dieTime = QTime::currentTime().addMSecs( millisecondsToWait );
-    while( QTime::currentTime() < dieTime )
-    {
-        QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
-    }
-}
-QSerialPort *arduino = new QSerialPort;
-static const quint16 arduino_uno_vendor_id = 9025;
-static const quint16 arduino_uno_product_id = 67;
-QString arduino_port_name = "";
-bool arduino_is_available = false;
-bool CalibrationOn = false;
-QCamera *mCamera;
-std::vector<double> calibrateVector = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-QCameraViewfinder *mCameraViewFinder;
-QCameraImageCapture *mCameraImageCapture;
-int lado = 0;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
