@@ -55,3 +55,8 @@ enum class Command
     DO_R_ROTATION,
     DO_RA_ROTATION,
 };
+
+enum class SolverStep
+{
+    
+};
