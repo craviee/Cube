@@ -7,12 +7,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setupSquares();
-    cube = std::make_unique<Cube>(squares);
-    layersSolver = std::make_shared<LayersSolver>(rotationsNumber);
+    rotator = std::make_shared<Rotator>(squares);
+    cube = std::make_shared<Cube>(squares, rotator);
+    layersSolver = std::make_shared<LayersSolver>(rotationsNumber, cube);
     //optimalSolver = std::make_shared<OptimalSolver>(rotationsNumber);
     layersSolver->subscribe(this);
     //optimalSolver->subscribe(this);
-    cube->setSolver(layersSolver);
     microcontroller = std::make_shared<Arduino>();
     calibrator = std::make_unique<ColorCalibrator>(squares, microcontroller);
     reader = std::make_unique<ColorReader>(squares, calibrator->configValues, microcontroller);
@@ -2844,17 +2844,9 @@ void MainWindow::on_crossButton_clicked()
     {
         CruzSul();
         CruzNorte();
-        
-        
         CruzLeste();
         CruzOeste();
-     }
-    
-    
-    
-    
-    
-    
+    }
 }
 
 void MainWindow::on_firstLayerCornersButton_clicked()

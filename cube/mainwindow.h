@@ -31,8 +31,9 @@ public:
 
     int rotationsNumber;
     Mode mode;
-    std::unique_ptr<Cube> cube;
+    std::shared_ptr<Cube> cube;
     std::shared_ptr<Microcontroller> microcontroller;
+    std::shared_ptr<Rotator> rotator;
     std::shared_ptr<Solver> layersSolver;
     std::shared_ptr<Solver> OptimalSolver;
     std::unique_ptr<ColorCalibrator> calibrator;

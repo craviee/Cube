@@ -6,15 +6,15 @@
 #include "square.h"
 #include "utils.h"
 #include "constants.h"
-#include "solver.h"
 
 class Cube
 {
+    friend class LayersSolver;
+
     public:
-        Cube(std::map<std::string, Square> squares) : squares{squares}, rotator{squares}{}
+        Cube(std::map<std::string, Square> squares, std::shared_ptr<Rotator> rotator);
         void initialize();
         void randomize();
-        void setSolver(std::shared_ptr<Solver> solver);
         bool isValid();
         void rotateD();
         void rotateU();
@@ -28,9 +28,7 @@ class Cube
         void rotateBA();
         void rotateLA();
         void rotateRA();
-        
     private:
         std::map<std::string, Square> squares;
-        Rotator rotator;
-        std::shared_ptr<Solver> solver;
+        std::shared_ptr<Rotator> rotator;
 };
