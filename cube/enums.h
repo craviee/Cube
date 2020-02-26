@@ -55,3 +55,15 @@ enum class Command
     DO_R_ROTATION,
     DO_RA_ROTATION,
 };
+
+enum class SolverStep
+{
+    ALL,
+    CROSS,
+    FIRST_LAYER,
+    SECOND_LAYER,
+    DOWN_CROSS,
+    DOWN_EDGES,
+    PLACE_DOWN_CORNERS,
+    TURN_DOWN_CORNERS
+};

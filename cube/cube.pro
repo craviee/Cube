@@ -25,6 +25,7 @@ SOURCES += main.cpp\
     colorreader.cpp \
     cube.cpp \
     identification.cpp \
+    layerssolver.cpp \
     mainwindow.cpp \
     rotator.cpp \
     square.cpp \
@@ -37,8 +38,12 @@ HEADERS  += mainwindow.h \
     constants.h \
     cube.h \
     enums.h \
+    layerssolver.h \
     microcontroller.h \
+    observable.h \
+    observer.h \
     rotator.h \
+    solver.h \
     square.h \
     utils.h
 

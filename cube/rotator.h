@@ -8,9 +8,7 @@
 
 class Rotator
 {
-    friend class Cube;
-
-    private:
+    public:
         Rotator(std::map<std::string, Square> squares) : squares{squares}{}
         void rotateD();
         void rotateU();
@@ -25,6 +23,7 @@ class Rotator
         void rotateLA();
         void rotateRA();
         void randomRotations(int numberRotations);
+    private:
         void rotate(std::string square1, std::string square2, std::string square3, std::string square4);
         void rotateFace(Face face, Direction direction);
         std::map<std::string, Square> squares;

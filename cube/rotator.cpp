@@ -99,12 +99,11 @@ void Rotator::rotateRA()
 
 void Rotator::randomRotations(int numberRotations)
 {
-    QRandomGenerator generator{};
     int rotation;
 
     for(int i = 0; i < numberRotations; i++)
     {
-        rotation = generator.bounded(0, 12);
+        rotation = QRandomGenerator::system()->bounded(0, 12);
         switch (rotation)
         {
             case 0: rotateU(); break;

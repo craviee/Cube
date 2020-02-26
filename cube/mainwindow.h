@@ -10,12 +10,13 @@
 #include "colorcalibrator.h"
 #include "colorreader.h"
 #include "arduino.h"
+#include "layerssolver.h"
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class MainWindow : public QMainWindow, public Observer<Solver>
 {
     Q_OBJECT
 
@@ -26,40 +27,20 @@ public:
     void setRotationsNumber(int rotationsNumber);
     void changeColor(QPushButton *square);
     void showDialog(std::string message);
+    void onUpdate(Solver& source, int number);
 
     int rotationsNumber;
-    Mode mode;
-    std::unique_ptr<Cube> cube;
+    Mode mode = Mode::SIMULATION;
+    std::shared_ptr<Cube> cube;
     std::shared_ptr<Microcontroller> microcontroller;
+    std::shared_ptr<Rotator> rotator;
+    std::shared_ptr<Solver> layersSolver;
+    std::shared_ptr<Solver> OptimalSolver;
     std::unique_ptr<ColorCalibrator> calibrator;
     std::unique_ptr<ColorReader> reader;
     std::map<std::string, Square> squares;
 
     // Will be excluded
-    void CruzSul();
-    void CruzNorte();
-    void CruzOeste();
-    void CruzLeste();
-    void QuinaSudeste();
-    void QuinaSudoeste();
-    void QuinaNordeste();
-    void QuinaNoroeste();
-    void SudesteBaixo();
-    void SudoesteBaixo();
-    void frontSecond();
-    void leftSecond();
-    void rightSecond();
-    void backSecond();
-    void NordesteBaixo();
-    void NoroesteBaixo();
-    void debugaFront();
-    void debugaLeft();
-    void debugaRight();
-    void debugaBack();
-    bool sudestecorreto();
-    bool sudoestecorreto();
-    bool nordestecorreto();
-    bool noroestecorreto();
     void solve(std::string s);
 
 private slots:
@@ -71,9 +52,9 @@ private slots:
     void on_firstLayerCornersButton_clicked();
     void on_secondLayerButton_clicked();
     void on_downCrossButton_clicked();
-    void on_backEdgesButton_clicked();
-    void on_placeDownEdgesButton_clicked();
-    void on_turnDownEdgesButton_clicked();
+    void on_downEdgesButton_clicked();
+    void on_placeDownCornersButton_clicked();
+    void on_turnDownCornersButton_clicked();
 
     void on_solveOptimalButton_clicked();
     void on_solveLanesButton_clicked();
