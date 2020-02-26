@@ -11,8 +11,8 @@ class Solver : public Observable<Solver>
     public:
         virtual void solve(SolverStep step = SolverStep::ALL){}
     protected:
-        Solver(int& rotationsNumber, std::shared_ptr<Cube> cube)
+        Solver(int* rotationsNumber, std::shared_ptr<Cube> cube)
          : rotationsNumber{rotationsNumber}, cube{cube}{}
         std::shared_ptr<Cube> cube;
-        int rotationsNumber;
+        int* rotationsNumber;
 };

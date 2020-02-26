@@ -7,9 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setupSquares();
+    setRotationsNumber(0);
     rotator = std::make_shared<Rotator>(squares);
     cube = std::make_shared<Cube>(squares, rotator);
-    layersSolver = std::make_shared<LayersSolver>(rotationsNumber, cube);
+    layersSolver = std::make_shared<LayersSolver>(&rotationsNumber, cube);
     //optimalSolver = std::make_shared<OptimalSolver>(rotationsNumber);
     layersSolver->subscribe(this);
     //optimalSolver->subscribe(this);
@@ -17,7 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
     calibrator = std::make_unique<ColorCalibrator>(squares, microcontroller);
     reader = std::make_unique<ColorReader>(squares, calibrator->configValues, microcontroller);
     cube->initialize();
-    setRotationsNumber(0);
 }
 
 MainWindow::~MainWindow()
@@ -105,7 +105,7 @@ void MainWindow::changeColor(QPushButton *button)
         Utils::setColor(Color::BLUE, button);
 }
 
-void MainWindow::onUpdate(Solver& source, int number) { setRotationsNumber(number); }
+void MainWindow::onUpdate(Solver& source, int number){ setRotationsNumber(number); }
 
 //TODO: VALIDATES THE MODEL BEFORE EVERY ALGORITHM
 
@@ -2837,16 +2837,8 @@ void MainWindow::on_toggleModeButton_clicked()
 
 void MainWindow::on_crossButton_clicked()
 {
-    while(ui->up2Button->styleSheet() != ui->up5Button->styleSheet() || ui->back8Button->styleSheet() != ui->back5Button->styleSheet() ||
-          ui->up4Button->styleSheet() != ui->up5Button->styleSheet() || ui->left2Button->styleSheet() != ui->left5Button->styleSheet() ||
-          ui->up6Button->styleSheet() != ui->up5Button->styleSheet() || ui->right2Button->styleSheet() != ui->right5Button->styleSheet() ||
-          ui->up8Button->styleSheet() != ui->up5Button->styleSheet() || ui->front2Button->styleSheet() != ui->front5Button->styleSheet() )
-    {
-        CruzSul();
-        CruzNorte();
-        CruzLeste();
-        CruzOeste();
-    }
+    if(cube->isValid()) layersSolver->solve(SolverStep::CROSS);
+    else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
 }
 
 void MainWindow::on_firstLayerCornersButton_clicked()
@@ -3557,7 +3549,7 @@ void MainWindow::on_readColorsButton_clicked()
     {
         reader->read();
         if(cube->isValid()) Utils::showDialog(std::string("Reading done with success."));
-        else Utils::showDialog(std::string("Error: The new cube have more than 9 squares of the same color."));
+        else Utils::showDialog(std::string("Error: The new cube has more than 9 squares of the same color."));
     }
     else Utils::showDialog(std::string("Error: The Reading only works on ROBOT mode."));
 }

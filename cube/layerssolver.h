@@ -5,7 +5,7 @@
 class LayersSolver : public Solver
 {
    public:
-       LayersSolver(int& rotationsNumber, std::shared_ptr<Cube> cube);
+       LayersSolver(int* rotationsNumber, std::shared_ptr<Cube> cube);
        void solve(SolverStep step = SolverStep::ALL) override;
     private:
         void cross();
