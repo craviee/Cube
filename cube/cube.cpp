@@ -33,7 +33,7 @@ bool Cube::isValid()
 
     for(size_t faceIndex = 0; faceIndex < faces.size(); faceIndex++)
     {
-        for(int square = 1; square < SQUARES_PER_FACE; square++)
+        for(int square = 1; square <= SQUARES_PER_FACE; square++)
         {
             colorsNumber[squares[Utils::face2str(faces[faceIndex]) + std::to_string(square)].getColor()]++;
         }
