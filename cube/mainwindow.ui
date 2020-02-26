@@ -1061,23 +1061,23 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="backEdgesButton">
+      <widget class="QPushButton" name="downEdgesButton">
        <property name="text">
-        <string>Back Edges</string>
+        <string>Down Edges</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="placeDownEdgesButton">
+      <widget class="QPushButton" name="placeDownCornersButton">
        <property name="text">
-        <string>Place Down Edges</string>
+        <string>Place Down Corners</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="turnDownEdgesButton">
+      <widget class="QPushButton" name="turnDownCornersButton">
        <property name="text">
-        <string>Turn Down Edges</string>
+        <string>Turn Down Corners</string>
        </property>
       </widget>
      </item>
@@ -1219,7 +1219,7 @@
       <x>10</x>
       <y>50</y>
       <width>181</width>
-      <height>21</height>
+      <height>31</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="rotationsNumberLayout">

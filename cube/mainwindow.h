@@ -30,7 +30,7 @@ public:
     void onUpdate(Solver& source, int number);
 
     int rotationsNumber;
-    Mode mode;
+    Mode mode = Mode::SIMULATION;
     std::shared_ptr<Cube> cube;
     std::shared_ptr<Microcontroller> microcontroller;
     std::shared_ptr<Rotator> rotator;
@@ -76,9 +76,9 @@ private slots:
     void on_firstLayerCornersButton_clicked();
     void on_secondLayerButton_clicked();
     void on_downCrossButton_clicked();
-    void on_backEdgesButton_clicked();
-    void on_placeDownEdgesButton_clicked();
-    void on_turnDownEdgesButton_clicked();
+    void on_downEdgesButton_clicked();
+    void on_placeDownCornersButton_clicked();
+    void on_turnDownCornersButton_clicked();
 
     void on_solveOptimalButton_clicked();
     void on_solveLanesButton_clicked();

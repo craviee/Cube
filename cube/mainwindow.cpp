@@ -2857,85 +2857,19 @@ void MainWindow::on_downCrossButton_clicked()
     else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
 }
 
-void MainWindow::on_backEdgesButton_clicked()
+void MainWindow::on_downEdgesButton_clicked()
 {
-    if(cube->isValid()) layersSolver->solve(SolverStep::BACK_EDGES);
+    if(cube->isValid()) layersSolver->solve(SolverStep::DOWN_EDGES);
     else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
 }
 
-void MainWindow::on_placeDownEdgesButton_clicked()
+void MainWindow::on_placeDownCornersButton_clicked()
 {
-    while(!sudestecorreto() || !sudoestecorreto() || !nordestecorreto() || !noroestecorreto())
-    {
-        if(sudoestecorreto())
-        {
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateL();
-            cube->rotateDA();
-            cube->rotateR();
-            cube->rotateD();
-            cube->rotateLA();
-            cube->rotateDA();
-
-            
-        }
-        else if(sudestecorreto())
-        {
-            cube->rotateBA();
-            cube->rotateD();
-            cube->rotateF();
-            cube->rotateDA();
-            cube->rotateB();
-            cube->rotateD();
-            cube->rotateFA();
-            cube->rotateDA();
-
-            
-        }
-        else if(noroestecorreto())
-        {
-            cube->rotateFA();
-            cube->rotateD();
-            cube->rotateB();
-            cube->rotateDA();
-            cube->rotateF();
-            cube->rotateD();
-            cube->rotateBA();
-            cube->rotateDA();
-
-            
-        }
-        else if(nordestecorreto())
-        {
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateL();
-            cube->rotateDA();
-            cube->rotateR();
-            cube->rotateD();
-            cube->rotateLA();
-            cube->rotateDA();
-
-            
-        }
-        else
-        {
-            cube->rotateRA();
-            cube->rotateD();
-            cube->rotateL();
-            cube->rotateDA();
-            cube->rotateR();
-            cube->rotateD();
-            cube->rotateLA();
-            cube->rotateDA();
-
-            
-        }
-    }
+    if(cube->isValid()) layersSolver->solve(SolverStep::PLACE_DOWN_CORNERS);
+    else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
 }
 
-void MainWindow::on_turnDownEdgesButton_clicked()
+void MainWindow::on_turnDownCornersButton_clicked()
 {
     while(ui->front1Button->styleSheet() != ui->front5Button->styleSheet() || ui->front2Button->styleSheet() != ui->front5Button->styleSheet() || ui->front3Button->styleSheet() != ui->front5Button->styleSheet() ||
           ui->front4Button->styleSheet() != ui->front5Button->styleSheet() || ui->front6Button->styleSheet() != ui->front5Button->styleSheet() || ui->front7Button->styleSheet() != ui->front5Button->styleSheet() ||
@@ -3137,9 +3071,9 @@ void MainWindow::on_solveLanesButton_clicked()
     on_firstLayerCornersButton_clicked();
     on_secondLayerButton_clicked();
     on_downCrossButton_clicked();
-    on_backEdgesButton_clicked();
-    on_placeDownEdgesButton_clicked();
-    on_turnDownEdgesButton_clicked();
+    on_downEdgesButton_clicked();
+    on_placeDownCornersButton_clicked();
+    on_turnDownCornersButton_clicked();
 }
 
 void MainWindow::on_solveOptimalButton_clicked()

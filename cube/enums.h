@@ -63,5 +63,7 @@ enum class SolverStep
     FIRST_LAYER,
     SECOND_LAYER,
     DOWN_CROSS,
-    BACK_EDGES
+    DOWN_EDGES,
+    PLACE_DOWN_CORNERS,
+    TURN_DOWN_CORNERS
 };

@@ -13,9 +13,10 @@ void LayersSolver::solve(SolverStep step)
         case SolverStep::FIRST_LAYER: firstLayer(); break;
         case SolverStep::SECOND_LAYER: secondLayer(); break;
         case SolverStep::DOWN_CROSS: downCross(); break;
-        case SolverStep::BACK_EDGES: backEdges(); break;
+        case SolverStep::DOWN_EDGES: downEdges(); break;
+        case SolverStep::PLACE_DOWN_CORNERS: placeDownCorners(); break;
         case SolverStep::ALL: break;
-    }    
+    }
 }
 
 void LayersSolver::cross()
@@ -66,7 +67,7 @@ void LayersSolver::downCross()
         cube->rotateLA(); notify(*this, (*rotationsNumber)+1);
         cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
         cube->rotateFA(); notify(*this, (*rotationsNumber)+1);
-    } 
+    }
     if(cube->squares["down6"].getColor() != Color::GREEN && cube->squares["down8"].getColor() != Color::GREEN)
     {
         cube->rotateF(); notify(*this, (*rotationsNumber)+1);
@@ -95,11 +96,76 @@ void LayersSolver::downCross()
     }
 }
 
-void LayersSolver::backEdges()
+void LayersSolver::downEdges()
 {
-    placeBackEdges();
-    placeBackEdges();
-    placeBackEdges();
+    placeDownEdges();
+    placeDownEdges();
+    placeDownEdges();
+}
+
+void LayersSolver::placeDownCorners()
+{
+    while(!isCornerFrontDownRightPlaced() ||
+        !isCornerFrontDownLeftPlaced() ||
+        !isCornerBackDownRightPlaced() ||
+        !isCornerBackDownLeftPlaced())
+    {
+        if(isCornerFrontDownLeftPlaced())
+        {
+            cube->rotateRA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateD(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateL(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateR(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateD(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateLA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
+        }
+        else if(isCornerFrontDownRightPlaced())
+        {
+            cube->rotateBA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateD(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateF(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateB(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateD(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateFA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
+        }
+        else if(isCornerBackDownLeftPlaced())
+        {
+            cube->rotateFA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateD(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateB(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateF(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateD(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateBA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
+        }
+        else if(isCornerBackDownRightPlaced())
+        {
+            cube->rotateRA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateD(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateL(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateR(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateD(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateLA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
+        }
+        else
+        {
+            cube->rotateRA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateD(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateL(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateR(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateD(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateLA(); notify(*this, (*rotationsNumber)+1);
+            cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
+        }
+    }
 }
 
 void LayersSolver::up8Cross()
@@ -603,7 +669,7 @@ void LayersSolver::up2Cross()
     }
     else if(cube->squares["back4"].getColor() == Color::YELLOW && cube->squares["left4"].getColor() == Color::BLUE)
     {
-        cube->rotateBA(); notify(*this, (*rotationsNumber)+1); 
+        cube->rotateBA(); notify(*this, (*rotationsNumber)+1);
     }
     else if(cube->squares["back6"].getColor() == Color::BLUE && cube->squares["right6"].getColor() == Color::YELLOW)
     {
@@ -758,14 +824,14 @@ void LayersSolver::up9FirstLayer()
         cube->rotateRA(); notify(*this, (*rotationsNumber)+1);
         cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
         cube->rotateR(); notify(*this, (*rotationsNumber)+1);
-        if(cube->squares["front7"].getColor() == Color::WHITE) 
+        if(cube->squares["front7"].getColor() == Color::WHITE)
         {
             cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
             cube->rotateFA(); notify(*this, (*rotationsNumber)+1);
             cube->rotateD(); notify(*this, (*rotationsNumber)+1);
             cube->rotateF(); notify(*this, (*rotationsNumber)+1);
         }
-        else if(cube->squares["front7"].getColor() == Color::ORANGE) 
+        else if(cube->squares["front7"].getColor() == Color::ORANGE)
         {
             cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
             cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
@@ -773,7 +839,7 @@ void LayersSolver::up9FirstLayer()
             cube->rotateD(); notify(*this, (*rotationsNumber)+1);
             cube->rotateL(); notify(*this, (*rotationsNumber)+1);
         }
-        else if(cube->squares["front7"].getColor() == Color::YELLOW) 
+        else if(cube->squares["front7"].getColor() == Color::YELLOW)
         {
             cube->rotateD(); notify(*this, (*rotationsNumber)+1);
             cube->rotateBA(); notify(*this, (*rotationsNumber)+1);
@@ -807,7 +873,7 @@ void LayersSolver::up9FirstLayer()
             cube->rotateD(); notify(*this, (*rotationsNumber)+1);
             cube->rotateR(); notify(*this, (*rotationsNumber)+1);
         }
-        else if(cube->squares["back3"].getColor() == Color::YELLOW)  
+        else if(cube->squares["back3"].getColor() == Color::YELLOW)
         {
             cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
             cube->rotateBA(); notify(*this, (*rotationsNumber)+1);
@@ -820,14 +886,14 @@ void LayersSolver::up9FirstLayer()
         cube->rotateF(); notify(*this, (*rotationsNumber)+1);
         cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
         cube->rotateFA(); notify(*this, (*rotationsNumber)+1);
-        if(cube->squares["front9"].getColor() == Color::WHITE) 
+        if(cube->squares["front9"].getColor() == Color::WHITE)
         {
             cube->rotateD(); notify(*this, (*rotationsNumber)+1);
             cube->rotateF(); notify(*this, (*rotationsNumber)+1);
             cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
             cube->rotateFA(); notify(*this, (*rotationsNumber)+1);
         }
-        else if(cube->squares["front9"].getColor() == Color::ORANGE) 
+        else if(cube->squares["front9"].getColor() == Color::ORANGE)
         {
             cube->rotateL(); notify(*this, (*rotationsNumber)+1);
             cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
@@ -2120,7 +2186,7 @@ void LayersSolver::backSecondLayer()
     }
 }
 
-void LayersSolver::placeBackEdges()
+void LayersSolver::placeDownEdges()
 {
     if(cube->squares["front8"].getColor() != Color::WHITE && cube->squares["left8"].getColor() != Color::ORANGE)
     {
@@ -2170,4 +2236,40 @@ void LayersSolver::placeBackEdges()
         cube->rotateFA(); notify(*this, (*rotationsNumber)+1);
         cube->rotateDA(); notify(*this, (*rotationsNumber)+1);
     }
+}
+
+bool LayersSolver::isCornerFrontDownRightPlaced()
+{
+    if((cube->squares["front9"].getColor() == Color::WHITE || cube->squares["front9"].getColor() == Color::GREEN || cube->squares["front9"].getColor() == Color::RED) &&
+            (cube->squares["down3"].getColor() == Color::WHITE || cube->squares["down3"].getColor() == Color::GREEN || cube->squares["down3"].getColor() == Color::RED) &&
+            (cube->squares["right7"].getColor() == Color::WHITE || cube->squares["right7"].getColor() == Color::GREEN || cube->squares["right7"].getColor() == Color::RED))
+        return true;
+    return false;
+}
+
+bool LayersSolver::isCornerFrontDownLeftPlaced()
+{
+    if((cube->squares["front7"].getColor() == Color::WHITE || cube->squares["front7"].getColor() == Color::GREEN || cube->squares["front7"].getColor() == Color::ORANGE) &&
+        (cube->squares["down1"].getColor() == Color::WHITE || cube->squares["down1"].getColor() == Color::GREEN || cube->squares["down1"].getColor() == Color::ORANGE) &&
+        (cube->squares["left9"].getColor() == Color::WHITE || cube->squares["left9"].getColor() == Color::GREEN || cube->squares["left9"].getColor() == Color::ORANGE))
+        return true;
+    return false;
+}
+
+bool LayersSolver::isCornerBackDownRightPlaced()
+{
+    if((cube->squares["back3"].getColor() == Color::YELLOW || cube->squares["back3"].getColor() == Color::GREEN || cube->squares["back3"].getColor() == Color::RED) &&
+        (cube->squares["down9"].getColor() == Color::YELLOW || cube->squares["down9"].getColor() == Color::GREEN || cube->squares["down9"].getColor() == Color::RED) &&
+        (cube->squares["right9"].getColor() == Color::YELLOW || cube->squares["right9"].getColor() == Color::GREEN || cube->squares["right9"].getColor() == Color::RED))
+        return true;
+    return false;
+}
+
+bool LayersSolver::isCornerBackDownLeftPlaced()
+{
+    if((cube->squares["back1"].getColor() == Color::YELLOW || cube->squares["back1"].getColor() == Color::GREEN || cube->squares["back1"].getColor() == Color::ORANGE) &&
+        (cube->squares["down7"].getColor() == Color::YELLOW || cube->squares["down7"].getColor() == Color::GREEN || cube->squares["down7"].getColor() == Color::ORANGE) &&
+        (cube->squares["left7"].getColor() == Color::YELLOW || cube->squares["left7"].getColor() == Color::GREEN || cube->squares["left7"].getColor() == Color::ORANGE))
+        return true;
+    return false;
 }
