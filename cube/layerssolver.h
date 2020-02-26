@@ -9,8 +9,17 @@ class LayersSolver : public Solver
        void solve(SolverStep step = SolverStep::ALL) override;
     private:
         void cross();
-        void front8Cross();
-        void front2Cross();
-        void front4Cross();
-        void front6Cross();
+        void firstLayer();
+        void up8Cross();
+        void up2Cross();
+        void up4Cross();
+        void up6Cross();
+        void up9FirstLayer();
+        void up7FirstLayer();
+        void up3FirstLayer();
+        void up1FirstLayer();
+        void front9FirstLayer();
+        void front7FirstLayer();
+        void back3FirstLayer();
+        void back1FirstLayer();
 };
