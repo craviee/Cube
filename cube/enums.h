@@ -58,5 +58,6 @@ enum class Command
 
 enum class SolverStep
 {
-    ALL
+    ALL,
+    CROSS
 };
