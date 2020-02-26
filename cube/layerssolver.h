@@ -10,6 +10,8 @@ class LayersSolver : public Solver
     private:
         void cross();
         void firstLayer();
+        void secondLayer();
+        void downCross();
         void up8Cross();
         void up2Cross();
         void up4Cross();
@@ -22,4 +24,9 @@ class LayersSolver : public Solver
         void front7FirstLayer();
         void back3FirstLayer();
         void back1FirstLayer();
+        void initiateSecondLayer();
+        void frontSecondLayer();
+        void leftSecondLayer();
+        void rightSecondLayer();
+        void backSecondLayer();
 };

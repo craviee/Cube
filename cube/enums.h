@@ -60,5 +60,7 @@ enum class SolverStep
 {
     ALL,
     CROSS,
-    FIRST_LAYER
+    FIRST_LAYER,
+    SECOND_LAYER,
+    DOWN_CROSS
 };
