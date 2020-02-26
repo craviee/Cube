@@ -8,13 +8,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setupSquares();
     setRotationsNumber(0);
+    microcontroller = std::make_shared<Arduino>();
     rotator = std::make_shared<Rotator>(squares);
     cube = std::make_shared<Cube>(squares, rotator);
-    layersSolver = std::make_shared<LayersSolver>(&rotationsNumber, cube);
+    layersSolver = std::make_shared<LayersSolver>(&rotationsNumber, cube, microcontroller);
     //optimalSolver = std::make_shared<OptimalSolver>(rotationsNumber);
     layersSolver->subscribe(this);
     //optimalSolver->subscribe(this);
-    microcontroller = std::make_shared<Arduino>();
     calibrator = std::make_unique<ColorCalibrator>(squares, microcontroller);
     reader = std::make_unique<ColorReader>(squares, calibrator->configValues, microcontroller);
     cube->initialize();
@@ -179,56 +179,104 @@ void MainWindow::on_restartButton_clicked() { cube->initialize(); setRotationsNu
 
 void MainWindow::on_toggleModeButton_clicked()
 {
-    mode = mode == Mode::SIMULATION ? Mode::ROBOT : Mode::SIMULATION;
-    ui->modeTextBox->setPlainText(QString(mode == Mode::SIMULATION ? "SIMULATION" : "ROBOT"));
+    mode = mode == Mode::SIMULATION ? Mode::MICROCONTROLLER : Mode::SIMULATION;
+    ui->modeTextBox->setPlainText(QString(mode == Mode::SIMULATION ? "SIMULATION" : "MICROCONTROLLER"));
 }
 
 void MainWindow::on_crossButton_clicked()
 {
-    if(cube->isValid()) layersSolver->solve(SolverStep::CROSS);
-    else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    SolverStep step = (mode == Mode::SIMULATION ?
+        SolverStep::CROSS : SolverStep::CROSS_MICROCONTROLLER);
+    try
+    {
+        if(cube->isValid())layersSolver->solve(step);
+        else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    }
+    catch(...) {Utils::showDialog(std::string("Error: Microcontroller not available."));} 
 }
 
 void MainWindow::on_firstLayerCornersButton_clicked()
 {
-    if(cube->isValid()) layersSolver->solve(SolverStep::FIRST_LAYER);
-    else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    SolverStep step = (mode == Mode::SIMULATION ?
+        SolverStep::FIRST_LAYER : SolverStep::FIRST_LAYER_MICROCONTROLLER);
+    try
+    {
+        if(cube->isValid())layersSolver->solve(step);
+        else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    }
+    catch(...) {Utils::showDialog(std::string("Error: Microcontroller not available."));} 
 }
 
 void MainWindow::on_secondLayerButton_clicked()
 {
-    if(cube->isValid()) layersSolver->solve(SolverStep::SECOND_LAYER);
-    else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    SolverStep step = (mode == Mode::SIMULATION ?
+        SolverStep::SECOND_LAYER : SolverStep::SECOND_LAYER_MICROCONTROLLER);
+    try
+    {
+        if(cube->isValid())layersSolver->solve(step);
+        else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    }
+    catch(...) {Utils::showDialog(std::string("Error: Microcontroller not available."));} 
 }
 
 void MainWindow::on_downCrossButton_clicked()
 {
-    if(cube->isValid()) layersSolver->solve(SolverStep::DOWN_CROSS);
-    else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    SolverStep step = (mode == Mode::SIMULATION ?
+        SolverStep::DOWN_CROSS : SolverStep::DOWN_CROSS_MICROCONTROLLER);
+    try
+    {
+        if(cube->isValid())layersSolver->solve(step);
+        else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    }
+    catch(...) {Utils::showDialog(std::string("Error: Microcontroller not available."));} 
 }
 
 void MainWindow::on_downEdgesButton_clicked()
 {
-    if(cube->isValid()) layersSolver->solve(SolverStep::DOWN_EDGES);
-    else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    SolverStep step = (mode == Mode::SIMULATION ?
+        SolverStep::DOWN_EDGES : SolverStep::DOWN_EDGES_MICROCONTROLLER);
+    try
+    {
+        if(cube->isValid())layersSolver->solve(step);
+        else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    }
+    catch(...) {Utils::showDialog(std::string("Error: Microcontroller not available."));} 
 }
 
 void MainWindow::on_placeDownCornersButton_clicked()
 {
-    if(cube->isValid()) layersSolver->solve(SolverStep::PLACE_DOWN_CORNERS);
-    else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    SolverStep step = (mode == Mode::SIMULATION ?
+        SolverStep::PLACE_DOWN_CORNERS : SolverStep::PLACE_DOWN_CORNERS_MICROCONTROLLER);
+    try
+    {
+        if(cube->isValid())layersSolver->solve(step);
+        else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    }
+    catch(...) {Utils::showDialog(std::string("Error: Microcontroller not available."));} 
 }
 
 void MainWindow::on_turnDownCornersButton_clicked()
 {
-    if(cube->isValid()) layersSolver->solve(SolverStep::TURN_DOWN_CORNERS);
-    else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    SolverStep step = (mode == Mode::SIMULATION ?
+        SolverStep::TURN_DOWN_CORNERS : SolverStep::TURN_DOWN_CORNERS_MICROCONTROLLER);
+    try
+    {
+        if(cube->isValid())layersSolver->solve(step);
+        else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    }
+    catch(...) {Utils::showDialog(std::string("Error: Microcontroller not available."));} 
 }
 
 void MainWindow::on_solveLanesButton_clicked()
 {
-    if(cube->isValid()) layersSolver->solve();
-    else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    SolverStep step = (mode == Mode::SIMULATION ?
+        SolverStep::COMPLETE : SolverStep::COMPLETE_MICROCONTROLLER);
+    try
+    {
+        if(cube->isValid())layersSolver->solve(step);
+        else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    }
+    catch(...) {Utils::showDialog(std::string("Error: Microcontroller not available."));} 
 }
 
 void MainWindow::on_solveOptimalButton_clicked()
@@ -342,28 +390,28 @@ void MainWindow::on_solveOptimalButton_clicked()
 
 void MainWindow::on_colorCalibrationButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         calibrator->calibrate();
         Utils::showDialog(std::string("Calibration done with success."));
     }
-    else Utils::showDialog(std::string("Error: The Calibration only works on ROBOT mode."));
+    else Utils::showDialog(std::string("Error: The Calibration only works on MICROCONTROLLER mode."));
 }
 
 void MainWindow::on_readColorsButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         reader->read();
         if(cube->isValid()) Utils::showDialog(std::string("Reading done with success."));
         else Utils::showDialog(std::string("Error: The new cube has more than 9 squares of the same color."));
     }
-    else Utils::showDialog(std::string("Error: The Reading only works on ROBOT mode."));
+    else Utils::showDialog(std::string("Error: The Reading only works on MICROCONTROLLER mode."));
 }
 
 void MainWindow::on_rotationUButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         if(microcontroller->isAvailable())
             microcontroller->runCommand(Command::DO_U_ROTATION);
@@ -379,7 +427,7 @@ void MainWindow::on_rotationUButton_clicked()
 
 void MainWindow::on_rotationUAButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         if(microcontroller->isAvailable())
             microcontroller->runCommand(Command::DO_UA_ROTATION);
@@ -395,7 +443,7 @@ void MainWindow::on_rotationUAButton_clicked()
 
 void MainWindow::on_rotationDButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         if(microcontroller->isAvailable())
             microcontroller->runCommand(Command::DO_D_ROTATION);
@@ -411,7 +459,7 @@ void MainWindow::on_rotationDButton_clicked()
 
 void MainWindow::on_rotationDAButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         if(microcontroller->isAvailable())
             microcontroller->runCommand(Command::DO_DA_ROTATION);
@@ -427,7 +475,7 @@ void MainWindow::on_rotationDAButton_clicked()
 
 void MainWindow::on_rotationRButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         if(microcontroller->isAvailable())
             microcontroller->runCommand(Command::DO_R_ROTATION);
@@ -443,7 +491,7 @@ void MainWindow::on_rotationRButton_clicked()
 
 void MainWindow::on_rotationRAButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         if(microcontroller->isAvailable())
             microcontroller->runCommand(Command::DO_RA_ROTATION);
@@ -459,7 +507,7 @@ void MainWindow::on_rotationRAButton_clicked()
 
 void MainWindow::on_rotationLButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         if(microcontroller->isAvailable())
             microcontroller->runCommand(Command::DO_L_ROTATION);
@@ -475,7 +523,7 @@ void MainWindow::on_rotationLButton_clicked()
 
 void MainWindow::on_rotationLAButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         if(microcontroller->isAvailable())
             microcontroller->runCommand(Command::DO_LA_ROTATION);
@@ -491,7 +539,7 @@ void MainWindow::on_rotationLAButton_clicked()
 
 void MainWindow::on_rotationFButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         if(microcontroller->isAvailable())
             microcontroller->runCommand(Command::DO_F_ROTATION);
@@ -507,7 +555,7 @@ void MainWindow::on_rotationFButton_clicked()
 
 void MainWindow::on_rotationFAButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         if(microcontroller->isAvailable())
             microcontroller->runCommand(Command::DO_FA_ROTATION);
@@ -523,7 +571,7 @@ void MainWindow::on_rotationFAButton_clicked()
 
 void MainWindow::on_rotationBButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         if(microcontroller->isAvailable())
             microcontroller->runCommand(Command::DO_B_ROTATION);
@@ -539,7 +587,7 @@ void MainWindow::on_rotationBButton_clicked()
 
 void MainWindow::on_rotationBAButton_clicked()
 {
-    if(mode == Mode::ROBOT)
+    if(mode == Mode::MICROCONTROLLER)
     {
         if(microcontroller->isAvailable())
             microcontroller->runCommand(Command::DO_BA_ROTATION);

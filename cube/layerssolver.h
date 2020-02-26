@@ -1,13 +1,19 @@
 #pragma once
 
+#include <stdexcept>
 #include "solver.h"
 
 class LayersSolver : public Solver
 {
-   public:
-       LayersSolver(int* rotationsNumber, std::shared_ptr<Cube> cube);
-       void solve(SolverStep step = SolverStep::ALL) override;
+    public:
+        LayersSolver(int* rotationsNumber, std::shared_ptr<Cube> cube, std::shared_ptr<Microcontroller> microcontroller);
+        void solve(SolverStep step) override;
     private:
+        bool isSimulation;
+
+        // Execute Microcontroller if needed and update the counter of rotations
+        void handlePreRotation(Command command);
+
         void cross();
         void firstLayer();
         void secondLayer();
