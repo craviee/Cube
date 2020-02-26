@@ -107,8 +107,6 @@ void MainWindow::changeColor(QPushButton *button)
 
 void MainWindow::onUpdate(Solver& source, int number){ setRotationsNumber(number); }
 
-//TODO: VALIDATES THE MODEL BEFORE EVERY ALGORITHM
-
 void MainWindow::CruzSul()
 {
     if(ui->up8Button->styleSheet() != ui->up5Button->styleSheet() || ui->front2Button->styleSheet() != ui->front5Button->styleSheet())
@@ -2855,126 +2853,14 @@ void MainWindow::on_secondLayerButton_clicked()
 
 void MainWindow::on_downCrossButton_clicked()
 {
-    if(ui->down2Button->styleSheet() != ui->down5Button->styleSheet() && ui->down4Button->styleSheet() != ui->down5Button->styleSheet() &&
-            ui->down6Button->styleSheet() != ui->down5Button->styleSheet() && ui->down8Button->styleSheet() != ui->down5Button->styleSheet())
-    {
-        cube->rotateF();
-        cube->rotateL();
-        cube->rotateD();
-        cube->rotateLA();
-        cube->rotateDA();
-        cube->rotateFA();
-    }
-    while((ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down4Button->styleSheet() != ui->down5Button->styleSheet()) &&
-          (ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down8Button->styleSheet() != ui->down5Button->styleSheet()) &&
-           (ui->down4Button->styleSheet() != ui->down5Button->styleSheet() || ui->down6Button->styleSheet() != ui->down5Button->styleSheet()))
-        cube->rotateD();
-    if(ui->down6Button->styleSheet() != ui->down5Button->styleSheet() && ui->down8Button->styleSheet() != ui->down5Button->styleSheet())
-    {
-        cube->rotateF();
-        cube->rotateL();
-        cube->rotateD();
-        cube->rotateLA();
-        cube->rotateDA();
-        cube->rotateFA();
-    }
-    
-    if((ui->down2Button->styleSheet() == ui->down5Button->styleSheet() &&
-        ui->down8Button->styleSheet() == ui->down5Button->styleSheet()) &&
-            ui->down4Button->styleSheet() != ui->down5Button->styleSheet() &&
-            ui->down6Button->styleSheet() != ui->down5Button->styleSheet())
-        cube->rotateD();
-    if(ui->down2Button->styleSheet() != ui->down5Button->styleSheet() || ui->down4Button->styleSheet() != ui->down5Button->styleSheet() ||
-            ui->down6Button->styleSheet() != ui->down5Button->styleSheet() || ui->down8Button->styleSheet() != ui->down5Button->styleSheet())
-    {
-        cube->rotateF();
-        cube->rotateL();
-        cube->rotateD();
-        cube->rotateLA();
-        cube->rotateDA();
-        cube->rotateFA();
-    }
+    if(cube->isValid()) layersSolver->solve(SolverStep::DOWN_CROSS);
+    else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
 }
 
 void MainWindow::on_backEdgesButton_clicked()
 {
-    int i;
-    int j=0;
-    while(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() || ui->left8Button->styleSheet() != ui->left5Button->styleSheet() ||
-          ui->back2Button->styleSheet() != ui->back5Button->styleSheet() || ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
-    {
-        j++;
-        if (j%30==0)
-            cube->rotateDA();
-        if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() || ui->left8Button->styleSheet() != ui->left5Button->styleSheet() ||
-                ui->back2Button->styleSheet() != ui->back5Button->styleSheet() || ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
-        {
-            i = 0;
-            if(ui->front8Button->styleSheet() == ui->front5Button->styleSheet())
-                i++;
-            if(ui->left8Button->styleSheet() == ui->left5Button->styleSheet())
-                i++;
-            if(ui->right8Button->styleSheet() == ui->right5Button->styleSheet())
-                i++;
-            if(ui->back2Button->styleSheet() == ui->back5Button->styleSheet())
-                i++;
-            if(i == 0)
-            {
-                cube->rotateD();
-                cube->rotateD();
-            }
-            if(ui->front8Button->styleSheet() != ui->front5Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
-            {
-                cube->rotateL();
-                cube->rotateD();
-                cube->rotateD();
-                cube->rotateLA();
-                cube->rotateDA();
-                cube->rotateL();
-                cube->rotateDA();
-                cube->rotateLA();
-                cube->rotateDA();
-            }
-            else if(ui->back2Button->styleSheet() != ui->back2Button->styleSheet() && ui->left8Button->styleSheet() != ui->left5Button->styleSheet())
-            {
-                cube->rotateB();
-                cube->rotateD();
-                cube->rotateD();
-                cube->rotateBA();
-                cube->rotateDA();
-                cube->rotateB();
-                cube->rotateDA();
-                cube->rotateBA();
-                cube->rotateDA();
-            }
-            else if(ui->back2Button->styleSheet() != ui->back5Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
-            {
-                cube->rotateR();
-                cube->rotateD();
-                cube->rotateD();
-                cube->rotateRA();
-                cube->rotateDA();
-                cube->rotateR();
-                cube->rotateDA();
-                cube->rotateRA();
-                cube->rotateDA();
-            }
-            else if(ui->front8Button->styleSheet() != ui->front2Button->styleSheet() && ui->right8Button->styleSheet() != ui->right5Button->styleSheet())
-            {
-                cube->rotateF();
-                cube->rotateD();
-                cube->rotateD();
-                cube->rotateFA();
-                cube->rotateDA();
-                cube->rotateF();
-                cube->rotateDA();
-                cube->rotateFA();
-                cube->rotateDA();
-            }
-            else
-                cube->rotateDA();
-        }
-    }
+    if(cube->isValid()) layersSolver->solve(SolverStep::BACK_EDGES);
+    else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
 }
 
 void MainWindow::on_placeDownEdgesButton_clicked()

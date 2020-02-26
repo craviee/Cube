@@ -44,6 +44,20 @@ bool Cube::isValid()
     return true;
 }
 
+bool Cube::isComplete()
+{
+    for(int square = 1; square <= SQUARES_PER_FACE; square++)
+    {
+        if (squares["front" + std::to_string(square)].getColor() != Color::WHITE) return false;
+        if (squares["back" + std::to_string(square)].getColor() != Color::YELLOW) return false;
+        if (squares["up" + std::to_string(square)].getColor() != Color::BLUE) return false;
+        if (squares["down" + std::to_string(square)].getColor() != Color::GREEN) return false;
+        if (squares["left" + std::to_string(square)].getColor() != Color::ORANGE) return false;
+        if (squares["right" + std::to_string(square)].getColor() != Color::RED) return false;
+    }
+    return true;
+}
+
 // The reason why repaint() is called is to trigger the whole UI to repaint itself
 // causing the smoth sensation of rotation
 void Cube::rotateD() { rotator->rotateD(); squares["front1"].repaint(); }

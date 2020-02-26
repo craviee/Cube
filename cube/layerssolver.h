@@ -12,6 +12,7 @@ class LayersSolver : public Solver
         void firstLayer();
         void secondLayer();
         void downCross();
+        void backEdges();
         void up8Cross();
         void up2Cross();
         void up4Cross();
@@ -29,4 +30,5 @@ class LayersSolver : public Solver
         void leftSecondLayer();
         void rightSecondLayer();
         void backSecondLayer();
+        void placeBackEdges();
 };

@@ -16,6 +16,7 @@ class Cube
         void initialize();
         void randomize();
         bool isValid();
+        bool isComplete();
         void rotateD();
         void rotateU();
         void rotateF();
