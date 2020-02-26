@@ -41,30 +41,6 @@ public:
     std::map<std::string, Square> squares;
 
     // Will be excluded
-    void CruzSul();
-    void CruzNorte();
-    void CruzOeste();
-    void CruzLeste();
-    void QuinaSudeste();
-    void QuinaSudoeste();
-    void QuinaNordeste();
-    void QuinaNoroeste();
-    void SudesteBaixo();
-    void SudoesteBaixo();
-    void frontSecond();
-    void leftSecond();
-    void rightSecond();
-    void backSecond();
-    void NordesteBaixo();
-    void NoroesteBaixo();
-    void debugaFront();
-    void debugaLeft();
-    void debugaRight();
-    void debugaBack();
-    bool sudestecorreto();
-    bool sudoestecorreto();
-    bool nordestecorreto();
-    bool noroestecorreto();
     void solve(std::string s);
 
 private slots:

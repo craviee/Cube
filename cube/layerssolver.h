@@ -14,6 +14,8 @@ class LayersSolver : public Solver
         void downCross();
         void downEdges();
         void placeDownCorners();
+        void turnDownCorners();
+        void completeSolve();
         void up8Cross();
         void up2Cross();
         void up4Cross();
@@ -26,12 +28,14 @@ class LayersSolver : public Solver
         void front7FirstLayer();
         void back3FirstLayer();
         void back1FirstLayer();
-        void initiateSecondLayer();
         void frontSecondLayer();
         void leftSecondLayer();
         void rightSecondLayer();
         void backSecondLayer();
-        void placeDownEdges();
+        bool fixBackSecondLayer();
+        bool fixLeftSecondLayer();
+        bool fixRightSecondLayer();
+        bool fixFrontSecondLayer();
         bool isCornerFrontDownRightPlaced();
         bool isCornerFrontDownLeftPlaced();
         bool isCornerBackDownRightPlaced();

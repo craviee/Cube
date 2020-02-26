@@ -39,7 +39,7 @@ bool Cube::isValid()
         }
     }
     for(auto it=colorsNumber.begin(); it!=colorsNumber.end(); ++it)
-        if(it->second != 9)
+        if(it->second != SQUARES_PER_FACE)
             return false;
     return true;
 }
