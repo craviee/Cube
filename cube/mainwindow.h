@@ -11,6 +11,7 @@
 #include "colorreader.h"
 #include "arduino.h"
 #include "layerssolver.h"
+#include "optimalsolver.h"
 
 namespace Ui {
 class MainWindow;
@@ -35,7 +36,7 @@ public:
     std::shared_ptr<Microcontroller> microcontroller;
     std::shared_ptr<Rotator> rotator;
     std::shared_ptr<Solver> layersSolver;
-    std::shared_ptr<Solver> OptimalSolver;
+    std::shared_ptr<Solver> optimalSolver;
     std::unique_ptr<ColorCalibrator> calibrator;
     std::unique_ptr<ColorReader> reader;
     std::map<std::string, Square> squares;

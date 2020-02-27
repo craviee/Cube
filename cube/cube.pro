@@ -27,6 +27,7 @@ SOURCES += main.cpp\
     identification.cpp \
     layerssolver.cpp \
     mainwindow.cpp \
+    optimalsolver.cpp \
     rotator.cpp \
     square.cpp \
     utils.cpp
@@ -42,6 +43,7 @@ HEADERS  += mainwindow.h \
     microcontroller.h \
     observable.h \
     observer.h \
+    optimalsolver.h \
     rotator.h \
     solver.h \
     square.h \

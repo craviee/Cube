@@ -10,6 +10,7 @@
 class Cube
 {
     friend class LayersSolver;
+    friend class OptimalSolver;
 
     public:
         Cube(std::map<std::string, Square> squares, std::shared_ptr<Rotator> rotator);
