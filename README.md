@@ -36,6 +36,12 @@ $ cd ../build/
 $ qmake ../cube/cube.pro
 $ make
 ```
+### Using
+
+```
+$ cd build
+$ ./cube
+```
 
 ## Videos
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=56DlDcRQmCs
