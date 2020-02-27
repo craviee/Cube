@@ -1,10 +1,10 @@
 #pragma once
 
-#include <string>
 #include <QTime>
 #include <QCoreApplication>
 #include <QPushButton>
 #include <QMessageBox>
+#include <string>
 #include "enums.h"
 
 class Utils
