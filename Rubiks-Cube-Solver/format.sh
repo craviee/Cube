@@ -5,4 +5,4 @@
 
 cd ../Rubiks-Cube-Solver
 
-python2 ./cube_convert.py ${1} > ../build-cube-Desktop-Debug/format.txt
+python2 ./cube_convert.py ${1} > format.txt

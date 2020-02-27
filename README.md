@@ -1,4 +1,5 @@
 # Cube
+
 Final project of my undergraduation program.
 
 Robot that uses a webcam to take pictures of the sides of the rubik's cube and
@@ -8,10 +9,33 @@ It is possible to create any model by changing the colors of the cube in the pro
 The cube can be solved by two methods, the layer methods, with a lot of rotations
 and another method that is near to the optimal.
 
-This project used brownan cube solver: https://github.com/brownan/Rubiks-Cube-Solver
-and Alyssaq squares.cpp: https://github.com/alyssaq/opencv
+## Getting Started
 
-Remember to give permissions to format.sh and run.sh in Rubik-Cube-Solver folder.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+```
+qt5
+qmake
+make
+opencv2
+```
+
+### Installing
+
+Download the repo and
+
+```
+$ mkdir build
+$ cd Rubiks-Cube-Solver/
+$ chmod +x format.sh
+$ chmod +x run.sh
+$ make
+$ cd ../build/
+$ qmake ../cube/cube.pro
+$ make
+```
 
 ## Videos
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=56DlDcRQmCs
@@ -23,8 +47,13 @@ alt="Video 1" width="240" height="180" border="10" /></a>
 alt="Video 1" width="240" height="180" border="10" /></a>
 
 ## Images
-![alt text](https://github.com/craviee/cube/blob/master/images/1.png "Image 1")
+![Random Cube](images/random.png "Random Cube")
 
-![alt text](https://github.com/craviee/cube/blob/master/images/2.png "Image 2")
+![Solved Cube](images/solved.png "Solved Cube")
 
-![alt text](https://github.com/craviee/cube/blob/master/images/3.png "Image 3")
+![Color Detection](images/color_detection.png "Color Detection")
+
+## Acknowledgments
+
+* Using brownan cube solver: https://github.com/brownan/Rubiks-Cube-Solver
+* Using Alyssaq squares.cpp: https://github.com/alyssaq/opencv

@@ -1,0 +1,77 @@
+#pragma once
+
+enum class Color
+{
+    RED,
+    BLUE,
+    ORANGE,
+    WHITE,
+    GREEN,
+    YELLOW,
+    ERROR
+};
+
+enum class Face
+{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    FRONT,
+    BACK
+};
+
+enum class Direction
+{
+    CLOCKWISE,
+    ANTI_CLOCKWISE
+};
+
+enum class Mode
+{
+    SIMULATION,
+    MICROCONTROLLER
+};
+
+enum class Command
+{
+    ERROR,
+    MOVE_UP,
+    MOVE_FRONT,
+    MOVE_DOWN,
+    MOVE_BACK,
+    MOVE_RIGHT,
+    MOVE_LEFT,
+    DO_U_ROTATION,
+    DO_UA_ROTATION,
+    DO_F_ROTATION,
+    DO_FA_ROTATION,
+    DO_D_ROTATION,
+    DO_DA_ROTATION,
+    DO_B_ROTATION,
+    DO_BA_ROTATION,
+    DO_L_ROTATION,
+    DO_LA_ROTATION,
+    DO_R_ROTATION,
+    DO_RA_ROTATION,
+};
+
+enum class SolverStep
+{
+    COMPLETE,
+    CROSS,
+    FIRST_LAYER,
+    SECOND_LAYER,
+    DOWN_CROSS,
+    DOWN_EDGES,
+    PLACE_DOWN_CORNERS,
+    TURN_DOWN_CORNERS,
+    COMPLETE_MICROCONTROLLER,
+    CROSS_MICROCONTROLLER,
+    FIRST_LAYER_MICROCONTROLLER,
+    SECOND_LAYER_MICROCONTROLLER,
+    DOWN_CROSS_MICROCONTROLLER,
+    DOWN_EDGES_MICROCONTROLLER,
+    PLACE_DOWN_CORNERS_MICROCONTROLLER,
+    TURN_DOWN_CORNERS_MICROCONTROLLER,
+};

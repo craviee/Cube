@@ -1,0 +1,12 @@
+# Vs code
+.vscode/
+
+# User Project files
+cube.pro.user*
+
+# Compilation files
+*.o
+build-cube-Desktop-Debug/
+
+# Plain text files
+*.txt
