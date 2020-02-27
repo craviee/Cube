@@ -1,7 +1,6 @@
 #pragma once
 
 #include <QRandomGenerator>
-
 #include "square.h"
 #include "enums.h"
 #include "utils.h"

@@ -1,7 +1,5 @@
 #include "layerssolver.h"
 
-#include <iostream>
-
 LayersSolver::LayersSolver(int* rotationsNumber, std::shared_ptr<Cube> cube
     , std::shared_ptr<Microcontroller> microcontroller)
     : Solver{rotationsNumber, cube, microcontroller}{ }
