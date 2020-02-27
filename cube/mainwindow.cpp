@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <iostream>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -12,9 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     rotator = std::make_shared<Rotator>(squares);
     cube = std::make_shared<Cube>(squares, rotator);
     layersSolver = std::make_shared<LayersSolver>(&rotationsNumber, cube, microcontroller);
-    //optimalSolver = std::make_shared<OptimalSolver>(rotationsNumber);
+    optimalSolver = std::make_shared<OptimalSolver>(&rotationsNumber, cube, microcontroller);
     layersSolver->subscribe(this);
-    //optimalSolver->subscribe(this);
+    optimalSolver->subscribe(this);
     calibrator = std::make_unique<ColorCalibrator>(squares, microcontroller);
     reader = std::make_unique<ColorReader>(squares, calibrator->configValues, microcontroller);
     cube->initialize();
@@ -281,111 +283,15 @@ void MainWindow::on_solveLanesButton_clicked()
 
 void MainWindow::on_solveOptimalButton_clicked()
 {
-    // QString input = "";
-    // input += color(ui->right3Button->styleSheet());
-    // input += color(ui->right6Button->styleSheet());
-    // input += color(ui->right9Button->styleSheet());
-    // input += color(ui->right2Button->styleSheet());
-    // input += color(ui->right8Button->styleSheet());
-    // input += color(ui->right1Button->styleSheet());
-    // input += color(ui->right4Button->styleSheet());
-    // input += color(ui->right7Button->styleSheet());
-    // input += color(ui->up3Button->styleSheet());
-    // input += color(ui->up6Button->styleSheet());
-    // input += color(ui->up9Button->styleSheet());
-    // input += color(ui->front3Button->styleSheet());
-    // input += color(ui->front6Button->styleSheet());
-    // input += color(ui->front9Button->styleSheet());
-    // input += color(ui->down3Button->styleSheet());
-    // input += color(ui->down6Button->styleSheet());
-    // input += color(ui->down9Button->styleSheet());
-    // input += color(ui->back3Button->styleSheet());
-    // input += color(ui->back6Button->styleSheet());
-    // input += color(ui->back9Button->styleSheet());
-    // input += color(ui->up2Button->styleSheet());
-    // input += color(ui->up8Button->styleSheet());
-    // input += color(ui->front2Button->styleSheet());
-    // input += color(ui->front8Button->styleSheet());
-    // input += color(ui->down2Button->styleSheet());
-    // input += color(ui->down8Button->styleSheet());
-    // input += color(ui->back2Button->styleSheet());
-    // input += color(ui->back8Button->styleSheet());
-    // input += color(ui->up1Button->styleSheet());
-    // input += color(ui->up4Button->styleSheet());
-    // input += color(ui->up7Button->styleSheet());
-    // input += color(ui->front1Button->styleSheet());
-    // input += color(ui->front4Button->styleSheet());
-    // input += color(ui->front7Button->styleSheet());
-    // input += color(ui->down1Button->styleSheet());
-    // input += color(ui->down4Button->styleSheet());
-    // input += color(ui->down7Button->styleSheet());
-    // input += color(ui->back1Button->styleSheet());
-    // input += color(ui->back4Button->styleSheet());
-    // input += color(ui->back7Button->styleSheet());
-    // input += color(ui->left3Button->styleSheet());
-    // input += color(ui->left6Button->styleSheet());
-    // input += color(ui->left9Button->styleSheet());
-    // input += color(ui->left2Button->styleSheet());
-    // input += color(ui->left8Button->styleSheet());
-    // input += color(ui->left1Button->styleSheet());
-    // input += color(ui->left4Button->styleSheet());
-    // input += color(ui->left7Button->styleSheet());
-    // std::cout << input.toStdString() << std::endl;
-    // QString program = "/home/lain/Desktop/TCC/backup_note/Rubiks-Cube-Solver/format.sh";
-    // QStringList arguments;
-    // QProcess *myProcess = new QProcess(this);
-    // myProcess->start(program,(QStringList) arguments << input );
-    
-    // std::string line;
-    // QString entrada;
-    // if (myProcess->waitForFinished())
-    // {
-    //     myProcess->close();
-    //     std::ifstream myfile ("format.txt");
-    
-    //      if (myfile.is_open())
-    //       {
-    
-    //         while ( std::getline (myfile,line ))
-    //         {
-    //             std::cout << "size: " << line.size() << std::endl;
-    //             if(line.size() == 120)
-    //                entrada = QString::fromStdString(line);
-    
-    //           std::cout << line << '\n';
-    //         }
-    //         std::cout << "size: " << line.size() << std::endl;
-    
-    //         myfile.close();
-    
-    //       }
-    //      std::cout << "começa a executar o run" << std::endl;
-    // }
-    // program = "/home/lain/Desktop/TCC/backup_note/Rubiks-Cube-Solver/run.sh";
-    // QStringList arguments2;
-    // QProcess *myProcess2 = new QProcess();
-    // myProcess2->start(program,(QStringList) arguments2 << entrada );
-    // std::cout << "mandou o run do solver" << std::endl;
-    // std::ifstream myfile2 ("result.txt");
-    // myProcess2->write("exit\n\r");
-    // if (myProcess2->waitForFinished(-1))
-    // {
-    // std::cout << "run ficou pronto run do solver" << std::endl;
-
-    //  if (myfile2.is_open())
-    //   {
-    //     while ( std::getline (myfile2,line ))
-    //     {
-    //         if(line.size() == 1 || line.size() == 2)
-    //         {
-    //             solve(line);
-    //         }
-    //       std::cout << line << '\n';
-    //       std::cout << "size: " << line.size() << std::endl;
-    //     }
-    //     myfile2.close();
-    //   }
-    // }
+    SolverStep step = (mode == Mode::SIMULATION ?
+    SolverStep::COMPLETE : SolverStep::COMPLETE_MICROCONTROLLER);
+    try
+    {
+        if(cube->isValid())optimalSolver->solve(step);
+        else Utils::showDialog(std::string("Error: The cube has more than 9 squares of the same color."));
+    }
+    //catch(...) {Utils::showDialog(std::string("Error: Microcontroller not available."));} 
+    catch(std::exception e) {std::cout << e.what() << std::endl;} 
 }
 
 void MainWindow::on_colorCalibrationButton_clicked()
